@@ -14,7 +14,7 @@ Revisión del 2026-09-28. Ninguna de estas afirmaciones pudo verificarse en fuen
 | 8 | Las 10 unidades (año, km, equipamiento, "única mano", "en garantía de fábrica", "permuta menor valor") | STOCK | El sitio dice que salen de Instagram/Facebook; no pude abrirlos | Verificar cada unidad; retirar las vendidas |
 | 9 | Fotos de las unidades | images/ | Origen: publicaciones de la agencia | Pedir autorización o reemplazar |
 | 10 | Facebook (profile.php?id=…) | NEGOCIO.facebook | No verificado; puede ser un perfil personal | Confirmar que sea la página del negocio |
-| 11 | Año de fundación / historia | — | No encontrado; no figura en el sitio | No publicar hasta tener dato |
+| 11 | "39 años de confianza" (título y sello del inicio) | Hero | Estaba en el sitio desde el inicio. Los flyers del propio negocio (Clio Mio y Ka S) llevan el mismo lema en su logo, sin fecha ni año de fundación | Confirmar con el dueño; no agregar un año de fundación |
 | 12 | Notas en medios | — | No encontrado | No publicar |
 
 Precios: todos "Consultar". El validador falla si aparece otro valor sin confirmación.
@@ -60,3 +60,14 @@ Precios: todos "Consultar". El validador falla si aparece otro valor sin confirm
 ## Ford Ka S: fotos (2026-09-28)
 - **Fotos:** 2 fotos originales enviadas por el solicitante (2048 px, reducidas a 1280 px), con corrección leve de tono y nitidez. Las demás eran de muy baja calidad, según el solicitante. Reemplazan la falta de foto anotada antes. Pedir autorización al dueño.
 - **Patente visible:** AA 264 AU.
+
+## Corrección (2026-09-28)
+- La nota anterior decía que "39 años de confianza" no se mostraba en el sitio. Era incorrecto: ya figuraba en el título y en el sello del inicio desde el archivo original. Lo respaldan los flyers del negocio, pero sigue pendiente confirmar el dato con el dueño.
+- **Unidades viejas:** las 9 unidades anteriores (EcoSport, Ka Viral, Fiat 147, Logan, 208, 2008, Suran, Ka 2013 y Stepway) vienen del demo original. No pude verificarlas contra publicaciones actuales; pueden estar vendidas.
+- **Vista previa (preview.png):** regenerada con fotos de las unidades nuevas.
+
+## Rediseño UX (2026-09-28)
+- **Textos quitados por no tener respaldo público:** "0 km de todas las marcas", "gestoría propia / todo tipo de trámites", "precio acordado sin comisión", "pago inmediato", "transferencia antes de retirar" y "local bajo techo". Estaban en el diseño anterior.
+- **Textos que quedan, con su respaldo:** "39 años de confianza" (flyers del negocio), "Vendo–Permuto" (publicaciones y flyers), "0 km · Usados · Consignaciones" (cartel del local). El sitio lo aclara con "según sus propias publicaciones" y "como dice el cartel del local".
+- **Si el dueño confirma** marcas 0 km, gestoría o condiciones de consignación, se pueden volver a agregar en las secciones de inicio y preguntas.
+- **Cambios de estructura:** las unidades aparecen justo después del inicio, con galería deslizable, y hay barra fija de WhatsApp y "Cómo llegar" en celular. El mosaico de fotos viejas del inicio se reemplazó por una sola foto de una unidad verificada (Kwid).

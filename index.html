@@ -5,156 +5,132 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>DEMO · Fernando Poerio Automotores · Concepción del Uruguay</title>
-<meta name="description" content="Propuesta de sitio web independiente para Fernando Poerio Automotores, compra y venta de 0 km y usados en Concepción del Uruguay.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2319788a'/%3E%3Ctext x='32' y='47' font-family='Arial' font-weight='700' font-size='42' text-anchor='middle' fill='white'%3EP%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Propuesta de sitio web independiente para Fernando Poerio Automotores, usados, 0 km y consignaciones en Concepción del Uruguay.">
+<meta name="theme-color" content="#0F2536">
 <meta property="og:title" content="DEMO · Fernando Poerio Automotores">
-<meta property="og:description" content="Compra y venta de 0 km y usados seleccionados, con gestoría propia. Alberdi 1337, Concepción del Uruguay.">
+<meta property="og:description" content="Usados, 0 km y consignaciones. Alberdi 1337, Concepción del Uruguay.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://hnk375561-lab.github.io/poerioautomotores/preview.png">
 <meta property="og:url" content="https://hnk375561-lab.github.io/poerioautomotores/">
 <link rel="canonical" href="https://hnk375561-lab.github.io/poerioautomotores/">
 <meta property="og:locale" content="es_AR">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#19788a">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F2536'/%3E%3Ctext x='32' y='45' font-family='Arial' font-weight='900' font-size='34' font-style='italic' text-anchor='middle' fill='%2334B4D2'%3EFP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@1,125,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#14181b;--steel:#4f5a64;--line:#d9dee2;--mist:#f2f5f6;--a:#19788a;--ad:#0f5766;--r:12px;--sh:0 10px 30px rgba(20,24,27,.10);--ease:cubic-bezier(.16,.8,.28,1)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}.rv{opacity:1!important;transform:none!important}}
-body{margin:0;font:16px/1.6 Barlow,system-ui,sans-serif;color:var(--ink);background:#fff}
-h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",sans-serif;line-height:1.05;margin:0;letter-spacing:.2px}
-a{color:inherit}:focus-visible{outline:3px solid var(--a);outline-offset:2px}
-.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
-.demo{background:var(--ink);color:#fff;font-size:13px;padding:7px 0;text-align:center}
-header.top{background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;transition:box-shadow .3s}
-header.top.sc{box-shadow:0 6px 24px rgba(20,24,27,.10)}
-header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
-.logo{font:700 30px "Barlow Condensed",sans-serif;text-decoration:none}.logo b{color:var(--a)}
-nav{display:flex;gap:4px}nav a{text-decoration:none;color:var(--steel);font-weight:500;padding:8px 12px;border-radius:8px;transition:.2s}nav a:hover,nav a.on{color:var(--a);background:rgba(25,120,138,.08)}
-.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--a);color:#fff;text-decoration:none;padding:13px 22px;border-radius:10px;border:0;cursor:pointer;font:600 16px Barlow,sans-serif;box-shadow:0 6px 16px rgba(25,120,138,.28);transition:transform .25s var(--ease),box-shadow .25s,background .2s}
-.btn:hover{background:var(--ad);transform:translateY(-2px)}
-.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink);box-shadow:none}.btn.ghost:hover{background:var(--ink);color:#fff}
-.dark .btn.ghost{color:#fff;border-color:#fff}.dark .btn.ghost:hover{background:#fff;color:var(--ink)}
-.eyebrow{font:600 14px Barlow,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--a);margin-bottom:12px}
-.hero{background:radial-gradient(900px 420px at 85% -10%,rgba(25,120,138,.18),transparent),linear-gradient(#fff,var(--mist));padding:72px 0 64px;border-bottom:1px solid var(--line)}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
-.hero h1{font-size:clamp(46px,6.2vw,84px);font-weight:700;max-width:12ch}
-.hero .lead{font-size:19px;margin:20px 0 28px}
-.cta{display:flex;flex-wrap:wrap;gap:12px}
-.hero-img{position:relative}.mosaic{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mosaic img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:14px;box-shadow:var(--sh)}.mosaic img:nth-child(even){transform:translateY(18px)}
-.badge{position:absolute;left:-14px;bottom:22px;background:var(--ink);color:#fff;border-radius:12px;padding:12px 18px;box-shadow:var(--sh);font-size:14px}.badge b{font:700 36px "Barlow Condensed",sans-serif;display:block;color:#7fd3e3;line-height:1}
-.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px}
-.fact{background:#fff;border:1px solid var(--line);border-left:4px solid var(--a);border-radius:10px;padding:14px 16px}.fact b{display:block;font:700 23px "Barlow Condensed",sans-serif}.fact span{color:var(--steel);font-size:14px}
-section{padding:72px 0;scroll-margin-top:76px}section h2{font-size:clamp(34px,4.6vw,52px);margin-bottom:10px}
-.lead{color:var(--steel);max-width:62ch;margin:0 0 30px}.alt{background:var(--mist)}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-.tile{display:block;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px;text-decoration:none;transition:transform .3s var(--ease),box-shadow .3s,border-color .3s}.tile:hover{transform:translateY(-4px);box-shadow:var(--sh);border-color:var(--a)}.tile h3{font-size:26px;margin:12px 0 6px}.tile p{margin:0;color:var(--steel);font-size:15px}
-.ico{width:46px;height:46px;border-radius:12px;background:rgba(25,120,138,.1);color:var(--a);display:grid;place-items:center}.ico svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;font:600 15px Barlow,sans-serif;cursor:pointer}.chip[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
-.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px}
-.car{padding:0;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s var(--ease),box-shadow .3s}.car:hover{transform:translateY(-4px);box-shadow:var(--sh)}
-.car img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.thumbs{display:flex;gap:6px;padding:8px 12px 0;overflow-x:auto}.thumbs .th{flex:0 0 56px;padding:0;border:2px solid transparent;border-radius:6px;background:none;cursor:pointer}.thumbs .th img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px}.thumbs .th:focus-visible{outline:2px solid currentColor}.car .in{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
-.car h3{font-size:25px}.meta{display:flex;flex-wrap:wrap;gap:6px}.meta span{background:var(--mist);border-radius:6px;padding:2px 9px;font-size:13px;font-weight:600;color:var(--steel)}
-.price{font:700 24px "Barlow Condensed",sans-serif}.note{font-size:14px;color:var(--steel)}.car .btn{margin-top:auto}
-.dark{background:var(--ink) radial-gradient(700px 320px at 10% 0,rgba(25,120,138,.4),transparent);color:#fff}.dark .lead{color:#c5cdd1}.dark .eyebrow{color:#7fd3e3}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-.checks{list-style:none;margin:0 0 26px;padding:0;display:grid;gap:10px}.checks li{padding-left:30px;position:relative}.checks li:before{content:"";position:absolute;left:0;top:5px;width:18px;height:18px;border-radius:50%;background:var(--a) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center/12px no-repeat}
-.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}.steps li{counter-increment:s;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px}.steps li:before{content:counter(s);font:700 40px "Barlow Condensed",sans-serif;color:var(--a);display:block}.steps b{display:block;font:700 22px "Barlow Condensed",sans-serif}.steps span{color:var(--steel)}
-form{display:grid;gap:14px;max-width:560px}label{display:grid;gap:4px;font-weight:600;font-size:15px}input,select{font:inherit;padding:12px;border:1px solid #9aa2ab;border-radius:8px;background:#fff;width:100%}.f2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-details{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:10px}summary{font-weight:600;cursor:pointer}details p{margin:10px 0 0;color:var(--steel)}
-address{font-style:normal;font-size:22px;margin-bottom:12px}.row{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
-.notice{background:rgba(169,129,44,.1);border:1px solid rgba(169,129,44,.4);border-radius:12px;padding:18px 22px;color:#5c4614;max-width:900px}
-footer{background:var(--ink);color:#c9ced3;padding:36px 0;font-size:14px}footer p{margin:0 0 8px;max-width:90ch}
-.fab{position:fixed;right:22px;bottom:22px;z-index:19}.callbar{display:none}
-.rv{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}.rv.in{opacity:1;transform:none}
-@media(max-width:820px){.hero-grid,.two{grid-template-columns:1fr}.facts{grid-template-columns:1fr 1fr}nav{display:none}.f2{grid-template-columns:1fr}.fab{display:none}.callbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:25;gap:8px;padding:10px 12px;background:#fff;border-top:1px solid var(--line)}.callbar a{flex:1}body{padding-bottom:72px}.badge{left:10px}section{padding:52px 0}.hero{padding:44px 0}}
+:root{--ink:#0F2536;--brand:#137C97;--sky:#EAF4F7;--line:#D3E3E9;--mute:#4A6272;--wa:#0F7A42;--bg:#F6FAFB;--r:14px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 "DM Sans",system-ui,sans-serif;padding-bottom:78px}
+img{display:block;max-width:100%}a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+.disp{font-family:"Archivo",system-ui,sans-serif;font-style:italic;font-weight:800;font-stretch:125%;letter-spacing:-.01em;line-height:1.02}
+.demo{background:var(--ink);color:#cfe3ea;font-size:13px;text-align:center;padding:7px 12px}
+header.top{position:sticky;top:0;z-index:20;background:rgba(246,250,251,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
+.mark{text-decoration:none;font-size:19px;line-height:1}.mark small{display:block;font-size:10px;letter-spacing:.32em;color:var(--brand);margin-top:3px;font-style:normal;font-weight:700}
+nav{display:none;gap:26px}nav a{text-decoration:none;color:var(--mute);font-weight:500}nav a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);font:700 16px "DM Sans",sans-serif;text-decoration:none;cursor:pointer}
+.btn.wa{background:var(--wa);border-color:var(--wa);color:#fff}.btn.wa:hover{background:#0b6135;border-color:#0b6135}.btn.sm{min-height:40px;padding:0 16px;font-size:15px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.gal:focus-visible,summary:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.hero{padding:34px 0 40px}.hero .wrap{display:grid;gap:28px}
+h1{font-size:clamp(34px,8.2vw,58px);margin:0 0 18px}
+.lead{font-size:19px;color:var(--mute);max-width:34em;margin:0 0 24px}.row{display:flex;flex-wrap:wrap;gap:12px}
+.facts{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:10px}.facts li{padding-left:14px;border-left:4px solid var(--brand);font-weight:700}.facts span{display:block;font-weight:400;color:var(--mute);font-size:15px}
+.hp{position:relative;border-radius:22px;overflow:hidden;background:var(--sky);aspect-ratio:4/3}.hp img{width:100%;height:100%;object-fit:cover}
+.hp a{position:absolute;left:12px;bottom:12px;background:var(--ink);color:#fff;text-decoration:none;padding:9px 14px;border-radius:999px;font-weight:700;font-size:15px}
+section{padding:46px 0}.alt{background:var(--sky)}
+h2{font-size:clamp(28px,6vw,44px);margin:0 0 8px}.sub{color:var(--mute);margin:0 0 22px;max-width:40em}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 18px;scrollbar-width:none}
+.chip{flex:none;min-height:42px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font:500 15px "DM Sans",sans-serif;color:var(--ink);cursor:pointer}.chip[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.grid{display:grid;gap:18px;grid-template-columns:1fr}
+.car{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.ph{position:relative}.gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;aspect-ratio:4/3;background:var(--sky)}
+.gal::-webkit-scrollbar{display:none}.gal img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:center}
+.cnt{position:absolute;right:10px;bottom:10px;background:rgba(15,37,54,.82);color:#fff;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px}
+.in{padding:16px 18px 18px;display:flex;flex-direction:column;gap:12px;flex:1}
+.in h3{margin:0;font-size:21px;line-height:1.2;font-weight:700}
+dl.spec{display:flex;flex-wrap:wrap;gap:8px 20px;margin:0}
+dl.spec dt{font-size:13px;color:var(--mute)}dl.spec dd{margin:0;font-weight:700;white-space:nowrap}
+.nota{margin:0;color:var(--mute);font-size:15px;flex:1}
+.two{display:grid;gap:30px;grid-template-columns:minmax(0,1fr)}
+.steps{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:14px;counter-reset:s}.steps li{counter-increment:s;padding-left:46px;position:relative}.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:700}
+.steps b{display:block}.steps span{color:var(--mute);font-size:15px}
+form{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:14px}
+label{display:grid;gap:5px;font-weight:700;font-size:15px}input,select{width:100%;min-width:0;min-height:48px;border:1.5px solid var(--line);border-radius:10px;padding:0 12px;font:400 16px "DM Sans",sans-serif;background:#fff;color:var(--ink)}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+details{border-bottom:1px solid var(--line);padding:4px 0}summary{cursor:pointer;font-weight:700;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}summary::after{content:"+";font-size:22px;line-height:1}details[open] summary::after{content:"–"}details p{margin:0 0 14px;color:var(--mute);max-width:44em}
+address{font-style:normal;font-size:20px;font-weight:700;margin-bottom:6px}.k{color:var(--mute)}
+footer{background:var(--ink);color:#b9cfd8;padding:30px 0;font-size:14px}footer p{margin:0 0 8px;max-width:60em}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(246,250,251,.96);border-top:1px solid var(--line)}.bar .btn{flex:1}
+@media(min-width:760px){body{padding-bottom:0}.bar{display:none}nav{display:flex}.grid{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px}.facts{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1000px){.hero .wrap{grid-template-columns:1.05fr .95fr;align-items:center;gap:48px}.grid{grid-template-columns:repeat(3,1fr)}.facts{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 <div class="demo">Demo: propuesta de diseño independiente, no oficial. Datos a confirmar con el negocio.</div>
-<header class="top" id="top"><div class="wrap">
-<a class="logo" href="#top">Fernando <b>Poerio</b></a>
-<nav aria-label="Principal"><a href="#stock">Unidades</a><a href="#consignacion">Vender tu auto</a><a href="#proceso">Cómo trabajamos</a><a href="#preguntas">Preguntas</a><a href="#ubicacion">Contacto</a></nav>
-<a class="btn" href="#" data-contact>Consultar</a></div></header>
-<main>
+<header class="top"><div class="wrap">
+<a class="mark disp" href="#top">Fernando Poerio<small>AUTOMOTORES</small></a>
+<nav aria-label="Principal"><a href="#unidades">Unidades</a><a href="#vender">Vender o permutar</a><a href="#preguntas">Preguntas</a><a href="#contacto">Dónde estamos</a></nav>
+<a class="btn wa sm" href="#" data-wa>WhatsApp</a>
+</div></header>
+<main id="top">
 <div class="hero"><div class="wrap">
-<div class="hero-grid">
-<div><p class="eyebrow">Concepción del Uruguay · Alberdi 1337</p>
-<h1>Tu próximo auto, con 39 años de confianza.</h1>
-<p class="lead">Compra y venta de 0 km de todas las marcas y usados seleccionados, con gestoría propia. Consultá una unidad y te respondemos con los datos reales.</p>
-<div class="cta"><a class="btn" href="#" data-contact>Consultar ahora</a><a class="btn ghost" href="#stock">Ver unidades</a></div></div>
-<div class="hero-img"><div class="mosaic"><img src="images/ecosport.jpg" alt="Ford EcoSport XLS 2011"><img src="images/logan.jpg" alt="Renault Logan 2017"><img src="images/peugeot-208.jpg" alt="Peugeot 208 Feline 2023"><img src="images/suran.jpg" alt="Volkswagen Suran 2013"></div><div class="badge"><b>39</b>años de confianza</div></div>
+<div>
+<h1 class="disp">Tu próximo auto, en Alberdi 1337.</h1>
+<p class="lead">Usados, 0 km y consignaciones en Concepción del Uruguay. Escribinos por WhatsApp y te confirmamos si la unidad sigue disponible.</p>
+<div class="row"><a class="btn wa" href="#" data-wa>Consultar por WhatsApp</a><a class="btn" href="#unidades">Ver unidades</a></div>
+<ul class="facts"><li>39 años de confianza<span>Según sus propias publicaciones</span></li><li>Vendo–Permuto<span>Aceptan tu usado como parte de pago</span></li><li>0 km · Usados · Consignaciones<span>Como dice el cartel del local</span></li></ul>
 </div>
-<div class="facts">
-<div class="fact"><b>0 km y usados</b><span>Todas las marcas</span></div>
-<div class="fact"><b>Gestoría propia</b><span>Todo tipo de trámites y transferencias</span></div>
-<div class="fact"><b>Permutas</b><span>Consultá tu usado</span></div>
-<div class="fact"><b>Consignación</b><span>Precio acordado sin comisión</span></div>
-</div></div></div>
+<div class="hp"><img src="images/kwid-1.webp" alt="Renault Kwid Outsider 2019" fetchpriority="high"><a href="#unidades">Kwid Outsider 2019 · 84.000 km</a></div>
+</div></div>
 
-<section id="acceso" class="rv"><div class="wrap">
-<h2>¿Qué necesitás hoy?</h2><p class="lead">Elegí un camino y te llevamos directo.</p>
-<div class="tiles">
-<a class="tile" href="#stock"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/></svg></span><h3>Comprar un usado</h3><p>Mirá las unidades publicadas por la agencia.</p></a>
-<a class="tile" href="#consignacion"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12l-8 8-9-9V3h8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span><h3>Vender mi auto</h3><p>Consignación sin comisión y pago inmediato.</p></a>
-<a class="tile" href="#canje"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3l4 4-4 4M21 7H8M7 21l-4-4 4-4M3 17h13"/></svg></span><h3>Permutar</h3><p>Contanos qué vehículo tenés y armamos la consulta.</p></a>
-<a class="tile" href="#ubicacion" data-map><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 10-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></span><h3>Cómo llegar</h3><p>Alberdi 1337, Concepción del Uruguay.</p></a>
-</div></div></section>
-
-<section id="stock" class="alt rv"><div class="wrap">
-<p class="eyebrow">Unidades</p><h2>Autos para consultar hoy</h2>
-<p class="lead">Unidades que la agencia publicó en sus historias de Instagram y en su Facebook. Disponibilidad, km y precio se confirman con la agencia.</p>
-<div class="chips" role="group" aria-label="Filtrar unidades"><button class="chip" data-f="todos" aria-pressed="true">Todas</button><button class="chip" data-f="mano" aria-pressed="false">Única mano</button><button class="chip" data-f="nuevos" aria-pressed="false">2016 o más nuevos</button><button class="chip" data-f="viejos" aria-pressed="false">Hasta 2015</button></div>
-<div class="grid" id="stockGrid"></div>
+<section id="unidades" class="alt"><div class="wrap">
+<h2 class="disp">Unidades</h2>
+<p class="sub">Publicadas por la agencia en Facebook e Instagram. Precio, kilometraje y disponibilidad se confirman con ellos.</p>
+<div class="chips" role="group" aria-label="Filtrar unidades" id="chips"></div>
+<div class="grid" id="stockGrid" aria-live="polite"></div>
 </div></section>
 
-<section id="consignacion" class="dark rv"><div class="wrap two">
-<div><p class="eyebrow">Consignación</p><h2>¿Querés vender tu auto?</h2>
-<p class="lead">Dejás tu vehículo en consignación y la agencia se ocupa de venderlo.</p>
-<ul class="checks"><li>Precio acordado, sin comisión</li><li>Operaciones claras</li><li>Local bajo techo</li><li>Pago inmediato</li><li>Transferencia antes de retirar</li></ul>
-<div class="cta"><a class="btn" href="#" data-contact="Hola! Quiero consultar por dejar mi auto en consignación.">Consultar por consignación</a></div></div>
-<div><h2 style="font-size:34px">Servicios de la agencia</h2><ul class="checks" style="margin-top:18px"><li>0 km de todas las marcas</li><li>Usados seleccionados</li><li>Gestoría propia</li><li>Compra, venta y permutas</li></ul><p class="note" style="color:#c5cdd1">Realizan todo tipo de trámites y transferencias. Consultá qué marcas de 0 km hay disponibles.</p></div>
-</div></section>
-
-<section id="proceso" class="rv"><div class="wrap">
-<h2>Cómo trabajamos</h2><p class="lead">Un recorrido simple, de la consulta a la entrega. Propuesta a validar con la agencia.</p>
-<ol class="steps"><li><b>Consultás</b><span>Por teléfono, WhatsApp o desde esta página, con la unidad que te interesa.</span></li><li><b>Vemos la unidad</b><span>Coordinás una visita a Alberdi 1337 para verla y sacarte las dudas.</span></li><li><b>Acordamos</b><span>Definís si comprás, vendés o dejás tu usado como parte de pago.</span></li><li><b>Trámites</b><span>La agencia cuenta con gestoría propia para acompañar el papeleo.</span></li></ol>
-</div></section>
-
-<section id="canje" class="alt rv"><div class="wrap two">
-<div><h2>Contanos qué vehículo tenés</h2><p class="lead">Completá los datos y se arma el mensaje para que un asesor lo revise. No calcula precios automáticos.</p>
-<form id="canjeForm"><label>Marca y modelo<input name="modelo" required></label>
+<section id="vender"><div class="wrap two">
+<div>
+<h2 class="disp">Vendé o permutá tu auto</h2>
+<p class="sub">La agencia trabaja con permutas y consignaciones. Contanos qué tenés y un asesor lo revisa. Este formulario no calcula precios.</p>
+<ol class="steps"><li><b>Contanos tu auto</b><span>Marca, modelo, año y kilómetros.</span></li><li><b>Lo vemos en Alberdi 1337</b><span>Coordinás una visita.</span></li><li><b>Definimos cómo seguir</b><span>Venta, permuta o consignación.</span></li></ol>
+</div>
+<form id="canjeForm">
+<label>Marca y modelo<input name="modelo" required autocomplete="off"></label>
 <div class="f2"><label>Año<input name="anio" inputmode="numeric" required></label><label>Kilometraje<input name="km" inputmode="numeric"></label></div>
-<label>¿Qué te interesa?<select name="interes"><option>Un 0 km</option><option>Un usado</option><option>Vender mi vehículo</option><option>Todavía no lo sé</option></select></label>
-<button class="btn" type="submit">Armar consulta</button><p class="note">No guardamos tus datos: se abre un mensaje que revisás y enviás vos.</p></form></div>
-<div><h3 style="font-size:30px;margin-bottom:10px">Si querés vender o permutar</h3><p class="lead" style="margin-bottom:14px">Documentación que suele pedirse. Es orientativa: confirmá el detalle con la agencia.</p>
-<ul class="checks"><li>DNI del titular</li><li>Título y cédula del vehículo</li><li>Comprobantes de pago de patente e infracciones</li><li>Llaves y manual, si los tenés</li><li>Verificación policial, si corresponde</li></ul></div>
+<label>¿Qué te interesa?<select name="interes"><option>Vender mi vehículo</option><option>Permutar por otro</option><option>Dejarlo en consignación</option><option>Todavía no lo sé</option></select></label>
+<button class="btn wa" type="submit">Enviar por WhatsApp</button>
+</form>
 </div></section>
 
-<section id="preguntas" class="rv"><div class="wrap">
-<h2>Lo que más se pregunta</h2><p class="lead">Respuestas basadas en lo que la agencia publica.</p>
-<div style="max-width:780px">
-<details><summary>¿Tienen todas las marcas?</summary><p>La agencia trabaja con 0 km y usados de todas las marcas. Consultá qué hay disponible hoy.</p></details>
-<details><summary>¿Reciben mi usado como parte de pago?</summary><p>Sí, en sus publicaciones aparece "Vendo – Permuto" y algunas unidades aceptan permuta por menor valor. Las condiciones las confirma la agencia.</p></details>
-<details><summary>¿Toman autos en consignación?</summary><p>Sí. Según sus publicaciones: precio acordado sin comisión, pago inmediato y transferencia antes de retirar.</p></details>
-<details><summary>¿Los precios están publicados?</summary><p>Solo se publican precios confirmados por el negocio. Si una unidad dice "Consultar", preguntá por ella.</p></details>
-<details><summary>¿Hacen la transferencia?</summary><p>Sí. La agencia informa que realiza todo tipo de trámites y transferencias, con gestoría propia. Consultá el detalle de cada operación.</p></details>
-<details><summary>¿Qué horarios tienen?</summary><p>Los horarios se están confirmando con el negocio. Mientras tanto, escribinos por WhatsApp o llamá al 03442 45-3550.</p></details>
-</div></div></section>
+<section id="preguntas" class="alt"><div class="wrap">
+<h2 class="disp">Preguntas</h2>
+<div style="max-width:760px;margin-top:14px">
+<details><summary>¿Tienen 0 km?</summary><p>El cartel del local dice "0 km, usados, consignaciones". Preguntá por WhatsApp qué marcas hay disponibles hoy.</p></details>
+<details><summary>¿Aceptan mi usado como parte de pago?</summary><p>Sí. Sus publicaciones dicen "Vendo–Permuto". Algunas unidades indican además permuta por menor valor.</p></details>
+<details><summary>¿Toman autos en consignación?</summary><p>Figura en el cartel del local. Consultá las condiciones directamente con la agencia.</p></details>
+<details><summary>¿Los precios están publicados?</summary><p>No. Solo se muestran precios confirmados por el negocio; hasta entonces, cada unidad dice "Consultar".</p></details>
+<details><summary>¿Qué horarios tienen?</summary><p id="hoursNote">Horarios a confirmar con el negocio.</p></details>
+</div>
+</div></section>
 
-<section id="ubicacion" class="alt rv"><div class="wrap two">
-<div><h2>Dónde estamos</h2><address id="addr"></address>
-<p><a id="phoneLink" href="#"></a></p><p class="note" id="hoursNote"></p>
-<div class="row"><a class="btn" id="mapLink" href="#" target="_blank" rel="noopener noreferrer">Abrir en Google Maps</a><a class="btn ghost" id="reviewsLink" href="#" target="_blank" rel="noopener noreferrer">Ver opiniones en Google</a><a class="btn ghost" id="igLink" href="#" target="_blank" rel="noopener noreferrer"></a><a class="btn ghost" id="fbLink" href="#" target="_blank" rel="noopener noreferrer">Facebook</a></div></div>
-<div class="notice"><b>Sobre esta versión demo.</b> Es una propuesta de diseño independiente, no oficial. Las fotos y datos de las unidades provienen de las publicaciones públicas de la agencia en Instagram y Facebook, y se usan solo para mostrar cómo se vería el sitio. Nada se publica como oficial hasta que el negocio lo confirme.</div>
+<section id="contacto"><div class="wrap two">
+<div>
+<h2 class="disp">Dónde estamos</h2>
+<address id="addr"></address>
+<p class="k"><a id="phoneLink" href="#"></a></p>
+<div class="row"><a class="btn wa" href="#" data-map target="_blank" rel="noopener noreferrer">Cómo llegar</a><a class="btn" id="reviewsLink" href="#" target="_blank" rel="noopener noreferrer">Opiniones en Google</a></div>
+<div class="row" style="margin-top:12px"><a class="btn sm" id="igLink" href="#" target="_blank" rel="noopener noreferrer"></a><a class="btn sm" id="fbLink" href="#" target="_blank" rel="noopener noreferrer">Facebook</a></div>
+</div>
+<div><h2 class="disp" style="font-size:clamp(24px,5vw,34px)">Antes de venir</h2><p class="sub">Escribinos o llamanos para confirmar que la unidad que te interesa sigue disponible y coordinar la visita.</p></div>
 </div></section>
 </main>
-<footer><div class="wrap"><p>Sitio demo hecho como propuesta por Santiago Solis. No es el sitio oficial de Fernando Poerio Automotores y todavía no está aprobado por el negocio.</p><p>Precios, disponibilidad y horarios se publican cuando el negocio los confirma.</p></div></footer>
-<a class="btn fab" href="#" data-contact>Consultar por WhatsApp</a>
-<div class="callbar"><a class="btn" href="#" data-contact>Consultar</a><a class="btn ghost" id="callMap" href="#ubicacion" target="_blank" rel="noopener noreferrer">Cómo llegar</a></div>
+<footer><div class="wrap"><p>Sitio demo hecho como propuesta por Santiago Solis. No es el sitio oficial de Fernando Poerio Automotores y todavía no está aprobado por el negocio.</p><p>Las fotos y datos de las unidades provienen de las publicaciones públicas de la agencia. Precios, disponibilidad y horarios se publican cuando el negocio los confirma.</p></div></footer>
+<div class="bar"><a class="btn wa" href="#" data-wa>WhatsApp</a><a class="btn" href="#" data-map target="_blank" rel="noopener noreferrer">Cómo llegar</a></div>
 <script>
 /* ==== DATOS DEL NEGOCIO (editar solo acá) ==== */
 var NEGOCIO = {
@@ -189,37 +165,29 @@ var STOCK = [
   { foto:"images/ka-2013.jpg", titulo:"Ford Ka", anio:2013, km:"78.000 km", precio:"Consultar", nota:"Única mano. Aire, cierre centralizado, alarma." },
   { foto:"images/stepway.jpg", titulo:"Renault Stepway Confort", anio:2009, precio:"Consultar", nota:"Segunda mano. Aire, doble airbag, llantas de aleación." }
 ];
-
 (function(){
-  var N=NEGOCIO,$=function(i){return document.getElementById(i)};
-  function contactHref(t){var m=encodeURIComponent(t||"Hola! Vi la página y quiero consultar por un vehículo.");return N.whatsapp?"https://wa.me/"+N.whatsapp+"?text="+m:"tel:"+N.telefonoTel}
-  var map=N.mapsPlace;
-  document.querySelectorAll("[data-contact]").forEach(function(a){a.href=contactHref(a.getAttribute("data-contact")||"");if(N.whatsapp){a.target="_blank";a.rel="noopener noreferrer"}else a.textContent="Llamar"});
-  document.querySelectorAll("[data-map]").forEach(function(a){a.href=map;a.target="_blank";a.rel="noopener noreferrer"});
-  $("callMap").href=map;$("mapLink").href=map;$("reviewsLink").href=N.mapsReviews;
-  $("addr").innerHTML=N.direccion+(N.referencia?" ("+N.referencia+")":"")+"<br>"+N.ciudad;
-  var p=$("phoneLink");p.href="tel:"+N.telefonoTel;p.textContent="Llamar al "+N.telefono;
-  $("hoursNote").textContent=N.horarios?"Horarios: "+N.horarios:"Horarios: a confirmar con el negocio.";
-  var ig=$("igLink");ig.href="https://www.instagram.com/"+N.instagram+"/";ig.textContent="Instagram @"+N.instagram;$("fbLink").href=N.facebook;
-  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
-  var F={todos:function(){return true},mano:function(c){return /única mano/i.test(c.nota||"")},nuevos:function(c){return c.anio>=2016},viejos:function(c){return c.anio<=2015}};
-  function render(f){
-    $("stockGrid").innerHTML=STOCK.filter(F[f]).map(function(c){
-      var msg="Hola! Quiero consultar por el "+c.titulo+(c.anio?" "+c.anio:"")+".";
-      return '<article class="card car">'+(c.foto?'<img src="'+esc(c.foto)+'" alt="'+esc(c.titulo)+'" loading="lazy">':'')+(c.fotos?'<div class="thumbs">'+c.fotos.map(function(s,i){return '<button type="button" class="th" aria-label="Ver foto '+(i+1)+'" data-src="'+esc(s)+'"><img src="'+esc(s.replace('.webp','-t.webp'))+'" alt="" loading="lazy"></button>'}).join('')+'</div>':'')+'<div class="in"><h3>'+esc(c.titulo)+'</h3><div class="meta">'+(c.anio?'<span>'+esc(c.anio)+'</span>':'')+(c.km?'<span>'+esc(c.km)+'</span>':'')+(c.combustible?'<span>'+esc(c.combustible)+'</span>':'')+'</div><div class="price">'+esc(c.precio||"Consultar")+'</div>'+(c.nota?'<p class="note">'+esc(c.nota)+'</p>':'')+'<a class="btn" href="'+contactHref(msg)+'"'+(N.whatsapp?' target="_blank" rel="noopener noreferrer"':'')+'>Consultar esta unidad</a></div></article>';
-    }).join("");
-  }
-  render("todos");
-  document.querySelectorAll(".chip").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".chip").forEach(function(x){x.setAttribute("aria-pressed",x===b)});render(b.getAttribute("data-f"))})});
-  $("stockGrid").addEventListener("click",function(e){var b=e.target.closest(".th");if(!b)return;var im=b.closest("article").querySelector("img");im.src=b.getAttribute("data-src")});
-  $("canjeForm").addEventListener("submit",function(e){e.preventDefault();var f=e.target;window.location.href=contactHref("Hola! Quiero consultar por mi vehículo: "+f.modelo.value+", año "+f.anio.value+(f.km.value?", "+f.km.value+" km":"")+". Me interesa: "+f.interes.value+".")});
-  var h=document.querySelector("header.top");addEventListener("scroll",function(){h.classList.toggle("sc",scrollY>8)},{passive:true});
-  if("IntersectionObserver" in window){
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.08});
-    document.querySelectorAll(".rv").forEach(function(s){io.observe(s)});
-    var no=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)document.querySelectorAll("nav a").forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id)})})},{rootMargin:"-45% 0px -50% 0px"});
-    document.querySelectorAll("main section[id]").forEach(function(s){no.observe(s)});
-  }else document.querySelectorAll(".rv").forEach(function(s){s.classList.add("in")});
+var N=NEGOCIO,$=function(i){return document.getElementById(i)};
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]})}
+function wa(t){return "https://wa.me/"+N.whatsapp+"?text="+encodeURIComponent(t||"Hola! Vi la página y quiero consultar por un vehículo.")}
+document.querySelectorAll("[data-wa]").forEach(function(a){a.href=wa(a.getAttribute("data-wa"));a.target="_blank";a.rel="noopener noreferrer"});
+document.querySelectorAll("[data-map]").forEach(function(a){a.href=N.mapsPlace});
+$("reviewsLink").href=N.mapsReviews;$("addr").innerHTML=esc(N.direccion)+(N.referencia?" <span class='k'>("+esc(N.referencia)+")</span>":"")+"<br>"+esc(N.ciudad);
+var p=$("phoneLink");p.href="tel:"+N.telefonoTel;p.textContent="Llamar al "+N.telefono;
+if(N.horarios)$("hoursNote").textContent="Horarios: "+N.horarios;
+var ig=$("igLink");ig.href="https://www.instagram.com/"+N.instagram+"/";ig.textContent="Instagram @"+N.instagram;$("fbLink").href=N.facebook;
+var F={todos:function(){return true},mano:function(c){return /única mano/i.test(c.nota||"")},nuevos:function(c){return c.anio>=2016},viejos:function(c){return c.anio<=2015}};
+var L={todos:"Todas",mano:"Única mano",nuevos:"2016 o más nuevos",viejos:"Hasta 2015"};
+function card(c){var ph=c.fotos||(c.foto?[c.foto]:[]);
+var g=ph.length?'<div class="ph"><div class="gal" tabindex="0" role="group" aria-label="Fotos de '+esc(c.titulo)+'">'+ph.map(function(s,i){return '<img src="'+esc(s)+'" alt="'+esc(c.titulo)+', foto '+(i+1)+' de '+ph.length+'" loading="lazy">'}).join('')+'</div>'+(ph.length>1?'<span class="cnt" aria-hidden="true">1/'+ph.length+'</span>':'')+'</div>':'';
+var msg="Hola! Vi en la página el "+c.titulo+" "+c.anio+" y quiero consultar por esta unidad.";
+return '<article class="car">'+g+'<div class="in"><h3>'+esc(c.titulo)+'</h3><dl class="spec"><div><dt>Año</dt><dd>'+esc(c.anio||"—")+'</dd></div><div><dt>Km</dt><dd>'+esc(c.km||"Consultar")+'</dd></div><div><dt>Motor</dt><dd>'+esc(c.combustible||"—")+'</dd></div><div><dt>Precio</dt><dd>'+esc(c.precio||"Consultar")+'</dd></div></dl>'+(c.nota?'<p class="nota">'+esc(c.nota)+'</p>':'')+'<a class="btn wa" href="'+wa(msg)+'" target="_blank" rel="noopener noreferrer">Consultar esta unidad</a></div></article>'}
+function render(f){$("stockGrid").innerHTML=STOCK.filter(F[f]).map(card).join("");
+document.querySelectorAll(".chip").forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-f")===f)})}
+$("chips").innerHTML=Object.keys(L).map(function(k){return '<button type="button" class="chip" data-f="'+k+'" aria-pressed="false">'+L[k]+' ('+STOCK.filter(F[k]).length+')</button>'}).join("");
+$("chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(b)render(b.getAttribute("data-f"))});
+$("stockGrid").addEventListener("scroll",function(e){var g=e.target;if(!g.classList||!g.classList.contains("gal"))return;var c=g.parentNode.querySelector(".cnt");if(c)c.textContent=(Math.round(g.scrollLeft/g.clientWidth)+1)+"/"+g.children.length},true);
+render("todos");
+$("canjeForm").addEventListener("submit",function(e){e.preventDefault();var f=e.target;window.open(wa("Hola! Quiero consultar por mi vehículo: "+f.modelo.value+", año "+f.anio.value+(f.km.value?", "+f.km.value+" km":"")+". Me interesa: "+f.interes.value+"."),"_blank","noopener")});
 })();
 </script>
 </body>
