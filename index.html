@@ -10,6 +10,11 @@
 <meta property="og:title" content="DEMO · Fernando Poerio Automotores">
 <meta property="og:description" content="Compra y venta de 0 km y usados seleccionados, con gestoría propia. Alberdi 1337, Concepción del Uruguay.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://hnk375561-lab.github.io/poerioautomotores/preview.png">
+<meta property="og:url" content="https://hnk375561-lab.github.io/poerioautomotores/">
+<link rel="canonical" href="https://hnk375561-lab.github.io/poerioautomotores/">
+<meta property="og:locale" content="es_AR">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#19788a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,7 +47,7 @@ nav a:hover{color:var(--ink)}
 .hero p{max-width:52ch;color:var(--steel);font-size:19px;margin:20px 0 28px}
 .hero .cta{display:flex;flex-wrap:wrap;gap:12px}
 .plate{display:inline-block;margin-top:36px;border:2px solid var(--ink);border-radius:6px;padding:6px 14px;font:700 26px "Barlow Condensed",sans-serif;letter-spacing:1px}
-section{padding:56px 0}
+section{padding:56px 0;scroll-margin-top:72px}
 section h2{font-size:clamp(32px,5vw,46px);margin-bottom:8px}
 .lead{color:var(--steel);max-width:60ch;margin:0 0 28px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
@@ -58,14 +63,16 @@ label{display:grid;gap:4px;font-weight:600;font-size:15px}
 input,select,textarea{font:inherit;padding:11px 12px;border:1px solid #9aa2ab;border-radius:6px;background:#fff;width:100%}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .sample{border-style:dashed;opacity:.85}.sample .ph{height:120px;background:var(--bg);border-radius:4px;display:grid;place-items:center;color:var(--steel);font-size:14px;margin-bottom:12px}.tag{display:inline-block;font-size:13px;font-weight:600;border:1px solid var(--steel);border-radius:4px;padding:1px 8px;color:var(--steel);margin-bottom:8px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}.steps li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:20px}.steps li:before{content:counter(s);font:700 34px "Barlow Condensed",sans-serif;color:var(--accent);display:block}.steps b{display:block;font:700 22px "Barlow Condensed",sans-serif}.steps span{color:var(--steel)}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px}.check{padding-left:20px;margin:0;color:var(--steel)}.check li{margin-bottom:6px}details{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 18px;margin-bottom:10px;max-width:760px}summary{font-weight:600;cursor:pointer}details p{margin:10px 0 0;color:var(--steel)}
 .note{font-size:14px;color:var(--steel)}
 .loc{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
 .loc address{font-style:normal;font-size:20px;margin-bottom:12px}
 .rating{display:inline-block;margin-top:14px;font-weight:600}
 footer{background:var(--ink);color:#c9ced3;padding:32px 0;font-size:14px}
 footer p{margin:0 0 8px;max-width:80ch}
-@media (max-width:720px){.hero-grid{grid-template-columns:1fr}.hero-car{max-width:340px}.callbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:6;gap:8px;padding:10px 12px;background:#fff;border-top:1px solid var(--line)}.callbar a{flex:1;text-align:center}body{padding-bottom:70px}nav{display:none}.loc,.two{grid-template-columns:1fr}.hero{padding-top:40px}}
+@media (max-width:720px){.hero-grid{grid-template-columns:1fr}.hero-car{max-width:340px}.callbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:6;gap:8px;padding:10px 12px;background:#fff;border-top:1px solid var(--line)}.callbar a{flex:1;text-align:center}body{padding-bottom:70px}nav{display:none}.loc,.two,.two-col{grid-template-columns:1fr}.hero{padding-top:40px}}
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"AutoDealer","name":"Fernando Poerio Automotores","telephone":"+543442453550","address":{"@type":"PostalAddress","streetAddress":"Alberdi 1337","addressLocality":"Concepción del Uruguay","addressRegion":"Entre Ríos","addressCountry":"AR"},"sameAs":["https://www.instagram.com/poerioautomotores/","https://www.facebook.com/profile.php?id=100011380620292"]}</script>
 </head>
 <body>
 <div class="demo">Demo: propuesta de diseño independiente, no oficial. Datos a confirmar con el negocio.</div>
@@ -73,7 +80,7 @@ footer p{margin:0 0 8px;max-width:80ch}
 <header class="top">
 <div class="wrap">
 <a class="logo" href="#top" id="top">Fernando <b>Poerio</b></a>
-<nav aria-label="Principal"><a href="#servicios">Qué hacemos</a><a href="#stock">Unidades</a><a href="#canje">Tu usado</a><a href="#ubicacion">Ubicación</a></nav>
+<nav aria-label="Principal"><a href="#servicios">Qué hacemos</a><a href="#stock">Unidades</a><a href="#proceso">Cómo trabajamos</a><a href="#canje">Tu usado</a><a href="#preguntas">Preguntas</a><a href="#ubicacion">Ubicación</a></nav>
 <a class="btn" href="#" data-contact>Consultar</a>
 </div>
 </header>
@@ -84,7 +91,7 @@ footer p{margin:0 0 8px;max-width:80ch}
 <h1>0 km y usados seleccionados.</h1>
 <p>Compra y venta de vehículos de todas las marcas, con gestoría propia. Consultá una unidad y te respondemos con los datos reales.</p>
 <div class="cta"><a class="btn" href="#" data-contact>Consultar ahora</a><a class="btn ghost" href="#stock">Ver unidades</a></div>
-<span class="plate" id="plate">ALBERDI 1337</span>
+<span class="plate" id="plate">ALBERDI 1337</span> <span class="tag" style="margin-left:8px">39 años de confianza</span>
 </div>
 <svg class="hero-car" viewBox="0 0 420 200" role="img" aria-label="Ilustración de un auto">
 <path d="M30 140 L45 110 Q55 90 80 86 L140 84 L175 55 Q185 48 200 48 L265 48 Q280 48 290 58 L320 86 L365 92 Q385 96 390 115 L392 140 Z" fill="#19788a"/>
@@ -113,7 +120,18 @@ footer p{margin:0 0 8px;max-width:80ch}
 <div class="grid" id="stockGrid"></div>
 </div></section>
 
-<section id="canje"><div class="wrap">
+<section id="proceso"><div class="wrap">
+<h2>Cómo trabajamos</h2>
+<p class="lead">Un recorrido simple, de la consulta a la entrega. Propuesta a validar con la agencia.</p>
+<ol class="steps">
+<li><b>Consultás</b><span>Por teléfono, WhatsApp o desde esta página, con la unidad que te interesa.</span></li>
+<li><b>Vemos la unidad</b><span>Coordinás una visita a Alberdi 1337 para verla y sacarte las dudas.</span></li>
+<li><b>Acordamos</b><span>Definís si comprás, vendés o dejás tu usado como parte de pago.</span></li>
+<li><b>Trámites</b><span>La agencia cuenta con gestoría propia para acompañar el papeleo.</span></li>
+</ol>
+</div></section>
+
+<section id="canje" style="background:var(--card)"><div class="wrap">
 <h2>Contanos qué vehículo tenés</h2>
 <p class="lead">Completá los datos y se arma el mensaje para que un asesor lo revise. No calcula precios automáticos.</p>
 <form id="canjeForm">
@@ -129,6 +147,22 @@ footer p{margin:0 0 8px;max-width:80ch}
 </form>
 </div></section>
 
+<section id="preguntas"><div class="wrap two-col">
+<div>
+<h2>Si querés vender o permutar</h2>
+<p class="lead">Documentación que suele pedirse. Es orientativa: confirmá el detalle con la agencia.</p>
+<ul class="check"><li>DNI del titular</li><li>Título y cédula del vehículo</li><li>Comprobantes de pago de patente e infracciones</li><li>Llaves y manual, si los tenés</li><li>Verificación policial, si corresponde</li></ul>
+</div>
+<div>
+<h2>Preguntas frecuentes</h2>
+<details><summary>¿Tienen todas las marcas?</summary><p>La agencia trabaja con 0 km y usados de todas las marcas. Consultá qué hay disponible hoy.</p></details>
+<details><summary>¿Reciben mi usado como parte de pago?</summary><p>Podés armar la consulta en el formulario de esta página y un asesor la revisa. Las condiciones las confirma la agencia.</p></details>
+<details><summary>¿Los precios están publicados?</summary><p>Solo se publican precios confirmados por el negocio. Si una unidad dice "Consultar", preguntá por ella.</p></details>
+<details><summary>¿Hacen la transferencia?</summary><p>La agencia cuenta con gestoría propia. Consultá qué trámites incluye cada operación.</p></details>
+<details><summary>¿Qué horarios tienen?</summary><p>Los horarios se están confirmando con el negocio. Mientras tanto, llamá al 03442 45-3550.</p></details>
+</div>
+</div></section>
+
 <section id="ubicacion" style="background:var(--card)"><div class="wrap">
 <h2>Dónde estamos</h2>
 <div class="loc">
@@ -137,7 +171,7 @@ footer p{margin:0 0 8px;max-width:80ch}
 <p><a id="phoneLink" href="#"></a></p>
 <p class="note" id="hoursNote"></p>
 <p><a class="btn" id="mapLink" href="#" target="_blank" rel="noopener noreferrer">Abrir en Google Maps</a></p>
-<p><a class="btn ghost" id="igLink" href="#" target="_blank" rel="noopener noreferrer"></a></p>
+<p><a class="btn ghost" id="igLink" href="#" target="_blank" rel="noopener noreferrer"></a> <a class="btn ghost" id="fbLink" href="#" target="_blank" rel="noopener noreferrer">Facebook</a></p>
 </div>
 <p class="lead" style="margin:0">Estamos en Alberdi 1337, Concepción del Uruguay, Entre Ríos.</p>
 </div>
@@ -149,7 +183,7 @@ footer p{margin:0 0 8px;max-width:80ch}
 <p>Fotos, precios y disponibilidad se publican solo cuando el negocio los confirma.</p>
 </div></footer>
 
-<div class="callbar"><a class="btn" href="#" data-contact>Consultar</a><a class="btn ghost" href="#ubicacion">Cómo llegar</a></div>
+<div class="callbar"><a class="btn" href="#" data-contact>Consultar</a><a class="btn ghost" id="callMap" href="#ubicacion" target="_blank" rel="noopener noreferrer">Cómo llegar</a></div>
 
 <script>
 /* ==== DATOS DEL NEGOCIO (editar solo acá) ==== */
@@ -159,13 +193,16 @@ var NEGOCIO = {
   ciudad: "Concepción del Uruguay, Entre Ríos",
   telefono: "03442 45-3550",
   telefonoTel: "+543442453550",
-  whatsapp: "",            /* completar con el número (formato 549344...) cuando el negocio lo confirme */
+  whatsapp: "543442453550",  /* confirmado: el 3442 45-3550 está en WhatsApp (línea fija, sin el 9) */
   horarios: "",
-  instagram: "poerioautomotores"
+  instagram: "poerioautomotores",
+  facebook: "https://www.facebook.com/profile.php?id=100011380620292"
 };
 /* ==== STOCK: agregar unidades reales, una por línea ====
    { titulo:"Marca Modelo Versión", anio:2020, km:"85.000 km", precio:"Consultar", combustible:"Nafta" } */
-var STOCK = [];
+var STOCK = [
+  { titulo:"Fiat Punto Attractive 1.4", anio:2011, combustible:"Nafta", precio:"Consultar", nota:"Publicada en su Facebook. Km y precio a confirmar con la agencia." }
+];
 
 (function(){
   var N = NEGOCIO;
@@ -182,6 +219,8 @@ var STOCK = [];
   var p = document.getElementById("phoneLink"); p.href = "tel:" + N.telefonoTel; p.textContent = "Llamar al " + N.telefono;
   document.getElementById("hoursNote").textContent = N.horarios ? "Horarios: " + N.horarios : "Horarios: a confirmar con el negocio.";
   var ig=document.getElementById("igLink");ig.href="https://www.instagram.com/"+N.instagram+"/";ig.textContent="Instagram @"+N.instagram;
+  var cm=document.getElementById("callMap");if(cm)cm.href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(N.nombre+" "+N.direccion+" "+N.ciudad);
+  document.getElementById("fbLink").href=N.facebook;
   document.getElementById("mapLink").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(N.nombre + " " + N.direccion + " " + N.ciudad);
 
   var grid = document.getElementById("stockGrid");
@@ -194,7 +233,7 @@ var STOCK = [];
       var msg = "Hola! Quiero consultar por el " + c.titulo + (c.anio ? " " + c.anio : "") + ".";
       return '<article class="card car"><h3>' + esc(c.titulo) + '</h3><div class="price">' + esc(c.precio || "Consultar") + '</div><dl>' +
         (c.anio ? '<dd>' + esc(c.anio) + '</dd>' : '') + (c.km ? '<dd>' + esc(c.km) + '</dd>' : '') + (c.combustible ? '<dd>' + esc(c.combustible) + '</dd>' : '') +
-        '</dl><a class="btn" href="' + contactHref(msg) + '">Consultar esta unidad</a></article>';
+        '</dl>' + (c.nota ? '<p class="note" style="margin:0 0 12px">' + esc(c.nota) + '</p>' : '') + '<a class="btn" href="' + contactHref(msg) + '">Consultar esta unidad</a></article>';
     }).join("");
   }
 
