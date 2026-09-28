@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>DEMO · Fernando Poerio Automotores · Concepción del Uruguay</title>
+<meta name="description" content="Propuesta de sitio web independiente para Fernando Poerio Automotores, compra y venta de 0 km y usados en Concepción del Uruguay.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16181b;--steel:#565f69;--line:#d3d7db;--bg:#eceef0;--card:#fff;--accent:#19788a;--accent-d:#125d6c}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;font:16px/1.55 Barlow,system-ui,sans-serif;color:var(--ink);background:var(--bg)}
+h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",sans-serif;line-height:1.05;margin:0;letter-spacing:.2px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.demo{background:var(--ink);color:#fff;font-size:14px;padding:8px 0;text-align:center}
+header.top{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px}
+.logo{font:700 28px "Barlow Condensed",sans-serif;text-decoration:none}
+.logo b{color:var(--accent)}
+nav{display:flex;gap:20px;font-weight:500}
+nav a{text-decoration:none;color:var(--steel)}
+nav a:hover{color:var(--ink)}
+.btn{display:inline-block;background:var(--accent);color:#fff;font-weight:600;text-decoration:none;padding:12px 20px;border-radius:6px;border:0;cursor:pointer;font-size:16px;font-family:inherit}
+.btn:hover{background:var(--accent-d)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.hero{padding:64px 0 56px;border-bottom:1px solid var(--line);background:var(--card)}
+.hero h1{font-size:clamp(44px,8vw,92px);max-width:11ch;font-weight:700}
+.hero p{max-width:52ch;color:var(--steel);font-size:19px;margin:20px 0 28px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px}
+.plate{display:inline-block;margin-top:36px;border:2px solid var(--ink);border-radius:6px;padding:6px 14px;font:700 26px "Barlow Condensed",sans-serif;letter-spacing:1px}
+section{padding:56px 0}
+section h2{font-size:clamp(32px,5vw,46px);margin-bottom:8px}
+.lead{color:var(--steel);max-width:60ch;margin:0 0 28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:20px}
+.card h3{font-size:24px;margin-bottom:6px}
+.card p{margin:0;color:var(--steel)}
+.stock-empty{background:var(--card);border:2px dashed var(--line);border-radius:6px;padding:28px;max-width:60ch}
+.car .price{font:700 26px "Barlow Condensed",sans-serif;margin:8px 0}
+.car dl{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0 0 14px;color:var(--steel);font-size:15px}
+.car dd{margin:0}
+form{display:grid;gap:14px;max-width:560px}
+label{display:grid;gap:4px;font-weight:600;font-size:15px}
+input,select,textarea{font:inherit;padding:11px 12px;border:1px solid #9aa2ab;border-radius:6px;background:#fff;width:100%}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sample{border-style:dashed;opacity:.85}.sample .ph{height:120px;background:var(--bg);border-radius:4px;display:grid;place-items:center;color:var(--steel);font-size:14px;margin-bottom:12px}.tag{display:inline-block;font-size:13px;font-weight:600;border:1px solid var(--steel);border-radius:4px;padding:1px 8px;color:var(--steel);margin-bottom:8px}
+.note{font-size:14px;color:var(--steel)}
+.loc{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.loc address{font-style:normal;font-size:20px;margin-bottom:12px}
+.rating{display:inline-block;margin-top:14px;font-weight:600}
+footer{background:var(--ink);color:#c9ced3;padding:32px 0;font-size:14px}
+footer p{margin:0 0 8px;max-width:80ch}
+@media (max-width:720px){nav{display:none}.loc,.two{grid-template-columns:1fr}.hero{padding-top:40px}}
+</style>
+</head>
+<body>
+<div class="demo">Demo: propuesta de diseño independiente, no oficial. Datos a confirmar con el negocio.</div>
+
+<header class="top">
+<div class="wrap">
+<a class="logo" href="#top" id="top">Fernando <b>Poerio</b></a>
+<nav aria-label="Principal"><a href="#servicios">Qué hacemos</a><a href="#stock">Unidades</a><a href="#canje">Tu usado</a><a href="#ubicacion">Ubicación</a></nav>
+<a class="btn" href="#" data-contact>Consultar</a>
+</div>
+</header>
+
+<main>
+<div class="hero"><div class="wrap">
+<h1>0 km y usados seleccionados.</h1>
+<p>Compra y venta de vehículos de todas las marcas, con gestoría propia. Consultá una unidad y te respondemos con los datos reales.</p>
+<div class="cta"><a class="btn" href="#" data-contact>Consultar ahora</a><a class="btn ghost" href="#stock">Ver unidades</a></div>
+<span class="plate" id="plate">ALBERDI 1337</span>
+</div></div>
+
+<section id="servicios"><div class="wrap">
+<h2>Qué hacemos</h2>
+<p class="lead">Compra y venta de vehículos 0 km y usados, con gestoría propia.</p>
+<div class="grid">
+<div class="card"><h3>0 km de todas las marcas</h3><p>Consultá qué marcas y modelos hay disponibles.</p></div>
+<div class="card"><h3>Usados seleccionados</h3><p>Unidades elegidas por la agencia. Consultá cuáles hay hoy.</p></div>
+<div class="card"><h3>Gestoría propia</h3><p>La agencia cuenta con gestoría propia. Consultá qué trámites incluye.</p></div>
+<div class="card"><h3>Compra y venta</h3><p>Comprá o vendé tu vehículo. Consultá cómo.</p></div>
+</div>
+</div></section>
+
+<section id="stock" style="background:var(--card)"><div class="wrap">
+<h2>Unidades disponibles</h2>
+<p class="lead">Cada unidad se carga con fotos y datos reales confirmados por la agencia.</p>
+<div class="grid" id="stockGrid"></div>
+</div></section>
+
+<section id="canje"><div class="wrap">
+<h2>Contanos qué vehículo tenés</h2>
+<p class="lead">Completá los datos y se arma el mensaje para que un asesor lo revise. No calcula precios automáticos.</p>
+<form id="canjeForm">
+<label>Marca y modelo<input name="modelo" required></label>
+<div class="two">
+<label>Año<input name="anio" inputmode="numeric" required></label>
+<label>Kilometraje<input name="km" inputmode="numeric"></label>
+</div>
+<label>¿Qué te interesa?
+<select name="interes"><option>Un 0 km</option><option>Un usado</option><option>Vender mi vehículo</option><option>Todavía no lo sé</option></select></label>
+<button class="btn" type="submit">Armar consulta</button>
+<p class="note">No guardamos tus datos: se abre un mensaje que revisás y enviás vos.</p>
+</form>
+</div></section>
+
+<section id="ubicacion" style="background:var(--card)"><div class="wrap">
+<h2>Dónde estamos</h2>
+<div class="loc">
+<div>
+<address id="addr"></address>
+<p><a id="phoneLink" href="#"></a></p>
+<p class="note" id="hoursNote"></p>
+<p><a class="btn" id="mapLink" href="#" target="_blank" rel="noopener noreferrer">Abrir en Google Maps</a></p>
+<p><a class="btn ghost" id="igLink" href="#" target="_blank" rel="noopener noreferrer"></a></p>
+</div>
+<p class="lead" style="margin:0">Estamos en Alberdi 1337, Concepción del Uruguay, Entre Ríos.</p>
+</div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+<p>Sitio demo hecho como propuesta por Santiago Solis. No es el sitio oficial de Fernando Poerio Automotores y todavía no está aprobado por el negocio.</p>
+<p>Fotos, precios y disponibilidad se publican solo cuando el negocio los confirma.</p>
+</div></footer>
+
+<script>
+/* ==== DATOS DEL NEGOCIO (editar solo acá) ==== */
+var NEGOCIO = {
+  nombre: "Fernando Poerio Automotores",
+  direccion: "Alberdi 1337",
+  ciudad: "Concepción del Uruguay, Entre Ríos",
+  telefono: "03442 45-3550",
+  telefonoTel: "+543442453550",
+  whatsapp: "",            /* completar con el número (formato 549344...) cuando el negocio lo confirme */
+  horarios: "",
+  instagram: "poerioautomotores"
+};
+/* ==== STOCK: agregar unidades reales, una por línea ====
+   { titulo:"Marca Modelo Versión", anio:2020, km:"85.000 km", precio:"Consultar", combustible:"Nafta" } */
+var STOCK = [];
+
+(function(){
+  var N = NEGOCIO;
+  function contactHref(texto){
+    var t = encodeURIComponent(texto || "Hola! Vi la página y quiero consultar por un vehículo.");
+    return N.whatsapp ? "https://wa.me/" + N.whatsapp + "?text=" + t : "tel:" + N.telefonoTel;
+  }
+  document.querySelectorAll("[data-contact]").forEach(function(a){
+    a.href = contactHref();
+    if(N.whatsapp){a.target="_blank";a.rel="noopener noreferrer";}
+    else{a.textContent = "Llamar";}
+  });
+  document.getElementById("addr").innerHTML = N.direccion + "<br>" + N.ciudad;
+  var p = document.getElementById("phoneLink"); p.href = "tel:" + N.telefonoTel; p.textContent = "Llamar al " + N.telefono;
+  document.getElementById("hoursNote").textContent = N.horarios ? "Horarios: " + N.horarios : "Horarios: a confirmar con el negocio.";
+  var ig=document.getElementById("igLink");ig.href="https://www.instagram.com/"+N.instagram+"/";ig.textContent="Instagram @"+N.instagram;
+  document.getElementById("mapLink").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(N.nombre + " " + N.direccion + " " + N.ciudad);
+
+  var grid = document.getElementById("stockGrid");
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  if(!STOCK.length){
+    var ej = '<article class="card car sample" aria-label="Ejemplo de unidad"><span class="tag">Ejemplo de cómo se verá</span><div class="ph">Foto de la unidad</div><h3>Marca Modelo Versión</h3><dl><dd>Año</dd><dd>Kilometraje</dd><dd>Combustible</dd></dl><div class="price">Precio o Consultar</div></article>';
+    grid.innerHTML = '<div class="stock-empty"><h3>Estamos cargando las unidades</h3><p class="note" style="font-size:16px;margin:8px 0 14px">Todavía no hay unidades publicadas en esta demo. Consultá qué tienen disponible hoy.</p><a class="btn" href="' + contactHref("Hola! Quiero saber qué unidades tienen disponibles.") + '">' + (N.whatsapp ? "Consultar disponibilidad" : "Llamar para consultar") + '</a></div>' + ej + ej;
+  } else {
+    grid.innerHTML = STOCK.map(function(c){
+      var msg = "Hola! Quiero consultar por el " + c.titulo + (c.anio ? " " + c.anio : "") + ".";
+      return '<article class="card car"><h3>' + esc(c.titulo) + '</h3><div class="price">' + esc(c.precio || "Consultar") + '</div><dl>' +
+        (c.anio ? '<dd>' + esc(c.anio) + '</dd>' : '') + (c.km ? '<dd>' + esc(c.km) + '</dd>' : '') + (c.combustible ? '<dd>' + esc(c.combustible) + '</dd>' : '') +
+        '</dl><a class="btn" href="' + contactHref(msg) + '">Consultar esta unidad</a></article>';
+    }).join("");
+  }
+
+  document.getElementById("canjeForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var f = e.target;
+    var msg = "Hola! Quiero consultar por mi vehículo: " + f.modelo.value + ", año " + f.anio.value +
+      (f.km.value ? ", " + f.km.value + " km" : "") + ". Me interesa: " + f.interes.value + ".";
+    window.location.href = contactHref(msg);
+  });
+})();
+</script>
+</body>
+</html>
