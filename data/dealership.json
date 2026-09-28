@@ -1,0 +1,21 @@
+{
+  "demo": { "status": "independent-demo", "official": false, "publicIndexing": false },
+  "identity": { "tradeName": "Fernando Poerio Automotores", "legalName": null, "cuit": null },
+  "location": {
+    "address": "Alberdi 1337", "city": "Concepción del Uruguay", "province": "Entre Ríos", "country": "Argentina",
+    "mapsPlaceUrl": null, "status": "address-given-by-requester-not-verified-publicly"
+  },
+  "contact": {
+    "phone": "03442 45-3550", "phoneTel": "+543442453550", "whatsApp": "5493442453550",
+    "email": null, "website": null, "instagram": "poerioautomotores",
+    "facebook": "https://www.facebook.com/profile.php?id=100011380620292",
+    "status": "phone-given-by-requester-not-verified-publicly"
+  },
+  "hours": { "display": null, "status": "not-found" },
+  "foundation": null,
+  "services": { "status": "not-verified", "note": "Ver golive/AFIRMACIONES-A-CONFIRMAR.md" },
+  "sources": [
+    { "label": "Directorio gtm.com.ar (solo fragmento de buscador; sitio bloqueó la apertura)", "url": "https://gtm.com.ar/ubicacion/entre-rios/uruguay/concepcion-del-uruguay/", "checkedAt": "2026-09-28", "finding": "Entrada 'Fernando poeiro', Compraventa de automóviles. Sin dirección ni teléfono; identidad no confirmada." },
+    { "label": "Instagram, Facebook, Google Maps, Mercado Libre, Autocosmos, TeleXplorer, Infoisinfo, prensa local", "url": null, "checkedAt": "2026-09-28", "finding": "No encontrado / no abierto" }
+  ]
+}
