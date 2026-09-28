@@ -56,7 +56,7 @@ section{padding:72px 0;scroll-margin-top:76px}section h2{font-size:clamp(34px,4.
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px}
 .car{padding:0;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s var(--ease),box-shadow .3s}.car:hover{transform:translateY(-4px);box-shadow:var(--sh)}
-.car img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.car .in{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.car img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.thumbs{display:flex;gap:6px;padding:8px 12px 0;overflow-x:auto}.thumbs .th{flex:0 0 56px;padding:0;border:2px solid transparent;border-radius:6px;background:none;cursor:pointer}.thumbs .th img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px}.thumbs .th:focus-visible{outline:2px solid currentColor}.car .in{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
 .car h3{font-size:25px}.meta{display:flex;flex-wrap:wrap;gap:6px}.meta span{background:var(--mist);border-radius:6px;padding:2px 9px;font-size:13px;font-weight:600;color:var(--steel)}
 .price{font:700 24px "Barlow Condensed",sans-serif}.note{font-size:14px;color:var(--steel)}.car .btn{margin-top:auto}
 .dark{background:var(--ink) radial-gradient(700px 320px at 10% 0,rgba(25,120,138,.4),transparent);color:#fff}.dark .lead{color:#c5cdd1}.dark .eyebrow{color:#7fd3e3}
@@ -148,7 +148,7 @@ footer{background:var(--ink);color:#c9ced3;padding:36px 0;font-size:14px}footer 
 <section id="ubicacion" class="alt rv"><div class="wrap two">
 <div><h2>Dónde estamos</h2><address id="addr"></address>
 <p><a id="phoneLink" href="#"></a></p><p class="note" id="hoursNote"></p>
-<div class="row"><a class="btn" id="mapLink" href="#" target="_blank" rel="noopener noreferrer">Abrir en Google Maps</a><a class="btn ghost" id="igLink" href="#" target="_blank" rel="noopener noreferrer"></a><a class="btn ghost" id="fbLink" href="#" target="_blank" rel="noopener noreferrer">Facebook</a></div></div>
+<div class="row"><a class="btn" id="mapLink" href="#" target="_blank" rel="noopener noreferrer">Abrir en Google Maps</a><a class="btn ghost" id="reviewsLink" href="#" target="_blank" rel="noopener noreferrer">Ver opiniones en Google</a><a class="btn ghost" id="igLink" href="#" target="_blank" rel="noopener noreferrer"></a><a class="btn ghost" id="fbLink" href="#" target="_blank" rel="noopener noreferrer">Facebook</a></div></div>
 <div class="notice"><b>Sobre esta versión demo.</b> Es una propuesta de diseño independiente, no oficial. Las fotos y datos de las unidades provienen de las publicaciones públicas de la agencia en Instagram y Facebook, y se usan solo para mostrar cómo se vería el sitio. Nada se publica como oficial hasta que el negocio lo confirme.</div>
 </div></section>
 </main>
@@ -167,12 +167,18 @@ var NEGOCIO = {
   whatsapp: "5493442453550",  /* confirmado: el chat abre como +54 9 3442 45-3550 */
   horarios: "",
   instagram: "poerioautomotores",
-  facebook: "https://www.facebook.com/profile.php?id=100011380620292"
+  facebook: "https://www.facebook.com/profile.php?id=100011380620292",
+  mapsPlace: "https://www.google.com/maps/place/Fernando+poeiro/@-32.4879785,-58.2420924,17z/data=!4m15!1m8!3m7!1s0x95afdb9fe685136b:0x2b57fd352c4aaa70!2sFernando+poeiro!8m2!3d-32.4882114!4d-58.2425324!10e5!16s%2Fg%2F11fpqtj8yz!3m5!1s0x95afdb9fe685136b:0x2b57fd352c4aaa70!8m2!3d-32.4882114!4d-58.2425324!16s%2Fg%2F11fpqtj8yz?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D",
+  mapsReviews: "https://www.google.com/maps/place/Fernando+poeiro/@-32.4879785,-58.2420924,17z/data=!4m17!1m8!3m7!1s0x95afdb9fe685136b:0x2b57fd352c4aaa70!2sFernando+poeiro!8m2!3d-32.4882114!4d-58.2425324!10e5!16s%2Fg%2F11fpqtj8yz!3m7!1s0x95afdb9fe685136b:0x2b57fd352c4aaa70!8m2!3d-32.4882114!4d-58.2425324!9m1!1b1!16s%2Fg%2F11fpqtj8yz?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D"
 };
 /* ==== STOCK: agregar unidades reales, una por línea ====
    { titulo:"Marca Modelo Versión", anio:2020, km:"85.000 km", precio:"Consultar", combustible:"Nafta" } */
 var STOCK = [
-  { foto:"images/punto.jpg", titulo:"Fiat Punto Attractive 1.4", anio:2011, combustible:"Nafta", precio:"Consultar", nota:"Motor 1.4 Fire. Publicada en su Facebook." },
+  { foto:"images/kwid-1.webp", fotos:[1,2].map(function(n){return "images/kwid-"+n+".webp"}), titulo:"Renault Kwid Outsider Full 1.0", anio:2019, km:"84.000 km", combustible:"Nafta", precio:"Consultar", nota:"Muy bien de cubiertas. Aire, dirección, levantavidrios, cierre centralizado, doble airbag, ABS, antinieblas. Permuta. Según su publicación." },
+  { foto:"images/ka-s-1.webp", fotos:[1,2].map(function(n){return "images/ka-s-"+n+".webp"}), titulo:"Ford Ka S 1.5", anio:2016, km:"132.000 km", combustible:"Nafta", precio:"Consultar", nota:"5 puertas. Aire, cierre centralizado, dirección asistida, doble airbag, ABS. Permuta. Según su flyer publicado." },
+  { foto:"images/up-1.webp", fotos:[1,2,3,4,5].map(function(n){return "images/up-"+n+".webp"}), titulo:"Volkswagen Up 1.0", anio:2018, km:"44.000 km", combustible:"Nafta", precio:"Consultar", nota:"5 puertas. Aire acondicionado, cierre centralizado, levantavidrios y espejos eléctricos, doble airbag. Publicada en Facebook el 25 de agosto." },
+  { foto:"images/clio-1.webp", fotos:[1,2,3,4,5,6].map(function(n){return "images/clio-"+n+".webp"}), titulo:"Renault Clio Mio 1.2", anio:2014, km:"96.600 km", combustible:"Nafta", precio:"Consultar", nota:"Única mano, 5 puertas. Aire, cierre centralizado, levantavidrios eléctricos, dirección asistida, doble airbag, ABS. Permuta. Publicada en Facebook el 30 de julio." },
+  { foto:"images/punto-1.webp", fotos:[1,2,3,4,5,6,7].map(function(n){return "images/punto-"+n+".webp"}), titulo:"Fiat Punto Attractive 1.4 Fire", anio:2011, km:"97.000 km", combustible:"Nafta", precio:"Consultar", nota:"Aire, levantavidrios y espejos eléctricos, cierre centralizado, dirección asistida, doble airbag, ABS. Permuta. Publicada en su Facebook." },
   { foto:"images/ecosport.jpg", titulo:"Ford EcoSport XLS 1.6", anio:2011, km:"200.000 km", combustible:"Nafta / GNC", precio:"Consultar", nota:"Aire, dirección asistida, doble airbag, ABS, llantas de aleación." },
   { foto:"images/ka-viral.jpg", titulo:"Ford Ka Viral 1.0", anio:2011, km:"108.000 km", combustible:"Nafta", precio:"Consultar", nota:"Aire acondicionado y dirección asistida." },
   { foto:"images/fiat-147.jpg", titulo:"Fiat 147 Spazio TR 1.4", anio:1994, combustible:"Nafta", precio:"Consultar", nota:"Clásico." },
@@ -187,10 +193,10 @@ var STOCK = [
 (function(){
   var N=NEGOCIO,$=function(i){return document.getElementById(i)};
   function contactHref(t){var m=encodeURIComponent(t||"Hola! Vi la página y quiero consultar por un vehículo.");return N.whatsapp?"https://wa.me/"+N.whatsapp+"?text="+m:"tel:"+N.telefonoTel}
-  var map="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(N.nombre+" "+N.direccion+" "+N.ciudad);
+  var map=N.mapsPlace;
   document.querySelectorAll("[data-contact]").forEach(function(a){a.href=contactHref(a.getAttribute("data-contact")||"");if(N.whatsapp){a.target="_blank";a.rel="noopener noreferrer"}else a.textContent="Llamar"});
   document.querySelectorAll("[data-map]").forEach(function(a){a.href=map;a.target="_blank";a.rel="noopener noreferrer"});
-  $("callMap").href=map;$("mapLink").href=map;
+  $("callMap").href=map;$("mapLink").href=map;$("reviewsLink").href=N.mapsReviews;
   $("addr").innerHTML=N.direccion+(N.referencia?" ("+N.referencia+")":"")+"<br>"+N.ciudad;
   var p=$("phoneLink");p.href="tel:"+N.telefonoTel;p.textContent="Llamar al "+N.telefono;
   $("hoursNote").textContent=N.horarios?"Horarios: "+N.horarios:"Horarios: a confirmar con el negocio.";
@@ -200,11 +206,12 @@ var STOCK = [
   function render(f){
     $("stockGrid").innerHTML=STOCK.filter(F[f]).map(function(c){
       var msg="Hola! Quiero consultar por el "+c.titulo+(c.anio?" "+c.anio:"")+".";
-      return '<article class="card car">'+(c.foto?'<img src="'+esc(c.foto)+'" alt="'+esc(c.titulo)+'" loading="lazy">':'')+'<div class="in"><h3>'+esc(c.titulo)+'</h3><div class="meta">'+(c.anio?'<span>'+esc(c.anio)+'</span>':'')+(c.km?'<span>'+esc(c.km)+'</span>':'')+(c.combustible?'<span>'+esc(c.combustible)+'</span>':'')+'</div><div class="price">'+esc(c.precio||"Consultar")+'</div>'+(c.nota?'<p class="note">'+esc(c.nota)+'</p>':'')+'<a class="btn" href="'+contactHref(msg)+'"'+(N.whatsapp?' target="_blank" rel="noopener noreferrer"':'')+'>Consultar esta unidad</a></div></article>';
+      return '<article class="card car">'+(c.foto?'<img src="'+esc(c.foto)+'" alt="'+esc(c.titulo)+'" loading="lazy">':'')+(c.fotos?'<div class="thumbs">'+c.fotos.map(function(s,i){return '<button type="button" class="th" aria-label="Ver foto '+(i+1)+'" data-src="'+esc(s)+'"><img src="'+esc(s.replace('.webp','-t.webp'))+'" alt="" loading="lazy"></button>'}).join('')+'</div>':'')+'<div class="in"><h3>'+esc(c.titulo)+'</h3><div class="meta">'+(c.anio?'<span>'+esc(c.anio)+'</span>':'')+(c.km?'<span>'+esc(c.km)+'</span>':'')+(c.combustible?'<span>'+esc(c.combustible)+'</span>':'')+'</div><div class="price">'+esc(c.precio||"Consultar")+'</div>'+(c.nota?'<p class="note">'+esc(c.nota)+'</p>':'')+'<a class="btn" href="'+contactHref(msg)+'"'+(N.whatsapp?' target="_blank" rel="noopener noreferrer"':'')+'>Consultar esta unidad</a></div></article>';
     }).join("");
   }
   render("todos");
   document.querySelectorAll(".chip").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".chip").forEach(function(x){x.setAttribute("aria-pressed",x===b)});render(b.getAttribute("data-f"))})});
+  $("stockGrid").addEventListener("click",function(e){var b=e.target.closest(".th");if(!b)return;var im=b.closest("article").querySelector("img");im.src=b.getAttribute("data-src")});
   $("canjeForm").addEventListener("submit",function(e){e.preventDefault();var f=e.target;window.location.href=contactHref("Hola! Quiero consultar por mi vehículo: "+f.modelo.value+", año "+f.anio.value+(f.km.value?", "+f.km.value+" km":"")+". Me interesa: "+f.interes.value+".")});
   var h=document.querySelector("header.top");addEventListener("scroll",function(){h.classList.toggle("sc",scrollY>8)},{passive:true});
   if("IntersectionObserver" in window){

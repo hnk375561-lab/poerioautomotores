@@ -1,21 +1,116 @@
 {
-  "demo": { "status": "independent-demo", "official": false, "publicIndexing": false },
-  "identity": { "tradeName": "Fernando Poerio Automotores", "legalName": null, "cuit": null },
+  "demo": {
+    "status": "independent-demo",
+    "official": false,
+    "publicIndexing": false
+  },
+  "identity": {
+    "tradeName": "Fernando Poerio Automotores",
+    "legalName": null,
+    "cuit": null
+  },
   "location": {
-    "address": "Alberdi 1337", "city": "Concepción del Uruguay", "province": "Entre Ríos", "country": "Argentina",
-    "mapsPlaceUrl": null, "status": "address-given-by-requester-not-verified-publicly"
+    "address": "Alberdi 1337",
+    "city": "Concepción del Uruguay",
+    "province": "Entre Ríos",
+    "country": "Argentina",
+    "mapsPlaceUrl": "https://www.google.com/maps/place/Fernando+poeiro/@-32.4879785,-58.2420924,17z/data=!4m15!1m8!3m7!1s0x95afdb9fe685136b:0x2b57fd352c4aaa70!2sFernando+poeiro!8m2!3d-32.4882114!4d-58.2425324!10e5!16s%2Fg%2F11fpqtj8yz!3m5!1s0x95afdb9fe685136b:0x2b57fd352c4aaa70!8m2!3d-32.4882114!4d-58.2425324!16s%2Fg%2F11fpqtj8yz?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D",
+    "status": "maps-listing-address-matches-Alberdi-1337 (captura 2026-09-28); ficha sin reclamar",
+    "mapsReviewsUrl": "https://www.google.com/maps/place/Fernando+poeiro/@-32.4879785,-58.2420924,17z/data=!4m17!1m8!3m7!1s0x95afdb9fe685136b:0x2b57fd352c4aaa70!2sFernando+poeiro!8m2!3d-32.4882114!4d-58.2425324!10e5!16s%2Fg%2F11fpqtj8yz!3m7!1s0x95afdb9fe685136b:0x2b57fd352c4aaa70!8m2!3d-32.4882114!4d-58.2425324!9m1!1b1!16s%2Fg%2F11fpqtj8yz?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D",
+    "coordinates": {
+      "latitude": -32.4882114,
+      "longitude": -58.2425324
+    },
+    "mapsListingName": "Fernando poeiro",
+    "plusCode": "GQ64+PX"
   },
   "contact": {
-    "phone": "03442 45-3550", "phoneTel": "+543442453550", "whatsApp": "5493442453550",
-    "email": null, "website": null, "instagram": "poerioautomotores",
+    "phone": "03442 45-3550",
+    "phoneTel": "+543442453550",
+    "whatsApp": "5493442453550",
+    "email": null,
+    "website": null,
+    "instagram": "poerioautomotores",
     "facebook": "https://www.facebook.com/profile.php?id=100011380620292",
-    "status": "phone-given-by-requester-not-verified-publicly"
+    "status": "whatsapp-profile-seen-in-screenshot-2026-09-28",
+    "whatsAppProfileName": "Fernando Poerio Automotores (logo en la foto de perfil)"
   },
-  "hours": { "display": null, "status": "not-found" },
-  "foundation": null,
-  "services": { "status": "not-verified", "note": "Ver golive/AFIRMACIONES-A-CONFIRMAR.md" },
+  "hours": {
+    "display": null,
+    "status": "not-found",
+    "note": "La ficha de Maps no tiene horarios, teléfono ni sitio web cargados (captura 2026-09-28)"
+  },
+  "foundation": {
+    "claim": "39 años de confianza",
+    "year": null,
+    "note": "Frase del logo en los flyers del propio negocio (Clio Mio y Ka S). No indica año de fundación ni fecha del flyer; no se calcula el año."
+  },
+  "services": {
+    "status": "partial",
+    "permuta": "Publicación de Facebook 30 de julio: 'VENDO-PERMUTO'",
+    "note": "Resto sin verificar; ver golive/AFIRMACIONES-A-CONFIRMAR.md",
+    "consignaciones_usados_0km": "Cartel en la pared del local, visible en una foto del Punto: 'OKM - USADOS - CONSIGNACIONES' (sic). Fecha de la foto: no visible."
+  },
   "sources": [
-    { "label": "Directorio gtm.com.ar (solo fragmento de buscador; sitio bloqueó la apertura)", "url": "https://gtm.com.ar/ubicacion/entre-rios/uruguay/concepcion-del-uruguay/", "checkedAt": "2026-09-28", "finding": "Entrada 'Fernando poeiro', Compraventa de automóviles. Sin dirección ni teléfono; identidad no confirmada." },
-    { "label": "Instagram, Facebook, Google Maps, Mercado Libre, Autocosmos, TeleXplorer, Infoisinfo, prensa local", "url": null, "checkedAt": "2026-09-28", "finding": "No encontrado / no abierto" }
+    {
+      "label": "Directorio gtm.com.ar (solo fragmento de buscador; sitio bloqueó la apertura)",
+      "url": "https://gtm.com.ar/ubicacion/entre-rios/uruguay/concepcion-del-uruguay/",
+      "checkedAt": "2026-09-28",
+      "finding": "Entrada 'Fernando poeiro', Compraventa de automóviles. Sin dirección ni teléfono; identidad no confirmada."
+    },
+    {
+      "label": "Instagram, Facebook, Google Maps, Mercado Libre, Autocosmos, TeleXplorer, Infoisinfo, prensa local",
+      "url": null,
+      "checkedAt": "2026-09-28",
+      "finding": "No encontrado / no abierto"
+    },
+    {
+      "label": "Ficha de Google Maps 'Fernando poeiro' (enlace del solicitante; no pude abrirla)",
+      "url": "https://www.google.com/maps/place/Fernando+poeiro/@-32.4879785,-58.2420924,17z/data=!4m15!1m8!3m7!1s0x95afdb9fe685136b:0x2b57fd352c4aaa70!2sFernando+poeiro!8m2!3d-32.4882114!4d-58.2425324!10e5!16s%2Fg%2F11fpqtj8yz!3m5!1s0x95afdb9fe685136b:0x2b57fd352c4aaa70!8m2!3d-32.4882114!4d-58.2425324!16s%2Fg%2F11fpqtj8yz?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D",
+      "checkedAt": "2026-09-28",
+      "finding": "Existe la ficha, coordenadas -32.4882114,-58.2425324. No leí dirección, horarios, teléfono ni reseñas."
+    },
+    {
+      "label": "Captura de WhatsApp (info del contacto) enviada por el solicitante",
+      "url": null,
+      "checkedAt": "2026-09-28",
+      "finding": "+54 9 3442 45-3550 con foto de perfil con logo 'Fernando Poerio Automotores'"
+    },
+    {
+      "label": "Facebook 'Fernando Poerio' (captura del solicitante): Renault Clio Mio 2014, publicada 30 de julio",
+      "url": null,
+      "checkedAt": "2026-09-28",
+      "finding": "Única mano, 5 puertas, 1.2 nafta, 96.600 km; aire, cierre centralizado, levantavidrios eléctricos, dirección asistida, airbag doble, ABS; 'VENDO-PERMUTO', tel. 3442-453550, Alberdi 1337. Sin precio."
+    },
+    {
+      "label": "Facebook 'Fernando Poerio' (captura del solicitante): VW Up 2018, publicada 25 de agosto",
+      "url": null,
+      "checkedAt": "2026-09-28",
+      "finding": "5 puertas, 1.0 nafta, 44.000 km; aire, cierre centralizado, levantavidrios y espejos eléctricos, doble airbag. Sin precio."
+    },
+    {
+      "label": "Google Maps, reseñas (captura del solicitante)",
+      "url": null,
+      "checkedAt": "2026-09-28",
+      "finding": "3.7 con 3 opiniones; una de 1 estrella con más de 5 años de antigüedad. Muestra demasiado chica para usar como dato destacado."
+    },
+    {
+      "label": "Facebook/Instagram del negocio (fotos y texto enviados por el solicitante): Fiat Punto Attractive 2011",
+      "url": null,
+      "checkedAt": "2026-09-28",
+      "finding": "1.4 Fire nafta, 97.000 km; aire, levantavidrios y espejos eléctricos, cierre centralizado, dirección asistida, doble airbag, ABS. 'VENDO-PERMUTO', tel. 3442-453550, Alberdi 1337. Sin precio."
+    },
+    {
+      "label": "Flyers del negocio (imágenes enviadas por el solicitante): Renault Clio Mio y Ford Ka S",
+      "url": null,
+      "checkedAt": "2026-09-28",
+      "finding": "Logo '39 años de confianza – Fernando Poerio Automotores'. Ford Ka S: 5 puertas, 2016, 1.5 nafta, 132.000 km; aire, cierre centralizado, dirección asistida, doble airbag, ABS; 'VENDO-PERMUTO', tel. 3442-453550, Alberdi 1337. El flyer del Clio repite los datos ya cargados."
+    },
+    {
+      "label": "Publicación del negocio (foto y texto enviados por el solicitante): Renault Kwid Outsider Full 2019",
+      "url": null,
+      "checkedAt": "2026-09-28",
+      "finding": "1.0 nafta, 84.000 km, 'muy bien de cubiertas'; aire, dirección, levantavidrios, cierre centralizado, doble airbag, ABS, antinieblas y 'etc'. 'VENDO-PERMUTO', tel. 3442-453550, Alberdi 1337. Sin precio."
+    }
   ]
 }

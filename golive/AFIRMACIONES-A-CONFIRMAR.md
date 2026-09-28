@@ -4,8 +4,8 @@ Revisión del 2026-09-28. Ninguna de estas afirmaciones pudo verificarse en fuen
 
 | # | Afirmación en el sitio | Ubicación | Estado | Acción antes de publicar |
 |--:|---|---|---|---|
-| 1 | Alberdi 1337 (y "casi Bv. Montoneras") | NEGOCIO, mapa | Dato del pedido, no verificado | Confirmar con el dueño; cargar ficha de Google Maps |
-| 2 | Tel. 03442 45-3550 / WhatsApp | NEGOCIO, botones | Dato del pedido; el código dice "confirmado" pero no hay fuente | Confirmar con el dueño |
+| 1 | Alberdi 1337 (y "casi Bv. Montoneras") | NEGOCIO, mapa | Ficha de Maps "Fernando poeiro" cargada (enlace del solicitante, 2026-09-28); no pude abrirla, así que la dirección escrita no está verificada contra ella | Comparar la dirección que muestra Maps con Alberdi 1337 |
+| 2 | Tel. 03442 45-3550 / WhatsApp | NEGOCIO, botones | Captura de WhatsApp (2026-09-28): ese número muestra foto con logo "Fernando Poerio Automotores". Confirma que el WhatsApp existe y usa la marca; no prueba que sea el número oficial de atención | Confirmar con el dueño |
 | 3 | Horarios | NEGOCIO.horarios | No encontrado; queda vacío | Pedir al dueño |
 | 4 | 0 km "de todas las marcas" | Hero, servicios, FAQ | Sin fuente | Confirmar marcas concretas |
 | 5 | Gestoría propia / trámites y transferencias | Hero, servicios, pasos | Sin fuente | Confirmar |
@@ -18,3 +18,45 @@ Revisión del 2026-09-28. Ninguna de estas afirmaciones pudo verificarse en fuen
 | 12 | Notas en medios | — | No encontrado | No publicar |
 
 Precios: todos "Consultar". El validador falla si aparece otro valor sin confirmación.
+
+## Novedades del 2026-09-28
+- **Dirección:** la ficha de Maps muestra "Alberdi 1337, Concepción del Uruguay" (captura). Confirmada en Maps; la ficha figura sin reclamar y sin horarios, teléfono ni web.
+- **Teléfono y permuta:** una publicación de Facebook del 30 de julio dice "VENDO-PERMUTO, TEL: 3442-453550, Alberdi 1337". Respalda las filas 2 y 7.
+- **Unidades nuevas en STOCK:** VW Up 2018 (Facebook, 25 de agosto) y Renault Clio Mio 2014 (Facebook, 30 de julio). Sin precio. Verificar que sigan disponibles.
+- **Reseñas de Google:** 3.7 con 3 opiniones, una de 1 estrella de hace más de 5 años. No se muestra la puntuación en el sitio; solo el enlace a las opiniones.
+- **Facebook:** las publicaciones salen de un perfil llamado "Fernando Poerio" (no una página comercial). Confirmar cuál es la cuenta oficial.
+
+## Fiat Punto (2026-09-28)
+- **Unidad:** Punto Attractive 2011, 1.4 Fire, 97.000 km, con el equipamiento del texto original. Reemplaza la ficha anterior (sin km). Sin precio.
+- **Fotos:** 7 fotos enviadas por el solicitante, mejoradas solo con corrección leve de tono y nitidez (sin retoque del auto; los rayones del paragolpes se ven). Pedir autorización de uso al dueño. La patente (KIM 536) es visible: evaluar taparla.
+- **Cartel del local:** una foto muestra "FERNANDO POERIO AUTOMOTORES / OKM - USADOS - CONSIGNACIONES". Es un indicio propio del negocio de que ofrece usados y consignaciones, pero dice "OKM" (probablemente 0 KM): no confirma marcas ni condiciones.
+- **Sobre "Grupo Delta":** aparece un logo de otra agencia en el baúl del auto. No se usa en el sitio.
+
+## Volkswagen Up (2026-09-28)
+- **Unidad:** Up 2018, 5 puertas, 1.0 nafta, 44.000 km, con el equipamiento del texto original. Sin precio.
+- **Fotos:** 5 fotos enviadas por el solicitante (1200 px, sin ampliar), con la misma corrección leve de tono y nitidez. Pedir autorización al dueño. La patente (AD 203 FX) es visible.
+- **Cartel:** aparece otra vez el cartel "FERNANDO POERIO AUTOMOTORES / OKM - USADOS - CONSIGNACIONES", ahora sobre la calle. Mismo alcance que en el Punto.
+- **Versión:** el auto muestra el logo "move" en la puerta, pero el texto no lo dice; no se agregó a la ficha.
+
+## Renault Clio Mio (2026-09-28)
+- **Unidad:** Clio Mio 2014, única mano, 5 puertas, 1.2 nafta, 96.600 km, con el equipamiento del texto original (coincide con lo visto en la publicación de Facebook del 30 de julio). Sin precio.
+- **Fotos:** 6 fotos enviadas por el solicitante (1200 px, sin ampliar), con corrección leve de tono y nitidez. Pedir autorización al dueño. La patente (OBH 727) es visible.
+- **Otros logos en las fotos:** un sticker "Polarizados Antonio" en la luneta y otro de "Fernando Poerio Automotores" en el baúl. El primero es de un tercero; no se usa en el sitio.
+- **Cartel del local:** vuelve a verse "FERNANDO POERIO AUTOMOTORES / OKM - USADOS - CONSIGNACIONES", con el mismo alcance que en las otras unidades.
+
+## Ford Ka S y "39 años" (2026-09-28)
+- **Ford Ka S:** 5 puertas, 2016, 1.5 nafta, 132.000 km, con el equipamiento del texto original. Sin precio y **sin foto propia**: solo tengo el flyer, que es un diseño con texto y no sirve como foto de tarjeta. Pedir las fotos originales.
+- **"39 años de confianza":** aparece en el logo de los flyers del negocio (Clio Mio y Ka S). Es la única mención de historia que encontré (punto 6 de la búsqueda). No dice el año de fundación ni cuándo se hizo el flyer, por eso no se deduce ninguna fecha. No se muestra en el sitio hasta que el dueño la confirme.
+- **Flyer del Clio:** repite exactamente los datos ya cargados (96.600 km, única mano, equipamiento, permuta, teléfono y dirección).
+- **Patente parcial** visible en el flyer del Ka ("AA 264…").
+
+## Renault Kwid Outsider (2026-09-28)
+- **Unidad:** Kwid Outsider "Full" 2019, 1.0 nafta, 84.000 km, "muy bien de cubiertas". Sin precio.
+- **Equipamiento:** solo lo que dice el texto. El texto termina en "etc", que no se completó con datos no confirmados. Dice "dirección" y "levantavidrios" sin especificar asistida o eléctricos, así que se copió igual.
+- **"Full":** es el término de la publicación; no hay una lista que lo defina. Confirmar qué incluye.
+- **Fotos:** solo 2, de 1536 px (las demás tenían muy baja calidad, según el solicitante), con corrección leve de tono y nitidez. Pedir autorización al dueño.
+- **Patentes visibles:** AD 658 TT (el auto) y otra parcial de un auto del fondo en la segunda foto.
+
+## Ford Ka S: fotos (2026-09-28)
+- **Fotos:** 2 fotos originales enviadas por el solicitante (2048 px, reducidas a 1280 px), con corrección leve de tono y nitidez. Las demás eran de muy baja calidad, según el solicitante. Reemplazan la falta de foto anotada antes. Pedir autorización al dueño.
+- **Patente visible:** AA 264 AU.
