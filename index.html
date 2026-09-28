@@ -55,6 +55,7 @@ section h2{font-size:clamp(32px,5vw,46px);margin-bottom:8px}
 .card h3{font-size:24px;margin-bottom:6px}
 .card p{margin:0;color:var(--steel)}
 .stock-empty{background:var(--card);border:2px dashed var(--line);border-radius:6px;padding:28px;max-width:60ch}
+.car img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px;margin-bottom:12px}
 .car .price{font:700 26px "Barlow Condensed",sans-serif;margin:8px 0}
 .car dl{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0 0 14px;color:var(--steel);font-size:15px}
 .car dd{margin:0}
@@ -110,13 +111,14 @@ footer p{margin:0 0 8px;max-width:80ch}
 <div class="card"><h3>0 km de todas las marcas</h3><p>Consultá qué marcas y modelos hay disponibles.</p></div>
 <div class="card"><h3>Usados seleccionados</h3><p>Unidades elegidas por la agencia. Consultá cuáles hay hoy.</p></div>
 <div class="card"><h3>Gestoría propia</h3><p>La agencia cuenta con gestoría propia. Consultá qué trámites incluye.</p></div>
-<div class="card"><h3>Compra y venta</h3><p>Comprá o vendé tu vehículo. Consultá cómo.</p></div>
+<div class="card"><h3>Compra, venta y permutas</h3><p>Comprá, vendé o permutá tu vehículo. Consultá cómo.</p></div>
+<div class="card"><h3>Consignación</h3><p>Dejás tu vehículo en consignación: precio acordado sin comisión, operaciones claras, local bajo techo, pago inmediato y transferencia antes de retirar.</p></div>
 </div>
 </div></section>
 
 <section id="stock" style="background:var(--card)"><div class="wrap">
 <h2>Unidades disponibles</h2>
-<p class="lead">Cada unidad se carga con fotos y datos reales confirmados por la agencia.</p>
+<p class="lead">Unidades que la agencia publicó en sus historias de Instagram y en su Facebook. Disponibilidad, km y precio se confirman con la agencia.</p>
 <div class="grid" id="stockGrid"></div>
 </div></section>
 
@@ -156,7 +158,8 @@ footer p{margin:0 0 8px;max-width:80ch}
 <div>
 <h2>Preguntas frecuentes</h2>
 <details><summary>¿Tienen todas las marcas?</summary><p>La agencia trabaja con 0 km y usados de todas las marcas. Consultá qué hay disponible hoy.</p></details>
-<details><summary>¿Reciben mi usado como parte de pago?</summary><p>Podés armar la consulta en el formulario de esta página y un asesor la revisa. Las condiciones las confirma la agencia.</p></details>
+<details><summary>¿Reciben mi usado como parte de pago?</summary><p>Sí, en sus publicaciones aparece "Vendo – Permuto" y algunas unidades aceptan permuta por menor valor. Las condiciones las confirma la agencia.</p></details>
+<details><summary>¿Toman autos en consignación?</summary><p>Sí. Según sus publicaciones: precio acordado sin comisión, pago inmediato y transferencia antes de retirar. Consultá los detalles.</p></details>
 <details><summary>¿Los precios están publicados?</summary><p>Solo se publican precios confirmados por el negocio. Si una unidad dice "Consultar", preguntá por ella.</p></details>
 <details><summary>¿Hacen la transferencia?</summary><p>La agencia cuenta con gestoría propia. Consultá qué trámites incluye cada operación.</p></details>
 <details><summary>¿Qué horarios tienen?</summary><p>Los horarios se están confirmando con el negocio. Mientras tanto, llamá al 03442 45-3550.</p></details>
@@ -180,7 +183,7 @@ footer p{margin:0 0 8px;max-width:80ch}
 
 <footer><div class="wrap">
 <p>Sitio demo hecho como propuesta por Santiago Solis. No es el sitio oficial de Fernando Poerio Automotores y todavía no está aprobado por el negocio.</p>
-<p>Fotos, precios y disponibilidad se publican solo cuando el negocio los confirma.</p>
+<p>Las fotos y datos de las unidades provienen de las publicaciones públicas de la agencia en Instagram y Facebook y se usan solo en esta demo. Precios y disponibilidad se publican cuando el negocio los confirma.</p>
 </div></footer>
 
 <div class="callbar"><a class="btn" href="#" data-contact>Consultar</a><a class="btn ghost" id="callMap" href="#ubicacion" target="_blank" rel="noopener noreferrer">Cómo llegar</a></div>
@@ -193,7 +196,7 @@ var NEGOCIO = {
   ciudad: "Concepción del Uruguay, Entre Ríos",
   telefono: "03442 45-3550",
   telefonoTel: "+543442453550",
-  whatsapp: "543442453550",  /* confirmado: el 3442 45-3550 está en WhatsApp (línea fija, sin el 9) */
+  whatsapp: "5493442453550",  /* confirmado: el chat abre como +54 9 3442 45-3550 */
   horarios: "",
   instagram: "poerioautomotores",
   facebook: "https://www.facebook.com/profile.php?id=100011380620292"
@@ -201,7 +204,16 @@ var NEGOCIO = {
 /* ==== STOCK: agregar unidades reales, una por línea ====
    { titulo:"Marca Modelo Versión", anio:2020, km:"85.000 km", precio:"Consultar", combustible:"Nafta" } */
 var STOCK = [
-  { titulo:"Fiat Punto Attractive 1.4", anio:2011, combustible:"Nafta", precio:"Consultar", nota:"Publicada en su Facebook. Km y precio a confirmar con la agencia." }
+  { foto:"images/punto.jpg", titulo:"Fiat Punto Attractive 1.4", anio:2011, combustible:"Nafta", precio:"Consultar", nota:"Motor 1.4 Fire. Publicada en su Facebook." },
+  { foto:"images/ecosport.jpg", titulo:"Ford EcoSport XLS 1.6", anio:2011, km:"200.000 km", combustible:"Nafta / GNC", precio:"Consultar", nota:"Aire, dirección asistida, doble airbag, ABS, llantas de aleación." },
+  { foto:"images/ka-viral.jpg", titulo:"Ford Ka Viral 1.0", anio:2011, km:"108.000 km", combustible:"Nafta", precio:"Consultar", nota:"Aire acondicionado y dirección asistida." },
+  { foto:"images/fiat-147.jpg", titulo:"Fiat 147 Spazio TR 1.4", anio:1994, combustible:"Nafta", precio:"Consultar", nota:"Clásico." },
+  { foto:"images/logan.jpg", titulo:"Renault Logan 1.6", anio:2017, km:"67.000 km", combustible:"Nafta", precio:"Consultar", nota:"Única mano. 4 cubiertas seminuevas, aire, doble airbag, ABS." },
+  { foto:"images/peugeot-208.jpg", titulo:"Peugeot 208 Feline Automático 1.6", anio:2023, km:"29.000 km", combustible:"Nafta", precio:"Consultar", nota:"Única mano, en garantía de fábrica. Techo solar, tapizado cuero, climatizador. Permuta menor valor." },
+  { foto:"images/peugeot-2008.jpg", titulo:"Peugeot 2008 Feline Full 1.6", anio:2021, km:"64.500 km", combustible:"Nafta", precio:"Consultar", nota:"Única mano, caja manual, techo solar panorámico, climatizado. Permuta menor valor." },
+  { foto:"images/suran.jpg", titulo:"Volkswagen Suran Trendline", anio:2013, km:"178.000 km", precio:"Consultar", nota:"Aire, levantavidrios 4 puertas, llantas de aleación." },
+  { foto:"images/ka-2013.jpg", titulo:"Ford Ka", anio:2013, km:"78.000 km", precio:"Consultar", nota:"Única mano. Aire, cierre centralizado, alarma." },
+  { foto:"images/stepway.jpg", titulo:"Renault Stepway Confort", anio:2009, precio:"Consultar", nota:"Segunda mano. Aire, doble airbag, llantas de aleación." }
 ];
 
 (function(){
@@ -231,7 +243,7 @@ var STOCK = [
   } else {
     grid.innerHTML = STOCK.map(function(c){
       var msg = "Hola! Quiero consultar por el " + c.titulo + (c.anio ? " " + c.anio : "") + ".";
-      return '<article class="card car"><h3>' + esc(c.titulo) + '</h3><div class="price">' + esc(c.precio || "Consultar") + '</div><dl>' +
+      return '<article class="card car">' + (c.foto ? '<img src="' + esc(c.foto) + '" alt="' + esc(c.titulo) + '" loading="lazy">' : '') + '<h3>' + esc(c.titulo) + '</h3><div class="price">' + esc(c.precio || "Consultar") + '</div><dl>' +
         (c.anio ? '<dd>' + esc(c.anio) + '</dd>' : '') + (c.km ? '<dd>' + esc(c.km) + '</dd>' : '') + (c.combustible ? '<dd>' + esc(c.combustible) + '</dd>' : '') +
         '</dl>' + (c.nota ? '<p class="note" style="margin:0 0 12px">' + esc(c.nota) + '</p>' : '') + '<a class="btn" href="' + contactHref(msg) + '">Consultar esta unidad</a></article>';
     }).join("");
