@@ -29,10 +29,10 @@ img{display:block;max-width:100%}a{color:inherit}
 header.top{position:sticky;top:0;z-index:40;margin-bottom:-64px;background:linear-gradient(rgba(11,26,38,.75),rgba(11,26,38,0));color:#fff;transition:background .3s}
 header.top.s{background:rgba(11,26,38,.92);backdrop-filter:blur(10px)}
 header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
-.mark{text-decoration:none;font-size:19px;line-height:1}.mark small{display:block;font-size:10px;letter-spacing:.32em;color:var(--cy);margin-top:3px;font-style:normal;font-weight:700}
-nav{display:none;gap:26px}nav a{text-decoration:none;color:#dbe8ee;font-weight:500}nav a:hover{color:#fff}
+.mark{display:inline-block;padding:8px 0;text-decoration:none;font-size:19px;line-height:1}.mark small{display:block;font-size:10px;letter-spacing:.32em;color:var(--cy);margin-top:3px;font-style:normal;font-weight:700}
+nav{display:none;gap:26px}nav a{padding:12px 0;text-decoration:none;color:#dbe8ee;font-weight:500}nav a:hover{color:#fff}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;border:2px solid currentColor;background:transparent;color:inherit;font:700 16px "DM Sans",sans-serif;text-decoration:none;cursor:pointer}
-.btn.wa{background:var(--wa);border-color:var(--wa);color:#fff}.btn.wa:hover{background:#0b6135;border-color:#0b6135}.btn.sm{min-height:40px;padding:0 16px;font-size:15px}
+.btn.wa{background:var(--wa);border-color:var(--wa);color:#fff}.btn.wa:hover{background:#0b6135;border-color:#0b6135}.btn.sm{min-height:44px;padding:0 16px;font-size:15px}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,.car:focus-visible{outline:3px solid var(--cy);outline-offset:2px}
 /* HERO */
 .hero{position:relative;min-height:calc(100svh - 34px);color:#fff;display:flex;align-items:flex-end;overflow:hidden;background:var(--ink)}
@@ -46,7 +46,7 @@ h1{font-size:clamp(38px,9vw,88px);margin:0 0 18px;max-width:12em;text-shadow:0 2
 .lead{font-size:19px;color:#d6e6ed;max-width:32em;margin:0 0 26px}.row{display:flex;flex-wrap:wrap;gap:12px}
 .now{margin-top:34px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.25);padding-top:16px}
 .now a{text-decoration:none;font-weight:700}.now small{display:block;color:#aac3ce;font-weight:400;font-size:14px}
-.dots{display:flex;gap:8px;margin-left:auto}.dots button{width:34px;height:5px;border:0;border-radius:3px;background:rgba(255,255,255,.35);cursor:pointer;padding:0}.dots button[aria-current=true]{background:var(--cy)}
+.dots{display:flex;gap:8px;margin-left:auto}.dots{align-items:center}.dots button{width:34px;height:45px;padding:20px 0;border:0;background:rgba(255,255,255,.35);background-clip:content-box;cursor:pointer}.dots button[aria-current=true]{background-color:var(--cy)}.pz{width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5);background:transparent;color:#fff;cursor:pointer;font-size:13px}
 /* STATS */
 .stats{background:var(--ink);color:#fff;padding:34px 0}.stats .wrap{display:grid;gap:22px}
 .stat b{display:block;font:800 italic clamp(34px,6vw,54px)/1 "Archivo",sans-serif;font-stretch:125%;color:var(--cy)}.stat span{color:#b9cfd8;font-size:15px}
@@ -56,12 +56,13 @@ h2{font-size:clamp(30px,6vw,52px);margin:0 0 10px}.sub{color:var(--mute);margin:
 .chip{flex:none;min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font:500 15px "DM Sans",sans-serif;color:var(--ink);cursor:pointer}.chip[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}
 /* STOCK */
 .grid{display:grid;gap:20px;grid-template-columns:1fr}
-.car{position:relative;border-radius:var(--r);overflow:hidden;background:var(--ink);color:#fff;cursor:pointer;aspect-ratio:4/3.4;border:0;padding:0;text-align:left;font:inherit;display:block;width:100%}
+.car{position:relative;border-radius:var(--r);overflow:hidden;background:var(--ink);color:#fff;aspect-ratio:4/3.4}
 .car img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}
 .car:hover img{transform:scale(1.06)}
-.car:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,26,38,.92),rgba(11,26,38,0) 55%)}
+.car:has(.st:focus-visible){outline:3px solid var(--cy);outline-offset:2px}
+.st{background:none;border:0;padding:0;font:inherit;color:inherit;text-align:left;cursor:pointer}.st:focus-visible{outline:none}.st:after{content:"";position:absolute;inset:0}
 .car .yr{position:absolute;top:12px;left:12px;z-index:2;background:rgba(11,26,38,.8);padding:4px 12px;border-radius:999px;font-weight:700;font-size:14px}
-.car .tx{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:16px 18px}
+.car .tx{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding:16px 18px;background:linear-gradient(0deg,rgba(11,26,38,.92),rgba(11,26,38,0) 55%)}
 .car h3{margin:0 0 4px;font-size:21px;line-height:1.15}.car .m{color:#c3d8e0;font-size:15px}.car .go{display:block;margin-top:8px;color:var(--cy);font-weight:700;font-size:15px}
 /* MODAL */
 dialog{width:min(1000px,96vw);max-height:94vh;border:0;border-radius:20px;padding:0;overflow:auto;background:#fff;color:var(--ink)}
@@ -84,10 +85,10 @@ label{display:grid;gap:5px;font-weight:700;font-size:15px}input,select{width:100
 .f2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 /* LOCAL */
 .mos{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mos img{width:100%;height:100%;object-fit:cover;border-radius:14px;aspect-ratio:1}.mos img:first-child{grid-row:span 2;aspect-ratio:auto}
-address{font-style:normal;font-size:22px;font-weight:700;margin-bottom:6px}.k{color:var(--mute)}
+#phoneLink{display:inline-block;padding:12px 0}address{font-style:normal;font-size:22px;font-weight:700;margin-bottom:6px}.k{color:var(--mute)}
 details{border-bottom:1px solid var(--line);padding:4px 0}summary{cursor:pointer;font-weight:700;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}summary::after{content:"+";font-size:22px;line-height:1}details[open] summary::after{content:"–"}details p{margin:0 0 14px;color:var(--mute);max-width:44em}
 footer{background:var(--ink);color:#b9cfd8;padding:30px 0;font-size:14px}footer p{margin:0 0 8px;max-width:60em}
-.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(11,26,38,.96)}.bar .btn{flex:1;color:#fff}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(11,26,38,.96)}.bar .btn{flex:1;color:#fff;padding:0 8px;font-size:15px}
 .rv{opacity:0;transform:translateY(26px);transition:opacity .8s,transform .8s}.rv.in{opacity:1;transform:none}
 @media(min-width:760px){body{padding-bottom:0}.bar{display:none}nav{display:flex}.grid{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px;align-items:center}.stats .wrap{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}.dm{grid-template-columns:1.25fr 1fr}.gal{aspect-ratio:auto;min-height:520px}}
@@ -103,13 +104,13 @@ footer{background:var(--ink);color:#b9cfd8;padding:30px 0;font-size:14px}footer 
 </div></header>
 <main id="top">
 <div class="hero">
-<div id="slides"></div>
+<div id="slides"><img class="sl on" src="images/kwid-1.webp" alt="Renault Kwid Outsider 2019" fetchpriority="high" width="1280" height="960"></div>
 <div class="wrap">
 <p class="eyebrow">Usados · 0 km · Consignaciones</p>
 <h1 class="disp">Tu próximo auto, en Alberdi 1337.</h1>
 <p class="lead">Escribinos por WhatsApp y te confirmamos si la unidad sigue disponible.</p>
 <div class="row"><a class="btn wa" href="#" data-wa>Consultar por WhatsApp</a><a class="btn" href="#unidades">Ver unidades</a></div>
-<div class="now"><a href="#unidades" id="nowLink"><span id="nowT"></span><small id="nowS"></small></a><div class="dots" id="dots"></div></div>
+<div class="now"><a href="#unidades" id="nowLink"><span id="nowT"></span><small id="nowS"></small></a><div class="dots" id="dots"></div><button type="button" class="pz" id="pz" aria-label="Pausar cambio automático de fotos">❚❚</button></div>
 </div></div>
 <div class="stats"><div class="wrap">
 <div class="stat rv"><b><span id="n39" data-to="39">39</span> años</b><span>de confianza, según sus propias publicaciones</span></div>
@@ -165,7 +166,7 @@ footer{background:var(--ink);color:#b9cfd8;padding:30px 0;font-size:14px}footer 
 </main>
 <footer><div class="wrap"><p>Sitio demo hecho como propuesta por Santiago Solis. No es el sitio oficial de Fernando Poerio Automotores y todavía no está aprobado por el negocio.</p><p>Las fotos y datos de las unidades provienen de las publicaciones públicas de la agencia. Precios, disponibilidad y horarios se publican cuando el negocio los confirma.</p></div></footer>
 <dialog id="dlg" aria-label="Ficha de la unidad"></dialog>
-<div class="bar"><a class="btn wa" href="#" data-wa>WhatsApp</a><a class="btn" href="#" data-map target="_blank" rel="noopener noreferrer">Cómo llegar</a></div>
+<div class="bar"><a class="btn wa" href="#" data-wa>WhatsApp</a><a class="btn" href="#unidades">Unidades</a><a class="btn" href="#" data-map target="_blank" rel="noopener noreferrer">Cómo llegar</a></div>
 <script>
 /* ==== DATOS DEL NEGOCIO (editar solo acá) ==== */
 var NEGOCIO = {
@@ -215,12 +216,14 @@ $("nu").textContent=STOCK.length;
 addEventListener("scroll",function(){$("hd").classList.toggle("s",scrollY>60)},{passive:true});
 /* hero: 5 unidades con fotos de 1200px+ */
 var H=[0,1,2,3,4].map(function(i){return STOCK[i]}),cur=0,tm;
-$("slides").innerHTML=H.map(function(c,i){return '<img class="sl'+(i?'':' on')+'" src="'+esc(c.foto)+'" alt="'+esc(c.titulo)+' '+c.anio+'"'+(i?' loading="lazy"':' fetchpriority="high"')+'>'}).join("");
+$("slides").insertAdjacentHTML("beforeend",H.slice(1).map(function(c){return '<img class="sl" src="'+esc(c.foto)+'" alt="'+esc(c.titulo)+' '+c.anio+'" loading="lazy">'}).join(""));
 $("dots").innerHTML=H.map(function(c,i){return '<button type="button" aria-label="Ver '+esc(c.titulo)+'" data-i="'+i+'"></button>'}).join("");
 function show(i){cur=i;var s=document.querySelectorAll(".sl");s.forEach(function(e,j){e.classList.remove("on");if(j===i){void e.offsetWidth;e.classList.add("on")}});
 document.querySelectorAll("#dots button").forEach(function(b,j){b.setAttribute("aria-current",j===i)});
 var c=H[i];$("nowT").textContent=c.titulo;$("nowS").textContent=c.anio+" · "+(c.km||"Consultar km")+" · Ver unidad →"}
-function loop(){clearInterval(tm);if(!RM)tm=setInterval(function(){show((cur+1)%H.length)},6500)}
+var paused=false,hov=false;function loop(){clearInterval(tm);if(!RM)tm=setInterval(function(){if(!paused&&!hov&&!document.hidden)show((cur+1)%H.length)},6500)}
+if(RM)$("pz").hidden=true;$("pz").addEventListener("click",function(){paused=!paused;this.textContent=paused?"▶":"❚❚";this.setAttribute("aria-label",paused?"Reanudar cambio automático de fotos":"Pausar cambio automático de fotos")});
+var hz=document.querySelector(".hero");hz.addEventListener("mouseenter",function(){hov=true});hz.addEventListener("mouseleave",function(){hov=false});hz.addEventListener("focusin",function(){hov=true});hz.addEventListener("focusout",function(){hov=false});
 $("dots").addEventListener("click",function(e){var b=e.target.closest("button");if(b){show(+b.getAttribute("data-i"));loop()}});
 $("nowLink").addEventListener("click",function(e){e.preventDefault();open_(cur)});
 show(0);loop();
@@ -228,19 +231,21 @@ show(0);loop();
 var F={todos:function(){return true},mano:function(c){return /única mano/i.test(c.nota||"")},nuevos:function(c){return c.anio>=2016},viejos:function(c){return c.anio<=2015}};
 var L={todos:"Todas",mano:"Única mano",nuevos:"2016 o más nuevos",viejos:"Hasta 2015"};
 function ph(c){return c.fotos||(c.foto?[c.foto]:[])}
-function card(c){var i=STOCK.indexOf(c);return '<button type="button" class="car" data-i="'+i+'" aria-label="Ver ficha: '+esc(c.titulo)+' '+esc(c.anio)+'"><img src="'+esc(c.foto)+'" alt="'+esc(c.titulo)+'" loading="lazy"><span class="yr">'+esc(c.anio||"—")+'</span><span class="tx"><h3>'+esc(c.titulo)+'</h3><span class="m">'+esc(c.km||"Km: consultar")+' · '+esc(c.combustible||"Consultar")+'</span><span class="go">Ver unidad →</span></span></button>'}
-function render(f){$("stockGrid").innerHTML=STOCK.filter(F[f]).map(card).join("");
+function card(c){var i=STOCK.indexOf(c);return '<article class="car"><img src="'+esc(c.foto)+'" alt="" loading="lazy"><span class="yr">'+esc(c.anio||"—")+'</span><div class="tx"><h3><button type="button" class="st" data-i="'+i+'" aria-label="Ver ficha: '+esc(c.titulo)+' '+esc(c.anio)+'">'+esc(c.titulo)+'</button></h3><span class="m">'+esc(c.km||"Km: consultar")+' · '+esc(c.combustible||"Consultar")+'</span><span class="go" aria-hidden="true">Ver unidad →</span></div></article>'}
+function render(f){var r=STOCK.filter(F[f]);$("stockGrid").innerHTML=r.length?r.map(card).join(""):'<p class="sub">No hay unidades para este filtro. Escribinos y te contamos qué ingresa.</p>';
 document.querySelectorAll(".chip").forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-f")===f)})}
 $("chips").innerHTML=Object.keys(L).map(function(k){return '<button type="button" class="chip" data-f="'+k+'" aria-pressed="false">'+L[k]+' ('+STOCK.filter(F[k]).length+')</button>'}).join("");
 $("chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(b)render(b.getAttribute("data-f"))});
-$("stockGrid").addEventListener("click",function(e){var b=e.target.closest(".car");if(b)open_(+b.getAttribute("data-i"))});
+$("stockGrid").addEventListener("click",function(e){var b=e.target.closest(".st");if(b)open_(+b.getAttribute("data-i"))});
 render("todos");
 /* ficha inmersiva */
 var D=$("dlg");
-function open_(i){var n=STOCK.length;i=(i+n)%n;var c=STOCK[i],f=ph(c);
+var ci=0,lf;function open_(i){var n=STOCK.length;i=(i+n)%n;ci=i;var c=STOCK[i],f=ph(c);
 var msg="Hola! Vi en la página el "+c.titulo+" "+c.anio+" y quiero consultar por esta unidad.";
 D.innerHTML='<div class="dm"><div class="pg"><button class="x" type="button" data-x aria-label="Cerrar">×</button><div class="gal" tabindex="0" role="group" aria-label="Fotos de '+esc(c.titulo)+'">'+f.map(function(s,k){return '<img src="'+esc(s)+'" alt="'+esc(c.titulo)+', foto '+(k+1)+' de '+f.length+'">'}).join("")+'</div>'+(f.length>1?'<span class="cnt" aria-hidden="true">1/'+f.length+'</span>':'')+'</div><div class="di"><h3 class="disp">'+esc(c.titulo)+'</h3><dl class="spec"><div><dt>Año</dt><dd>'+esc(c.anio||"—")+'</dd></div><div><dt>Km</dt><dd>'+esc(c.km||"Consultar")+'</dd></div><div><dt>Motor</dt><dd>'+esc(c.combustible||"—")+'</dd></div><div><dt>Precio</dt><dd>'+esc(c.precio||"Consultar")+'</dd></div></dl>'+(c.nota?'<p class="nota">'+esc(c.nota)+'</p>':'')+'<a class="btn wa" href="'+wa(msg)+'" target="_blank" rel="noopener noreferrer">Consultar esta unidad</a><div class="nav"><button class="btn" type="button" data-n="'+(i-1)+'">← Anterior</button><button class="btn" type="button" data-n="'+(i+1)+'">Siguiente →</button></div></div></div>';
-if(!D.open)D.showModal();D.scrollTop=0}
+if(!D.open){lf=document.activeElement;document.documentElement.style.overflow="hidden";D.showModal()}D.scrollTop=0}
+D.addEventListener("close",function(){document.documentElement.style.overflow="";if(lf&&lf.focus)lf.focus()});
+D.addEventListener("keydown",function(e){if(e.target.classList&&e.target.classList.contains("gal"))return;if(e.key==="ArrowRight")open_(ci+1);if(e.key==="ArrowLeft")open_(ci-1)});
 D.addEventListener("click",function(e){if(e.target===D||e.target.closest("[data-x]"))return D.close();var b=e.target.closest("[data-n]");if(b)open_(+b.getAttribute("data-n"))});
 D.addEventListener("scroll",function(e){var g=e.target;if(!g.classList||!g.classList.contains("gal"))return;var c=g.parentNode.querySelector(".cnt");if(c)c.textContent=(Math.round(g.scrollLeft/g.clientWidth)+1)+"/"+g.children.length},true);
 /* reveal */
