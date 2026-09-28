@@ -6,6 +6,11 @@
 <meta name="robots" content="noindex, nofollow">
 <title>DEMO · Fernando Poerio Automotores · Concepción del Uruguay</title>
 <meta name="description" content="Propuesta de sitio web independiente para Fernando Poerio Automotores, compra y venta de 0 km y usados en Concepción del Uruguay.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2319788a'/%3E%3Ctext x='32' y='47' font-family='Arial' font-weight='700' font-size='42' text-anchor='middle' fill='white'%3EP%3C/text%3E%3C/svg%3E">
+<meta property="og:title" content="DEMO · Fernando Poerio Automotores">
+<meta property="og:description" content="Compra y venta de 0 km y usados seleccionados, con gestoría propia. Alberdi 1337, Concepción del Uruguay.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#19788a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
@@ -32,7 +37,8 @@ nav a:hover{color:var(--ink)}
 .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
 .btn.ghost:hover{background:var(--ink);color:#fff}
 .hero{padding:64px 0 56px;border-bottom:1px solid var(--line);background:var(--card)}
-.hero h1{font-size:clamp(44px,8vw,92px);max-width:11ch;font-weight:700}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:center}.hero-car{width:100%;height:auto}.callbar{display:none}
+.hero h1{font-size:clamp(42px,6.4vw,80px);max-width:11ch;font-weight:700}
 .hero p{max-width:52ch;color:var(--steel);font-size:19px;margin:20px 0 28px}
 .hero .cta{display:flex;flex-wrap:wrap;gap:12px}
 .plate{display:inline-block;margin-top:36px;border:2px solid var(--ink);border-radius:6px;padding:6px 14px;font:700 26px "Barlow Condensed",sans-serif;letter-spacing:1px}
@@ -58,7 +64,7 @@ input,select,textarea{font:inherit;padding:11px 12px;border:1px solid #9aa2ab;bo
 .rating{display:inline-block;margin-top:14px;font-weight:600}
 footer{background:var(--ink);color:#c9ced3;padding:32px 0;font-size:14px}
 footer p{margin:0 0 8px;max-width:80ch}
-@media (max-width:720px){nav{display:none}.loc,.two{grid-template-columns:1fr}.hero{padding-top:40px}}
+@media (max-width:720px){.hero-grid{grid-template-columns:1fr}.hero-car{max-width:340px}.callbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:6;gap:8px;padding:10px 12px;background:#fff;border-top:1px solid var(--line)}.callbar a{flex:1;text-align:center}body{padding-bottom:70px}nav{display:none}.loc,.two{grid-template-columns:1fr}.hero{padding-top:40px}}
 </style>
 </head>
 <body>
@@ -73,11 +79,21 @@ footer p{margin:0 0 8px;max-width:80ch}
 </header>
 
 <main>
-<div class="hero"><div class="wrap">
+<div class="hero"><div class="wrap hero-grid">
+<div>
 <h1>0 km y usados seleccionados.</h1>
 <p>Compra y venta de vehículos de todas las marcas, con gestoría propia. Consultá una unidad y te respondemos con los datos reales.</p>
 <div class="cta"><a class="btn" href="#" data-contact>Consultar ahora</a><a class="btn ghost" href="#stock">Ver unidades</a></div>
 <span class="plate" id="plate">ALBERDI 1337</span>
+</div>
+<svg class="hero-car" viewBox="0 0 420 200" role="img" aria-label="Ilustración de un auto">
+<path d="M30 140 L45 110 Q55 90 80 86 L140 84 L175 55 Q185 48 200 48 L265 48 Q280 48 290 58 L320 86 L365 92 Q385 96 390 115 L392 140 Z" fill="#19788a"/>
+<path d="M186 62 L262 62 L292 88 L152 90 Z" fill="#dcecef"/>
+<path d="M226 62 L228 89" stroke="#19788a" stroke-width="4"/>
+<circle cx="110" cy="145" r="31" fill="#16181b"/><circle cx="110" cy="145" r="14" fill="#cfd6db"/>
+<circle cx="320" cy="145" r="31" fill="#16181b"/><circle cx="320" cy="145" r="14" fill="#cfd6db"/>
+<line x1="10" y1="177" x2="410" y2="177" stroke="#d3d7db" stroke-width="3"/>
+</svg>
 </div></div>
 
 <section id="servicios"><div class="wrap">
@@ -132,6 +148,8 @@ footer p{margin:0 0 8px;max-width:80ch}
 <p>Sitio demo hecho como propuesta por Santiago Solis. No es el sitio oficial de Fernando Poerio Automotores y todavía no está aprobado por el negocio.</p>
 <p>Fotos, precios y disponibilidad se publican solo cuando el negocio los confirma.</p>
 </div></footer>
+
+<div class="callbar"><a class="btn" href="#" data-contact>Consultar</a><a class="btn ghost" href="#ubicacion">Cómo llegar</a></div>
 
 <script>
 /* ==== DATOS DEL NEGOCIO (editar solo acá) ==== */
