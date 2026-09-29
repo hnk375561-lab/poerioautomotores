@@ -11,7 +11,7 @@ Revisión del 2026-09-28. Ninguna de estas afirmaciones pudo verificarse en fuen
 | 5 | Gestoría propia / trámites y transferencias | Hero, servicios, pasos | Sin fuente | Confirmar |
 | 6 | Consignación: precio acordado sin comisión, pago inmediato, transferencia antes de retirar, local bajo techo | Sección consignación, FAQ | Sin fuente | Confirmar por escrito |
 | 7 | Permutas / recibimos usados | Servicios, formulario | Sin fuente | Confirmar |
-| 8 | Las 10 unidades (año, km, equipamiento, "única mano", "en garantía de fábrica", "permuta menor valor") | STOCK | El sitio dice que salen de Instagram/Facebook; no pude abrirlos | Verificar cada unidad; retirar las vendidas |
+| 8 | Las 6 unidades (año, km, equipamiento, "única mano", "en garantía de fábrica", "permuta menor valor") | STOCK | El sitio dice que salen de Instagram/Facebook; no pude abrirlos | Verificar cada unidad; retirar las vendidas |
 | 9 | Fotos de las unidades | images/ | Origen: publicaciones de la agencia | Pedir autorización o reemplazar |
 | 10 | Facebook (profile.php?id=…) | NEGOCIO.facebook | No verificado; puede ser un perfil personal | Confirmar que sea la página del negocio |
 | 11 | "39 años de confianza" (título y sello del inicio) | Hero | Estaba en el sitio desde el inicio. Los flyers del propio negocio (Clio Mio y Ka S) llevan el mismo lema en su logo, sin fecha ni año de fundación | Confirmar con el dueño; no agregar un año de fundación |
@@ -71,3 +71,9 @@ Precios: todos "Consultar". El validador falla si aparece otro valor sin confirm
 - **Textos que quedan, con su respaldo:** "39 años de confianza" (flyers del negocio), "Vendo–Permuto" (publicaciones y flyers), "0 km · Usados · Consignaciones" (cartel del local). El sitio lo aclara con "según sus propias publicaciones" y "como dice el cartel del local".
 - **Si el dueño confirma** marcas 0 km, gestoría o condiciones de consignación, se pueden volver a agregar en las secciones de inicio y preguntas.
 - **Cambios de estructura:** las unidades aparecen justo después del inicio, con galería deslizable, y hay barra fija de WhatsApp y "Cómo llegar" en celular. El mosaico de fotos viejas del inicio se reemplazó por una sola foto de una unidad verificada (Kwid).
+
+## Ford EcoSport y limpieza de fotos (2026-09-28)
+- **Unidad nueva:** EcoSport XLS 2011, 1.6 nafta/GNC, 200.000 km, con el equipamiento del texto original ("dirección" sin aclarar asistida). Sin precio. Verificar que siga disponible.
+- **Fotos:** 6 fotos nítidas (1350–1440 px, sin ampliar), con corrección leve de tono y nitidez. Pedir autorización al dueño. La patente (JQR 465) es visible: evaluar taparla.
+- **Fotos eliminadas:** se borraron las 10 imágenes de baja calidad (capturas de Instagram de 720 px): ecosport, ka-viral, fiat-147, logan, peugeot-208, peugeot-2008, suran, ka-2013, stepway y punto (la vieja).
+- **Unidades retiradas del STOCK** por no tener fotos nítidas: Ka Viral 2011, Fiat 147 1994, Logan 2017, Peugeot 208 2023, Peugeot 2008 2021, Suran 2013, Ka 2013, Stepway 2009 y la ficha vieja de EcoSport. Si el dueño manda fotos buenas, se pueden volver a cargar.
