@@ -3,7 +3,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+import { fileURLToPath } from 'node:url';
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const d = JSON.parse(fs.readFileSync(path.join(root, 'data/dealership.json'), 'utf8'));
 const errors = [];
 if (d.demo.official !== false) errors.push('demo.official debe ser false');
