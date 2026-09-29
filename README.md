@@ -10,7 +10,7 @@ Sitio estático (HTML/CSS/JS sin dependencias) de propuesta para Fernando Poerio
 - `data/dealership.json`: datos confirmados y su fuente. `golive/`: pendientes y pasos a producción.
 
 ## Comprobar
-`npm test` valida que los datos coincidan con `index.html`, que no haya precios sin confirmar, que existan todas las imágenes (y no sobren), un solo `h1`, `alt` en imágenes, `noindex` en las tres páginas y `Disallow: /` en `robots.txt`.
+`npm test` valida que no haya `href="#"`, que los datos coincidan con `index.html`, que no haya precios sin confirmar, que existan todas las imágenes (y no sobren), un solo `h1`, `alt` en imágenes, `noindex` en las tres páginas y `Disallow: /` en `robots.txt`.
 
 ## Publicar
 GitHub > Settings > Pages > Deploy from a branch > main / (root). URL esperada: https://hnk375561-lab.github.io/poerioautomotores/

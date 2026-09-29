@@ -40,6 +40,7 @@ else {
 if ((html.match(/<h1[\s>]/g) || []).length !== 1) errors.push('index.html debe tener un único h1');
 for (const m of html.matchAll(/<img\b[^>]*>/g)) if (!/\balt=/.test(m[0])) errors.push(`img sin alt: ${m[0].slice(0, 60)}`);
 if (!html.includes('href="privacidad.html')) errors.push('index.html: falta enlace a privacidad.html');
+for (const page of ['index.html', '404.html', 'privacidad.html']) if (/href="#"/.test(fs.readFileSync(path.join(root, page), 'utf8'))) errors.push(`${page}: hay href="#" (enlace sin destino)`);
 if (/href="http:\/\//.test(html)) errors.push('Enlace http:// sin cifrar en index.html');
 for (const page of ['404.html', 'privacidad.html']) {
   const h = fs.readFileSync(path.join(root, page), 'utf8');
