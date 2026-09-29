@@ -77,3 +77,9 @@ Precios: todos "Consultar". El validador falla si aparece otro valor sin confirm
 - **Fotos:** 6 fotos nítidas (1350–1440 px, sin ampliar), con corrección leve de tono y nitidez. Pedir autorización al dueño. La patente (JQR 465) es visible: evaluar taparla.
 - **Fotos eliminadas:** se borraron las 10 imágenes de baja calidad (capturas de Instagram de 720 px): ecosport, ka-viral, fiat-147, logan, peugeot-208, peugeot-2008, suran, ka-2013, stepway y punto (la vieja).
 - **Unidades retiradas del STOCK** por no tener fotos nítidas: Ka Viral 2011, Fiat 147 1994, Logan 2017, Peugeot 208 2023, Peugeot 2008 2021, Suran 2013, Ka 2013, Stepway 2009 y la ficha vieja de EcoSport. Si el dueño manda fotos buenas, se pueden volver a cargar.
+
+## Rediseño minimalista (2026-09-28)
+- Se reconstruyó `index.html` (HTML, CSS y JS de presentación). Sin cambios en `NEGOCIO`, `STOCK` ni en los datos; no se agregaron textos comerciales nuevos.
+- Se quitaron el sello "39 años de confianza", el bloque de cifras y el mosaico de fotos del rediseño anterior. Si el dueño confirma el lema, puede volver a mostrarse.
+- "Comprar" no tiene respaldo escrito en las publicaciones (solo "Vendo–Permuto" y el cartel de consignaciones): confirmar con el dueño que quiere mostrarlo como operación.
+- Se mantiene el aviso demo, `noindex` y el formulario existente (abre WhatsApp).
