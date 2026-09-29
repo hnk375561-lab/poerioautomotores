@@ -1,2 +1,3 @@
+# DEMO: no indexar. Al salir a producción ver golive/PRODUCCION.md
 User-agent: *
 Disallow: /

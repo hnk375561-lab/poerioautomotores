@@ -2,13 +2,14 @@
 // y que no se publiquen datos sin confirmar. Uso: node scripts/validate-dealership.mjs
 import fs from 'node:fs';
 import path from 'node:path';
+import vm from 'node:vm';
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const d = JSON.parse(fs.readFileSync(path.join(root, 'data/dealership.json'), 'utf8'));
 const errors = [];
 if (d.demo.official !== false) errors.push('demo.official debe ser false');
 if (d.identity.cuit !== null) errors.push('CUIT debe ser null hasta confirmación');
 if (d.hours.display && d.hours.status === 'not-found') errors.push('hours.display cargado pero status sigue en not-found');
-for (const page of ['index.html', '404.html']) {
+for (const page of ['index.html', '404.html', 'privacidad.html']) {
   const h = fs.readFileSync(path.join(root, page), 'utf8');
   if (d.demo.publicIndexing === false && !h.includes('noindex')) errors.push(`${page}: falta noindex mientras sea demo`);
 }
@@ -24,5 +25,27 @@ const stock = html.split('var STOCK')[1] || '';
 for (const m of stock.matchAll(/precio:\s*"([^"]*)"/g)) if (m[1] !== 'Consultar') errors.push(`Precio publicado sin confirmar: ${m[1]}`);
 for (const u of [d.location.mapsPlaceUrl, d.location.mapsReviewsUrl]) if (!u || !u.startsWith('https://www.google.com/maps/place/')) errors.push('URL de Maps debe ser https://www.google.com/maps/place/...');
 if (/google\.com\/maps\/search/.test(html)) errors.push('index.html: enlace a Maps por búsqueda de texto; usar mapsPlace');
+
+// Referencias, imágenes y accesibilidad básica
+const stockSrc = (html.match(/var STOCK = (\[[\s\S]*?\n\]);/) || [])[1];
+if (!stockSrc) errors.push('No se pudo leer STOCK');
+else {
+  const STOCK = vm.runInNewContext(stockSrc);
+  const used = new Set();
+  for (const c of STOCK) for (const f of (c.fotos || [c.foto])) { used.add(path.basename(f)); if (!fs.existsSync(path.join(root, f))) errors.push(`Falta la imagen ${f} (${c.titulo})`); }
+  for (const m of html.matchAll(/(?:src|href)="(images\/[^"]+)"/g)) { used.add(path.basename(m[1])); if (!fs.existsSync(path.join(root, m[1]))) errors.push(`Falta la imagen ${m[1]}`); }
+  for (const f of fs.readdirSync(path.join(root, 'images'))) if (!used.has(f)) errors.push(`Imagen sin uso: images/${f}`);
+}
+if ((html.match(/<h1[\s>]/g) || []).length !== 1) errors.push('index.html debe tener un único h1');
+for (const m of html.matchAll(/<img\b[^>]*>/g)) if (!/\balt=/.test(m[0])) errors.push(`img sin alt: ${m[0].slice(0, 60)}`);
+if (!html.includes('href="privacidad.html')) errors.push('index.html: falta enlace a privacidad.html');
+if (/href="http:\/\//.test(html)) errors.push('Enlace http:// sin cifrar en index.html');
+for (const page of ['404.html', 'privacidad.html']) {
+  const h = fs.readFileSync(path.join(root, page), 'utf8');
+  if (!h.includes(`wa.me/${d.contact.whatsApp}`)) errors.push(`${page}: WhatsApp no coincide con dealership.json`);
+  if (!h.includes(`tel:${d.contact.phoneTel}`) && page === 'privacidad.html') errors.push(`${page}: teléfono no coincide con dealership.json`);
+}
+if (!/<base href="https:\/\/[^"]+\/">/.test(fs.readFileSync(path.join(root, '404.html'), 'utf8'))) errors.push('404.html: falta <base href> absoluto');
+if (!/Disallow:\s*\/\s*$/m.test(fs.readFileSync(path.join(root, 'robots.txt'), 'utf8'))) errors.push('robots.txt debe tener Disallow: / mientras sea demo');
 if (errors.length) { console.error(errors.map((e) => 'ERROR: ' + e).join('\n')); process.exit(1); }
 console.log('Datos de Poerio válidos y consistentes con index.html.');
