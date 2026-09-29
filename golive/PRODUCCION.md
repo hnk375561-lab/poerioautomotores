@@ -13,6 +13,7 @@
 4. Cuenta oficial de Facebook (hoy es un perfil llamado "Fernando Poerio") y que `@poerioautomotores` sea su Instagram (no se pudo verificar).
 5. Qué unidades siguen disponibles, y sus precios si quiere publicarlos.
 6. Autorización para usar las fotos; decidir si se tapan las patentes visibles.
+6b. Autorización para usar el logo (imagen del negocio con "39 años de confianza"; hoy figura en el pie, la ficha, el 404 y la página de privacidad) y confirmar que la cifra sigue vigente.
 7. Confirmar "Comprar", 0 km (marcas), consignación (condiciones) y el lema "39 años de confianza" (hoy no se muestra en el sitio).
 8. Si quiere mostrar el enlace de opiniones de Google (la ficha tiene 3 opiniones, una de 1 estrella hace más de 5 años).
 

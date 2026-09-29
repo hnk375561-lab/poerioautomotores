@@ -14,7 +14,7 @@
 <meta property="og:image" content="https://hnk375561-lab.github.io/poerioautomotores/preview.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Vista previa del sitio de Fernando Poerio Automotores">
+<meta property="og:image:alt" content="Logo de Fernando Poerio Automotores">
 <meta property="og:url" content="https://hnk375561-lab.github.io/poerioautomotores/">
 <link rel="canonical" href="https://hnk375561-lab.github.io/poerioautomotores/">
 <meta property="og:locale" content="es_AR">
@@ -22,7 +22,9 @@
 <meta name="twitter:title" content="DEMO · Fernando Poerio Automotores">
 <meta name="twitter:description" content="Usados, permutas y consignaciones. Alberdi 1337, Concepción del Uruguay.">
 <meta name="twitter:image" content="https://hnk375561-lab.github.io/poerioautomotores/preview.png">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230E1B26'/%3E%3Ctext x='32' y='45' font-family='Arial' font-weight='900' font-size='34' text-anchor='middle' fill='%2334B4D2'%3EFP%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="images/icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/icon-192.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -42,7 +44,7 @@ h2{font-size:clamp(28px,4vw,44px)}.sub{color:var(--mute);max-width:56ch;margin:1
 .demo{background:var(--ink);color:#c9d4da;font-size:13px;text-align:center;padding:6px 12px}.demo a{color:#fff;display:inline-block;padding:4px 2px}
 header{background:var(--paper);border-bottom:1px solid var(--stone)}
 header .w{display:flex;flex-wrap:wrap;align-items:center;column-gap:24px;min-height:56px}
-.mark{font:700 18px var(--h);text-decoration:none;letter-spacing:-.01em;margin-right:auto;min-height:44px;display:inline-flex;align-items:center}.mark small{font:500 12px var(--b);color:var(--mute);margin-left:8px;letter-spacing:.06em}
+.mark{font:700 18px var(--h);text-decoration:none;letter-spacing:-.01em;margin-right:auto;min-height:44px;display:inline-flex;align-items:center}.mark img{width:32px;height:32px;margin-right:10px;border-radius:3px}.mark small{font:500 12px var(--b);color:var(--mute);margin-left:8px;letter-spacing:.06em}
 nav{display:flex;order:3;width:100%;gap:20px;overflow-x:auto;scrollbar-width:none}nav a{text-decoration:none;font-weight:500;font-size:15px;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center}nav a:hover{color:var(--cyd)}
 header .btn{padding:0 16px;font-size:15px}
 .hero{display:grid;background:var(--ink);color:#fff}
@@ -96,27 +98,28 @@ form .meta a{color:var(--cyd)}
 .faq{background:#fff;border-top:1px solid var(--stone)}.faq .w{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
 details{border-bottom:1px solid var(--stone)}summary{padding:16px 0;font-weight:600;cursor:pointer;min-height:48px}details p{margin:0 0 16px;color:var(--mute);max-width:60ch}details a{color:var(--cyd)}
 .fin{margin-top:32px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px}.fin p{margin:0;font-weight:600}
-footer{background:var(--ink);color:#aebbc3;font-size:14px;padding:32px 0}footer p{margin:0 0 8px;max-width:80ch}footer .fn{color:#fff;font-size:16px;margin-bottom:0}footer .soc{margin:8px 0 16px}footer .soc a{color:#fff;font-size:15px}
+footer .lg img{width:min(300px,100%);height:auto;margin-bottom:16px}footer{background:var(--ink);color:#aebbc3;font-size:14px;padding:32px 0}footer p{margin:0 0 8px;max-width:80ch}footer .fn{color:#fff;font-size:16px;margin-bottom:0}footer .soc{margin:8px 0 16px}footer .soc a{color:#fff;font-size:15px}
 dialog{width:min(1000px,96vw);max-height:94vh;border:0;padding:0;overflow:auto;background:var(--paper);color:var(--ink)}dialog::backdrop{background:rgba(6,12,18,.8)}
-.dm{display:grid}.pg{position:relative}.gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;aspect-ratio:4/3;background:var(--ink)}.gal::-webkit-scrollbar{display:none}.gal img{flex:0 0 100%;width:100%;height:100%;object-fit:contain;scroll-snap-align:center}
+.dm{display:grid}.pg{display:flex;flex-direction:column;background:var(--ink)}.gw{position:relative}.gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;aspect-ratio:4/3;background:var(--ink)}.gal::-webkit-scrollbar{display:none}.gal img{flex:0 0 100%;width:100%;height:100%;object-fit:contain;scroll-snap-align:center}
 .x{position:absolute;top:8px;right:8px;z-index:2;width:44px;height:44px;border:0;background:var(--paper);font-size:26px;cursor:pointer;border-radius:3px}
-.pg .ar{z-index:1}
+.pg .ar{z-index:1}.pb{display:none}
 .cnt{position:absolute;left:10px;bottom:10px;background:var(--ink);color:#fff;font-size:13px;font-weight:600;padding:2px 10px}
 .di{padding:24px;display:flex;flex-direction:column;gap:16px}.di h3{font-size:clamp(24px,4vw,32px)}
 dl.spec{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}dl.spec dt{font-size:13px;color:var(--mute)}dl.spec dd{margin:0;font-weight:600;font-size:18px}.nota{margin:0;color:var(--mute);font-size:15px}.nota.s{font-size:13px}.nav{display:flex;gap:10px}.nav .btn{flex:1;padding:0 8px}
 .bar{display:none}
-@media(max-width:899px){body{padding-bottom:72px}.bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:15;gap:10px;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));background:var(--paper);border-top:1px solid var(--stone)}.bar .btn{flex:1;padding:0 8px}}
+@media(max-width:899px){header .w>.btn{display:none}body{padding-bottom:72px}.bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:15;gap:10px;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));background:var(--paper);border-top:1px solid var(--stone)}.bar .btn{flex:1;padding:0 8px}}
 @media(max-width:520px){.mark small{display:none}}
 @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:900px){header{position:sticky;top:0;z-index:20}header .w{flex-wrap:nowrap;height:56px}nav{order:0;width:auto;overflow:visible}.grid{grid-template-columns:repeat(3,1fr)}.ops .w{grid-template-columns:1.15fr 1fr;gap:72px;align-items:start}.loc .w{grid-template-columns:1fr 1fr;gap:72px;align-items:center}.faq .w{grid-template-columns:1fr 1.6fr;gap:72px}.hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:min(calc(100svh - 100px),720px)}.hero figure{order:0;position:relative}.hero figure img{position:absolute;inset:0;aspect-ratio:auto}.hero .tx{align-self:stretch;padding:56px 48px 300px max(20px,calc((100vw - 1180px)/2));min-width:0;min-height:0}.vcap{left:max(20px,calc((100vw - 1180px)/2))}.hero h1{font-size:clamp(40px,4.1vw,60px)}html{scroll-padding-top:60px}}
-@media(min-width:1000px){.dm{grid-template-columns:1.3fr 1fr}.gal{aspect-ratio:auto;min-height:540px}}
+@media(min-width:900px) and (max-width:1099px){header .w{column-gap:16px}nav{gap:14px}nav a{font-size:14px}.mark small{display:none}}
+@media(min-width:1000px){.dm{grid-template-columns:1.3fr 1fr}.pb{display:flex;flex:1;align-items:center;gap:18px;padding:14px 18px}.pb .lg{flex:none;background:var(--paper);border-radius:3px;padding:8px 12px}.pb .lg img{height:52px;width:auto}.pb p{margin:0;color:#aebbc3;font-size:14px;line-height:1.45}.pb strong{color:#fff;display:block;font-size:15px}.pb a{color:#fff;font-weight:600}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
 </head>
 <body>
 <a class="skip" href="#unidades">Saltar al contenido</a>
 <div class="demo">Demo: propuesta de diseño independiente, no oficial. Datos a confirmar con el negocio. <a href="privacidad.html#demo">Más información</a></div>
-<header><div class="w"><a class="mark" href="#top">Fernando Poerio<small>AUTOMOTORES</small></a>
+<header><div class="w"><a class="mark" href="#top" aria-label="Fernando Poerio Automotores, inicio"><img src="images/icon-32.png" alt="" width="32" height="32"><span>Fernando Poerio<small>AUTOMOTORES</small></span></a>
 <nav aria-label="Principal"><a href="#unidades">Unidades</a><a href="#operaciones">Comprar, vender, permutar</a><a href="#contacto">Dónde estamos</a><a href="#preguntas">Preguntas</a></nav>
 <a class="btn p" href="#" data-wa="Hola! Quiero consultar por las unidades disponibles.">WhatsApp</a></div></header>
 <main id="top">
@@ -163,7 +166,7 @@ dl.spec{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}dl.spec dt{
 <div class="fin"><p>¿No encontraste lo que buscabas?</p><a class="btn p" href="#" data-wa="Hola! Quiero consultar por las unidades disponibles.">Escribinos por WhatsApp</a></div>
 </div></div></section>
 </main>
-<footer><div class="w"><p class="fn">Fernando Poerio Automotores</p><p id="fAddr"></p>
+<footer><div class="w"><div class="lg"><img src="images/logo-claro.webp" alt="Fernando Poerio Automotores, 39 años de confianza" width="722" height="287" loading="lazy"></div><p class="fn">Fernando Poerio Automotores</p><p id="fAddr"></p>
 <div class="soc"><a id="fPhone" href="#"></a><a href="#" data-wa="Hola! Quiero consultar por las unidades disponibles.">WhatsApp</a><a data-ig href="#" target="_blank" rel="noopener noreferrer">Instagram</a><a data-fb href="#" target="_blank" rel="noopener noreferrer">Facebook</a><a href="privacidad.html">Privacidad y avisos</a></div>
 <p>Sitio demo hecho como propuesta por Santiago Solis. No es el sitio oficial de Fernando Poerio Automotores y todavía no está aprobado por el negocio.</p><p>Las fotos y datos de las unidades provienen de las publicaciones públicas de la agencia. Precios, disponibilidad y horarios se publican cuando el negocio los confirma.</p></div></footer>
 <div class="bar"><a class="btn p" href="#" data-wa="Hola! Quiero consultar por las unidades disponibles.">WhatsApp</a><a class="btn" id="barCall" href="#">Llamar</a></div>
@@ -230,9 +233,10 @@ $("stockGrid").addEventListener("error",broken,true);
 render("todos");
 
 var D=$("dlg");D.addEventListener("error",broken,true);
+var BRAND='<div class="pb"><div class="lg"><img src="images/logo.webp" alt="Fernando Poerio Automotores" width="722" height="287"></div><p><strong>'+esc(N.nombre)+'</strong>'+esc(N.direccion)+', '+esc(N.ciudad.split(',')[0])+'<br><a href="tel:'+esc(N.telefonoTel)+'">'+esc(N.telefono)+'</a> · <a href="https://www.instagram.com/'+esc(N.instagram)+'/" target="_blank" rel="noopener noreferrer">Instagram</a> · <a href="'+esc(N.facebook)+'" target="_blank" rel="noopener noreferrer">Facebook</a></p></div>';
 var ci=0,lf;function open_(i,keep){var n=STOCK.length,was=D.open;i=(i+n)%n;ci=i;var c=STOCK[i],f=ph(c);
 D.setAttribute("aria-label","Ficha: "+c.titulo);
-D.innerHTML='<div class="dm"><div class="pg"><button class="x" type="button" data-x aria-label="Cerrar ficha">×</button><div class="gal" tabindex="0" role="group" aria-label="Fotos de '+esc(c.titulo)+'">'+f.map(function(s,k){return '<img src="'+esc(s)+'" alt="'+esc(c.titulo)+', foto '+(k+1)+' de '+f.length+'">'}).join("")+'</div>'+(f.length>1?'<button type="button" class="ar l" data-d="-1" aria-label="Foto anterior">‹</button><button type="button" class="ar r" data-d="1" aria-label="Foto siguiente">›</button><span class="cnt" aria-hidden="true">1/'+f.length+'</span>':'')+'</div><div class="di"><h3>'+esc(c.titulo)+'</h3><dl class="spec"><div><dt>Año</dt><dd>'+esc(c.anio||"—")+'</dd></div><div><dt>Km</dt><dd>'+esc(c.km||"Consultar")+'</dd></div><div><dt>Combustible</dt><dd>'+esc(c.combustible||"—")+'</dd></div><div><dt>Precio</dt><dd>'+esc(c.precio||"Consultar")+'</dd></div></dl>'+(c.nota?'<p class="nota">'+esc(c.nota)+'</p>':'')+'<p class="nota s">Datos y fotos según publicaciones de la agencia. Precio y disponibilidad: a confirmar con la agencia.</p><a class="btn p" href="'+wa(ask(c))+'" target="_blank" rel="noopener noreferrer">Consultar esta unidad</a><div class="nav"><button class="btn" type="button" data-n="'+(i-1)+'" data-k="p">← Anterior</button><button class="btn" type="button" data-n="'+(i+1)+'" data-k="s">Siguiente →</button></div></div></div>';
+D.innerHTML='<div class="dm"><div class="pg"><div class="gw"><button class="x" type="button" data-x aria-label="Cerrar ficha">×</button><div class="gal" tabindex="0" role="group" aria-label="Fotos de '+esc(c.titulo)+'">'+f.map(function(s,k){return '<img src="'+esc(s)+'" alt="'+esc(c.titulo)+', foto '+(k+1)+' de '+f.length+'">'}).join("")+'</div>'+(f.length>1?'<button type="button" class="ar l" data-d="-1" aria-label="Foto anterior">‹</button><button type="button" class="ar r" data-d="1" aria-label="Foto siguiente">›</button><span class="cnt" aria-hidden="true">1/'+f.length+'</span>':'')+'</div>'+BRAND+'</div><div class="di"><h3>'+esc(c.titulo)+'</h3><dl class="spec"><div><dt>Año</dt><dd>'+esc(c.anio||"—")+'</dd></div><div><dt>Km</dt><dd>'+esc(c.km||"Consultar")+'</dd></div><div><dt>Combustible</dt><dd>'+esc(c.combustible||"—")+'</dd></div><div><dt>Precio</dt><dd>'+esc(c.precio||"Consultar")+'</dd></div></dl>'+(c.nota?'<p class="nota">'+esc(c.nota)+'</p>':'')+'<p class="nota s">Datos y fotos según publicaciones de la agencia. Precio y disponibilidad: a confirmar con la agencia.</p><a class="btn p" href="'+wa(ask(c))+'" target="_blank" rel="noopener noreferrer">Consultar esta unidad</a><div class="nav"><button class="btn" type="button" data-n="'+(i-1)+'" data-k="p">← Anterior</button><button class="btn" type="button" data-n="'+(i+1)+'" data-k="s">Siguiente →</button></div></div></div>';
 if(!was){lf=document.activeElement;document.documentElement.style.overflow="hidden";D.showModal()}else{var t=D.querySelector('[data-k="'+(keep||"")+'"]')||D.querySelector(".x");t.focus()}D.scrollTop=0}
 D.addEventListener("close",function(){document.documentElement.style.overflow="";if(lf&&lf.focus)lf.focus()});
 D.addEventListener("keydown",function(e){if(e.target.classList&&e.target.classList.contains("gal"))return;if(e.key==="ArrowRight")open_(ci+1,"s");if(e.key==="ArrowLeft")open_(ci-1,"p")});
