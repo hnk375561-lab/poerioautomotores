@@ -20,7 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#0E1B26;--paper:#F3F5F6;--stone:#DCE2E6;--mute:#5B6b76;--cy:#1B8CAB;--cyd:#146F88;--h:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;--b:"Instrument Sans",system-ui,sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:60px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.55 var(--b);-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}a{color:inherit}
 :focus-visible{outline:3px solid var(--cy);outline-offset:3px}
@@ -29,13 +29,13 @@ h1,h2,h3{font-family:var(--h);font-weight:700;letter-spacing:-.02em;line-height:
 h2{font-size:clamp(28px,4vw,44px)}.sub{color:var(--mute);max-width:56ch;margin:14px 0 0}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);font:600 16px var(--b);text-decoration:none;cursor:pointer;border-radius:3px;transition:background .2s,color .2s,border-color .2s}
 .btn:hover{background:var(--ink);color:var(--paper)}
-.btn.p{background:var(--cy);border-color:var(--cy);color:#fff}.btn.p:hover{background:var(--cyd);border-color:var(--cyd)}
+.btn.p{background:var(--cyd);border-color:var(--cyd);color:#fff}.btn.p:hover{background:var(--ink);border-color:var(--ink)}
 .demo{background:var(--ink);color:#c9d4da;font-size:13px;text-align:center;padding:6px 12px}
-header{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--stone)}
-header .w{display:flex;align-items:center;gap:24px;height:56px}
-.mark{font:700 18px var(--h);text-decoration:none;letter-spacing:-.01em;margin-right:auto}.mark small{font:500 12px var(--b);color:var(--mute);margin-left:8px;letter-spacing:.06em}
-nav{display:none;gap:24px}nav a{text-decoration:none;font-weight:500;font-size:15px}nav a:hover{color:var(--cyd)}
-header .btn{min-height:40px;padding:0 16px;font-size:15px}
+header{background:var(--paper);border-bottom:1px solid var(--stone)}
+header .w{display:flex;flex-wrap:wrap;align-items:center;column-gap:24px;min-height:56px}
+.mark{font:700 18px var(--h);text-decoration:none;letter-spacing:-.01em;margin-right:auto;min-height:44px;display:inline-flex;align-items:center}.mark small{font:500 12px var(--b);color:var(--mute);margin-left:8px;letter-spacing:.06em}
+nav{display:flex;order:3;width:100%;gap:20px;overflow-x:auto;scrollbar-width:none}nav a{text-decoration:none;font-weight:500;font-size:15px;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center}nav a:hover{color:var(--cyd)}
+header .btn{padding:0 16px;font-size:15px}
 .hero{position:relative;background:var(--ink);color:#fff}
 .hero img{width:100%;height:min(64svh,560px);object-fit:cover;opacity:.92}
 .hero .w{position:relative;padding:28px 0 40px}
@@ -50,7 +50,7 @@ sec,section{display:block}section{padding:72px 0}
 .grid{display:grid;gap:40px 28px;grid-template-columns:1fr}
 .car .im{display:block;width:100%;padding:0;border:0;background:var(--stone);aspect-ratio:4/3;overflow:hidden;cursor:pointer}
 .car .im img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.car h3{font-size:22px;margin:16px 0 4px}.car h3 button{all:unset;cursor:pointer}.car h3 button:focus-visible{outline:3px solid var(--cy)}
+.car h3{font-size:22px;margin:6px 0 0}.car h3 button{all:unset;display:inline-block;padding:10px 0;cursor:pointer}.car h3 button:focus-visible{outline:3px solid var(--cy)}
 .meta{color:var(--mute);font-size:15px;margin:0}
 .pr{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--stone)}
 .pr b{font:700 17px var(--h)}.pr a{font-weight:600;font-size:15px;color:var(--cyd);text-decoration:none;min-height:44px;display:inline-flex;align-items:center}.pr a:hover{text-decoration:underline}
@@ -65,7 +65,7 @@ form h3{font-size:22px}label{display:grid;gap:6px;font-size:14px;font-weight:600
 input,select{width:100%;min-width:0;min-height:48px;padding:0 12px;border:1.5px solid #b5c0c7;background:#fff;font:400 16px var(--b);border-radius:3px;color:var(--ink)}
 .f2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
 .loc .w{display:grid;grid-template-columns:minmax(0,1fr);gap:36px}.loc address{font:400 18px/1.5 var(--b);font-style:normal}.loc address strong{display:block;font:700 clamp(34px,5.4vw,56px)/1.05 var(--h);letter-spacing:-.02em}.loc address .k{color:var(--mute)}
-.loc p{margin:14px 0 0}.loc .row{margin-top:22px}.loc img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.loc p{margin:14px 0 0}.loc p a{display:inline-flex;align-items:center;min-height:44px}.loc .row{margin-top:22px}.loc img{aspect-ratio:4/3;object-fit:cover;width:100%}
 .faq{background:#fff;border-top:1px solid var(--stone)}.faq .w{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
 details{border-bottom:1px solid var(--stone)}summary{padding:16px 0;font-weight:600;cursor:pointer;min-height:48px}details p{margin:0 0 16px;color:var(--mute);max-width:60ch}
 footer{background:var(--ink);color:#aebbc3;font-size:14px;padding:32px 0}footer p{margin:0 0 8px;max-width:80ch}
@@ -75,8 +75,10 @@ dialog{width:min(1000px,96vw);max-height:94vh;border:0;padding:0;overflow:auto;b
 .cnt{position:absolute;left:10px;bottom:10px;background:var(--ink);color:#fff;font-size:13px;font-weight:600;padding:2px 10px}
 .di{padding:24px;display:flex;flex-direction:column;gap:16px}.di h3{font-size:clamp(24px,4vw,32px)}
 dl.spec{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}dl.spec dt{font-size:13px;color:var(--mute)}dl.spec dd{margin:0;font-weight:600;font-size:18px}.nota{margin:0;color:var(--mute);font-size:15px}.nav{display:flex;gap:10px}.nav .btn{flex:1;padding:0 8px}
+@media(max-width:520px){.mark small{display:none}}
 @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:900px){nav{display:flex}.grid{grid-template-columns:repeat(3,1fr)}.ops .w{grid-template-columns:1.15fr 1fr;gap:72px;align-items:start}.loc .w{grid-template-columns:1fr 1fr;gap:72px;align-items:center}.faq .w{grid-template-columns:1fr 1.6fr;gap:72px}.hero .w{padding:36px 0 56px}}
+@media(min-width:900px){header{position:sticky;top:0;z-index:20}header .w{flex-wrap:nowrap;height:56px}nav{order:0;width:auto;overflow:visible}.grid{grid-template-columns:repeat(3,1fr)}.ops .w{grid-template-columns:1.15fr 1fr;gap:72px;align-items:start}.loc .w{grid-template-columns:1fr 1fr;gap:72px;align-items:center}.faq .w{grid-template-columns:1fr 1.6fr;gap:72px}.hero .w{padding:36px 0 56px}}
+@media(min-width:900px){html{scroll-padding-top:60px}}
 @media(min-width:1000px){.dm{grid-template-columns:1.3fr 1fr}.gal{aspect-ratio:auto;min-height:540px}.car .im:hover img{transform:scale(1.03)}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
@@ -84,7 +86,7 @@ dl.spec{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}dl.spec dt{
 <body>
 <div class="demo">Demo: propuesta de diseño independiente, no oficial. Datos a confirmar con el negocio.</div>
 <header><div class="w"><a class="mark" href="#top">Fernando Poerio<small>AUTOMOTORES</small></a>
-<nav aria-label="Principal"><a href="#unidades">Unidades</a><a href="#operaciones">Comprar, vender, permutar</a><a href="#contacto">Dónde estamos</a><a href="#preguntas">Preguntas</a></nav>
+<nav aria-label="Principal"><a href="#unidades">Unidades</a><a href="#operaciones">Operaciones</a><a href="#contacto">Dónde estamos</a><a href="#preguntas">Preguntas</a></nav>
 <a class="btn p" href="#" data-wa>WhatsApp</a></div></header>
 <main id="top">
 <div class="hero"><img src="images/kwid-1.webp" alt="Renault Kwid Outsider 2019 en el local de Alberdi 1337" fetchpriority="high" width="1280" height="960">
@@ -165,7 +167,7 @@ var F={todos:function(){return true},mano:function(c){return /única mano/i.test
 var L={todos:"Todas",mano:"Única mano",nuevos:"2016 o más nuevos",viejos:"Hasta 2015"};
 function ph(c){return c.fotos||(c.foto?[c.foto]:[])}
 function card(c){var i=STOCK.indexOf(c),t=[],n=c.nota||"";if(/única mano/i.test(n))t.push("Única mano");if(/permuta/i.test(n))t.push("Permuta");
-return '<article class="car"><button type="button" class="im st" data-i="'+i+'" aria-label="Ver fotos: '+esc(c.titulo)+' '+esc(c.anio)+'"><img src="'+esc(c.foto)+'" alt="" loading="lazy" width="1280" height="960"></button><h3><button type="button" class="st" data-i="'+i+'">'+esc(c.titulo)+'</button></h3><p class="meta">'+esc(c.anio||"")+' · '+esc(c.km||"Km: consultar")+' · '+esc(c.combustible||"—")+'</p>'+(t.length?'<p class="tg">'+t.join(" · ")+'</p>':'')+'<div class="pr"><b>'+esc(c.precio||"Consultar")+'</b><a href="'+wa("Hola! Vi en la página el "+c.titulo+" "+c.anio+" y quiero consultar por esta unidad.")+'" target="_blank" rel="noopener noreferrer">Consultar unidad</a></div></article>'}
+return '<article class="car"><button type="button" class="im st" data-i="'+i+'" tabindex="-1" aria-hidden="true"><img src="'+esc(c.foto)+'" alt="" loading="lazy" width="1280" height="960"></button><h3><button type="button" class="st" data-i="'+i+'">'+esc(c.titulo)+'</button></h3><p class="meta">'+esc(c.anio||"")+' · '+esc(c.km||"Km: consultar")+' · '+esc(c.combustible||"—")+'</p>'+(t.length?'<p class="tg">'+t.join(" · ")+'</p>':'')+'<div class="pr"><b>'+esc(c.precio||"Consultar")+'</b><a href="'+wa("Hola! Vi en la página el "+c.titulo+" "+c.anio+" y quiero consultar por esta unidad.")+'" target="_blank" rel="noopener noreferrer">Consultar unidad</a></div></article>'}
 function render(f){var r=STOCK.filter(F[f]);$("stockGrid").innerHTML=r.length?r.map(card).join(""):'<p class="sub">No hay unidades para este filtro. Escribinos y te contamos qué ingresa.</p>';
 document.querySelectorAll(".chip").forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-f")===f)})}
 $("chips").innerHTML=Object.keys(L).map(function(k){return '<button type="button" class="chip" data-f="'+k+'" aria-pressed="false">'+L[k]+' ('+STOCK.filter(F[k]).length+')</button>'}).join("");

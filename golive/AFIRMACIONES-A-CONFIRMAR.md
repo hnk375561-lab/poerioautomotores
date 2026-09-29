@@ -83,3 +83,9 @@ Precios: todos "Consultar". El validador falla si aparece otro valor sin confirm
 - Se quitaron el sello "39 años de confianza", el bloque de cifras y el mosaico de fotos del rediseño anterior. Si el dueño confirma el lema, puede volver a mostrarse.
 - "Comprar" no tiene respaldo escrito en las publicaciones (solo "Vendo–Permuto" y el cartel de consignaciones): confirmar con el dueño que quiere mostrarlo como operación.
 - Se mantiene el aviso demo, `noindex` y el formulario existente (abre WhatsApp).
+
+## Revisión final de calidad (2026-09-28)
+- **Arreglado:** botones principales con contraste 3.9:1 (ahora 5.7:1); en celular no había menú (ahora hay una franja de enlaces deslizable); el botón de WhatsApp bajaba a otra línea en celular; áreas táctiles de menos de 44 px en títulos de unidades, teléfono y botón del encabezado; doble tabulador por tarjeta; 40 miniaturas `-t.webp` sin uso (borradas); `preview.png` regenerado con el diseño actual; README actualizado.
+- **Lighthouse (local, sin Google Fonts por bloqueo del entorno):** móvil rendimiento 96, accesibilidad 100, buenas prácticas 96, SEO 69; escritorio 99 / 100 / 96 / 69. El SEO baja a propósito por `noindex` (sitio demo). El error de consola que reporta es la carga bloqueada de Google Fonts en mi entorno; no lo pude verificar en un navegador con internet completo.
+- **Pendiente del dueño:** horarios; precios; confirmar que "Comprar" figure como operación; "39 años de confianza"; marcas 0 km y condiciones de consignación; cuenta oficial de Facebook; autorización para usar las fotos; patentes visibles en las fotos; disponibilidad de cada unidad.
+- **Al salir a producción:** quitar `noindex` (index y 404), `robots.txt` con `Disallow: /`, aviso demo y títulos "DEMO".
