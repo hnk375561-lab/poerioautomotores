@@ -37,9 +37,13 @@ header .w{display:flex;flex-wrap:wrap;align-items:center;column-gap:24px;min-hei
 nav{display:flex;order:3;width:100%;gap:20px;overflow-x:auto;scrollbar-width:none}nav a{text-decoration:none;font-weight:500;font-size:15px;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center}nav a:hover{color:var(--cyd)}
 header .btn{padding:0 16px;font-size:15px}
 .hero{display:grid;background:var(--ink);color:#fff}
-.hero figure{margin:0;order:-1}.hero img{display:block;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover}
+.hero figure{margin:0;order:-1}.hero figure img{display:block;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover}
 .row{display:flex;flex-wrap:wrap;gap:12px}
-.hero .tx{padding:36px 20px 48px}
+.hero .tx{position:relative;isolation:isolate;overflow:hidden;padding:36px 20px 240px;min-height:600px}
+.hero .bgv{position:absolute;left:0;bottom:0;z-index:-2;width:100%;height:66%;object-fit:cover;object-position:50% 62%;-webkit-mask-image:linear-gradient(180deg,transparent,#000 38%);mask-image:linear-gradient(180deg,transparent,#000 38%)}
+.hero .tx::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,27,38,1) 0%,rgba(14,27,38,.9) 34%,rgba(14,27,38,.08) 100%),linear-gradient(0deg,rgba(14,27,38,.72),transparent 22%)}
+.vcap{position:absolute;left:20px;bottom:14px;right:20px;font-size:13px;font-weight:500;color:#e8eef2;display:flex;justify-content:space-between;gap:12px}
+.soc{display:flex;flex-wrap:wrap;gap:6px 24px;margin-top:20px}.soc a{display:inline-flex;align-items:center;min-height:44px;color:#fff;font-weight:600;font-size:15px;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.45)}.soc a:hover{text-decoration-color:#fff}
 .hero h1{font-size:clamp(36px,9.5vw,64px);max-width:13ch}
 .hero p{margin:18px 0 28px;max-width:38ch;color:#d3dde3;font-size:18px}
 .hero .btn:not(.p){border-color:#fff;color:#fff}.hero .btn:not(.p):hover{background:#fff;color:var(--ink)}
@@ -73,7 +77,7 @@ input,select{width:100%;min-width:0;min-height:48px;padding:0 12px;border:1.5px 
 .loc .btn{border-color:#fff}.loc .btn:hover{background:#fff;color:var(--ink)}.loc .btn.p{background:#fff;color:var(--ink)}.loc .btn.p:hover{background:var(--stone)}
 .faq{background:#fff;border-top:1px solid var(--stone)}.faq .w{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
 details{border-bottom:1px solid var(--stone)}summary{padding:16px 0;font-weight:600;cursor:pointer;min-height:48px}details p{margin:0 0 16px;color:var(--mute);max-width:60ch}
-footer{background:var(--ink);color:#aebbc3;font-size:14px;padding:32px 0}footer p{margin:0 0 8px;max-width:80ch}
+footer{background:var(--ink);color:#aebbc3;font-size:14px;padding:32px 0}footer p{margin:0 0 8px;max-width:80ch}footer .soc a{color:#fff;font-size:15px}
 dialog{width:min(1000px,96vw);max-height:94vh;border:0;padding:0;overflow:auto;background:var(--paper);color:var(--ink)}dialog::backdrop{background:rgba(6,12,18,.8)}
 .dm{display:grid}.pg{position:relative}.gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;aspect-ratio:4/3;background:var(--ink)}.gal::-webkit-scrollbar{display:none}.gal img{flex:0 0 100%;width:100%;height:100%;object-fit:contain;scroll-snap-align:center}
 .x{position:absolute;top:8px;right:8px;z-index:2;width:44px;height:44px;border:0;background:var(--paper);font-size:26px;cursor:pointer;border-radius:3px}
@@ -82,7 +86,7 @@ dialog{width:min(1000px,96vw);max-height:94vh;border:0;padding:0;overflow:auto;b
 dl.spec{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}dl.spec dt{font-size:13px;color:var(--mute)}dl.spec dd{margin:0;font-weight:600;font-size:18px}.nota{margin:0;color:var(--mute);font-size:15px}.nav{display:flex;gap:10px}.nav .btn{flex:1;padding:0 8px}
 @media(max-width:520px){.mark small{display:none}}
 @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:900px){header{position:sticky;top:0;z-index:20}header .w{flex-wrap:nowrap;height:56px}nav{order:0;width:auto;overflow:visible}.grid{grid-template-columns:repeat(3,1fr)}.ops .w{grid-template-columns:1.15fr 1fr;gap:72px;align-items:start}.loc .w{grid-template-columns:1fr 1fr;gap:72px;align-items:center}.faq .w{grid-template-columns:1fr 1.6fr;gap:72px}.hero{grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:min(calc(100svh - 100px),720px)}.hero figure{order:0;position:relative}.hero img{position:absolute;inset:0;aspect-ratio:auto}.hero .tx{align-self:center;padding:64px 48px 64px max(20px,calc((100vw - 1180px)/2));min-width:0}.hero h1{font-size:clamp(40px,4.1vw,60px)}}
+@media(min-width:900px){header{position:sticky;top:0;z-index:20}header .w{flex-wrap:nowrap;height:56px}nav{order:0;width:auto;overflow:visible}.grid{grid-template-columns:repeat(3,1fr)}.ops .w{grid-template-columns:1.15fr 1fr;gap:72px;align-items:start}.loc .w{grid-template-columns:1fr 1fr;gap:72px;align-items:center}.faq .w{grid-template-columns:1fr 1.6fr;gap:72px}.hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:min(calc(100svh - 100px),720px)}.hero figure{order:0;position:relative}.hero figure img{position:absolute;inset:0;aspect-ratio:auto}.hero .tx{align-self:stretch;padding:56px 48px 300px max(20px,calc((100vw - 1180px)/2));min-width:0;min-height:0}.vcap{left:max(20px,calc((100vw - 1180px)/2))}.hero h1{font-size:clamp(40px,4.1vw,60px)}}
 @media(min-width:900px){html{scroll-padding-top:60px}}
 @media(min-width:1000px){.dm{grid-template-columns:1.3fr 1fr}.gal{aspect-ratio:auto;min-height:540px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
@@ -94,9 +98,11 @@ dl.spec{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}dl.spec dt{
 <nav aria-label="Principal"><a href="#unidades">Unidades</a><a href="#operaciones">Operaciones</a><a href="#contacto">Dónde estamos</a><a href="#preguntas">Preguntas</a></nav>
 <a class="btn p" href="#" data-wa>WhatsApp</a></div></header>
 <main id="top">
-<div class="hero"><div class="tx"><h1>Autos usados en Concepción del Uruguay</h1><p>Venta, permuta y consignación. Escribinos y te confirmamos si la unidad sigue disponible.</p>
-<div class="row"><a class="btn p" href="#unidades">Ver unidades</a><a class="btn" href="#" data-wa>Consultar por WhatsApp</a></div></div>
-<figure><img src="images/kwid-1.webp" alt="Renault Kwid Outsider 2019 en el local de Alberdi 1337" fetchpriority="high" width="1280" height="960"></figure></div>
+<div class="hero"><div class="tx"><img class="bgv" src="images/up-1.webp" alt="" width="1200" height="900" loading="lazy"><h1>Autos usados en Concepción del Uruguay</h1><p>Venta, permuta y consignación. Escribinos y te confirmamos si la unidad sigue disponible.</p>
+<div class="row"><a class="btn p" href="#unidades">Ver unidades</a><a class="btn" href="#" data-wa>Consultar por WhatsApp</a></div>
+<div class="soc"><a href="#" data-ig target="_blank" rel="noopener noreferrer">Instagram</a><a href="#" data-fb target="_blank" rel="noopener noreferrer">Facebook</a></div>
+<span class="vcap"><span>Volkswagen Up 1.0 2018</span><span>Disponibilidad a confirmar</span></span></div>
+<figure><img src="images/ecosport-1.webp" alt="Ford EcoSport XLS 2011 en el local de Alberdi 1337" fetchpriority="high" width="1440" height="1085"></figure></div>
 
 <section id="unidades"><div class="w">
 <div class="head"><div><h2>Unidades</h2><p class="sub">Tocá una unidad para ver todas las fotos. Precio y disponibilidad se confirman con la agencia.</p></div><div class="tabs" role="group" aria-label="Filtrar unidades" id="chips"></div></div>
@@ -130,7 +136,7 @@ dl.spec{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}dl.spec dt{
 <details><summary>¿Qué horarios tienen?</summary><p>Horarios a confirmar con el negocio.</p></details>
 </div></div></section>
 </main>
-<footer><div class="w"><p>Sitio demo hecho como propuesta por Santiago Solis. No es el sitio oficial de Fernando Poerio Automotores y todavía no está aprobado por el negocio.</p><p>Las fotos y datos de las unidades provienen de las publicaciones públicas de la agencia. Precios, disponibilidad y horarios se publican cuando el negocio los confirma.</p></div></footer>
+<footer><div class="w"><div class="soc" style="margin:0 0 12px"><a href="#" data-ig target="_blank" rel="noopener noreferrer">Instagram</a><a href="#" data-fb target="_blank" rel="noopener noreferrer">Facebook</a></div><p>Sitio demo hecho como propuesta por Santiago Solis. No es el sitio oficial de Fernando Poerio Automotores y todavía no está aprobado por el negocio.</p><p>Las fotos y datos de las unidades provienen de las publicaciones públicas de la agencia. Precios, disponibilidad y horarios se publican cuando el negocio los confirma.</p></div></footer>
 <dialog id="dlg" aria-label="Ficha de la unidad"></dialog>
 <script>
 /* ==== DATOS DEL NEGOCIO (editar solo acá) ==== */
@@ -167,7 +173,7 @@ document.querySelectorAll("[data-map]").forEach(function(a){a.href=N.mapsPlace})
 $("reviewsLink").href=N.mapsReviews;$("addr").innerHTML="<strong>"+esc(N.direccion)+"</strong>"+(N.referencia?" <span class='k'>("+esc(N.referencia)+")</span>":"")+"<br>"+esc(N.ciudad);
 var p=$("phoneLink");p.href="tel:"+N.telefonoTel;p.textContent="Llamar al "+N.telefono;
 if(N.horarios)$("hoursNote").textContent="Horarios: "+N.horarios;
-var ig=$("igLink");ig.href="https://www.instagram.com/"+N.instagram+"/";ig.textContent="Instagram @"+N.instagram;$("fbLink").href=N.facebook;
+document.querySelectorAll("[data-ig],#igLink").forEach(function(a){a.href="https://www.instagram.com/"+N.instagram+"/"});document.querySelectorAll("[data-fb],#fbLink").forEach(function(a){a.href=N.facebook});$("igLink").textContent="Instagram @"+N.instagram;
 var F={todos:function(){return true},mano:function(c){return /única mano/i.test(c.nota||"")},nuevos:function(c){return c.anio>=2016},viejos:function(c){return c.anio<=2015}};
 var L={todos:"Todas",mano:"Única mano",nuevos:"2016 o más nuevos",viejos:"Hasta 2015"};
 function ph(c){return c.fotos||(c.foto?[c.foto]:[])}
