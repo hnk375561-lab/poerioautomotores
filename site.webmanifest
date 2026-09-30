@@ -1,0 +1,14 @@
+{
+  "name": "Fernando Poerio Automotores (demo)",
+  "short_name": "Poerio Automotores",
+  "description": "Propuesta de sitio web independiente: autos usados en Concepción del Uruguay.",
+  "lang": "es-AR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0E1B26",
+  "theme_color": "#0E1B26",
+  "icons": [
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" }
+  ]
+}

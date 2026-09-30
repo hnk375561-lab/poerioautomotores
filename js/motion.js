@@ -74,8 +74,27 @@
     window.Flip.from(st, { duration: .9, ease: E, stagger: .04 });
   };
 
+  /* ---------- Pausa del movimiento automático (WCAG 2.2.2) ----------
+     Un solo estado para el hero y las tres rotaciones de fotos: cada una tiene su botón y todos quedan sincronizados. */
+  var auto = { off: false, subs: [], btns: [] };
+  var IC_PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>';
+  var IC_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l11-6.5z"/></svg>';
+  function autoSync() { auto.subs.slice().forEach(function (f) { f(); }); }
+  function autoBtn(host) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'apz';
+    function paint() {
+      var t = auto.off ? 'Reanudar el movimiento automático' : 'Pausar el movimiento automático';
+      b.setAttribute('aria-label', t); b.title = t; b.innerHTML = auto.off ? IC_PLAY : IC_PAUSE;
+    }
+    b.addEventListener('click', function () { auto.off = !auto.off; auto.btns.forEach(function (f) { f(); }); autoSync(); });
+    paint(); auto.btns.push(paint); host.appendChild(b);
+    return function () { var i = auto.btns.indexOf(paint); if (i > -1) auto.btns.splice(i, 1); if (b.parentNode) b.parentNode.removeChild(b); };
+  }
+
   /* ---------- Rotadores de fotos (banda, "Quiénes somos", Preguntas): un solo sistema ----------
-     Fundido con asentado de escala; solo corren a la vista y con la pestaña visible. Las fotos extra se agregan tras la carga. */
+     Fundido con asentado de escala; solo corren a la vista y con la pestaña visible. Se detienen con hover (mouse), foco de teclado y el botón de pausa.
+     Las fotos extra se agregan tras la carga. */
   function rotator(box, names, o) {
     if (!box) return;
     names.forEach(function (n) {
@@ -89,10 +108,20 @@
       var a = im[k], b = im[(k + 1) % im.length]; k = (k + 1) % im.length;
       g.set(b, { opacity: 0, scale: o.sc }); g.to(b, { opacity: top, scale: 1, duration: o.du, ease: 'power2.out' }); g.to(a, { opacity: 0, duration: o.du, ease: 'power2.out' });
     }
-    function go() { if (!tm && vis && !document.hidden) tm = setInterval(nx, o.ms); }
+    var hold = 0;
+    function go() { if (!tm) tm = setInterval(nx, o.ms); }
     function st() { clearInterval(tm); tm = 0; }
-    new IntersectionObserver(function (e) { vis = e[0].isIntersecting; vis ? go() : st(); }).observe(box);
-    document.addEventListener('visibilitychange', function () { document.hidden ? st() : go(); });
+    function sync() { (vis && !hold && !auto.off && !document.hidden) ? go() : st(); }
+    new IntersectionObserver(function (e) { vis = e[0].isIntersecting; sync(); }).observe(box);
+    document.addEventListener('visibilitychange', sync);
+    if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
+      box.addEventListener('pointerenter', function () { hold |= 1; sync(); });
+      box.addEventListener('pointerleave', function () { hold &= ~1; sync(); });
+    }
+    box.addEventListener('focusin', function (e) { if (e.target.matches && e.target.matches(':focus-visible')) { hold |= 2; sync(); } });
+    box.addEventListener('focusout', function () { hold &= ~2; sync(); });
+    auto.subs.push(sync);
+    autoBtn(box);
   }
   function onLoad(fn) { if (document.readyState === 'complete') fn(); else window.addEventListener('load', fn); }
   onLoad(function () {
@@ -219,8 +248,8 @@
        Todas las unidades entran igual: máscara lateral (dirección según el sentido) + foto que se asienta con contraparalaje,
        nombre por palabra y un progreso por unidad en el rail. Se pausa con hover/foco, fuera de pantalla, en otra pestaña o con el botón. */
     var hs = $('#hs'), H = window.poerioHero, sl = $$('.hz', hs || document);
-    var hn = $('#hn'), hm = $('#hm'), prog = null, playing = true, held = 0, inView = true, started = false;
-    function sync() { if (!prog) return; (playing && !held && inView && !document.hidden) ? prog.play() : prog.pause(); }
+    var hn = $('#hn'), hm = $('#hm'), prog = null, held = 0, inView = true, started = false;
+    function sync() { if (!prog) return; (!auto.off && !held && inView && !document.hidden) ? prog.play() : prog.pause(); }
     function tick(i) {
       if (prog) prog.kill();
       prog = g.delayedCall(2, function () { H.next(); });
@@ -229,6 +258,8 @@
     function startSlider() { if (started || !H || !hs) return; started = true; tick(H.i); }
     if (H && hs && sl.length > 1) {
       root.classList.add('hg');
+      auto.subs.push(sync);
+      cleanups.push(function () { var i = auto.subs.indexOf(sync); if (i > -1) auto.subs.splice(i, 1); }, autoBtn($('.hv', hs)));
       var onHero = function (e) {
         ctx.add(function () {
           var d = e.detail, A = sl[d.to], B = sl[d.from], iA = $('img', A), iB = $('img', B), dir = d.dir;
