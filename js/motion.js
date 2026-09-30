@@ -71,7 +71,7 @@
         if (!D) g.set(fi, { clearProps: 'transform' });
       } });
       tl.fromTo(fg, { clipPath: D ? 'inset(0 0 0 100%)' : 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0 0)', duration: 1.2 * k, ease: 'expo.inOut' }, 0)
-        .fromTo(fi, { scale: D ? 1.12 : 1.08, transformOrigin: '100% 50%' }, { scale: D ? 1.05 : 1, duration: 1.8, ease: 'power3.out' }, 0)
+        .fromTo(fi, { scale: D ? 1.12 : 1.08, transformOrigin: '100% 50%' }, { scale: 1, duration: 1.8, ease: 'power3.out' }, 0)
         .fromTo(bg, { opacity: 0, scale: 1.1 }, { opacity: 1, scale: 1, duration: 1.6, ease: 'power2.out' }, 0)
         .set(txt[0], { opacity: 1 }, 0).fromTo(HW, { yPercent: 115 }, { yPercent: 0, duration: 1.1 * k, stagger: .07 }, .1)
         .fromTo(txt[1], { opacity: 0, y: dy }, { opacity: 1, y: 0, duration: .9 * k }, .25)
@@ -133,9 +133,8 @@
     reveal($$('.ops .w > div:first-child > .sub'), '.ops');
     reveal($$('.op'), '.op', { s: .1, st: 'top 88%' });
     reveal([$('#canjeForm')], '#canjeForm', { st: 'top 90%' });
-    reveal($$('.loc .w > div > *'), '.loc', { st: 'top 70%', s: .07 });
-    mask($('.loc .ph'));
-    if (D) g.fromTo('.loc .ph img', { yPercent: -4, scale: 1.08 }, { yPercent: 4, scale: 1.08, ease: 'none', scrollTrigger: { trigger: '.loc', start: 'top bottom', end: 'bottom top', scrub: .6 } });
+    reveal($$('.loc .lc > *'), '.loc', { st: 'top 70%', s: .07 });
+    mask($('.mp'), '.loc', 'top 70%');
     words($('.faq h2'), '.faq');
     reveal($$('.faq details'), '.faq details', { y: 16, s: .06, st: 'top 90%' });
     reveal($$('.fin'), '.fin', { y: 12, st: 'top 95%' });
