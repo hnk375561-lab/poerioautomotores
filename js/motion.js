@@ -10,7 +10,9 @@
    · ScrollTo   → los enlaces internos viajan con expo.inOut; la rueda o el toque los interrumpen (no hay secuestro de scroll)
    · Flip       → al filtrar unidades, las que quedan se reacomodan, las nuevas entran y las que salen se despiden
    · Puntero    → paralaje del hero, botones magnéticos y tilt de las tarjetas de operaciones (solo mouse; nunca en táctil)
-   · Vista previa del mensaje → el mensaje de WhatsApp se escribe mientras se completa el formulario; año y km ruedan como un odómetro
+   · Vender o permutar → una unidad por vez, con la misma máscara lateral y el mismo nombre por palabra que el hero
+   · Ficha → se abre desde la tarjeta; la foto se revela con máscara y el contenido entra escalonado
+   · Banner → foto fija de fondo con paralaje suave
    · Mapa       → se descubre con máscara; el panel de dirección entra escalonado
    · Preguntas  → el acordeón abre y cierra con altura animada (details nativo, teclado intacto)
    prefers-reduced-motion: no se registra ninguna animación (queda la navegación activa, sin movimiento). */
@@ -108,7 +110,6 @@
   onLoad(function () {
     rotator($('#fqs2'), ['ka-s-1', 'clio-2', 'punto-2', 'ecosport-2', 'up-4'], { sizes: '(min-width:900px) 40vw,100vw', sc: 1.06, du: 1.2, ms: 4600 });
     rotator($('#fqs'), ['clio-3', 'up-3', 'punto-3', 'ecosport-3', 'ka-s-2'], { sizes: '(min-width:900px) 40vw,100vw', sc: 1.06, du: 1.2, ms: 3800 });
-    rotator($('#bd'), ['clio-5', 'up-5', 'ecosport-5'], { sizes: '100vw', sc: 1.08, du: 1.6, ms: 4200, op: .75, before: 'a' });
   });
 
   /* ---------- Anclas: viaje con expo.inOut; la rueda/toque lo interrumpe ---------- */
@@ -123,49 +124,6 @@
       onComplete: function () { t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); } });
     if (history.replaceState) history.replaceState(null, '', id);
   });
-
-  /* ---------- Vista previa del mensaje: escritura + odómetro ----------
-     index.html arma el estado (texto, modelo, dígitos) y llama a window.poerioFx(estado). Sin GSAP, index.html lo dibuja estático. */
-  var pv = $('#pv'), pvIntro = false;
-  if (pv) {
-    var tx = $('#pvTx'), cr = $('#pvCr'), mod = $('#pvMod'), bar = $('#pvP'), bub = $('#pvBub'), tkp = $$('.tk path', pv);
-    var T = { n: 0 }, wasEmpty = true, ready = false;
-    var od = { y: { cols: $$('#odY .d'), strips: $$('#odY .s'), sps: [] }, k: { cols: $$('#odK .d'), strips: $$('#odK .s'), sps: $$('#odK .sp') } };
-    /* las posiciones iniciales pasan de transform CSS a yPercent de GSAP */
-    [od.y, od.k].forEach(function (o) { o.strips.forEach(function (st) { var d = +st.getAttribute('data-d') || 0; g.set(st, { clearProps: 'transform' }); g.set(st, { yPercent: -10 * d }); }); });
-    var roll = function (o, v) {
-      o.cols.forEach(function (c, i) { c.classList.toggle('off', !!v.a[i].off); });
-      o.sps.forEach(function (b, i) { b.classList.toggle('off', v.off > (i ? 3 : 0)); });
-      o.strips.forEach(function (st, i) { g.to(st, { yPercent: -10 * v.a[i].d, duration: 1.2, ease: E, delay: (v.a.length - 1 - i) * .045, overwrite: true }); });
-    };
-    window.poerioFx = function (s) {
-      var cur = tx.textContent, c = 0, L = s.text.length;
-      while (c < cur.length && c < L && cur.charAt(c) === s.text.charAt(c)) c++;
-      g.killTweensOf(T);
-      if (L <= c) tx.textContent = s.text;                       /* solo se borró: sin animación */
-      else {
-        tx.textContent = s.text.slice(0, c); T.n = c;
-        g.to(T, { n: L, duration: Math.min(.9, (L - c) * .022), ease: 'none', onUpdate: function () { tx.textContent = s.text.slice(0, Math.round(T.n)); }, onComplete: function () { tx.textContent = s.text; } });
-      }
-      g.fromTo(cr, { opacity: 1 }, { opacity: 0, duration: .5, delay: 1.2, overwrite: true });
-      var empty = !s.modelo;
-      mod.textContent = s.modelo || 'Marca y modelo'; mod.classList.toggle('e', empty);
-      if (empty !== wasEmpty) g.fromTo(mod, { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .6, ease: E, overwrite: true, clearProps: 'opacity,transform' });
-      wasEmpty = empty;
-      g.to(bar, { scaleX: s.prog, duration: .9, ease: E, overwrite: true });
-      if (s.prog === 1 && !ready) g.fromTo(bub, { scale: .97, transformOrigin: '100% 100%' }, { scale: 1, duration: .7, ease: E, clearProps: 'transform,transformOrigin', overwrite: 'auto' });
-      ready = s.prog === 1;
-      roll(od.y, s.y); roll(od.k, s.k);
-    };
-    /* Enviado: la burbuja se asienta y las tildes se dibujan */
-    document.addEventListener('poerio:sent', function () {
-      g.fromTo(bub, { y: 8, scale: .985, transformOrigin: '100% 100%' }, { y: 0, scale: 1, duration: .7, ease: E, clearProps: 'transform,transformOrigin', overwrite: 'auto' });
-      tkp.forEach(function (pth, i) {
-        var l = pth.getTotalLength();
-        g.fromTo(pth, { strokeDasharray: l, strokeDashoffset: l }, { strokeDashoffset: 0, duration: .55, delay: .15 + i * .2, ease: E, clearProps: 'strokeDasharray,strokeDashoffset', overwrite: true });
-      });
-    });
-  }
 
   g.matchMedia().add({ d: '(min-width:900px)', m: '(max-width:899px)' }, function (ctx) {
     var D = ctx.conditions.d, dy = D ? 32 : 18, k = D ? 1 : .8;
@@ -265,6 +223,54 @@
     }
     startSlider();   /* arranca la rotación (y la retoma tras redimensionar) */
 
+
+    /* ---------- VENDER O PERMUTAR · una unidad por vez ----------
+       Mismo gesto que el hero: máscara lateral según el sentido, foto que se asienta con contraparalaje y nombre por palabra.
+       El progreso de cada unidad es el propio tween que la hace avanzar (se pausa con hover/foco, fuera de pantalla, en otra pestaña o con el estado compartido). */
+    var VR = window.poerioVr, vrEl = $('#vr'), vsl = $$('.vrz', vrEl || document), vbt = $$('.vrr button', vrEl || document);
+    var vn = $('#vrN'), vm = $('#vrM'), vi = $('#vrI'), vprog = null, vheld = 0, vin = false, vstarted = false;
+    function vsync() { if (!vprog) return; (!auto.off && !vheld && vin && !document.hidden) ? vprog.play() : vprog.pause(); }
+    function vtick(i) {
+      if (vprog) vprog.kill();
+      vbt.forEach(function (b, q) { g.set($('i', b), { scaleX: q < i ? 1 : 0 }); });
+      vprog = g.to($('i', vbt[i]), { scaleX: 1, duration: 3.8, ease: 'none', onComplete: function () { VR.next(); } });
+      vsync();
+    }
+    if (VR && vrEl && vsl.length > 1) {
+      var r0 = vrEl.getBoundingClientRect(); vin = r0.top < innerHeight && r0.bottom > 0;
+      root.classList.add('vg');
+      auto.subs.push(vsync);
+      cleanups.push(function () { var q = auto.subs.indexOf(vsync); if (q > -1) auto.subs.splice(q, 1); });
+      var onVr = function (e) {
+        ctx.add(function () {
+          var d = e.detail, A = vsl[d.to], B = vsl[d.from], iA = $('img', A), iB = $('img', B), dir = d.dir;
+          vsl.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'clipPath,zIndex' }); } });
+          g.killTweensOf([A, B, iA, iB]);
+          B.classList.add('lv'); g.set(B, { zIndex: 1, clipPath: 'inset(0% 0% 0% 0%)' }); g.set(A, { zIndex: 2 });
+          g.fromTo(A, { clipPath: dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .9 * k, ease: 'expo.inOut', clearProps: 'clipPath,zIndex',
+            onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,clipPath' }); g.set(iB, { clearProps: 'transform' }); } });
+          g.fromTo(iA, { scale: 1.16, xPercent: 8 * dir }, { scale: 1, xPercent: 0, duration: 1.4, ease: 'power3.out', clearProps: 'transform' });
+          g.to(iB, { xPercent: -6 * dir, duration: .9 * k, ease: 'expo.inOut' });
+          var W = split(vn, true);
+          g.fromTo(W, { yPercent: 115 }, { yPercent: 0, duration: .6 * k, stagger: .04, delay: .15, ease: E, clearProps: 'transform' });
+          g.fromTo([vm, vi], { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .5, delay: .25, ease: E, clearProps: 'opacity,transform' });
+          if (vstarted) vtick(d.to);
+        });
+      };
+      document.addEventListener('poerio:vr', onVr);
+      cleanups.push(function () { document.removeEventListener('poerio:vr', onVr); if (vprog) vprog.kill(); vprog = null; vstarted = false; root.classList.remove('vg'); });
+      on(document, 'visibilitychange', vsync);
+      if (fine) { on(vrEl, 'pointerenter', function () { vheld |= 1; vsync(); }); on(vrEl, 'pointerleave', function () { vheld &= ~1; vsync(); }); }
+      on(vrEl, 'focusin', function () { vheld |= 2; vsync(); });
+      on(vrEl, 'focusout', function () { vheld &= ~2; vsync(); });
+      ST.create({ trigger: vrEl, start: 'top bottom', end: 'bottom top', onToggle: function (s2) { vin = s2.isActive; vsync(); } });
+      /* deslizar en táctil: cambia de unidad en el sentido del gesto */
+      var vx0 = 0, vy0 = 0;
+      on(vrEl, 'pointerdown', function (e) { vx0 = e.clientX; vy0 = e.clientY; });
+      on(vrEl, 'pointerup', function (e) { if (e.target.closest('.g-a, .vrr')) return; var dx = e.clientX - vx0, dy2 = e.clientY - vy0; if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy2) * 1.4) { var s3 = dx < 0 ? 1 : -1; VR.go(VR.i + s3, s3); } });
+      vstarted = true; vtick(VR.i);
+    }
+
     /* ---------- STOCK: el corazón comercial ---------- */
     words($('.head h2'), '.head');
     reveal($$('.head .sub, .head .tabs'), '.head');
@@ -347,100 +353,49 @@
     });
     mo.observe(grid, { childList: true });
 
-    /* ---------- FICHA: se abre desde la tarjeta tocada; el contenido entra escalonado ---------- */
-    var dlg = $('#dlg'), was = false, ox = 0, oy = 0, fl = null;
+    /* ---------- FICHA: se abre desde la tarjeta tocada; la foto se revela con máscara y el contenido entra escalonado ---------- */
+    var dlg = $('#dlg'), was = false, ox = 0, oy = 0;
     grid.addEventListener('click', function (e) {
       var c = e.target.closest('.car'); if (!c) return;
-      var r = $('.im', c).getBoundingClientRect(), ct = $('.ct', c);
+      var r = $('.im', c).getBoundingClientRect();
       ox = r.left + r.width / 2 - innerWidth / 2; oy = r.top + r.height / 2 - innerHeight / 2;
-      fl = ct && !(e.target.closest('.ar')) ? { r: r, idx: Math.round(ct.scrollLeft / (ct.clientWidth || 1)) } : null;
     }, true);
     dlg.addEventListener('close', function () { was = false; });
     var mo2 = new MutationObserver(function () {
       var fresh = dlg.open && !was; was = dlg.open;
-      var gal0 = $('.gal', dlg);
-      if (fresh && fl && gal0) {
-        /* Vuelo compartido: la foto de la tarjeta viaja hasta la galería de la ficha (escala uniforme, nunca deforma) y la ficha se abre desde el rectángulo de la tarjeta */
-        var F = fl; fl = null; zoomOff();
-        if (F.idx) gal0.scrollLeft = F.idx * gal0.clientWidth;
-        var gr = gal0.getBoundingClientRect(), dr = dlg.getBoundingClientRect(), src = $$('img', gal0)[F.idx || 0].src;
-        var fy = document.createElement('div'); fy.className = 'fly'; fy.setAttribute('aria-hidden', 'true'); fy.innerHTML = '<img alt="" src="' + src + '">';
-        fy.style.cssText = 'left:' + gr.left + 'px;top:' + gr.top + 'px;width:' + gr.width + 'px;height:' + gr.height + 'px';
-        dlg.appendChild(fy);
-        var cp = function (a, b, c2, d) { return 'inset(' + a + 'px ' + b + 'px ' + c2 + 'px ' + d + 'px)'; };
-        g.fromTo(dlg, { clipPath: cp(F.r.top - dr.top, dr.right - F.r.right, dr.bottom - F.r.bottom, F.r.left - dr.left) }, { clipPath: cp(0, 0, 0, 0), duration: 1.05 * k, ease: 'expo.inOut', clearProps: 'clipPath', overwrite: 'auto' });
-        g.fromTo(fy, { x: F.r.left - gr.left, y: F.r.top - gr.top, scale: F.r.width / gr.width }, { x: 0, y: 0, scale: 1, duration: 1.05 * k, ease: 'expo.inOut',
-          onComplete: function () { if (fy.parentNode) fy.parentNode.removeChild(fy); } });
-        g.fromTo(gal0, { opacity: 0 }, { opacity: 1, duration: .01, delay: 1.05 * k, clearProps: 'opacity' });
-      } else if (fresh) {
-        fl = null;
+      if (!dlg.open) return;
+      if (fresh) {
         var w = dlg.offsetWidth, h = dlg.offsetHeight;
-        g.fromTo(dlg, { opacity: 0, scale: D ? .88 : .94, x: ox * .1, y: oy * .1 + 10, transformOrigin: (w / 2 + ox) + 'px ' + (h / 2 + oy) + 'px' },
-          { opacity: 1, scale: 1, x: 0, y: 0, duration: .65, ease: E, clearProps: 'opacity,transform,transformOrigin', overwrite: 'auto' });
+        g.fromTo(dlg, { opacity: 0, scale: D ? .92 : .97, x: ox * .08, y: oy * .08 + 18, transformOrigin: (w / 2 + ox) + 'px ' + (h / 2 + oy) + 'px' },
+          { opacity: 1, scale: 1, x: 0, y: 0, duration: .75, ease: E, clearProps: 'opacity,transform,transformOrigin', overwrite: 'auto' });
       }
-      var t = $$('.di > *', dlg);
-      if (t.length) g.from(t, { opacity: 0, y: D ? 12 : 8, duration: .55, stagger: .045, delay: fresh ? .18 : 0, ease: E, clearProps: 'opacity,transform', overwrite: 'auto' });
-      if (gal0 && !$('.fly', dlg)) g.from(gal0, { opacity: 0, duration: .5, delay: fresh ? .1 : 0, ease: 'power2.out', clearProps: 'opacity' });
+      var stage = $('.fcs', dlg), im0 = $('.ct img', dlg);
+      if (stage) g.fromTo(stage, { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1 * k, ease: 'expo.inOut', delay: fresh ? .12 : 0, clearProps: 'clipPath', overwrite: 'auto' });
+      if (im0) g.fromTo(im0, { scale: 1.12 }, { scale: 1, duration: 1.6, ease: 'power3.out', delay: fresh ? .12 : 0, clearProps: 'transform', overwrite: 'auto' });
+      var t = $$('.fcb > *, .fcft', dlg);
+      if (t.length) g.from(t, { opacity: 0, y: D ? 14 : 10, duration: .6, stagger: .05, delay: fresh ? .3 : .08, ease: E, clearProps: 'opacity,transform', overwrite: 'auto' });
     });
     mo2.observe(dlg, { childList: true });
 
 
-    /* ---------- FOTOS: lupa en la ficha, exploración por puntero y cursor en el catálogo (solo mouse) ---------- */
-    var zi = null, zqx, zqy, ZS = 2.2;
-    function zoomOff() {
-      if (!zi) return; var im = zi; zi = null;
-      if (im.parentNode) im.parentNode.classList.remove('zo');
-      g.to(im, { scale: 1, x: 0, y: 0, duration: .6, ease: E, overwrite: true, clearProps: 'transform' });
-    }
+    /* ---------- CURSOR del catálogo: "Ver ficha" sigue al mouse sobre la foto de cada tarjeta (solo mouse) ---------- */
     if (fine) {
-      on(dlg, 'click', function (e) {
-        var im = e.target.closest && e.target.closest('.gal img'); if (!im) return;
-        if (zi) return zoomOff();
-        zi = im; im.parentNode.classList.add('zo');
-        zqx = g.quickTo(im, 'x', { duration: .55, ease: 'power3.out' }); zqy = g.quickTo(im, 'y', { duration: .55, ease: 'power3.out' });
-        g.to(im, { scale: ZS, duration: .8, ease: E, overwrite: 'auto' });
-        pan(e);
-      });
-      var pan = function (e) {
-        if (!zi) return; var r = zi.parentNode.getBoundingClientRect();
-        zqx(-((e.clientX - r.left) / r.width - .5) * (ZS - 1) * r.width); zqy(-((e.clientY - r.top) / r.height - .5) * (ZS - 1) * r.height);
-      };
-      on(dlg, 'pointermove', pan);
-      on(dlg, 'pointerout', function (e) { if (zi && !(e.relatedTarget && zi.parentNode.contains(e.relatedTarget))) zoomOff(); });
-      on(dlg, 'scroll', zoomOff, true);
-      on(dlg, 'keydown', zoomOff);
-      on(dlg, 'close', zoomOff);
-
-      /* Cursor contextual + exploración: al mover el puntero sobre la foto de una tarjeta, se recorren sus fotos */
       var cu = document.createElement('div'); cu.className = 'cur'; cu.setAttribute('aria-hidden', 'true'); cu.innerHTML = '<span>Ver ficha</span>'; document.body.appendChild(cu);
-      var cqx = g.quickTo(cu, 'x', { duration: .45, ease: 'power3.out' }), cqy = g.quickTo(cu, 'y', { duration: .45, ease: 'power3.out' }), cOn = false, scrubbed = new WeakMap();
+      var cqx = g.quickTo(cu, 'x', { duration: .45, ease: 'power3.out' }), cqy = g.quickTo(cu, 'y', { duration: .45, ease: 'power3.out' }), cOn = false;
       var cshow = function (v, e) {
         if (v === cOn) return; cOn = v; root.classList.toggle('cur-on', v);
         if (v && e) g.set(cu, { x: e.clientX, y: e.clientY });
         g.to(cu, { scale: v ? 1 : 0, opacity: v ? 1 : 0, duration: .45, ease: E, overwrite: 'auto' });
       };
-      var snapBack = function (im) {
-        var ct = $('.ct', im); if (!ct || !scrubbed.get(im)) { im.classList.remove('pk'); return; }
-        scrubbed.set(im, 0);
-        if (window.ScrollToPlugin) g.to(ct, { scrollTo: { x: 0 }, duration: .7, ease: E, overwrite: true, onComplete: function () { im.classList.remove('pk'); } });
-        else { ct.scrollLeft = 0; im.classList.remove('pk'); }
-      };
       on(grid, 'pointermove', function (e) {
         if (e.pointerType && e.pointerType !== 'mouse') return;
-        var im = e.target.closest && e.target.closest('.im'), over = !!im && !e.target.closest('.ar');
-        if (over) {
-          cqx(e.clientX); cqy(e.clientY);
-        }
+        var im = e.target.closest && e.target.closest('.im'), over = !!im && !e.target.closest('.g-a');
+        if (over) { cqx(e.clientX); cqy(e.clientY); }
         cshow(over, e);
-      });
-      on(grid, 'pointerout', function (e) {
-        var im = e.target.closest && e.target.closest('.im'); if (!im || (e.relatedTarget && im.contains(e.relatedTarget))) return;
-        im._pi = -1; snapBack(im);
       });
       on(grid, 'pointerleave', function () { cshow(false); });
       on(window, 'scroll', function () { cshow(false); }, { passive: true });
       on(dlg, 'click', function () { cshow(false); }, true);
-      on(grid, 'click', function (e) { if (e.target.closest('.ar')) { var im = e.target.closest('.im'); if (im) { scrubbed.set(im, 0); im._pi = -1; } } }, true);
       cleanups.push(function () { root.classList.remove('cur-on'); if (cu.parentNode) cu.parentNode.removeChild(cu); });
     }
 
@@ -452,7 +407,13 @@
     reveal($$('#nosotros .ey, #nosotros .w > div:nth-child(2) > p, #nosotros .pl > div, #nosotros .w > div:nth-child(2) > .btn'), '#nosotros', { s: .08, nt: 1 });
     photos([$('#nph')], '#nosotros', { still: true });
     reveal($$('.ci'), '.ci', { s: .08 });
-    reveal($$('.bd a'), '.bd', { y: 20, st: 'top 70%', nt: 1 });
+    var bdI = $('.bdm img');
+    if (bdI) {
+      g.set(bdI, { scale: 1.2 });
+      g.fromTo(bdI, { yPercent: D ? -7 : -4 }, { yPercent: D ? 7 : 4, ease: 'none', scrollTrigger: { trigger: '.bd', start: 'top bottom', end: 'bottom top', scrub: true } });
+    }
+    words($('.bd h2'), '.bd');
+    reveal($$('.bd .bde, .bd .btn'), '.bd', { y: 18, st: 'top 75%', nt: 1 });
 
     /* ---------- FAQ (foto) y marca del pie ---------- */
     photos($$('.fq'), '.faq', { s: .1, st: 'top 85%' });
@@ -465,19 +426,10 @@
     photos($$('.oi'), '.og', { s: .1, st: 'top 88%' });
 
     /* Collage "Contanos tu auto": máscara escalonada; en escritorio, cada foto con su propia velocidad (±3–5%) */
-    reveal($$('.fm > div:first-child > :not(.fp):not(.stp)'), '.fm', { s: .12, st: 'top 85%' });
+    reveal($$('.fm > div:first-child > :not(.vr):not(.stp)'), '.fm', { s: .12, st: 'top 85%' });
     reveal($$('.stp li'), '.stp', { s: .14, y: 22, st: 'top 88%' });
-    photos($$('.fp > div'), '.fp', { s: .14, st: 'top 88%', still: D, from: D ? 'inset(0% 100% 0% 0%)' : 'inset(0% 0% 100% 0%)' });
+    photos([$('#vr')], '#vr', { st: 'top 88%', still: true, from: D ? 'inset(0% 100% 0% 0%)' : 'inset(0% 0% 100% 0%)' });
     reveal($$('.fm form'), '.fm form', { st: 'top 88%' });
-
-    /* Vista previa: máscara + contenido escalonado; el mensaje se escribe solo la primera vez que entra */
-    var pvEl = $('#pv');
-    if (pvEl) {
-      if (pvEl.getBoundingClientRect().top > innerHeight * .85) $('#pvTx').textContent = '';
-      g.fromTo(pvEl, { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2 * k, ease: 'expo.inOut', clearProps: 'clipPath', scrollTrigger: { trigger: pvEl, start: 'top 88%', once: true } });
-      reveal($$('.pv > *:not(.pvp)'), pvEl, { y: 14, s: .1, d: .3, st: 'top 82%' });
-      ST.create({ trigger: pvEl, start: 'top 82%', once: true, onEnter: function () { g.delayedCall(.55, function () { if (window.poerioPv && !$('#pvTx').textContent) window.poerioPv(); }); } });
-    }
 
     /* Mapa: se descubre con máscara y el mapa se asienta; el panel de dirección entra escalonado */
     var mp = $('.mp'), mif = $('.mp iframe');
