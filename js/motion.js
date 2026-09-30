@@ -133,8 +133,9 @@
     reveal($$('.ops .oh .sub'), '.ops');
     reveal($$('.oc'), '.og', { s: .1, st: 'top 88%' });
     reveal($$('.fm > *'), '.fm', { s: .12, st: 'top 85%' });
+    g.from($$('.fp > div'), { opacity: 0, x: D ? -56 : -28, duration: 1.1 * k, stagger: .14, ease: E, clearProps: 'opacity,transform', scrollTrigger: { trigger: '.fp', start: 'top 88%', once: true } });
+    g.from($$('.fp img'), { scale: 1.1, duration: 1.6, stagger: .14, ease: 'power3.out', clearProps: 'transform', scrollTrigger: { trigger: '.fp', start: 'top 88%', once: true } });
     reveal([$('.lc')], '.loc', { st: 'top 65%' });
-    mask($('.mp'), '.loc', 'top 85%');
     words($('.faq h2'), '.faq');
     reveal($$('.faq details'), '.faq details', { y: 16, s: .06, st: 'top 90%' });
     reveal($$('.fin'), '.fin', { y: 12, st: 'top 95%' });
