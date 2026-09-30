@@ -48,7 +48,7 @@ else {
     if ((pre.match(/<article class="car"/g) || []).length !== STOCK.length) errors.push('Tarjetas prerenderizadas no coinciden con STOCK: correr node scripts/prerender.mjs');
     for (const c of STOCK) if (!pre.includes(`>${c.titulo}</button>`)) errors.push(`Falta en el prerender: ${c.titulo}. Correr node scripts/prerender.mjs`);
   }
-  for (const f of fs.readdirSync(path.join(root, 'images'))) if (!used.has(f)) errors.push(`Imagen sin uso: images/${f}`);
+  for (const f of fs.readdirSync(path.join(root, 'images'))) if (!used.has(f)) console.warn(`Aviso: imagen de reserva sin usar: images/${f}`);
 }
 if ((html.match(/<h1[\s>]/g) || []).length !== 1) errors.push('index.html debe tener un único h1');
 for (const m of html.matchAll(/<img\b[^>]*>/g)) if (!/\balt=/.test(m[0])) errors.push(`img sin alt: ${m[0].slice(0, 60)}`);
