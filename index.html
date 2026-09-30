@@ -668,6 +668,15 @@ dialog#dlg{width:100vw;height:100dvh;overflow-y:auto;overflow-x:hidden;overscrol
 .fm #canjeForm .lead{margin:-6px 0 4px;color:var(--mute);font-size:15px;line-height:1.55}
 .fm #canjeForm .btn.p{margin-top:auto}
 
+/* Pulido: tipografía, pantallas grandes y textos largos */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+a,button{-webkit-tap-highlight-color:transparent}
+h1,h2,h3{text-wrap:balance}
+p,li,figcaption{text-wrap:pretty;overflow-wrap:break-word}
+img,video,iframe{max-width:100%}
+@media(min-width:1500px){.w,.no .w{width:min(1320px,100% - 96px)}}
+@media(min-width:2000px){.w,.no .w{width:min(1440px,100% - 160px)}}
+@media(max-width:380px){.rvk{padding:24px 18px}.pdc{padding:20px 16px}}
 /* Pulido final: presentación comercial de precios/pago, táctil y foco */
 section.pp.pp.pp.pp .pdc{border:1px solid var(--stone);border-top:3px solid var(--ink);box-shadow:0 18px 40px -30px rgba(14,27,38,.45)}
 .pdt{border-style:solid;color:var(--ink);border-color:var(--ink)}
