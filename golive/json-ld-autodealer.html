@@ -1,0 +1,37 @@
+<!--
+  PREPARADO, SIN ACTIVAR. No pegar en index.html mientras el sitio sea demo (CLAUDE.md, regla 5).
+  Al salir a producción (ver golive/PRODUCCION.md):
+    1. Reemplazar DOMINIO-FINAL por el dominio real.
+    2. Pegar el bloque <script> de abajo dentro de <head> en index.html.
+    3. Comprobar que cada dato coincide con data/dealership.json y con NEGOCIO (npm test).
+  Solo lleva datos que ya están confirmados en el sitio (nombre, dirección, teléfono, redes, ubicación).
+  A propósito NO incluye: horarios (openingHoursSpecification), rango de precios, puntuación ni cantidad
+  de opiniones (aggregateRating), ni imagen (el preview.png y el logo todavía llevan frases sin confirmar).
+  Sumarlos solo cuando el dueño lo confirme por escrito y quede registrado en AFIRMACIONES-A-CONFIRMAR.md.
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoDealer",
+  "name": "Fernando Poerio Automotores",
+  "url": "https://DOMINIO-FINAL/",
+  "telephone": "+543442453550",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Alberdi 1337",
+    "addressLocality": "Concepción del Uruguay",
+    "addressRegion": "Entre Ríos",
+    "addressCountry": "AR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -32.4882114,
+    "longitude": -58.2425324
+  },
+  "hasMap": "https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z",
+  "sameAs": [
+    "https://www.instagram.com/poerioautomotores/",
+    "https://www.facebook.com/profile.php?id=100011380620292"
+  ]
+}
+</script>

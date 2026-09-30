@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  PREPARADO, SIN ACTIVAR. Mientras el sitio sea demo no se publica (CLAUDE.md, regla 5).
+  Al salir a producción (ver golive/PRODUCCION.md):
+    1. Reemplazar DOMINIO-FINAL por el dominio real, con https:// y barra final.
+    2. Copiar este archivo a la raíz del sitio como sitemap.xml.
+    3. Agregar en robots.txt la línea: Sitemap: https://DOMINIO-FINAL/sitemap.xml
+  Se sumó a lo confirmado solo la estructura; no lleva fechas ni prioridades inventadas.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://DOMINIO-FINAL/</loc></url>
+  <url><loc>https://DOMINIO-FINAL/privacidad.html</loc></url>
+</urlset>

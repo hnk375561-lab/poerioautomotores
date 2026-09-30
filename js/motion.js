@@ -486,8 +486,6 @@
     reveal($$('#nosotros .ey, #nosotros .w > div:nth-child(2) > p, #nosotros .pl > div, #nosotros .w > div:nth-child(2) > .btn'), '#nosotros', { s: .08, nt: 1 });
     photos([$('#nph')], '#nosotros', { still: true });
     reveal($$('.ci'), '.ci', { s: .08 });
-    words($('.cta-band h2'), '.cta-band');
-    reveal($$('.cta-band p, .cta-band .row'), '.cta-band', { s: .08, nt: 1 });
     reveal($$('.bd a'), '.bd', { y: 20, st: 'top 70%', nt: 1 });
 
     /* ---------- FAQ (foto) y marca del pie ---------- */
@@ -536,7 +534,7 @@
     reveal($$('footer .w > :not(.lg)'), 'footer', { y: 12, s: .07, d: .15, st: 'top 96%' });
 
     /* Botones magnéticos (solo mouse): siguen al puntero unos px y vuelven con expo.out; el press los achica */
-    if (fine) $$('.hero .btn, header .btn.p, .loc .btn, .fin .btn, .fm form .btn, .bd a, .cta-band .btn, .no .btn').forEach(function (b) {
+    if (fine) $$('.hero .btn, header .btn.p, .loc .btn, .fin .btn, .fm form .btn, .bd a, .no .btn').forEach(function (b) {
       var lift = b.classList.contains('p') ? -2 : 0, qx, qy;
       b.classList.add('mg');
       qx = g.quickTo(b, 'x', { duration: .6, ease: 'power3.out' }); qy = g.quickTo(b, 'y', { duration: .6, ease: 'power3.out' });
