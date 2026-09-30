@@ -34,7 +34,7 @@ else {
   const STOCK = vm.runInNewContext(stockSrc);
   const used = new Set();
   for (const c of STOCK) for (const f of (c.fotos || [c.foto])) { used.add(path.basename(f)); if (!fs.existsSync(path.join(root, f))) errors.push(`Falta la imagen ${f} (${c.titulo})`); }
-  for (const m of html.matchAll(/(?:src|href)="(images\/[^"]+)"/g)) { used.add(path.basename(m[1])); if (!fs.existsSync(path.join(root, m[1]))) errors.push(`Falta la imagen ${m[1]}`); }
+  for (const m of html.matchAll(/(images\/[A-Za-z0-9._-]+\.(?:webp|png|jpe?g))/g)) { used.add(path.basename(m[1])); if (!fs.existsSync(path.join(root, m[1]))) errors.push(`Falta la imagen ${m[1]}`); }
   // Variantes responsive (srcset): cada foto de unidad tiene -480 y -800
   for (const f of [...used]) {
     const m = f.match(/^((?:clio|ecosport|ka-s|kwid|punto|up)-\d+)\.webp$/);
