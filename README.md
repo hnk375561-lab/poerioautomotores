@@ -8,7 +8,8 @@ Sitio estático (HTML/CSS/JS; el movimiento usa GSAP + ScrollTrigger incluidos e
 - `index.html`: sitio completo. Datos del negocio (`NEGOCIO`) y unidades (`STOCK`) en el bloque `<script>` al final.
 - `privacidad.html`: política de privacidad preliminar, aviso sobre la información de las unidades y aviso de demo.
 - `404.html`: página de error (usa `<base href>` absoluto porque GitHub Pages la sirve desde cualquier ruta).
-- `robots.txt`, `preview.png` (imagen para compartir), `images/<unidad>-N.webp` (la primera foto es la portada).
+- `robots.txt`, `preview.png` (imagen para compartir), `images/<unidad>-N.webp` (la primera foto es la portada). Cada foto de unidad tiene dos variantes para `srcset`: `<unidad>-N-480.webp` y `<unidad>-N-800.webp` (mismo nombre, ancho 480 y 800 px); al sumar una foto hay que generar las dos.
+- `scripts/prerender.mjs` (`npm run prerender`): escribe en `index.html` el HTML de las tarjetas de unidades (entre `<!--PRE:cards-->` y `<!--/PRE:cards-->`) con la misma función que usa el navegador, para que el stock se vea sin JavaScript. Correrlo cada vez que cambie `STOCK`; `npm test` avisa si quedó desactualizado.
 - `data/dealership.json`: datos confirmados y su fuente. `golive/`: pendientes y pasos a producción.
 
 ## Comprobar

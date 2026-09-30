@@ -1,3 +1,3 @@
 { "name": "poerioautomotores-web", "private": true, "type": "module",
-  "scripts": { "validate:dealership": "node scripts/validate-dealership.mjs", "test": "node scripts/validate-dealership.mjs" },
+  "scripts": { "validate:dealership": "node scripts/validate-dealership.mjs", "test": "node scripts/validate-dealership.mjs", "prerender": "node scripts/prerender.mjs" },
   "engines": { "node": ">=20" } }

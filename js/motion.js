@@ -62,7 +62,7 @@
   ST.addEventListener('refresh', function () { if (cur) place(cur, true); edge(); });
   edge();
 
-  window.addEventListener('load', function () { ST.refresh(); });
+  window.addEventListener('load', function () { ST.refresh(); setTimeout(function () { ST.refresh(); }, 400); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ST.refresh(); });
 
   if (reduce) return;
@@ -73,6 +73,33 @@
     var st = window.Flip.getState(els); mutate();
     window.Flip.from(st, { duration: .9, ease: E, stagger: .04 });
   };
+
+  /* ---------- Rotadores de fotos (banda, "Quiénes somos", Preguntas): un solo sistema ----------
+     Fundido con asentado de escala; solo corren a la vista y con la pestaña visible. Las fotos extra se agregan tras la carga. */
+  function rotator(box, names, o) {
+    if (!box) return;
+    names.forEach(function (n) {
+      var src = 'images/' + n + '.webp', i = new Image();
+      i.src = src; if (window.SSET) { i.srcset = window.SSET(src); i.sizes = o.sizes; }
+      i.alt = ''; i.width = 1280; i.height = 960; i.loading = 'lazy';
+      box.insertBefore(i, o.before ? $(o.before, box) : null);
+    });
+    var im = $$('img', box), k = 0, tm = 0, vis = false, top = o.op == null ? 1 : o.op;
+    function nx() {
+      var a = im[k], b = im[(k + 1) % im.length]; k = (k + 1) % im.length;
+      g.set(b, { opacity: 0, scale: o.sc }); g.to(b, { opacity: top, scale: 1, duration: o.du, ease: 'power2.out' }); g.to(a, { opacity: 0, duration: o.du, ease: 'power2.out' });
+    }
+    function go() { if (!tm && vis && !document.hidden) tm = setInterval(nx, o.ms); }
+    function st() { clearInterval(tm); tm = 0; }
+    new IntersectionObserver(function (e) { vis = e[0].isIntersecting; vis ? go() : st(); }).observe(box);
+    document.addEventListener('visibilitychange', function () { document.hidden ? st() : go(); });
+  }
+  function onLoad(fn) { if (document.readyState === 'complete') fn(); else window.addEventListener('load', fn); }
+  onLoad(function () {
+    rotator($('#fqs'), ['clio-3', 'up-3', 'punto-3', 'ecosport-3', 'ka-s-2'], { sizes: '(min-width:900px) 40vw,100vw', sc: 1.06, du: 1.2, ms: 3800 });
+    rotator($('#bd'), ['clio-5', 'up-5', 'ecosport-5'], { sizes: '100vw', sc: 1.08, du: 1.6, ms: 4200, op: .75, before: 'a' });
+    rotator($('#nph'), ['punto-4', 'up-4', 'clio-4', 'kwid-2'], { sizes: '(min-width:900px) 40vw,100vw', sc: 1.06, du: 1.2, ms: 3800 });
+  });
 
   /* ---------- Anclas: viaje con expo.inOut; la rueda/toque lo interrumpe ---------- */
   if (window.ScrollToPlugin) document.addEventListener('click', function (e) {
@@ -420,37 +447,17 @@
       cleanups.push(function () { root.classList.remove('cur-on'); if (cu.parentNode) cu.parentNode.removeChild(cu); });
     }
 
-    /* ---------- COMPARADOR: filas, barras de km y equipamiento ---------- */
-    words($('.cmp h2'), '.cmp');
-    reveal($$('.cmp .head .sub, .cmp .cs'), '.cmp');
-    reveal($$('#cl li'), '#cl', { s: .07, y: 20, st: 'top 88%' });
-    g.from($$('#cl .kb i'), { scaleX: 0, duration: 1.3, stagger: .07, ease: E, clearProps: 'transform', scrollTrigger: { trigger: '#cl', start: 'top 82%', once: true } });
-    reveal([$('.eq')], '.eq', { st: 'top 88%' });
-    g.from($$('.eq .kb i'), { scaleX: 0, duration: 1.3, stagger: .07, ease: E, clearProps: 'transform', scrollTrigger: { trigger: '.eq', start: 'top 80%', once: true } });
-    var clEl = $('#cl');
-    if (clEl) clEl.addEventListener('click', function (e) {
-      var b = e.target.closest('.cr'); if (!b) return; var r = b.getBoundingClientRect(); fl = null;
-      ox = r.left + r.width / 2 - innerWidth / 2; oy = r.top + r.height / 2 - innerHeight / 2;
-    }, true);
-    /* Vista previa que sigue al puntero sobre las filas (solo mouse): otra foto de la unidad, revelada con máscara */
-    if (fine && clEl) {
-      var pw = document.createElement('div'); pw.className = 'cpv'; pw.setAttribute('aria-hidden', 'true'); pw.innerHTML = '<img alt="">'; document.body.appendChild(pw);
-      var pqx = g.quickTo(pw, 'x', { duration: .5, ease: 'power3.out' }), pqy = g.quickTo(pw, 'y', { duration: .5, ease: 'power3.out' }), pcur = null;
-      var phide = function () { if (!pcur) return; pcur = null; g.to(pw, { opacity: 0, duration: .25, overwrite: 'auto' }); };
-      on(clEl, 'pointermove', function (e) {
-        if (e.pointerType && e.pointerType !== 'mouse') return;
-        var b = e.target.closest && e.target.closest('.cr'); if (!b) { phide(); return; }
-        var x = Math.min(e.clientX + 28, innerWidth - 280), y = Math.max(8, Math.min(e.clientY - 70, innerHeight - 210));
-        if (b !== pcur) {
-          var first2 = !pcur; pcur = b; $('img', pw).src = b.getAttribute('data-src');
-          if (first2) g.set(pw, { x: x, y: y });
-          g.fromTo(pw, { clipPath: 'inset(0% 0% 100% 0%)', opacity: 1 }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .6, ease: E, overwrite: 'auto', clearProps: 'clipPath' });
-        }
-        pqx(x); pqy(y);
-      });
-      on(clEl, 'pointerleave', phide); on(clEl, 'click', phide); on(window, 'scroll', phide, { passive: true });
-      cleanups.push(function () { if (pw.parentNode) pw.parentNode.removeChild(pw); });
-    }
+    /* ---------- COMPARADOR (versus), Quiénes somos, banner y barra de filtros ---------- */
+    reveal($$('#ff, #qc'), '#ff', { s: .08 });
+    words($('#versus h2'), '#versus');
+    reveal($$('#versus .sub, #vp'), '#versus', { s: .08 });
+    words($('#nosotros h2'), '#nosotros');
+    reveal($$('#nosotros .ey, #nosotros .w > div:nth-child(2) > p, #nosotros .pl > div, #nosotros .w > div:nth-child(2) > .btn'), '#nosotros', { s: .08, nt: 1 });
+    photos([$('#nph')], '#nosotros', { still: true });
+    reveal($$('.ci'), '.ci', { s: .08 });
+    words($('.cta-band h2'), '.cta-band');
+    reveal($$('.cta-band p, .cta-band .row'), '.cta-band', { s: .08, nt: 1 });
+    reveal($$('.bd a'), '.bd', { y: 20, st: 'top 70%', nt: 1 });
 
     /* ---------- FAQ (foto) y marca del pie ---------- */
     photos($$('.fq'), '.faq', { s: .1, st: 'top 85%' });
@@ -498,7 +505,7 @@
     reveal($$('footer .w > :not(.lg)'), 'footer', { y: 12, s: .07, d: .15, st: 'top 96%' });
 
     /* Botones magnéticos (solo mouse): siguen al puntero unos px y vuelven con expo.out; el press los achica */
-    if (fine) $$('.hero .btn, header .btn.p, .loc .btn, .fin .btn, .fm form .btn').forEach(function (b) {
+    if (fine) $$('.hero .btn, header .btn.p, .loc .btn, .fin .btn, .fm form .btn, .bd a, .cta-band .btn, .no .btn').forEach(function (b) {
       var lift = b.classList.contains('p') ? -2 : 0, qx, qy;
       b.classList.add('mg');
       qx = g.quickTo(b, 'x', { duration: .6, ease: 'power3.out' }); qy = g.quickTo(b, 'y', { duration: .6, ease: 'power3.out' });

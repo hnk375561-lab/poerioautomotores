@@ -35,6 +35,19 @@ else {
   const used = new Set();
   for (const c of STOCK) for (const f of (c.fotos || [c.foto])) { used.add(path.basename(f)); if (!fs.existsSync(path.join(root, f))) errors.push(`Falta la imagen ${f} (${c.titulo})`); }
   for (const m of html.matchAll(/(?:src|href)="(images\/[^"]+)"/g)) { used.add(path.basename(m[1])); if (!fs.existsSync(path.join(root, m[1]))) errors.push(`Falta la imagen ${m[1]}`); }
+  // Variantes responsive (srcset): cada foto de unidad tiene -480 y -800
+  for (const f of [...used]) {
+    const m = f.match(/^((?:clio|ecosport|ka-s|kwid|punto|up)-\d+)\.webp$/);
+    if (!m) continue;
+    for (const t of [480, 800]) { const vname = `${m[1]}-${t}.webp`; used.add(vname); if (!fs.existsSync(path.join(root, 'images', vname))) errors.push(`Falta la variante images/${vname}`); }
+  }
+  // Tarjetas prerenderizadas (node scripts/prerender.mjs): deben coincidir con STOCK
+  const pre = (html.match(/<!--PRE:cards-->([\s\S]*?)<!--\/PRE:cards-->/) || [])[1];
+  if (pre === undefined) errors.push('index.html: faltan los marcadores <!--PRE:cards-->');
+  else {
+    if ((pre.match(/<article class="car"/g) || []).length !== STOCK.length) errors.push('Tarjetas prerenderizadas no coinciden con STOCK: correr node scripts/prerender.mjs');
+    for (const c of STOCK) if (!pre.includes(`>${c.titulo}</button>`)) errors.push(`Falta en el prerender: ${c.titulo}. Correr node scripts/prerender.mjs`);
+  }
   for (const f of fs.readdirSync(path.join(root, 'images'))) if (!used.has(f)) errors.push(`Imagen sin uso: images/${f}`);
 }
 if ((html.match(/<h1[\s>]/g) || []).length !== 1) errors.push('index.html debe tener un único h1');
