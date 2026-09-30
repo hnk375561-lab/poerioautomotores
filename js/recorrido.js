@@ -58,6 +58,7 @@
     mk();
     if (mq.addEventListener) mq.addEventListener('change', mk); else mq.addListener(mk);
     new IntersectionObserver(function (es) { vis = es[0].isIntersecting; sync(); }).observe($('#local'));
+    d.addEventListener('visibilitychange', function () { if (d.hidden && v) v.pause(); else sync(); });
     set(0);
   }
 
@@ -70,5 +71,6 @@
       rv = es[0].isIntersecting;
       if (rv && !rm && !m2.v) play(r); else r.pause();
     }, { threshold: .4 }).observe(r);
+    d.addEventListener('visibilitychange', function () { if (d.hidden) r.pause(); else if (rv && !rm && !m2.v) play(r); });
   }
 })();
