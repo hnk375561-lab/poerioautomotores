@@ -28,7 +28,7 @@
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <script>(function(r){if(!matchMedia("(prefers-reduced-motion:reduce)").matches){r.classList.add("m");setTimeout(function(){r.classList.add("mi")},4500)}})(document.documentElement)</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#0E1B26;--paper:#F3F5F6;--stone:#DCE2E6;--mute:#5B6b76;--cy:#1B8CAB;--cyd:#146F88;--h:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;--b:"Instrument Sans",system-ui,sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
@@ -218,15 +218,40 @@ html.m{scroll-behavior:auto}
 .hcap{position:absolute;left:20px;right:20px;bottom:16px;z-index:4;display:grid;gap:4px}
 .hero .hn{margin:0;max-width:none;font:700 clamp(24px,2.7vw,36px)/1.05 var(--h);letter-spacing:-.02em;color:#fff}
 .hero .hm{margin:0;max-width:none;font-size:16px;font-weight:500;color:#e8eef2}
-.hr{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;padding:12px 20px 0;background:var(--ink)}
-.hb{all:unset;box-sizing:border-box;cursor:pointer;min-height:44px;display:grid;align-content:start;gap:8px;font:600 13px var(--b);color:#aebbc3;transition:color .3s}.hb:hover,.hb[aria-current=true]{color:#fff}.hb:focus-visible{outline:3px solid var(--cy);outline-offset:2px}
-.hb span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hb .hp{display:block;position:relative;height:3px;overflow:hidden;background:rgba(255,255,255,.24)}.hb .hp i{position:absolute;inset:0;background:var(--cy);transform:scaleX(0);transform-origin:0 50%}
-.hb[aria-current=true] .hp i{transform:scaleX(1)}.hg .hb[aria-current=true] .hp i{transform:scaleX(0)}
 .ha{display:flex;gap:10px;align-items:center;padding:10px 20px 16px;background:var(--ink)}.ha .btn{flex:1;padding:0 12px;font-size:15px}
-.hpp{display:none;flex:none;place-items:center;width:48px;height:48px;border:1.5px solid rgba(255,255,255,.55);border-radius:3px;background:none;color:#fff;cursor:pointer;transition:background .25s,border-color .25s}.hpp:hover{background:rgba(255,255,255,.14);border-color:#fff}.hg .hpp{display:grid}
-.hpp svg{width:18px;height:18px;fill:currentColor}.hpp .pl2{display:none}.hpp[aria-pressed=true] .pa{display:none}.hpp[aria-pressed=true] .pl2{display:block}
-@media(max-width:440px){.hr{gap:4px;padding:12px 16px 0}.hb{font-size:12px}}@media(max-width:380px){.ha .hf{display:none}}
+@media(max-width:380px){.ha .hf{display:none}}
+/* ==== v7: hero de lujo con identidad Fernando Poerio (logo, azul profundo, celeste del logo, serif) ==== */
+:root{--deep:#06111a;--lux:#5cb8d0;--luxl:#8fd3e4;--serif:"Instrument Serif","Cormorant Garamond",Georgia,serif}
+header{background:var(--deep);border-bottom:1px solid rgba(92,184,208,.28);color:#fff}
+header nav a{color:#e3edf1}header nav a:hover{color:var(--luxl)}header .ic{color:#e3edf1}header .ic:hover{color:var(--luxl)}
+header .mark{color:#fff}header .mark small{color:#8fa9b6}
+.hero{background:var(--deep)}
+.hero .tx{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:44px 24px 52px;min-height:0;background:radial-gradient(90% 70% at 0% 0%,#0e2e40 0%,rgba(14,46,64,0) 62%),linear-gradient(180deg,#08151f,var(--deep))}
+.hero .tx::before{display:none}
+.hlogo{width:clamp(170px,52vw,230px);height:auto;margin:0 0 clamp(20px,4vh,40px)}
+.hero .tx h1{font:400 clamp(44px,11.5vw,80px)/1 var(--serif);letter-spacing:-.012em;max-width:14ch;color:#fff}
+.hero .tx>p{position:relative;margin:26px 0 30px;padding-top:22px;max-width:36ch;font-size:18px;line-height:1.6;color:#b9cad3}
+.hero .tx>p::before{content:"";position:absolute;left:0;top:0;width:64px;height:1px;background:var(--lux)}
+.hero .btn{border-radius:0;min-height:54px;padding:0 24px;letter-spacing:.02em;white-space:nowrap}
+.hero .btn.p{background:var(--lux);border-color:var(--lux);color:var(--deep)}.hero .btn.p:hover{background:#fff;border-color:#fff;color:var(--deep)}
+.hero .btn:not(.p){border-color:rgba(255,255,255,.5)}
+.hero .lk{color:var(--luxl);margin-top:18px}
+.hero figure{background:var(--deep)}
+.hv::after{height:70%;background:linear-gradient(0deg,rgba(6,17,26,.96) 6%,rgba(6,17,26,.55) 45%,rgba(6,17,26,0))}
+.hcap{left:24px;right:24px;bottom:22px;gap:10px}
+.hcap::before{content:"";width:48px;height:1px;background:var(--lux)}
+.hero .hn{font:400 clamp(30px,3.6vw,52px)/1 var(--serif);letter-spacing:-.005em}
+.hero .hm{font-size:15px;letter-spacing:.04em;color:#a9bfca}
+.ha{padding:18px 24px 24px;gap:12px;background:var(--deep);border-top:1px solid rgba(92,184,208,.3)}
+.ha .btn{min-height:52px;font-size:15px;padding:0 10px;white-space:normal;text-align:center;line-height:1.15}
+@media(min-width:900px){
+.hero{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+.hero .tx{padding:40px 48px 40px max(24px,calc((100vw - 1180px)/2));justify-content:center}
+.hero .tx h1{font-size:clamp(48px,4.6vw,76px);max-width:12ch}
+.hero{height:min(calc(100svh - 89px),760px);min-height:600px}
+.hero figure{border-left:1px solid rgba(92,184,208,.3)}
+.hv::before{width:22%}
+}
 /* ==== v6b: catálogo y fotos: segmentos, cursor, lupa, vuelo a la ficha ==== */
 .sg{position:absolute;left:12px;right:12px;bottom:10px;z-index:1;display:flex;gap:4px;pointer-events:none}.sg i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.45);box-shadow:0 0 0 1px rgba(14,27,38,.12);transition:background .3s}.sg i.on{background:#fff}
 .car .cnt{left:auto;right:12px;top:12px;bottom:auto}.gw .sg{left:0;right:0;bottom:0;gap:0}.gw .sg i{border-radius:0;height:4px;box-shadow:none;background:rgba(255,255,255,.25)}.gw .sg i.on{background:var(--cy)}.gw .cnt{bottom:14px}
@@ -236,9 +261,6 @@ html.m{scroll-behavior:auto}
 .fly{position:fixed;z-index:5;overflow:hidden;pointer-events:none;transform-origin:0 0}.fly img{display:block;width:100%;height:100%;object-fit:cover}
 @media(hover:hover){.m .gal img{cursor:zoom-in}.m .gal.zo{overflow:hidden}.m .gal.zo img{cursor:zoom-out}}
 /* ==== v7: franja de datos, comparador, FAQ en dos columnas, marca en el pie ==== */
-.mq{background:var(--cyd);color:#fff;overflow:hidden;border-block:1px solid rgba(255,255,255,.18)}
-.mqt{display:flex;width:max-content}.mqg{display:flex;flex:none}
-.mqi{display:inline-flex;align-items:center;gap:28px;padding:18px 0 18px 28px;font:700 clamp(20px,2.6vw,30px)/1 var(--h);letter-spacing:-.01em;white-space:nowrap}.mqi::after{content:"";width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.55)}
 .cmp{background:var(--paper);border-top:1px solid var(--stone)}
 .cs{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
 .sc{min-height:44px;padding:0 14px;border:0;border-bottom:2px solid transparent;background:none;font:500 15px var(--b);color:var(--mute);cursor:pointer;transition:color .25s,border-color .25s}.sc[aria-pressed=true]{color:var(--ink);border-color:var(--cy)}
@@ -269,11 +291,10 @@ footer{position:relative;overflow:hidden}.wm{font:700 clamp(96px,27vw,400px)/.78
 <nav aria-label="Principal"><a href="#unidades">Unidades</a><a href="#operaciones">Comprar, vender, permutar</a><a href="#contacto">Dónde estamos</a><a href="#preguntas">Preguntas</a></nav>
 <div class="hc"><a class="ic tel" data-tel href="tel:+543442453550" aria-label="Llamar al 03442 45-3550"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25c1.1.37 2.3.57 3.6.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.6a1 1 0 01-.25 1z"/></svg><span>03442 45-3550</span></a><a class="ic pin" data-map target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" aria-label="Ubicación en Google Maps"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1114.5 9 2.5 2.5 0 0112 11.5z"/></svg></a><a class="ic ig" data-ig target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/poerioautomotores/" aria-label="Instagram"><svg class="o" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6"/></svg></a><a class="ic fb" data-fb target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/profile.php?id=100011380620292" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 00-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8.5a.5.5 0 01.5-.5z"/></svg></a></div><a class="btn p" href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por las unidades disponibles.">WhatsApp</a></div></header>
 <main id="top">
-<div class="hero"><div class="tx"><img class="bgv" src="images/kwid-1.webp" alt="" width="1200" height="900"><h1>Autos usados en Concepción del Uruguay</h1><p>Venta, permuta y consignación. Escribinos y te confirmamos si la unidad sigue disponible.</p>
+<div class="hero"><div class="tx"><img class="hlogo" src="images/logo-claro.webp" alt="Fernando Poerio Automotores, 39 años de confianza" width="722" height="287"><h1>Autos usados en Concepción del Uruguay</h1><p>Venta, permuta y consignación. Escribinos y te confirmamos si la unidad sigue disponible.</p>
 <div class="row"><a class="btn p" href="#unidades">Ver unidades</a><a class="btn" href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por las unidades disponibles.">Consultar por WhatsApp</a></div>
 <a class="lk" href="#operaciones">¿Querés vender o permutar tu auto? →</a></div>
-<figure class="hs" id="hs" aria-roledescription="carousel" aria-label="Unidades en stock"><div class="hv"><div class="hzs" id="hzs"><div class="hz on"><img src="images/kwid-1.webp" alt="Renault Kwid Outsider Full 1.0 2019" fetchpriority="high" width="1440" height="1085"></div></div><div class="hcap"><p class="hn" id="hn">Renault Kwid Outsider Full 1.0</p><p class="hm" id="hm">2019 · 84.000 km · Nafta</p></div></div><div class="hr" id="hr"></div><div class="ha"><button type="button" class="btn hf" id="hf">Ver ficha</button><a class="btn p hw" id="hw" href="https://wa.me/5493442453550">Consultar esta unidad</a><button type="button" class="hpp" id="hpp" aria-pressed="false" aria-label="Pausar rotación de unidades"><svg class="pa" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="pl2" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg></button></div></figure></div>
-<div class="mq" id="mq" aria-hidden="true"><div class="mqt" id="mqt"></div></div>
+<figure class="hs" id="hs" aria-roledescription="carousel" aria-label="Unidades en stock"><div class="hv"><div class="hzs" id="hzs"><div class="hz on"><img src="images/kwid-1.webp" alt="Renault Kwid Outsider Full 1.0 2019" fetchpriority="high" width="1440" height="1085"></div></div><div class="hcap"><p class="hn" id="hn">Renault Kwid Outsider Full 1.0</p><p class="hm" id="hm">2019 · 84.000 km · Nafta</p></div></div><div class="ha"><button type="button" class="btn hf" id="hf">Ver ficha</button><a class="btn p hw" id="hw" href="https://wa.me/5493442453550">Consultar esta unidad</a></div></figure></div>
 
 <section id="unidades"><div class="w">
 <div class="head"><div><h2>Unidades</h2><p class="sub">Tocá una unidad para ver todas las fotos. Precio y disponibilidad: consultanos por WhatsApp.</p></div><div class="tabs" role="group" aria-label="Filtrar unidades" id="chips"></div></div>
@@ -399,25 +420,21 @@ D.addEventListener("keydown",function(e){if(e.target.classList&&e.target.classLi
 D.addEventListener("click",function(e){if(e.target===D||e.target.closest("[data-x]"))return D.close();var a=e.target.closest(".ar");if(a)return step(a);var b=e.target.closest("[data-n]");if(b)open_(+b.getAttribute("data-n"),b.getAttribute("data-k"))});
 D.addEventListener("scroll",count,true);
 
-/* Hero: las 6 unidades con el mismo tratamiento. index.html arma y cambia el estado; motion.js (GSAP) anima el cambio con el evento poerio:hero */
-var HZ=$("hzs"),HR=$("hr"),HN=$("hn"),HM=$("hm"),HW=$("hw"),hi=0,hL=STOCK.length,hsl,hbt;
-HZ.innerHTML=STOCK.map(function(c,i){return '<div class="hz'+(i?'':' on')+'" role="group" aria-roledescription="slide" aria-label="'+(i+1)+' de '+hL+'"><img src="'+esc(ph(c)[0])+'" alt="'+esc(c.titulo+" "+c.anio)+'" width="1440" height="1085"'+(i?' decoding="async"':' fetchpriority="high"')+'></div>'}).join("");
-HR.innerHTML=STOCK.map(function(c,i){return '<button type="button" class="hb" data-i="'+i+'" aria-label="Ver '+esc(c.titulo)+'"'+(i?'':' aria-current="true"')+'><i class="hp"><i></i></i><span>'+esc(c.corto||c.titulo)+'</span></button>'}).join("");
-hsl=HZ.querySelectorAll(".hz");hbt=HR.querySelectorAll(".hb");
-function heroGo(n,dir){n=(n+hL)%hL;if(n===hi)return;var f=hi,c=STOCK[n];hi=n;dir=dir||(n>f?1:-1);
-hsl[f].classList.remove("on");hsl[n].classList.add("on");hbt[f].removeAttribute("aria-current");hbt[n].setAttribute("aria-current","true");
-HN.textContent=c.titulo;HM.textContent=c.anio+" · "+(c.km||"Km: consultar")+" · "+(c.combustible||"—");HW.href=wa(ask(c));HW.setAttribute("aria-label","Consultar por WhatsApp: "+c.titulo);
+/* Hero: fotos intercaladas. Una foto de cada unidad por vuelta (Kwid, Ka S, Up, Clio, Punto, EcoSport, y otra vez desde la 2.ª foto). motion.js anima el cambio con el evento poerio:hero */
+var HZ=$("hzs"),HN=$("hn"),HM=$("hm"),HW=$("hw"),hi=0,SL=[],hsl;
+(function(){var mx=Math.max.apply(null,STOCK.map(function(c){return ph(c).length}));for(var p=0;p<mx;p++)STOCK.forEach(function(c,ci){var f=ph(c)[p];if(f)SL.push({c:ci,src:f})})})();
+var hL=SL.length;
+HZ.innerHTML=SL.map(function(x,i){var c=STOCK[x.c];return '<div class="hz'+(i?'':' on')+'" role="group" aria-roledescription="slide" aria-label="'+(i+1)+' de '+hL+': '+esc(c.titulo)+'"><img src="'+esc(x.src)+'" alt="'+esc(c.titulo+" "+c.anio)+'" width="1440" height="1085"'+(i?' decoding="async"':' fetchpriority="high"')+'></div>'}).join("");
+hsl=HZ.querySelectorAll(".hz");
+function heroGo(n,dir){n=(n+hL)%hL;if(n===hi)return;var f=hi,c=STOCK[SL[n].c],pc=STOCK[SL[f].c];hi=n;dir=dir||(n>f?1:-1);
+hsl[f].classList.remove("on");hsl[n].classList.add("on");
+if(c!==pc){HN.textContent=c.titulo;HM.textContent=c.anio+" · "+(c.km||"Km: consultar")+" · "+(c.combustible||"—");HW.href=wa(ask(c));HW.setAttribute("aria-label","Consultar por WhatsApp: "+c.titulo)}
 document.dispatchEvent(new CustomEvent("poerio:hero",{detail:{from:f,to:n,dir:dir}}))}
-HR.addEventListener("click",function(e){var b=e.target.closest(".hb");if(b)heroGo(+b.getAttribute("data-i"))});
-HR.addEventListener("keydown",function(e){var d=e.key==="ArrowRight"?1:e.key==="ArrowLeft"?-1:0;if(!d)return;e.preventDefault();heroGo(hi+d,d);hbt[hi].focus()});
-$("hf").addEventListener("click",function(){open_(hi)});HW.setAttribute("aria-label","Consultar por WhatsApp: "+STOCK[0].titulo);HW.href=wa(ask(STOCK[0]));
+$("hf").addEventListener("click",function(){open_(SL[hi].c)});HW.setAttribute("aria-label","Consultar por WhatsApp: "+STOCK[0].titulo);HW.href=wa(ask(STOCK[0]));
 window.poerioHero={go:heroGo,next:function(){heroGo(hi+1,1)},get i(){return hi},n:hL};
 
 /* Franja de datos, comparador y equipamiento: todo sale de NEGOCIO y STOCK (nada inventado) */
 var NU=STOCK.length,perm=STOCK.filter(function(c){return /permuta/i.test(c.nota||"")}).length,kmv=function(c){return +String(c.km||"").replace(/\D/g,"")||0},KM=Math.max.apply(null,STOCK.map(kmv))||1;
-var MQ=["39 años de confianza","Usados, permutas y consignaciones",N.direccion+", "+N.ciudad.split(",")[0],NU+(NU===1?" unidad publicada":" unidades publicadas"),"Tel. "+N.telefono],mg="";
-for(var q=0;q<2;q++)mg+='<div class="mqg">'+MQ.concat(MQ).map(function(t){return '<span class="mqi">'+esc(t)+'</span>'}).join("")+'</div>';
-$("mqt").innerHTML=mg;
 var OVT={c:NU+(NU===1?" unidad publicada":" unidades publicadas"),v:"Pedimos marca, modelo y año",p:perm+" de "+NU+" publicaciones dicen «Permuta»",s:"Te contamos cómo funciona por WhatsApp"};
 document.querySelectorAll("[data-ov]").forEach(function(e){e.textContent=OVT[e.getAttribute("data-ov")]});
 $("fqc").textContent=N.direccion+" · "+N.telefono;

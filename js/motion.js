@@ -168,7 +168,7 @@
     /* ---------- HERO: una sola entrada coordinada ----------
        0.0 foto (máscara desde la costura con el texto) · 0.25 título por palabra · 0.4 bajada · 0.5 CTAs (usables en <1 s) · 0.62 enlace · 0.9 epígrafe */
     if (!root.classList.contains('mi')) {
-      var fg = $('.hero figure'), fi = $('#hzs'), bg = $('.hero .bgv'), ui = $$('.hero .hcap, .hero .hr, .hero .ha'),
+      var fg = $('.hero figure'), fi = $('#hzs'), bg = $('.hero .bgv') || document.createElement('i'), ui = $$('.hero .hcap, .hero .ha'),
         txt = [$('.hero h1'), $('.hero .tx p'), $('.hero .row'), $('.hero .lk')];
       var HW = split(txt[0]);
       var tl = g.timeline({ defaults: { ease: E }, onComplete: function () {
@@ -211,13 +211,12 @@
     /* ---------- HERO · rotación de unidades ----------
        Todas las unidades entran igual: máscara lateral (dirección según el sentido) + foto que se asienta con contraparalaje,
        nombre por palabra y un progreso por unidad en el rail. Se pausa con hover/foco, fuera de pantalla, en otra pestaña o con el botón. */
-    var hs = $('#hs'), H = window.poerioHero, sl = $$('.hz', hs || document), fills = $$('.hb .hp i', hs || document);
-    var hn = $('#hn'), hm = $('#hm'), ppb = $('#hpp'), prog = null, playing = true, held = 0, inView = true, started = false;
+    var hs = $('#hs'), H = window.poerioHero, sl = $$('.hz', hs || document);
+    var hn = $('#hn'), hm = $('#hm'), prog = null, playing = true, held = 0, inView = true, started = false;
     function sync() { if (!prog) return; (playing && !held && inView && !document.hidden) ? prog.play() : prog.pause(); }
     function tick(i) {
       if (prog) prog.kill();
-      g.set(fills, { scaleX: 0 });
-      prog = g.fromTo(fills[i], { scaleX: 0 }, { scaleX: 1, duration: 6, ease: 'none', onComplete: function () { H.next(); } });
+      prog = g.delayedCall(2, function () { H.next(); });
       sync();
     }
     function startSlider() { if (started || !H || !hs) return; started = true; tick(H.i); }
@@ -229,14 +228,14 @@
           sl.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'clipPath,zIndex' }); } });
           g.killTweensOf([A, B, iA, iB]);
           B.classList.add('lv'); g.set(B, { zIndex: 1, clipPath: 'inset(0% 0% 0% 0%)' }); g.set(A, { zIndex: 2 });
-          g.fromTo(A, { clipPath: dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2 * k, ease: 'expo.inOut', clearProps: 'clipPath,zIndex',
+          g.fromTo(A, { clipPath: dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .8 * k, ease: 'expo.inOut', clearProps: 'clipPath,zIndex',
             onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,clipPath' }); g.set(iB, { clearProps: 'transform' }); } });
-          g.fromTo(iA, { scale: 1.16, xPercent: 8 * dir }, { scale: 1, xPercent: 0, duration: 1.8, ease: 'power3.out', clearProps: 'transform' });
-          g.to(iB, { xPercent: -6 * dir, duration: 1.2 * k, ease: 'expo.inOut' });
+          g.fromTo(iA, { scale: 1.16, xPercent: 8 * dir }, { scale: 1, xPercent: 0, duration: 1.3, ease: 'power3.out', clearProps: 'transform' });
+          g.to(iB, { xPercent: -6 * dir, duration: .8 * k, ease: 'expo.inOut' });
           var W = split(hn, true);
-          g.fromTo(W, { yPercent: 115 }, { yPercent: 0, duration: 1 * k, stagger: .05, delay: .25, ease: E, clearProps: 'transform' });
-          g.fromTo(hm, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .7, delay: .4, ease: E, clearProps: 'opacity,transform' });
-          if (bg) g.to(bg, { opacity: 0, duration: .3, onComplete: function () { bg.src = $('img', A).src; g.to(bg, { opacity: 1, duration: 1, ease: 'power2.out', clearProps: 'opacity' }); } });
+          g.fromTo(W, { yPercent: 115 }, { yPercent: 0, duration: .6 * k, stagger: .04, delay: .1, ease: E, clearProps: 'transform' });
+          g.fromTo(hm, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .5, delay: .2, ease: E, clearProps: 'opacity,transform' });
+          if (bg && bg.parentNode) g.to(bg, { opacity: 0, duration: .3, onComplete: function () { bg.src = $('img', A).src; g.to(bg, { opacity: 1, duration: 1, ease: 'power2.out', clearProps: 'opacity' }); } });
           if (started) tick(d.to);
         });
       };
@@ -247,10 +246,6 @@
       on(hs, 'focusout', function () { held &= ~2; sync(); });
       on(document, 'visibilitychange', sync);
       ST.create({ trigger: hs, start: 'top bottom', end: 'bottom top', onToggle: function (s) { inView = s.isActive; sync(); } });
-      if (ppb) on(ppb, 'click', function () {
-        playing = !playing; ppb.setAttribute('aria-pressed', String(!playing));
-        ppb.setAttribute('aria-label', playing ? 'Pausar rotación de unidades' : 'Reanudar rotación de unidades'); sync();
-      });
       /* deslizar en táctil: cambia de unidad en el sentido del gesto */
       var hv = $('.hv', hs), x0 = 0, y0 = 0;
       on(hv, 'pointerdown', function (e) { x0 = e.clientX; y0 = e.clientY; });
@@ -443,20 +438,6 @@
       on(dlg, 'click', function () { cshow(false); }, true);
       on(grid, 'click', function (e) { if (e.target.closest('.ar')) { var im = e.target.closest('.im'); if (im) { scrubbed.set(im, 0); im._pi = -1; } } }, true);
       cleanups.push(function () { root.classList.remove('cur-on'); if (cu.parentNode) cu.parentNode.removeChild(cu); });
-    }
-
-    /* ---------- FRANJA DE DATOS: bucle continuo; el scroll la acelera y, al invertir el sentido, ella también ---------- */
-    var mqt = $('#mqt');
-    if (mqt) {
-      var mtw = g.to(mqt, { xPercent: -50, duration: D ? 50 : 36, ease: 'none', repeat: -1 });
-      mtw.totalTime(mtw.duration() * 40);   /* margen para que el reverso no choque con el inicio */
-      ST.create({ start: 0, end: 'max', onUpdate: function (s) {
-        var dir = s.direction || 1;
-        g.to(mtw, { timeScale: dir * (1 + Math.min(7, Math.abs(s.getVelocity()) / 260)), duration: .25, overwrite: true });
-        g.to(mtw, { timeScale: dir, duration: 1.2, delay: .25, ease: 'power2.out' });
-      } });
-      ST.create({ trigger: '#mq', start: 'top bottom', end: 'bottom top', onToggle: function (s) { s.isActive ? mtw.resume() : mtw.pause(); } });
-      cleanups.push(function () { mtw.kill(); g.set(mqt, { clearProps: 'transform' }); });
     }
 
     /* ---------- COMPARADOR: filas, barras de km y equipamiento ---------- */
