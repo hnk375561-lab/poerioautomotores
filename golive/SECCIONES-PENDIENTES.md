@@ -15,3 +15,7 @@ Estas secciones existen en `index.html` como estructura, marcadas con la etiquet
 ## Antes de salir a producción
 - Ninguna sección puede quedar con la etiqueta «Pendiente de confirmación» ni con tarjetas vacías: cada una se completa o se elimina.
 - Al eliminar una, revisar que no quede ningún enlace interno a su `id`.
+
+## Contenido general que hay que mantener al día
+- **«Antes de comprar o permutar un usado»** (`#guia`): información general sobre qué revisar y la documentación habitual de la transferencia. Está fechada en septiembre de 2026. Los requisitos y costos del Registro del Automotor cambian: revisarla cada tanto y, antes de salir a producción, que la revise un profesional (gestor o escribano). No es una promesa ni una condición del negocio.
+- **Formularios «Coordiná tu visita» y «Contanos qué auto buscás»**: solo arman un mensaje de WhatsApp que envía la persona. No guardan datos y no confirman disponibilidad ni precios. Si se agrega algún campo nuevo, actualizar `privacidad.html`.
