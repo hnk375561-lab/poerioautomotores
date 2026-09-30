@@ -106,6 +106,7 @@
   }
   function onLoad(fn) { if (document.readyState === 'complete') fn(); else window.addEventListener('load', fn); }
   onLoad(function () {
+    rotator($('#fqs2'), ['ka-s-1', 'clio-2', 'punto-2', 'ecosport-2', 'up-4'], { sizes: '(min-width:900px) 40vw,100vw', sc: 1.06, du: 1.2, ms: 4600 });
     rotator($('#fqs'), ['clio-3', 'up-3', 'punto-3', 'ecosport-3', 'ka-s-2'], { sizes: '(min-width:900px) 40vw,100vw', sc: 1.06, du: 1.2, ms: 3800 });
     rotator($('#bd'), ['clio-5', 'up-5', 'ecosport-5'], { sizes: '100vw', sc: 1.08, du: 1.6, ms: 4200, op: .75, before: 'a' });
   });
@@ -206,7 +207,6 @@
     var fg = $('.hero figure'), fi = $('#hzs'), bg = $('.hero .bgv') || document.createElement('i'),
       txt = [$('.hero h1'), $('.hero .tx p')];
     if (D) {
-      g.delayedCall(.9, function () { pulse('header .btn.p'); });
       /* Paralaje con el puntero: foto y fondo se mueven en sentidos opuestos (solo mouse) */
       if (fine) {
         var hero = $('.hero'), P = { ease: 'power3.out', duration: .9 };
@@ -533,7 +533,7 @@
         bar.classList.add('bh');
         var bt = ST.create({ trigger: '.hero .row', start: 'bottom 22%', end: 'max', onToggle: function (s) {
           bar.classList.toggle('bh', !s.isActive);
-          if (s.isActive && !pulsed) { pulsed = true; g.delayedCall(.45, function () { pulse('.bar .btn.p'); }); }
+          if (s.isActive && !pulsed) { pulsed = true;  }
         } });
         if (bt.isActive) bar.classList.remove('bh');
         cleanups.push(function () { bar.classList.remove('bh'); });
