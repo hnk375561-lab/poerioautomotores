@@ -99,3 +99,20 @@ Precios: todos "Consultar". El validador falla si aparece otro valor sin confirm
 - Reemplaza la guía genérica. Ordena las unidades de `STOCK` por kilómetros, año, equipamiento, única mano o GNC, y calcula promedios; todo sale de los datos ya cargados. No hay datos, servicios ni imágenes nuevas.
 - El FAQ alterna 6 fotos ya existentes con fundido. Se quitó la marca de agua "Poerio" del pie.
 - Rendimiento: se quitaron el filtro CSS del mapa, el blur del panel y la animación de escala/máscara sobre el iframe.
+
+## Buscador, comparador, "Quiénes somos" y banner (2026-09-30)
+- Búsqueda por marca/modelo, comparador de hasta 3 unidades y chips de marcas: salen de `STOCK`. Sin datos nuevos.
+- "Quiénes somos" solo dice lo respaldado: atiende en Alberdi 1337, usados, permutas ("Vendo–Permuto") y consignaciones (cartel del local). No repite "39 años" ni promete condiciones.
+- Banner de venta/permuta sin promesas de precio ("mejor precio del mercado" no se usa: sin respaldo).
+- No se agregaron precios, estrellas, "oportunidades del mes", marcas oficiales ni campos de patente/chasis: no hay datos ni respaldo.
+
+## Filtros, ficha de información, pie y franja de fotos (2026-09-30)
+- Filtros por modelo, año, km y orden (Recientes, año, km): salen de `STOCK`. No hay filtro por precio: no hay precios confirmados.
+- Ficha de información en "Quiénes somos" y pie con navegación y contacto: repiten dirección, WhatsApp y teléfono de `NEGOCIO`. En "Atención" no hay horario (sigue sin confirmar): dice que se coordina la visita.
+- Franja fotográfica "Encontrá tu próximo vehículo" con fotos ya cargadas. Se restauró el menú completo.
+
+## Pulido de movimiento GSAP (2026-09-30)
+- Solo movimiento, sin datos nuevos: filtros y orden del stock con Flip, títulos de las secciones nuevas por palabra, revelados escalonados, máscara en la foto de "Quiénes somos", botones magnéticos (solo mouse) y `ScrollTrigger.refresh()` tras cargar las imágenes. Todo respeta `prefers-reduced-motion`.
+
+## Pulido final de movimiento (2026-09-30)
+- El panel del buscador "¿Qué estás buscando?" anima el cambio de contenido al elegir otra prioridad. Los títulos animados por palabra ya no cortan las tildes. Se verificó sin desborde horizontal en móvil (390 px) y con movimiento reducido. Sin datos nuevos.

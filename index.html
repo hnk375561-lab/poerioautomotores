@@ -401,13 +401,55 @@ details p{font-size:16px;line-height:1.65;padding-right:44px}
 .fd .al{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:auto;color:var(--mute);font-size:14.5px}.fd .al button{border:0;background:none;padding:6px 0;font:600 14.5px var(--b);color:var(--cyd);text-decoration:underline;cursor:pointer;min-height:36px}
 .fd .nm{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-top:1.5px solid var(--ink);margin-top:48px}
 .fd .nm div{padding:22px 16px 0 0}.fd .nm b{display:block;font:700 clamp(34px,5vw,54px)/1 var(--h);letter-spacing:-.03em}.fd .nm span{color:var(--mute);font-size:15px}
+
+.qb{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:0 0 20px}
+.qb label{flex:1 1 280px;position:relative}.qb input{width:100%;min-height:52px;padding:0 18px;border:1.5px solid var(--ink);background:#fff;font:500 16px var(--b);border-radius:3px;color:var(--ink)}
+.qb .bc{display:flex;flex-wrap:wrap;gap:8px}.qb .bc button{min-height:44px;padding:0 16px;border:1.5px solid var(--stone);background:#fff;font:600 15px var(--b);border-radius:999px;cursor:pointer;color:var(--ink)}.qb .bc button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+#qe{display:none;padding:28px;background:#fff;border:1px dashed var(--stone);text-align:center;color:var(--mute)}
+.vs{padding:clamp(56px,9vw,104px) 0;background:var(--ink);color:#fff}.vs .sub{color:#aebbc3}
+.vs .vp{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:28px 0}
+.vs select{width:100%;min-height:52px;padding:0 14px;background:#14283a;color:#fff;border:1px solid rgba(255,255,255,.3);font:600 16px var(--b);border-radius:3px}
+.vs .tw{overflow-x:auto;border:1px solid rgba(255,255,255,.16)}.vs table{width:100%;min-width:640px;border-collapse:collapse}
+.vs th,.vs td{padding:14px 16px;text-align:left;border-bottom:1px solid rgba(255,255,255,.12);font-size:16px}.vs th[scope=row]{color:#aebbc3;font-weight:500;width:26%}
+.vs td img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}.vs td.b{color:#8fd3e4;font-weight:700}.vs td.y{color:#8fd3e4}.vs td.n{color:#5b6b76}
+.no{padding:clamp(56px,9vw,104px) 0;background:var(--paper)}.no .w{display:grid;gap:40px}
+@media(min-width:860px){.no .w{grid-template-columns:1fr 1fr;gap:72px;align-items:center}}
+.no .ph{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--stone)}.no .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}.no .ph img:first-child{opacity:1}
+.no .ey{display:inline-block;border:1px solid var(--ink);border-radius:999px;padding:6px 16px;font:600 13px var(--b);letter-spacing:.14em;text-transform:uppercase}
+.no h2{font:700 clamp(30px,4.4vw,52px)/1.05 var(--h);letter-spacing:-.02em;margin:18px 0}.no p{color:var(--mute)}
+.no .pl{display:grid;gap:0;margin:26px 0;border-top:1.5px solid var(--ink)}.no .pl div{padding:16px 0;border-bottom:1px solid var(--stone)}.no .pl b{font:700 19px var(--h);display:block}
+.cb{position:relative;overflow:hidden;background:var(--ink);color:#fff;text-align:center;padding:clamp(64px,10vw,120px) 0}
+.cb>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.28}.cb .w{position:relative}
+.cb h2{font:700 clamp(30px,5vw,58px)/1.05 var(--h);letter-spacing:-.02em;margin:0 0 14px}.cb p{max-width:560px;margin:0 auto 26px;color:#dbe6ec}.cb .row{justify-content:center;display:flex;flex-wrap:wrap;gap:12px}.cb .btn:not(.p){border-color:#fff;color:#fff}
+
+.car[hidden]{display:none!important}
+@media(min-width:900px){header nav{flex:1 1 auto;min-width:0;justify-content:center;gap:0;overflow-x:auto;scrollbar-width:none}header nav::-webkit-scrollbar{display:none}header nav a{white-space:nowrap;flex:none;padding-inline:9px;font-size:15px}}
+@media(min-width:900px) and (max-width:1500px){header .tel span{display:none}}
+.ff{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;align-items:end;margin:0 0 14px;padding:18px;background:#fff;border:1px solid var(--stone);border-radius:4px}
+.ff label{display:flex;flex-direction:column;gap:6px;font:600 13px var(--b);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.ff input,.ff select{min-height:46px;padding:0 12px;border:1px solid var(--stone);background:var(--paper);font:500 16px var(--b);color:var(--ink);border-radius:3px;width:100%}
+.ff button{min-height:46px;border:1.5px solid var(--ink);background:transparent;font:600 15px var(--b);cursor:pointer;border-radius:3px}
+#qc{margin:0 0 18px;color:var(--mute);font-size:15px}
+.bd{position:relative;height:clamp(300px,42vw,520px);overflow:hidden;background:#06111a;display:grid;place-items:center}
+.bd img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}.bd img:first-child{opacity:.75}.bd:after{content:"";position:absolute;inset:0;background:rgba(6,17,26,.35)}
+.bd a{position:relative;z-index:1;padding:18px 30px;background:rgba(6,17,26,.9);color:#fff;font:600 16px var(--b);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(255,255,255,.35)}.bd a:hover{background:#fff;color:var(--ink)}
+.ci{grid-column:1/-1;background:#fff;border:1px solid var(--stone);border-radius:6px;overflow:hidden;box-shadow:0 20px 40px -30px rgba(14,27,38,.5)}
+.ci .ih{background:var(--ink);padding:22px 28px}.ci .ih img{height:56px;width:auto}
+.ci .ib{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;padding:28px}
+.ci small{display:block;font:600 12.5px var(--b);letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}.ci b{font:600 18px/1.35 var(--b)}.ci a{color:var(--cyd)}
+.fx{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;margin:36px 0;padding:32px 0;border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18)}
+.fx h3{font:700 15px var(--b);letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;color:#fff}.fx a{display:block;padding:6px 0;color:#c9d6dd;text-decoration:none;font-size:16px;min-height:36px}.fx a:hover{color:#fff}
+@media(min-width:900px){header>.w{width:min(1640px,100% - 32px)}header nav a{padding-inline:8px;font-size:14.5px}}
+@media(min-width:900px) and (max-width:1250px){header .ic.ig,header .ic.pin{display:none}header .mark small{display:none}}
+@media(min-width:900px) and (max-width:1500px){header nav a{padding-inline:6px;font-size:14px}header .mark small{display:none}header>.w{gap:10px}header .hc{gap:6px}}
+.fs2 img,.no .ph img,.bd img{will-change:opacity,transform;backface-visibility:hidden}.wi{will-change:transform}
 </style>
 </head>
 <body>
 <a class="skip" href="#unidades">Saltar al contenido</a>
 <div class="demo">Demo: propuesta de diseño independiente, no oficial. Datos a confirmar con el negocio. <a href="privacidad.html#demo">Más información</a></div>
 <header><div class="w"><a class="mark" href="#top" aria-label="Fernando Poerio Automotores, inicio"><img src="images/icon-32.png" alt="" width="32" height="32"><span>Fernando Poerio<small>AUTOMOTORES</small></span></a>
-<nav aria-label="Principal"><a href="#unidades">Unidades</a><a href="#operaciones">Comprar, vender, permutar</a><a href="#elegir">Tu auto</a><a href="#contacto">Dónde estamos</a><a href="#preguntas">Preguntas</a></nav>
+<nav aria-label="Principal"><a href="#unidades">Unidades</a><a href="#operaciones">Comprar, vender, permutar</a><a href="#elegir">Tu auto</a><a href="#versus">Comparar</a><a href="#nosotros">Nosotros</a><a href="#contacto">Dónde estamos</a><a href="#preguntas">Preguntas</a></nav>
 <div class="hc"><a class="ic tel" data-tel href="tel:+543442453550" aria-label="Llamar al 03442 45-3550"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25c1.1.37 2.3.57 3.6.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.6a1 1 0 01-.25 1z"/></svg><span>03442 45-3550</span></a><a class="ic pin" data-map target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" aria-label="Ubicación en Google Maps"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1114.5 9 2.5 2.5 0 0112 11.5z"/></svg></a><a class="ic ig" data-ig target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/poerioautomotores/" aria-label="Instagram"><svg class="o" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6"/></svg></a><a class="ic fb" data-fb target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/profile.php?id=100011380620292" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 00-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8.5a.5.5 0 01.5-.5z"/></svg></a></div><a class="btn p" href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por las unidades disponibles.">WhatsApp</a></div></header>
 <main id="top">
 <div class="hero"><div class="tx"><img class="hlogo" src="images/logo-claro.webp" alt="Fernando Poerio Automotores, 39 años de confianza" width="722" height="287"><h1>Autos usados en Concepción del Uruguay</h1><p>Venta, permuta y consignación. Escribinos y te confirmamos si la unidad sigue disponible.</p>
@@ -417,6 +459,8 @@ details p{font-size:16px;line-height:1.65;padding-right:44px}
 
 <section id="unidades"><div class="w">
 <div class="head"><div><h2>Unidades</h2><p class="sub">Tocá una unidad para ver todas las fotos. Precio y disponibilidad: consultanos por WhatsApp.</p></div><div class="tabs" role="group" aria-label="Filtrar unidades" id="chips"></div></div>
+<div class="qb"><label><span class="sr">Buscar por marca o modelo</span><input id="q" type="search" placeholder="Escribí la marca o el modelo" autocomplete="off"></label><div class="bc" id="bc" role="group" aria-label="Marcas"></div></div><div class="ff" id="ff"><label>Modelo<select id="fm"><option value="">Todos</option></select></label><label>Año desde<input id="fy1" inputmode="numeric" maxlength="4" placeholder="2011"></label><label>Año hasta<input id="fy2" inputmode="numeric" maxlength="4" placeholder="2019"></label><label>Km desde<input id="fk1" inputmode="numeric" maxlength="7" placeholder="0"></label><label>Km hasta<input id="fk2" inputmode="numeric" maxlength="7" placeholder="200000"></label><label>Ordenar<select id="fo"><option value="">Recientes</option><option value="nuevo">Año: más nuevo</option><option value="viejo">Año: más antiguo</option><option value="km">Menos kilómetros</option></select></label><button type="button" id="fc">Limpiar</button></div><p id="qc" role="status"></p>
+<p id="qe">No hay unidades con esa búsqueda. Escribinos y te contamos qué ingresa.</p>
 <p class="sr" id="stockStatus" role="status"></p>
 <div class="grid" id="stockGrid"></div></div></section>
 
@@ -426,6 +470,8 @@ details p{font-size:16px;line-height:1.65;padding-right:44px}
 <div class="cw"><div><ol class="cl" id="cl"></ol><p class="meta cn">La barra muestra los kilómetros de cada unidad en relación con la que más tiene.</p></div>
 <aside class="eq" aria-labelledby="eqT"><h3 id="eqT">Lo que más se repite</h3><ul id="eqL"></ul><p class="meta">Según el texto de cada publicación. Confirmá el equipamiento de la unidad que te interese.</p></aside></div>
 </div></section>
+
+<section class="bd" id="bd" aria-label="Fotos de nuestras unidades"><img src="images/punto-5.webp" alt="" width="1280" height="960"><a href="#unidades">Encontrá tu próximo vehículo</a></section>
 
 <section id="operaciones" class="ops"><div class="w">
 <div class="oh"><h2>Comprá, vendé o permutá</h2><p class="sub">Elegí qué querés hacer y escribinos por WhatsApp. Cada consulta llega con el mensaje ya armado.</p></div>
@@ -452,6 +498,14 @@ details p{font-size:16px;line-height:1.65;padding-right:44px}
 <div class="nm" id="nm"></div>
 </div></section>
 
+<section id="versus" class="vs"><div class="w"><div class="head"><div><h2>¿Estás entre varias opciones?</h2><p class="sub">Elegí hasta tres unidades y compará año, kilómetros y equipamiento lado a lado.</p></div></div><div class="vp" id="vp"></div><div class="tw" id="vt"></div></div></section>
+
+<section id="nosotros" class="no"><div class="w"><div class="ph" id="nph"><img src="images/ecosport-4.webp" alt="Ford EcoSport XLS 2011" width="1280" height="960"></div><div><span class="ey">Quiénes somos</span><h2>Usados, permutas y consignaciones en Concepción del Uruguay</h2><p>Fernando Poerio Automotores atiende en Alberdi 1337. Vas a encontrar autos usados con sus fotos y datos, y podés escribirnos para vender, permutar o dejar tu auto en consignación.</p><div class="pl"><div><b>Usados</b><span>Unidades con ficha completa: año, kilómetros y equipamiento.</span></div><div><b>Permutas</b><span>Contanos tu auto y lo evaluamos como parte de pago.</span></div><div><b>Consignaciones</b><span>Escribinos y te contamos cómo funciona.</span></div></div><a class="btn p" href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por las unidades disponibles.">Hablar con la agencia</a></div>
+<div class="ci"><div class="ih"><img src="images/logo-claro.webp" alt="Fernando Poerio Automotores" width="722" height="287" loading="lazy"></div><div class="ib"><div><small>Dirección</small><b id="icA"></b></div><div><small>Atención</small><b>Escribinos o llamanos antes de venir y coordinamos la visita.</b></div><div><small>WhatsApp directo</small><b><a id="icW" href="https://wa.me/5493442453550"></a></b></div><div><small>Teléfono</small><b><a id="icT" href="tel:+543442453550"></a></b></div></div></div>
+</div></section>
+
+<section class="cb"><img src="images/punto-4.webp" alt="" loading="lazy" width="1280" height="960"><div class="w"><h2>¿Querés vender o permutar tu auto?</h2><p>Contanos marca, modelo y año y te respondemos por WhatsApp.</p><div class="row"><a class="btn p" href="#operaciones">Completar el formulario</a><a class="btn" href="https://wa.me/5493442453550" data-wa="Hola! Quiero vender mi auto.">Escribir ahora</a></div></div></section>
+
 <section id="contacto" class="loc"><div class="mp"><iframe title="Mapa: Fernando Poerio Automotores, Alberdi 1337, Concepción del Uruguay" src="https://maps.google.com/maps?q=-32.4882114,-58.2425324&amp;z=17&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" width="600" height="450"></iframe><span class="mph">Tocá el mapa para moverlo</span><a class="mpl" data-map href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" target="_blank" rel="noopener noreferrer">Abrir en Google Maps ↗</a></div><div class="w">
 <div class="lc"><h2 class="eb">Dónde estamos</h2><address id="addr"></address><p class="meta" id="hoursNote">Escribinos o llamanos antes de venir y coordinamos la visita.</p>
 <div class="row"><a class="btn p" href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" data-map target="_blank" rel="noopener noreferrer">Cómo llegar</a><a class="btn" id="phoneLink" href="tel:+543442453550">Llamar al 03442 45-3550</a><a class="btn" href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por las unidades disponibles.">WhatsApp</a></div>
@@ -471,6 +525,7 @@ details p{font-size:16px;line-height:1.65;padding-right:44px}
 </main>
 <footer><div class="w"><div class="lg"><img src="images/logo-claro.webp" alt="Fernando Poerio Automotores, 39 años de confianza" width="722" height="287" loading="lazy"></div><p class="fn">Fernando Poerio Automotores</p><p id="fAddr"></p>
 <div class="soc"><a id="fPhone" href="tel:+543442453550">Tel. 03442 45-3550</a><a href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por las unidades disponibles.">WhatsApp</a><a data-ig href="https://www.instagram.com/poerioautomotores/" target="_blank" rel="noopener noreferrer">Instagram</a><a data-fb href="https://www.facebook.com/profile.php?id=100011380620292" target="_blank" rel="noopener noreferrer">Facebook</a><a href="privacidad.html">Privacidad y avisos</a></div>
+<div class="fx"><div><h3>Navegación</h3><a href="#top">Inicio</a><a href="#unidades">Unidades</a><a href="#versus">Comparar</a><a href="#operaciones">Comprar, vender, permutar</a><a href="#nosotros">Quiénes somos</a><a href="#preguntas">Preguntas</a><a href="privacidad.html">Privacidad y avisos</a></div><div><h3>Contacto y ubicación</h3><a href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por las unidades disponibles.">WhatsApp 03442 45-3550</a><a href="tel:+543442453550">Tel. 03442 45-3550</a><a data-map href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" target="_blank" rel="noopener noreferrer">Alberdi 1337, Concepción del Uruguay</a><a data-ig href="https://www.instagram.com/poerioautomotores/" target="_blank" rel="noopener noreferrer">Instagram</a></div></div>
 <p>Sitio demo hecho como propuesta por Santiago Solis. No es el sitio oficial de Fernando Poerio Automotores y todavía no está aprobado por el negocio. © 2026 Santiago Solis: diseño y código de esta propuesta, todos los derechos reservados; su uso o publicación requiere acuerdo previo.</p><p>Las fotos y datos de las unidades provienen de las publicaciones públicas de la agencia. Precios, disponibilidad y horarios se publican cuando el negocio los confirma.</p></div></footer>
 <div class="bar"><a class="btn p" href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por las unidades disponibles.">WhatsApp</a><a class="btn" id="barCall" href="tel:+543442453550">Llamar</a></div>
 <dialog id="dlg" aria-label="Ficha de la unidad"></dialog>
@@ -632,7 +687,7 @@ function show(k,i){
  if(g&&!RM&&old){im.style.opacity=0;fi.appendChild(im);g.to(im,{opacity:1,duration:.7,ease:"power2.out"});g.to(old,{opacity:0,duration:.7,onComplete:function(){old.remove()}})}else{fi.innerHTML="";fi.appendChild(im)}
  var others=order.filter(function(x,j){return j!==ci}).slice(0,2).map(function(x){return'<button type="button" data-j="'+order.indexOf(x)+'">'+esc(x.corto||x.titulo)+" "+x.anio+"</button>"}).join("");
  $("fb").innerHTML='<h3>'+esc(c.titulo)+'</h3><div class="sp"><span>'+c.anio+'</span><span>'+esc(c.km)+'</span><span>'+esc(c.combustible)+'</span></div><ul><li>'+esc(P[k].w(c))+'</li><li>'+esc((c.nota||"").split(".").slice(0,2).join(".").trim())+'.</li></ul><div class="row"><a class="btn p" href="'+wa(c)+'" target="_blank" rel="noopener noreferrer">Consultar esta unidad</a><button type="button" class="btn" data-f="1">Ver ficha</button></div><div class="al">También:'+others+'</div>';
- $("fdSt").textContent=P[k].l+": "+c.titulo;
+ $("fdSt").textContent=P[k].l+": "+c.titulo;if(g&&!RM&&window.__fd)g.fromTo("#fb > *",{y:14,opacity:0},{y:0,opacity:1,duration:.6,ease:"expo.out",stagger:.06,clearProps:"transform,opacity"});window.__fd=1;
  document.querySelectorAll("#fk button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.k===k)});
 }
 if(!S.length||!$("fk"))return;
@@ -647,7 +702,7 @@ $("nm").innerHTML=N.map(function(n){return'<div><b data-n="'+n[0]+'" data-y="'+n
 show("km");
 function late(){g=window.gsap;if(!g)return;
 if(window.ScrollTrigger&&!RM){
- g.from("#elegir .head,#fk,#fr2",{y:24,opacity:0,duration:.9,ease:"expo.out",stagger:.1,clearProps:"all",scrollTrigger:{trigger:"#elegir",start:"top 75%",once:true}});
+ g.from("#elegir .sub,#fk,#fr2",{y:24,opacity:0,duration:.9,ease:"expo.out",stagger:.1,clearProps:"all",scrollTrigger:{trigger:"#elegir",start:"top 75%",once:true}});
  document.querySelectorAll("#nm b").forEach(function(b){var t=+b.dataset.n,o={v:0},y=b.dataset.y;ScrollTrigger.create({trigger:"#nm",start:"top 90%",once:true,onEnter:function(){g.to(o,{v:t,duration:1.6,ease:"expo.out",onUpdate:function(){b.textContent=y?Math.round(o.v):Math.round(o.v).toLocaleString("es-AR")}})}})})}
 /* FAQ: fundido entre fotos, sin scroll */
 var fs=$("fqs");
@@ -660,6 +715,64 @@ if(fs&&g&&!RM){
  document.addEventListener("visibilitychange",function(){document.hidden?st():go()})}
 }
 if(document.readyState==="complete")late();else window.addEventListener("load",late);
+})();
+</script>
+<script>
+(function(){
+var S=window.STOCK||[],g,RM=matchMedia("(prefers-reduced-motion:reduce)").matches;
+function $(i){return document.getElementById(i)}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function nz(s){return String(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()}
+function km(c){return parseInt(String(c.km).replace(/\D/g,""),10)||0}
+if(!S.length)return;
+/* Buscador y marcas */
+var q=$("q"),bc=$("bc"),br={};S.forEach(function(c){var b=c.titulo.split(" ")[0];br[b]=(br[b]||0)+1});
+bc.innerHTML='<button type="button" data-b="" aria-pressed="true">Todas</button>'+Object.keys(br).map(function(b){return'<button type="button" data-b="'+esc(b)+'" aria-pressed="false">'+esc(b)+" ("+br[b]+")</button>"}).join("");
+var ob=new MutationObserver(function(){ap()});
+function num(s){return parseInt(String(s).replace(/\D/g,""),10)||0}
+var mo={};S.forEach(function(c){mo[c.corto||c.titulo]=1});$("fm").innerHTML+=Object.keys(mo).map(function(m){return'<option value="'+esc(m)+'">'+esc(m)+"</option>"}).join("");
+function ap(an){var F=window.Flip,G=window.gsap,fl=an===true&&F&&G&&!matchMedia("(prefers-reduced-motion:reduce)").matches,st=fl?F.getState(document.querySelectorAll("#stockGrid .car:not([hidden])")):0;var t=nz(q.value.trim()),m=$("fm").value,y1=num($("fy1").value),y2=num($("fy2").value)||9999,k1=num($("fk1").value),k2=num($("fk2").value)||1e12,o=$("fo").value,gr=$("stockGrid"),cs=[].slice.call(gr.querySelectorAll(".car")),n=0;
+ cs.forEach(function(a){var c=S[+a.dataset.i],ok=!c||(nz(c.titulo+" "+c.anio+" "+c.combustible).indexOf(t)>-1&&(!m||(c.corto||c.titulo)===m)&&c.anio>=y1&&c.anio<=y2&&km(c)>=k1&&km(c)<=k2);a.hidden=!ok;if(ok)n++});
+ var sr=cs.slice().sort(function(a,b){var A=S[+a.dataset.i]||{},B=S[+b.dataset.i]||{};return o==="km"?km(A)-km(B):o==="nuevo"?B.anio-A.anio:o==="viejo"?A.anio-B.anio:+a.dataset.i-+b.dataset.i});
+ ob.disconnect();sr.forEach(function(a){gr.appendChild(a)});ob.observe(gr,{childList:true});
+ if(st)F.from(st,{duration:.7,ease:"expo.out",scale:false,onEnter:function(e){return G.fromTo(e,{opacity:0,y:18},{opacity:1,y:0,duration:.6,ease:"expo.out",clearProps:"transform,opacity"})}});$("qe").style.display=n?"none":"block";$("qc").textContent="Mostrando "+n+" de "+S.length+" unidades"}
+["fm","fy1","fy2","fk1","fk2","fo"].forEach(function(i){$(i).addEventListener("input",function(){ap(true)});$(i).addEventListener("change",function(){ap(true)})});
+$("fc").addEventListener("click",function(){["fm","fy1","fy2","fk1","fk2","fo"].forEach(function(i){$(i).value=""});q.value="";q.dispatchEvent(new Event("input"))});
+q.addEventListener("input",function(){bc.querySelectorAll("button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.b===q.value.trim())});ap()});
+bc.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;q.value=b.dataset.b;q.dispatchEvent(new Event("input"))});
+ob.observe($("stockGrid"),{childList:true});ap();
+/* Comparador de hasta 3 */
+var EQ=[["aire","Aire acondicionado"],["cierre","Cierre centralizado"],["levantavidrios","Levantavidrios"],["espejos","Espejos eléctricos"],["direcci","Dirección"],["airbag","Airbag"],["abs","ABS"],["llantas","Llantas de aleación"],["antinieblas","Antinieblas"]];
+var vp=$("vp"),sl=[];
+vp.innerHTML=[0,1,2].map(function(i){return'<label><span class="sr">Unidad '+(i+1)+'</span><select data-s="'+i+'"><option value="-1">Elegir unidad</option>'+S.map(function(c,j){return'<option value="'+j+'"'+(i===j?" selected":"")+">"+esc(c.titulo+" "+c.anio)+"</option>"}).join("")+"</select></label>"}).join("");
+function vr(){var u=[].map.call(vp.querySelectorAll("select"),function(s){return S[+s.value]}),a=u.filter(Boolean);
+ if(!a.length){$("vt").innerHTML='<p style="padding:24px;margin:0">Elegí al menos una unidad para compararla.</p>';return}
+ var mk=Math.min.apply(null,a.map(km)),ma=Math.max.apply(null,a.map(function(c){return c.anio}));
+ function row(l,f){return'<tr><th scope="row">'+l+"</th>"+u.map(function(c){return c?f(c):"<td></td>"}).join("")+"</tr>"}
+ function yn(ok){return'<td class="'+(ok?"y":"n")+'">'+(ok?"✓ Incluye":"—")+"</td>"}
+ $("vt").innerHTML="<table><thead><tr><td></td>"+u.map(function(c){return c?"<th scope=\"col\">"+esc(c.titulo)+"</th>":"<th></th>"}).join("")+"</tr></thead><tbody>"+row("Foto",function(c){return'<td><img src="'+esc((c.fotos||[c.foto])[0])+'" alt="'+esc(c.titulo)+'" loading="lazy"></td>'})+row("Año",function(c){return"<td"+(a.length>1&&c.anio===ma?' class="b"':"")+">"+c.anio+"</td>"})+row("Kilómetros",function(c){return"<td"+(a.length>1&&km(c)===mk?' class="b"':"")+">"+esc(c.km)+"</td>"})+row("Combustible",function(c){return"<td>"+esc(c.combustible)+"</td>"})+row("Única mano",function(c){return yn(/única mano/i.test(c.nota||""))})+EQ.map(function(e){return row(e[1],function(c){return yn((c.nota||"").toLowerCase().indexOf(e[0])>-1)})}).join("")+"</tbody></table>";
+ if(g&&!RM)g.from("#vt tbody tr",{opacity:0,y:10,duration:.5,stagger:.03,ease:"expo.out",clearProps:"all"})}
+vp.addEventListener("change",vr);
+/* Nosotros: fotos en fundido */
+$("icA").textContent=NEGOCIO.direccion+" ("+NEGOCIO.referencia+"), "+NEGOCIO.ciudad;$("icW").textContent="+54 9 "+NEGOCIO.telefono.replace("03442 ","3442 ");$("icT").textContent=NEGOCIO.telefono;
+function late(){g=window.gsap;vr();(function(){var b=$("bd"),ns=["clio-5","up-5","ecosport-5"];ns.forEach(function(n){var i=new Image();i.src="images/"+n+".webp";i.alt="";i.width=1280;i.height=960;i.loading="lazy";b.insertBefore(i,b.querySelector("a"))});var im=b.querySelectorAll("img"),k=0,tm=0,vis=false;function nx(){var a=im[k],c=im[(k+1)%im.length];k=(k+1)%im.length;g.set(c,{opacity:0,scale:1.08});g.to(c,{opacity:.75,scale:1,duration:1.6,ease:"power2.out"});g.to(a,{opacity:0,duration:1.6})}function go(){if(!tm&&vis&&!document.hidden&&!RM)tm=setInterval(nx,4200)}function st(){clearInterval(tm);tm=0}new IntersectionObserver(function(e){vis=e[0].isIntersecting;vis?go():st()}).observe(b);document.addEventListener("visibilitychange",function(){document.hidden?st():go()})})();if(!g||RM)return;
+ var ph=$("nph");["punto-4","up-4","clio-4","kwid-2"].forEach(function(n){var i=new Image();i.src="images/"+n+".webp";i.alt="";i.width=1280;i.height=960;i.loading="lazy";ph.appendChild(i)});
+ var im=ph.querySelectorAll("img"),k=0,tm=0,vis=false;
+ function nx(){var a=im[k],b=im[(k+1)%im.length];k=(k+1)%im.length;g.set(b,{opacity:0,scale:1.06});g.to(b,{opacity:1,scale:1,duration:1.2,ease:"power2.out"});g.to(a,{opacity:0,duration:1.2})}
+ function go(){if(!tm&&vis&&!document.hidden)tm=setInterval(nx,3800)}function st(){clearInterval(tm);tm=0}
+ new IntersectionObserver(function(e){vis=e[0].isIntersecting;vis?go():st()}).observe(ph);document.addEventListener("visibilitychange",function(){document.hidden?st():go()});
+
+ if(window.ScrollTrigger){
+  function wd(el){if(!el||el.dataset.w)return;var t=el.textContent.trim();el.dataset.w=1;el.setAttribute("aria-label",t);el.innerHTML=t.split(/\s+/).map(function(w){return'<span aria-hidden="true" style="display:inline-block;overflow:hidden;vertical-align:top;padding:.28em 0 .16em;margin:-.28em 0 -.16em"><span class="wi" style="display:inline-block">'+w+"</span></span>"}).join(" ");
+   g.fromTo(el.querySelectorAll(".wi"),{yPercent:110},{yPercent:0,duration:1,ease:"expo.out",stagger:.06,scrollTrigger:{trigger:el,start:"top 88%",once:true}})}
+  ["#elegir h2","#versus h2","#nosotros h2",".cb h2"].forEach(function(s){wd(document.querySelector(s))});
+  [["#versus .sub,#vp","#versus"],["#nosotros .ey,#nosotros .w > div:last-child > p,#nosotros .pl > div,#nosotros .w > div:last-child > .btn","#nosotros"],[".cb p,.cb .row",".cb"],[".ci",".ci"],["#ff,#qc,.qb","#unidades .qb"],["#nm div","#nm"]].forEach(function(r){var e=document.querySelectorAll(r[0]);if(e.length)g.from(e,{y:24,opacity:0,duration:.9,ease:"expo.out",stagger:.08,clearProps:"transform,opacity",scrollTrigger:{trigger:r[1],start:"top 85%",once:true}})});
+  var pi=document.querySelector("#nph");if(pi)g.fromTo(pi,{clipPath:"inset(0% 0% 100% 0%)"},{clipPath:"inset(0% 0% 0% 0%)",duration:1.3,ease:"expo.inOut",clearProps:"clipPath",scrollTrigger:{trigger:pi,start:"top 85%",once:true}});
+  var bd=document.querySelector(".bd a");if(bd)g.from(bd,{y:20,opacity:0,duration:.9,ease:"expo.out",clearProps:"transform,opacity",scrollTrigger:{trigger:".bd",start:"top 70%",once:true}});
+  if(matchMedia("(hover:hover)").matches)document.querySelectorAll(".bd a,.cb .btn,.ci a,.no .btn").forEach(function(b){var x=g.quickTo(b,"x",{duration:.6,ease:"power3.out"}),y=g.quickTo(b,"y",{duration:.6,ease:"power3.out"});b.addEventListener("pointermove",function(e){var r=b.getBoundingClientRect();x((e.clientX-r.left-r.width/2)*.2);y((e.clientY-r.top-r.height/2)*.28)});b.addEventListener("pointerleave",function(){x(0);y(0)})});
+  window.addEventListener("load",function(){setTimeout(function(){ScrollTrigger.refresh()},400)})}
+}
+vr();if(document.readyState==="complete")late();else window.addEventListener("load",late);
 })();
 </script>
 </body>
