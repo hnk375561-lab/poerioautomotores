@@ -135,8 +135,8 @@
       g.from(t, { opacity: 0, y: o.y == null ? dy : o.y, duration: .9 * k, stagger: o.s || .08, delay: o.d || 0, ease: E, clearProps: 'opacity,transform' + (o.nt ? ',transition' : ''),
         scrollTrigger: { trigger: trig, start: o.st || 'top 85%', once: true } });
     }
-    function split(el) {
-      if (!el || el._s) return []; el._s = 1;
+    function split(el, force) {
+      if (!el || (el._s && !force)) return []; el._s = 1;
       var w = el.textContent.trim().split(/\s+/); el.setAttribute('aria-label', w.join(' '));
       el.innerHTML = w.map(function (x) { return '<span class="wl" aria-hidden="true"><span>' + x + '</span></span>'; }).join(' ');
       return $$('.wl > span', el);
@@ -161,13 +161,14 @@
     /* ---------- HERO: una sola entrada coordinada ----------
        0.0 foto (máscara desde la costura con el texto) · 0.25 título por palabra · 0.4 bajada · 0.5 CTAs (usables en <1 s) · 0.62 enlace · 0.9 epígrafe */
     if (!root.classList.contains('mi')) {
-      var fg = $('.hero figure'), fi = $('.hero figure img'), bg = $('.hero .bgv'),
-        txt = [$('.hero h1'), $('.hero .tx p'), $('.hero .row'), $('.hero .lk')], cap = $('.hero .vcap');
+      var fg = $('.hero figure'), fi = $('#hzs'), bg = $('.hero .bgv'), ui = $$('.hero .hcap, .hero .hr, .hero .ha'),
+        txt = [$('.hero h1'), $('.hero .tx p'), $('.hero .row'), $('.hero .lk')];
       var HW = split(txt[0]);
       var tl = g.timeline({ defaults: { ease: E }, onComplete: function () {
         root.classList.add('mi');
         g.set(HW, { clearProps: 'transform' });
-        g.set([fg, fi, bg, cap].concat(txt), { clearProps: 'opacity,transform,clipPath' });
+        g.set([fg, fi, bg].concat(ui, txt), { clearProps: 'opacity,transform,clipPath' });
+        ctx.add(startSlider);
         ctx.add(function () {
           if (D) {
             /* Salida del hero: profundidad muy moderada (texto 28px, foto 2%) */
@@ -195,8 +196,60 @@
         .fromTo(txt[1], { opacity: 0, y: dy }, { opacity: 1, y: 0, duration: .8 * k }, .4)
         .fromTo(txt[2], { opacity: 0, y: dy }, { opacity: 1, y: 0, duration: .7 * k }, .5)
         .fromTo(txt[3], { opacity: 0, y: dy / 2 }, { opacity: 1, y: 0, duration: .6 * k }, .62)
-        .fromTo(cap, { opacity: 0 }, { opacity: 1, duration: .8 }, .9);
+        .fromTo(ui[0], { opacity: 0 }, { opacity: 1, duration: .8 }, .9)
+        .fromTo(ui.slice(1), { opacity: 0, y: dy / 2 }, { opacity: 1, y: 0, duration: .7 * k, stagger: .08 }, 1);
     }
+
+
+    /* ---------- HERO · rotación de unidades ----------
+       Todas las unidades entran igual: máscara lateral (dirección según el sentido) + foto que se asienta con contraparalaje,
+       nombre por palabra y un progreso por unidad en el rail. Se pausa con hover/foco, fuera de pantalla, en otra pestaña o con el botón. */
+    var hs = $('#hs'), H = window.poerioHero, sl = $$('.hz', hs || document), fills = $$('.hb .hp i', hs || document);
+    var hn = $('#hn'), hm = $('#hm'), hd = $('.hero .hd'), ppb = $('#hpp'), prog = null, playing = true, held = 0, inView = true, started = false;
+    function sync() { if (!prog) return; (playing && !held && inView && !document.hidden) ? prog.play() : prog.pause(); }
+    function tick(i) {
+      if (prog) prog.kill();
+      g.set(fills, { scaleX: 0 });
+      prog = g.fromTo(fills[i], { scaleX: 0 }, { scaleX: 1, duration: 6, ease: 'none', onComplete: function () { H.next(); } });
+      sync();
+    }
+    function startSlider() { if (started || !H || !hs) return; started = true; tick(H.i); }
+    if (H && hs && sl.length > 1) {
+      root.classList.add('hg');
+      var onHero = function (e) {
+        ctx.add(function () {
+          var d = e.detail, A = sl[d.to], B = sl[d.from], iA = $('img', A), iB = $('img', B), dir = d.dir;
+          sl.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'clipPath,zIndex' }); } });
+          g.killTweensOf([A, B, iA, iB]);
+          B.classList.add('lv'); g.set(B, { zIndex: 1, clipPath: 'inset(0% 0% 0% 0%)' }); g.set(A, { zIndex: 2 });
+          g.fromTo(A, { clipPath: dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2 * k, ease: 'expo.inOut', clearProps: 'clipPath,zIndex',
+            onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,clipPath' }); g.set(iB, { clearProps: 'transform' }); } });
+          g.fromTo(iA, { scale: 1.16, xPercent: 8 * dir }, { scale: 1, xPercent: 0, duration: 1.8, ease: 'power3.out', clearProps: 'transform' });
+          g.to(iB, { xPercent: -6 * dir, duration: 1.2 * k, ease: 'expo.inOut' });
+          var W = split(hn, true);
+          g.fromTo(W, { yPercent: 115 }, { yPercent: 0, duration: 1 * k, stagger: .05, delay: .25, ease: E, clearProps: 'transform' });
+          g.fromTo([hm, hd], { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .7, stagger: .08, delay: .4, ease: E, clearProps: 'opacity,transform' });
+          if (bg) g.to(bg, { opacity: 0, duration: .3, onComplete: function () { bg.src = $('img', A).src; g.to(bg, { opacity: 1, duration: 1, ease: 'power2.out', clearProps: 'opacity' }); } });
+          if (started) tick(d.to);
+        });
+      };
+      document.addEventListener('poerio:hero', onHero);
+      cleanups.push(function () { document.removeEventListener('poerio:hero', onHero); if (prog) prog.kill(); prog = null; started = false; root.classList.remove('hg'); });
+      if (fine) { on(hs, 'pointerenter', function () { held |= 1; sync(); }); on(hs, 'pointerleave', function () { held &= ~1; sync(); }); }
+      on(hs, 'focusin', function (e) { if (e.target.matches && e.target.matches(':focus-visible')) { held |= 2; sync(); } });
+      on(hs, 'focusout', function () { held &= ~2; sync(); });
+      on(document, 'visibilitychange', sync);
+      ST.create({ trigger: hs, start: 'top bottom', end: 'bottom top', onToggle: function (s) { inView = s.isActive; sync(); } });
+      if (ppb) on(ppb, 'click', function () {
+        playing = !playing; ppb.setAttribute('aria-pressed', String(!playing));
+        ppb.setAttribute('aria-label', playing ? 'Pausar rotación de unidades' : 'Reanudar rotación de unidades'); sync();
+      });
+      /* deslizar en táctil: cambia de unidad en el sentido del gesto */
+      var hv = $('.hv', hs), x0 = 0, y0 = 0;
+      on(hv, 'pointerdown', function (e) { x0 = e.clientX; y0 = e.clientY; });
+      on(hv, 'pointerup', function (e) { var dx = e.clientX - x0, dy2 = e.clientY - y0; if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy2) * 1.4) { var s2 = dx < 0 ? 1 : -1; H.go(H.i + s2, s2); } });
+    }
+    if (root.classList.contains('mi')) startSlider();   /* redimensionado después de la entrada: retoma la rotación */
 
     /* ---------- STOCK: el corazón comercial ---------- */
     words($('.head h2'), '.head');

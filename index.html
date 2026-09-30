@@ -117,7 +117,7 @@ dl.spec{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}dl.spec dt{
 @media(min-width:1000px){.dm{grid-template-columns:1.3fr 1fr}.pb{display:flex;flex:1;align-items:center;gap:18px;padding:14px 18px}.pb .lg{flex:none;background:var(--paper);border-radius:3px;padding:8px 12px}.pb .lg img{height:52px;width:auto}.pb p{margin:0;color:#aebbc3;font-size:14px;line-height:1.45}.pb strong{color:#fff;display:block;font-size:15px}.pb a{color:#fff;font-weight:600}}
 /* MOVIMIENTO: estados iniciales del hero (solo con JS y sin reduced-motion), microinteracciones y ficha */
 .hero figure{overflow:hidden}nav{position:relative}
-.m:not(.mi) .hero h1,.m:not(.mi) .hero .tx p,.m:not(.mi) .hero .row,.m:not(.mi) .hero .lk,.m:not(.mi) .hero .vcap,.m:not(.mi) .hero .bgv{opacity:0}
+.m:not(.mi) .hero h1,.m:not(.mi) .hero .tx p,.m:not(.mi) .hero .row,.m:not(.mi) .hero .lk,.m:not(.mi) .hero .hcap,.m:not(.mi) .hero .hr,.m:not(.mi) .hero .ha,.m:not(.mi) .hero .bgv{opacity:0}
 .m:not(.mi) .bar{opacity:0;visibility:hidden}
 .m:not(.mi) .hero figure{clip-path:inset(0% 0% 100% 0%)}@media(min-width:900px){.m:not(.mi) .hero figure{clip-path:inset(0% 100% 0% 0%)}}
 .btn{transition:background .2s,color .2s,border-color .2s,transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}.btn:active{transform:scale(.97)}
@@ -206,6 +206,27 @@ html.m{scroll-behavior:auto}
 .m .btn.mg{transition:background .2s,color .3s cubic-bezier(.16,1,.3,1) .06s,border-color .3s,box-shadow .25s}
 .m .oc{transition:box-shadow .5s}.m .oc:hover{transform:none}
 .m .faq details{overflow:hidden}
+/* ==== v6: hero con todas las unidades (mismo tratamiento para cada una) ==== */
+.hero figure{display:flex;flex-direction:column;min-width:0;background:var(--ink)}.hero figure::after{display:none}
+.hv{position:relative;flex:1;aspect-ratio:4/3;overflow:hidden;touch-action:pan-y}@media(min-width:900px){.hv{aspect-ratio:auto}}
+.hzs{position:absolute;inset:0}
+.hz{position:absolute;inset:0;overflow:hidden;opacity:0;visibility:hidden;transition:opacity .7s,visibility 0s .7s}.hz.on{opacity:1;visibility:visible;transition:opacity .7s}
+.hero .hz img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;object-position:50% 60%}
+.hg .hz,.hg .hz.on{opacity:1;transition:none}.hg .hz.on,.hg .hz.lv{visibility:visible}
+.hv::after{content:"";position:absolute;left:0;right:0;bottom:0;height:62%;z-index:3;background:linear-gradient(0deg,rgba(14,27,38,.94),rgba(14,27,38,0));pointer-events:none}
+@media(min-width:900px){.hv::before{content:"";position:absolute;top:0;bottom:0;left:0;width:30%;z-index:3;background:linear-gradient(90deg,var(--ink),rgba(14,27,38,.5) 50%,rgba(14,27,38,0));pointer-events:none}}
+.hcap{position:absolute;left:20px;right:20px;bottom:16px;z-index:4;display:grid;gap:4px}
+.hero .hn{margin:0;max-width:none;font:700 clamp(24px,2.7vw,36px)/1.05 var(--h);letter-spacing:-.02em;color:#fff}
+.hero .hm{margin:0;max-width:none;font-size:16px;font-weight:500;color:#e8eef2}.hero .hd{margin:0;max-width:none;font-size:13px;color:#aebbc3}
+.hr{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;padding:12px 20px 0;background:var(--ink)}
+.hb{all:unset;box-sizing:border-box;cursor:pointer;min-height:44px;display:grid;align-content:start;gap:8px;font:600 13px var(--b);color:#aebbc3;transition:color .3s}.hb:hover,.hb[aria-current=true]{color:#fff}.hb:focus-visible{outline:3px solid var(--cy);outline-offset:2px}
+.hb span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hb .hp{display:block;position:relative;height:3px;overflow:hidden;background:rgba(255,255,255,.24)}.hb .hp i{position:absolute;inset:0;background:var(--cy);transform:scaleX(0);transform-origin:0 50%}
+.hb[aria-current=true] .hp i{transform:scaleX(1)}.hg .hb[aria-current=true] .hp i{transform:scaleX(0)}
+.ha{display:flex;gap:10px;align-items:center;padding:10px 20px 16px;background:var(--ink)}.ha .btn{flex:1;padding:0 12px;font-size:15px}
+.hpp{display:none;flex:none;place-items:center;width:48px;height:48px;border:1.5px solid rgba(255,255,255,.55);border-radius:3px;background:none;color:#fff;cursor:pointer;transition:background .25s,border-color .25s}.hpp:hover{background:rgba(255,255,255,.14);border-color:#fff}.hg .hpp{display:grid}
+.hpp svg{width:18px;height:18px;fill:currentColor}.hpp .pl2{display:none}.hpp[aria-pressed=true] .pa{display:none}.hpp[aria-pressed=true] .pl2{display:block}
+@media(max-width:440px){.hr{gap:4px;padding:12px 16px 0}.hb{font-size:12px}}@media(max-width:380px){.ha .hf{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}dialog[open],dialog[open]::backdrop{animation:none!important}}
 </style>
 </head>
@@ -216,11 +237,10 @@ html.m{scroll-behavior:auto}
 <nav aria-label="Principal"><a href="#unidades">Unidades</a><a href="#operaciones">Comprar, vender, permutar</a><a href="#contacto">Dónde estamos</a><a href="#preguntas">Preguntas</a></nav>
 <div class="hc"><a class="ic tel" data-tel href="tel:+543442453550" aria-label="Llamar al 03442 45-3550"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25c1.1.37 2.3.57 3.6.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.6a1 1 0 01-.25 1z"/></svg><span>03442 45-3550</span></a><a class="ic pin" data-map target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" aria-label="Ubicación en Google Maps"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1114.5 9 2.5 2.5 0 0112 11.5z"/></svg></a><a class="ic ig" data-ig target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/poerioautomotores/" aria-label="Instagram"><svg class="o" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6"/></svg></a><a class="ic fb" data-fb target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/profile.php?id=100011380620292" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 00-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8.5a.5.5 0 01.5-.5z"/></svg></a></div><a class="btn p" href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por las unidades disponibles.">WhatsApp</a></div></header>
 <main id="top">
-<div class="hero"><div class="tx"><img class="bgv" src="images/up-1.webp" alt="" width="1200" height="900"><h1>Autos usados en Concepción del Uruguay</h1><p>Venta, permuta y consignación. Escribinos y te confirmamos si la unidad sigue disponible.</p>
+<div class="hero"><div class="tx"><img class="bgv" src="images/kwid-1.webp" alt="" width="1200" height="900"><h1>Autos usados en Concepción del Uruguay</h1><p>Venta, permuta y consignación. Escribinos y te confirmamos si la unidad sigue disponible.</p>
 <div class="row"><a class="btn p" href="#unidades">Ver unidades</a><a class="btn" href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por las unidades disponibles.">Consultar por WhatsApp</a></div>
-<a class="lk" href="#operaciones">¿Querés vender o permutar tu auto? →</a>
-<span class="vcap"><span>Volkswagen Up 1.0 2018</span><span>Disponibilidad a confirmar</span></span></div>
-<figure><img src="images/ecosport-1.webp" alt="Ford EcoSport XLS 2011" fetchpriority="high" width="1440" height="1085"></figure></div>
+<a class="lk" href="#operaciones">¿Querés vender o permutar tu auto? →</a></div>
+<figure class="hs" id="hs" aria-roledescription="carousel" aria-label="Unidades en stock"><div class="hv"><div class="hzs" id="hzs"><div class="hz on"><img src="images/kwid-1.webp" alt="Renault Kwid Outsider Full 1.0 2019" fetchpriority="high" width="1440" height="1085"></div></div><div class="hcap"><p class="hn" id="hn">Renault Kwid Outsider Full 1.0</p><p class="hm" id="hm">2019 · 84.000 km · Nafta</p><p class="hd">Disponibilidad a confirmar</p></div></div><div class="hr" id="hr"></div><div class="ha"><button type="button" class="btn hf" id="hf">Ver ficha</button><a class="btn p hw" id="hw" href="https://wa.me/5493442453550">Consultar esta unidad</a><button type="button" class="hpp" id="hpp" aria-pressed="false" aria-label="Pausar rotación de unidades"><svg class="pa" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="pl2" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg></button></div></figure></div>
 
 <section id="unidades"><div class="w">
 <div class="head"><div><h2>Unidades</h2><p class="sub">Tocá una unidad para ver todas las fotos. Precio y disponibilidad: consultanos por WhatsApp.</p></div><div class="tabs" role="group" aria-label="Filtrar unidades" id="chips"></div></div>
@@ -285,12 +305,12 @@ var NEGOCIO = {
 /* ==== STOCK: agregar unidades reales, una por línea ====
    { titulo:"Marca Modelo Versión", anio:2020, km:"85.000 km", precio:"Consultar", combustible:"Nafta" } */
 var STOCK = [
-  { foto:"images/kwid-1.webp", fotos:[1,2].map(function(n){return "images/kwid-"+n+".webp"}), titulo:"Renault Kwid Outsider Full 1.0", anio:2019, km:"84.000 km", combustible:"Nafta", precio:"Consultar", nota:"Muy bien de cubiertas. Aire, dirección, levantavidrios, cierre centralizado, doble airbag, ABS, antinieblas. Permuta." },
-  { foto:"images/ka-s-1.webp", fotos:[1,2].map(function(n){return "images/ka-s-"+n+".webp"}), titulo:"Ford Ka S 1.5", anio:2016, km:"132.000 km", combustible:"Nafta", precio:"Consultar", nota:"5 puertas. Aire, cierre centralizado, dirección asistida, doble airbag, ABS. Permuta." },
-  { foto:"images/up-1.webp", fotos:[1,2,3,4,5].map(function(n){return "images/up-"+n+".webp"}), titulo:"Volkswagen Up 1.0", anio:2018, km:"44.000 km", combustible:"Nafta", precio:"Consultar", nota:"5 puertas. Aire acondicionado, cierre centralizado, levantavidrios y espejos eléctricos, doble airbag." },
-  { foto:"images/clio-1.webp", fotos:[1,2,3,4,5,6].map(function(n){return "images/clio-"+n+".webp"}), titulo:"Renault Clio Mio 1.2", anio:2014, km:"96.600 km", combustible:"Nafta", precio:"Consultar", nota:"Única mano, 5 puertas. Aire, cierre centralizado, levantavidrios eléctricos, dirección asistida, doble airbag, ABS. Permuta." },
-  { foto:"images/punto-1.webp", fotos:[1,2,3,4,5,6,7].map(function(n){return "images/punto-"+n+".webp"}), titulo:"Fiat Punto Attractive 1.4 Fire", anio:2011, km:"97.000 km", combustible:"Nafta", precio:"Consultar", nota:"Aire, levantavidrios y espejos eléctricos, cierre centralizado, dirección asistida, doble airbag, ABS. Permuta." },
-  { foto:"images/ecosport-1.webp", fotos:[1,2,3,4,5,6].map(function(n){return "images/ecosport-"+n+".webp"}), titulo:"Ford EcoSport XLS 1.6", anio:2011, km:"200.000 km", combustible:"Nafta / GNC", precio:"Consultar", nota:"Aire, dirección, levantavidrios, espejos eléctricos, cierre centralizado, llantas de aleación, doble airbag, ABS. Permuta. Según su publicación." }
+  { foto:"images/kwid-1.webp", fotos:[1,2].map(function(n){return "images/kwid-"+n+".webp"}), titulo:"Renault Kwid Outsider Full 1.0", corto:"Kwid", anio:2019, km:"84.000 km", combustible:"Nafta", precio:"Consultar", nota:"Muy bien de cubiertas. Aire, dirección, levantavidrios, cierre centralizado, doble airbag, ABS, antinieblas. Permuta." },
+  { foto:"images/ka-s-1.webp", fotos:[1,2].map(function(n){return "images/ka-s-"+n+".webp"}), titulo:"Ford Ka S 1.5", corto:"Ka S", anio:2016, km:"132.000 km", combustible:"Nafta", precio:"Consultar", nota:"5 puertas. Aire, cierre centralizado, dirección asistida, doble airbag, ABS. Permuta." },
+  { foto:"images/up-1.webp", fotos:[1,2,3,4,5].map(function(n){return "images/up-"+n+".webp"}), titulo:"Volkswagen Up 1.0", corto:"Up", anio:2018, km:"44.000 km", combustible:"Nafta", precio:"Consultar", nota:"5 puertas. Aire acondicionado, cierre centralizado, levantavidrios y espejos eléctricos, doble airbag." },
+  { foto:"images/clio-1.webp", fotos:[1,2,3,4,5,6].map(function(n){return "images/clio-"+n+".webp"}), titulo:"Renault Clio Mio 1.2", corto:"Clio", anio:2014, km:"96.600 km", combustible:"Nafta", precio:"Consultar", nota:"Única mano, 5 puertas. Aire, cierre centralizado, levantavidrios eléctricos, dirección asistida, doble airbag, ABS. Permuta." },
+  { foto:"images/punto-1.webp", fotos:[1,2,3,4,5,6,7].map(function(n){return "images/punto-"+n+".webp"}), titulo:"Fiat Punto Attractive 1.4 Fire", corto:"Punto", anio:2011, km:"97.000 km", combustible:"Nafta", precio:"Consultar", nota:"Aire, levantavidrios y espejos eléctricos, cierre centralizado, dirección asistida, doble airbag, ABS. Permuta." },
+  { foto:"images/ecosport-1.webp", fotos:[1,2,3,4,5,6].map(function(n){return "images/ecosport-"+n+".webp"}), titulo:"Ford EcoSport XLS 1.6", corto:"EcoSport", anio:2011, km:"200.000 km", combustible:"Nafta / GNC", precio:"Consultar", nota:"Aire, dirección, levantavidrios, espejos eléctricos, cierre centralizado, llantas de aleación, doble airbag, ABS. Permuta. Según su publicación." }
 ];
 (function(){
 var N=NEGOCIO,$=function(i){return document.getElementById(i)},RM=matchMedia("(prefers-reduced-motion:reduce)").matches;
@@ -338,6 +358,20 @@ D.addEventListener("close",function(){document.documentElement.style.overflow=""
 D.addEventListener("keydown",function(e){if(e.target.classList&&e.target.classList.contains("gal"))return;if(e.key==="ArrowRight")open_(ci+1,"s");if(e.key==="ArrowLeft")open_(ci-1,"p")});
 D.addEventListener("click",function(e){if(e.target===D||e.target.closest("[data-x]"))return D.close();var a=e.target.closest(".ar");if(a)return step(a);var b=e.target.closest("[data-n]");if(b)open_(+b.getAttribute("data-n"),b.getAttribute("data-k"))});
 D.addEventListener("scroll",count,true);
+
+/* Hero: las 6 unidades con el mismo tratamiento. index.html arma y cambia el estado; motion.js (GSAP) anima el cambio con el evento poerio:hero */
+var HZ=$("hzs"),HR=$("hr"),HN=$("hn"),HM=$("hm"),HW=$("hw"),hi=0,hL=STOCK.length,hsl,hbt;
+HZ.innerHTML=STOCK.map(function(c,i){return '<div class="hz'+(i?'':' on')+'" role="group" aria-roledescription="slide" aria-label="'+(i+1)+' de '+hL+'"><img src="'+esc(ph(c)[0])+'" alt="'+esc(c.titulo+" "+c.anio)+'" width="1440" height="1085"'+(i?' decoding="async"':' fetchpriority="high"')+'></div>'}).join("");
+HR.innerHTML=STOCK.map(function(c,i){return '<button type="button" class="hb" data-i="'+i+'" aria-label="Ver '+esc(c.titulo)+'"'+(i?'':' aria-current="true"')+'><i class="hp"><i></i></i><span>'+esc(c.corto||c.titulo)+'</span></button>'}).join("");
+hsl=HZ.querySelectorAll(".hz");hbt=HR.querySelectorAll(".hb");
+function heroGo(n,dir){n=(n+hL)%hL;if(n===hi)return;var f=hi,c=STOCK[n];hi=n;dir=dir||(n>f?1:-1);
+hsl[f].classList.remove("on");hsl[n].classList.add("on");hbt[f].removeAttribute("aria-current");hbt[n].setAttribute("aria-current","true");
+HN.textContent=c.titulo;HM.textContent=c.anio+" · "+(c.km||"Km: consultar")+" · "+(c.combustible||"—");HW.href=wa(ask(c));HW.setAttribute("aria-label","Consultar por WhatsApp: "+c.titulo);
+document.dispatchEvent(new CustomEvent("poerio:hero",{detail:{from:f,to:n,dir:dir}}))}
+HR.addEventListener("click",function(e){var b=e.target.closest(".hb");if(b)heroGo(+b.getAttribute("data-i"))});
+HR.addEventListener("keydown",function(e){var d=e.key==="ArrowRight"?1:e.key==="ArrowLeft"?-1:0;if(!d)return;e.preventDefault();heroGo(hi+d,d);hbt[hi].focus()});
+$("hf").addEventListener("click",function(){open_(hi)});HW.setAttribute("aria-label","Consultar por WhatsApp: "+STOCK[0].titulo);HW.href=wa(ask(STOCK[0]));
+window.poerioHero={go:heroGo,next:function(){heroGo(hi+1,1)},get i(){return hi},n:hL};
 
 /* Formulario: valida y arma el mensaje de WhatsApp segun la intencion elegida */
 var FM=$("canjeForm"),FS=$("fStatus"),YR=new Date().getFullYear()+1;
