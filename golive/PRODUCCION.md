@@ -14,7 +14,7 @@
 5. Qué unidades siguen disponibles, y sus precios si quiere publicarlos.
 6. Autorización para usar las fotos; decidir si se tapan las patentes visibles.
 6b. Autorización para usar el logo (imagen del negocio con "39 años de confianza"; hoy figura en el pie, la ficha, el 404 y la página de privacidad) y confirmar que la cifra sigue vigente.
-7. Confirmar "Comprar", 0 km (marcas), consignación (condiciones) y el lema "39 años de confianza" (hoy no se muestra en el sitio).
+7. Confirmar "Comprar", 0 km (marcas), consignación (condiciones) y el lema "39 años de confianza". Hoy sí se ve: está dentro de la imagen del logo (hero, pie, ficha, 404 y privacidad) y en el `alt` del logo. Si el dueño no lo confirma, hay que usar una versión del logo sin la leyenda. La imagen para compartir (`preview.png`) ya no lo lleva ni menciona consignaciones.
 8. Si quiere mostrar el enlace de opiniones de Google (la ficha tiene 3 opiniones, una de 1 estrella hace más de 5 años).
 
 ## Al aprobar (checklist)
