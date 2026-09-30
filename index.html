@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- © 2026 Santiago Solis. Propuesta de diseño y código, todos los derechos reservados. Su copia, uso o publicación requiere acuerdo previo. -->
 <html lang="es-AR">
 <head>
 <meta charset="utf-8">
@@ -11,20 +12,21 @@
 <meta property="og:title" content="DEMO · Fernando Poerio Automotores">
 <meta property="og:description" content="Usados, permutas y consignaciones. Alberdi 1337, Concepción del Uruguay.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://hnk375561-lab.github.io/poerioautomotores/preview.png">
+<meta property="og:image" content="https://poerio-automotores-demo.netlify.app/preview.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Logo de Fernando Poerio Automotores">
-<meta property="og:url" content="https://hnk375561-lab.github.io/poerioautomotores/">
-<link rel="canonical" href="https://hnk375561-lab.github.io/poerioautomotores/">
+<meta property="og:url" content="https://poerio-automotores-demo.netlify.app/">
+<link rel="canonical" href="https://poerio-automotores-demo.netlify.app/">
 <meta property="og:locale" content="es_AR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="DEMO · Fernando Poerio Automotores">
 <meta name="twitter:description" content="Usados, permutas y consignaciones. Alberdi 1337, Concepción del Uruguay.">
-<meta name="twitter:image" content="https://hnk375561-lab.github.io/poerioautomotores/preview.png">
+<meta name="twitter:image" content="https://poerio-automotores-demo.netlify.app/preview.png">
 <link rel="icon" type="image/png" sizes="32x32" href="images/icon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="images/icon-192.png">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<script>(function(r){if(!matchMedia("(prefers-reduced-motion:reduce)").matches){r.classList.add("m");setTimeout(function(){r.classList.add("mi")},4500)}})(document.documentElement)</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -107,13 +109,31 @@ dialog{width:min(1000px,96vw);max-height:94vh;border:0;padding:0;overflow:auto;b
 .di{padding:24px;display:flex;flex-direction:column;gap:16px}.di h3{font-size:clamp(24px,4vw,32px)}
 dl.spec{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}dl.spec dt{font-size:13px;color:var(--mute)}dl.spec dd{margin:0;font-weight:600;font-size:18px}.nota{margin:0;color:var(--mute);font-size:15px}.nota.s{font-size:13px}.nav{display:flex;gap:10px}.nav .btn{flex:1;padding:0 8px}
 .bar{display:none}
-@media(max-width:899px){header .w>.btn{display:none}body{padding-bottom:72px}.bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:15;gap:10px;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));background:var(--paper);border-top:1px solid var(--stone)}.bar .btn{flex:1;padding:0 8px}}
+@media(max-width:899px){header .w>.btn{display:none}body{padding-bottom:80px}.bar{display:flex;position:fixed;left:12px;bottom:calc(72px + env(safe-area-inset-bottom,0px));z-index:15;gap:8px}.bar .btn{flex:none;padding:0 16px;font-size:15px;box-shadow:0 2px 10px rgba(14,27,38,.3)}.bar .btn:not(.p){background:var(--paper)}.bar .btn:not(.p):hover{background:var(--ink)}}
 @media(max-width:520px){.mark small{display:none}}
 @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:900px){header{position:sticky;top:0;z-index:20}header .w{flex-wrap:nowrap;height:56px}nav{order:0;width:auto;overflow:visible}.grid{grid-template-columns:repeat(3,1fr)}.ops .w{grid-template-columns:1.15fr 1fr;gap:72px;align-items:start}.loc .w{grid-template-columns:1fr 1fr;gap:72px;align-items:center}.faq .w{grid-template-columns:1fr 1.6fr;gap:72px}.hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:min(calc(100svh - 100px),720px)}.hero figure{order:0;position:relative}.hero figure img{position:absolute;inset:0;aspect-ratio:auto}.hero .tx{align-self:stretch;padding:56px 48px 300px max(20px,calc((100vw - 1180px)/2));min-width:0;min-height:0}.vcap{left:max(20px,calc((100vw - 1180px)/2))}.hero h1{font-size:clamp(40px,4.1vw,60px)}html{scroll-padding-top:60px}}
 @media(min-width:900px) and (max-width:1099px){header .w{column-gap:16px}nav{gap:14px}nav a{font-size:14px}.mark small{display:none}}
 @media(min-width:1000px){.dm{grid-template-columns:1.3fr 1fr}.pb{display:flex;flex:1;align-items:center;gap:18px;padding:14px 18px}.pb .lg{flex:none;background:var(--paper);border-radius:3px;padding:8px 12px}.pb .lg img{height:52px;width:auto}.pb p{margin:0;color:#aebbc3;font-size:14px;line-height:1.45}.pb strong{color:#fff;display:block;font-size:15px}.pb a{color:#fff;font-weight:600}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+/* MOVIMIENTO: estados iniciales del hero (solo con JS y sin reduced-motion), microinteracciones y ficha */
+.hero figure{overflow:hidden}nav{position:relative}
+.m:not(.mi) .hero h1,.m:not(.mi) .hero .tx p,.m:not(.mi) .hero .row,.m:not(.mi) .hero .lk,.m:not(.mi) .hero .vcap,.m:not(.mi) .hero .bgv,.m:not(.mi) .bar{opacity:0}
+.m:not(.mi) .hero figure{clip-path:inset(0 0 100% 0)}
+.btn{transition:background .2s,color .2s,border-color .2s,transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}.btn:active{transform:scale(.97)}
+.chip{transition:color .25s,border-color .25s}
+nav a::after{content:"";position:absolute;left:0;right:0;bottom:7px;height:2px;background:var(--cy);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.16,1,.3,1)}
+nav a{position:relative}nav a:hover::after,nav a[aria-current]::after{transform:scaleX(1)}nav a[aria-current]{color:var(--cyd)}
+header{transition:box-shadow .35s}header.s{box-shadow:0 10px 30px -22px rgba(14,27,38,.55)}
+@media(hover:hover){.btn.p:hover{transform:translateY(-2px);box-shadow:0 10px 22px -12px rgba(14,27,38,.55)}.car .ct img{transition:transform 1s cubic-bezier(.16,1,.3,1)}.car:hover .ct img{transform:scale(1.045)}}
+@media(max-width:899px){.m header{position:sticky;top:0;z-index:20;transition:box-shadow .35s,transform .5s cubic-bezier(.16,1,.3,1)}.m header.h{transform:translateY(-100%)}}
+dialog[open]{animation:dIn .45s cubic-bezier(.16,1,.3,1)}dialog[open]::backdrop{animation:dB .35s ease-out}
+@keyframes dIn{from{opacity:0;transform:translate(calc(var(--fx,0px)*.06),calc(var(--fy,0px)*.06 + 14px)) scale(.97)}}@keyframes dB{from{opacity:0}}
+.ph{overflow:hidden}.pr{transition:border-color .4s}.car:hover .pr{border-color:var(--cy)}.car .vf{transition:transform .35s cubic-bezier(.16,1,.3,1)}.car:hover .vf{transform:translateX(3px)}
+.wl{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.14em;margin-bottom:-.14em}.wl>span{display:inline-block}
+.pgb{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--cy);transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+.pulse{position:relative}.pulse::after{content:"";position:absolute;inset:-1px;border:2px solid var(--cy);border-radius:3px;pointer-events:none;animation:pl 1.6s cubic-bezier(.16,1,.3,1) 1 forwards}@keyframes pl{from{opacity:.8;transform:scale(1)}to{opacity:0;transform:scale(1.14,1.55)}}
+.op h3{transition:transform .5s cubic-bezier(.16,1,.3,1)}@media(hover:hover){.op:hover h3{transform:translateX(8px)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}dialog[open],dialog[open]::backdrop{animation:none!important}}
 </style>
 </head>
 <body>
@@ -154,7 +174,7 @@ dl.spec{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}dl.spec dt{
 <div><h2 class="eb">Dónde estamos</h2><address id="addr"></address><p class="meta" id="hoursNote">Escribinos o llamanos antes de venir y coordinamos la visita.</p>
 <div class="row"><a class="btn p" href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" data-map target="_blank" rel="noopener noreferrer">Cómo llegar</a><a class="btn" id="phoneLink" href="tel:+543442453550">Llamar al 03442 45-3550</a><a class="btn" href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por las unidades disponibles.">WhatsApp</a></div>
 <div class="soc"><a id="reviewsLink" href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" target="_blank" rel="noopener noreferrer">Opiniones en Google</a><a id="igLink" data-ig href="https://www.instagram.com/poerioautomotores/" target="_blank" rel="noopener noreferrer"></a><a data-fb href="https://www.facebook.com/profile.php?id=100011380620292" target="_blank" rel="noopener noreferrer">Facebook</a></div></div>
-<img src="images/up-3.webp" alt="Frente de la agencia con el cartel de Fernando Poerio Automotores" loading="lazy" width="1200" height="900"></div></section>
+<div class="ph"><img src="images/up-3.webp" alt="Frente de la agencia con el cartel de Fernando Poerio Automotores" loading="lazy" width="1200" height="900"></div></div></section>
 
 <section id="preguntas" class="faq"><div class="w"><h2>Preguntas</h2><div>
 <details><summary>¿Tienen 0 km?</summary><p>Consultanos por WhatsApp qué 0 km hay disponibles hoy.</p></details>
@@ -168,7 +188,7 @@ dl.spec{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}dl.spec dt{
 </main>
 <footer><div class="w"><div class="lg"><img src="images/logo-claro.webp" alt="Fernando Poerio Automotores, 39 años de confianza" width="722" height="287" loading="lazy"></div><p class="fn">Fernando Poerio Automotores</p><p id="fAddr"></p>
 <div class="soc"><a id="fPhone" href="tel:+543442453550">Tel. 03442 45-3550</a><a href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por las unidades disponibles.">WhatsApp</a><a data-ig href="https://www.instagram.com/poerioautomotores/" target="_blank" rel="noopener noreferrer">Instagram</a><a data-fb href="https://www.facebook.com/profile.php?id=100011380620292" target="_blank" rel="noopener noreferrer">Facebook</a><a href="privacidad.html">Privacidad y avisos</a></div>
-<p>Sitio demo hecho como propuesta por Santiago Solis. No es el sitio oficial de Fernando Poerio Automotores y todavía no está aprobado por el negocio.</p><p>Las fotos y datos de las unidades provienen de las publicaciones públicas de la agencia. Precios, disponibilidad y horarios se publican cuando el negocio los confirma.</p></div></footer>
+<p>Sitio demo hecho como propuesta por Santiago Solis. No es el sitio oficial de Fernando Poerio Automotores y todavía no está aprobado por el negocio. © 2026 Santiago Solis: diseño y código de esta propuesta, todos los derechos reservados; su uso o publicación requiere acuerdo previo.</p><p>Las fotos y datos de las unidades provienen de las publicaciones públicas de la agencia. Precios, disponibilidad y horarios se publican cuando el negocio los confirma.</p></div></footer>
 <div class="bar"><a class="btn p" href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por las unidades disponibles.">WhatsApp</a><a class="btn" id="barCall" href="tel:+543442453550">Llamar</a></div>
 <dialog id="dlg" aria-label="Ficha de la unidad"></dialog>
 <script>
@@ -259,5 +279,8 @@ FS.textContent="Abriendo WhatsApp con tu consulta. Si no se abrió, ";var l=docu
 window.open(u,"_blank","noopener")});
 })();
 </script>
+<script src="vendor/gsap.min.js" defer onerror="document.documentElement.classList.remove('m')"></script>
+<script src="vendor/ScrollTrigger.min.js" defer onerror="document.documentElement.classList.remove('m')"></script>
+<script src="js/motion.js" defer onerror="document.documentElement.classList.remove('m')"></script>
 </body>
 </html>
