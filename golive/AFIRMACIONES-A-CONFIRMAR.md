@@ -95,6 +95,7 @@ Precios: todos "Consultar". El validador falla si aparece otro valor sin confirm
 - **Textos:** se quitó el tono de tercera persona ("sus publicaciones dicen…", "según su flyer") y las fechas de publicación de las tarjetas; el sitio habla como la agencia. Las afirmaciones siguen siendo solo las respaldadas (permuta, consignaciones, 0 km por el cartel), sin agregar nuevas. La pregunta de horarios pasó a "¿Cuándo puedo ir a ver un auto?": escribir o llamar antes de venir (no inventa horario).
 - **Sigue pendiente del dueño (no bloquea la demo):** horarios, precios, marcas 0 km y condiciones de consignación, "39 años de confianza", cuenta oficial de Facebook e Instagram, autorización de fotos y logo, patentes visibles, disponibilidad de cada unidad, datos legales para privacidad.
 
-## Sección "Guía" (2026-09-30)
-- Se agregó `#guia`: consejos generales para revisar un usado y preparar la venta o permuta. Es contenido informativo general, no describe condiciones, servicios ni datos del negocio. Sin datos nuevos ni imágenes nuevas.
-- Se borraron los duplicados en minúsculas de `golive/` y se quitó de `CLAUDE.md` la referencia a otro proyecto.
+## Buscador "¿Qué estás buscando?" y ajustes (2026-09-30)
+- Reemplaza la guía genérica. Ordena las unidades de `STOCK` por kilómetros, año, equipamiento, única mano o GNC, y calcula promedios; todo sale de los datos ya cargados. No hay datos, servicios ni imágenes nuevas.
+- El FAQ alterna 6 fotos ya existentes con fundido. Se quitó la marca de agua "Poerio" del pie.
+- Rendimiento: se quitaron el filtro CSS del mapa, el blur del panel y la animación de escala/máscara sobre el iframe.

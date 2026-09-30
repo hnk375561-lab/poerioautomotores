@@ -475,8 +475,6 @@
     /* ---------- FAQ (foto) y marca del pie ---------- */
     photos($$('.fq'), '.faq', { s: .1, st: 'top 85%' });
     reveal($$('.fl .sub'), '.faq', { st: 'top 85%' });
-    if (D) g.fromTo('.wm', { yPercent: 38 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: 'footer', start: 'top bottom', end: 'bottom bottom', scrub: .5 } });
-    else g.from('.wm', { yPercent: 30, opacity: 0, duration: 1.2, ease: E, clearProps: 'opacity,transform', scrollTrigger: { trigger: 'footer', start: 'top 92%', once: true } });
 
     /* ---------- BLOQUES: mismo gesto en todo el sitio ---------- */
     words($('.ops h2'), '.ops');
@@ -509,8 +507,7 @@
     var mp = $('.mp'), mif = $('.mp iframe');
     if (mp) {
       var mst = { trigger: '.loc', start: 'top 78%', once: true };
-      g.fromTo(mp, { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4 * k, ease: 'expo.inOut', clearProps: 'clipPath', scrollTrigger: mst });
-      if (mif) g.fromTo(mif, { scale: 1.14 }, { scale: 1, duration: 2, ease: 'power3.out', clearProps: 'transform', scrollTrigger: mst });
+      g.fromTo(mp, { opacity: 0 }, { opacity: 1, duration: 1 * k, ease: 'power2.out', clearProps: 'opacity', scrollTrigger: mst });
     }
     reveal([$('.lc')], '.loc', { st: 'top 65%' });
     reveal($$('.lc > *'), '.loc', { st: 'top 65%', s: .09, y: 18, d: .25 });
