@@ -77,20 +77,8 @@
   /* ---------- Pausa del movimiento automático (WCAG 2.2.2) ----------
      Un solo estado para el hero y las tres rotaciones de fotos: cada una tiene su botón y todos quedan sincronizados. */
   var auto = { off: false, subs: [], btns: [] };
-  var IC_PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>';
-  var IC_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l11-6.5z"/></svg>';
   function autoSync() { auto.subs.slice().forEach(function (f) { f(); }); }
-  function autoBtn(host) {
-    var b = document.createElement('button');
-    b.type = 'button'; b.className = 'apz';
-    function paint() {
-      var t = auto.off ? 'Reanudar el movimiento automático' : 'Pausar el movimiento automático';
-      b.setAttribute('aria-label', t); b.title = t; b.innerHTML = auto.off ? IC_PLAY : IC_PAUSE;
-    }
-    b.addEventListener('click', function () { auto.off = !auto.off; auto.btns.forEach(function (f) { f(); }); autoSync(); });
-    paint(); auto.btns.push(paint); host.appendChild(b);
-    return function () { var i = auto.btns.indexOf(paint); if (i > -1) auto.btns.splice(i, 1); if (b.parentNode) b.parentNode.removeChild(b); };
-  }
+  function autoBtn() { return function () {}; }   /* sin botón: las rotaciones son continuas */
 
   /* ---------- Rotadores de fotos (banda, "Quiénes somos", Preguntas): un solo sistema ----------
      Fundido con asentado de escala; solo corren a la vista y con la pestaña visible. Se detienen con hover (mouse), foco de teclado y el botón de pausa.
@@ -114,14 +102,7 @@
     function sync() { (vis && !hold && !auto.off && !document.hidden) ? go() : st(); }
     new IntersectionObserver(function (e) { vis = e[0].isIntersecting; sync(); }).observe(box);
     document.addEventListener('visibilitychange', sync);
-    if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
-      box.addEventListener('pointerenter', function () { hold |= 1; sync(); });
-      box.addEventListener('pointerleave', function () { hold &= ~1; sync(); });
-    }
-    box.addEventListener('focusin', function (e) { if (e.target.matches && e.target.matches(':focus-visible')) { hold |= 2; sync(); } });
-    box.addEventListener('focusout', function () { hold &= ~2; sync(); });
     auto.subs.push(sync);
-    autoBtn(box);
   }
   function onLoad(fn) { if (document.readyState === 'complete') fn(); else window.addEventListener('load', fn); }
   onLoad(function () {
@@ -226,9 +207,6 @@
     var fg = $('.hero figure'), fi = $('#hzs'), bg = $('.hero .bgv') || document.createElement('i'),
       txt = [$('.hero h1'), $('.hero .tx p')];
     if (D) {
-      /* Salida del hero: profundidad muy moderada (texto 28px, foto 2%) */
-      g.to([txt[0], txt[1]], { y: -28, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .5 } });
-      g.to(fi, { yPercent: 2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .5 } });
       g.delayedCall(.9, function () { pulse('header .btn.p'); });
       /* Paralaje con el puntero: foto y fondo se mueven en sentidos opuestos (solo mouse) */
       if (fine) {
@@ -259,7 +237,7 @@
     if (H && hs && sl.length > 1) {
       root.classList.add('hg');
       auto.subs.push(sync);
-      cleanups.push(function () { var i = auto.subs.indexOf(sync); if (i > -1) auto.subs.splice(i, 1); }, autoBtn($('.hv', hs)));
+      cleanups.push(function () { var i = auto.subs.indexOf(sync); if (i > -1) auto.subs.splice(i, 1); });
       var onHero = function (e) {
         ctx.add(function () {
           var d = e.detail, A = sl[d.to], B = sl[d.from], iA = $('img', A), iB = $('img', B), dir = d.dir;
@@ -279,9 +257,6 @@
       };
       document.addEventListener('poerio:hero', onHero);
       cleanups.push(function () { document.removeEventListener('poerio:hero', onHero); if (prog) prog.kill(); prog = null; started = false; root.classList.remove('hg'); });
-      if (fine) { on(hs, 'pointerenter', function () { held |= 1; sync(); }); on(hs, 'pointerleave', function () { held &= ~1; sync(); }); }
-      on(hs, 'focusin', function (e) { if (e.target.matches && e.target.matches(':focus-visible')) { held |= 2; sync(); } });
-      on(hs, 'focusout', function () { held &= ~2; sync(); });
       on(document, 'visibilitychange', sync);
       ST.create({ trigger: hs, start: 'top bottom', end: 'bottom top', onToggle: function (s) { inView = s.isActive; sync(); } });
       /* deslizar en táctil: cambia de unidad en el sentido del gesto */
@@ -502,12 +477,6 @@
     reveal($$('.fm > div:first-child > :not(.fp):not(.stp)'), '.fm', { s: .12, st: 'top 85%' });
     reveal($$('.stp li'), '.stp', { s: .14, y: 22, st: 'top 88%' });
     photos($$('.fp > div'), '.fp', { s: .14, st: 'top 88%', still: D, from: D ? 'inset(0% 100% 0% 0%)' : 'inset(0% 0% 100% 0%)' });
-    if (D) {
-      $$('.fp > div').forEach(function (box, i) {
-        var img = $('img', box), a = [3, 5, 4][i] || 3;
-        g.fromTo(img, { scale: 1.12, yPercent: -a }, { scale: 1.12, yPercent: a, ease: 'none', scrollTrigger: { trigger: '.fp', start: 'top bottom', end: 'bottom top', scrub: .6 } });
-      });
-    }
     reveal($$('.fm form'), '.fm form', { st: 'top 88%' });
 
     /* Vista previa: máscara + contenido escalonado; el mensaje se escribe solo la primera vez que entra */

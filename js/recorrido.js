@@ -17,60 +17,52 @@
     figs.forEach(function (f) { fo.observe(f); });
   }
 
-  /* Botones de video: pausar y sonido */
-  function wire(v, pb, man) {
-    function label() { pb.textContent = v.paused ? 'Reproducir' : 'Pausar'; pb.setAttribute('aria-label', v.paused ? 'Reproducir el video' : 'Pausar el video'); }
-    v.addEventListener('play', label); v.addEventListener('pause', label); label();
-    pb.addEventListener('click', function () { if (v.paused) { man.v = false; play(v); } else { man.v = true; v.pause(); } });
-  }
-
-  /* Recorrido: capítulos que cambian la escena */
+  /* Recorrido: los cuatro pasos se suceden solos, en bucle continuo (la escena y el texto cambian juntos) */
   var st = $('#local .rs');
-  if (st && 'IntersectionObserver' in window) {
-    var L = $$('#local .rl'), C = $$('#local .rcc'), B = $$('#local .rb i'),
-        v = $('#rvid'), pb = $('#rvp'), sb = $('#rvs'), nn = $('#rn'), tt = $('#rt'),
-        man = { v: false }, cur = -1, vis = false;
-    if (v && pb) wire(v, pb, man);
-    if (v && sb) sb.addEventListener('click', function () {
-      v.muted = !v.muted; sb.setAttribute('aria-pressed', v.muted ? 'false' : 'true');
-      sb.setAttribute('aria-label', v.muted ? 'Activar el sonido del video' : 'Silenciar el video');
-    });
-    function sync() { if (!v) return; if (vis && cur === 2 && !rm && !man.v) play(v); else v.pause(); }
-    function set(i) {
-      if (i < 0 || i === cur) return;
+  if (st) {
+    var L = $$('#local .rl'), C = $$('#local .rcc'), N = $$('#local .rnav button'),
+        v = $('#rvid'), nn = $('#rn'), tt = $('#rt'),
+        DUR = [7000, 6500, 12000, 7000], cur = 0, tm = 0, vis = false;
+
+    N.forEach(function (b, k) { b.style.setProperty('--d', DUR[k] + 'ms'); });
+
+    function stop() { clearTimeout(tm); tm = 0; if (v) v.pause(); }
+    function go(i) {
+      clearTimeout(tm); tm = 0;
       cur = i;
       L.forEach(function (l, k) { l.classList.toggle('on', k === i); });
       C.forEach(function (c, k) { c.classList.toggle('on', k === i); });
-      B.forEach(function (b, k) { b.classList.toggle('on', k <= i); });
+      N.forEach(function (b, k) {
+        b.classList.remove('on'); b.classList.toggle('done', k < i || rm);
+        if (k === i) { void b.offsetWidth; b.classList.add('on'); }
+      });
       st.setAttribute('data-c', i);
       nn.textContent = '0' + (i + 1);
       tt.textContent = C[i].getAttribute('data-t');
-      sync();
+      if (v) { if (i === 2 && vis && !rm) { try { v.currentTime = 0; } catch (e) {} play(v); } else v.pause(); }
+      if (vis && !rm && !d.hidden) tm = setTimeout(function () { go((cur + 1) % L.length); }, DUR[i]);
     }
-    var mq = matchMedia('(min-width:900px)'), io;
-    function mk() {
-      if (io) io.disconnect();
-      io = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { if (e.isIntersecting) set(C.indexOf(e.target)); });
-      }, { rootMargin: mq.matches ? '-40% 0px -40% 0px' : '-58% 0px -18% 0px' });
-      C.forEach(function (c) { io.observe(c); });
+
+    N.forEach(function (b, k) { b.addEventListener('click', function () { go(k); }); });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        vis = es[0].isIntersecting;
+        if (vis) go(cur); else stop();
+      }, { threshold: .35 }).observe(st);
     }
-    mk();
-    if (mq.addEventListener) mq.addEventListener('change', mk); else mq.addListener(mk);
-    new IntersectionObserver(function (es) { vis = es[0].isIntersecting; sync(); }).observe($('#local'));
-    d.addEventListener('visibilitychange', function () { if (d.hidden && v) v.pause(); else sync(); });
-    set(0);
+    d.addEventListener('visibilitychange', function () { if (d.hidden) stop(); else if (vis) go(cur); });
+    go(0);
   }
 
-  /* Video del equipo: corre a la vista, con botón de pausa */
-  var r = $('#eqv'), rp = $('#eqp');
-  if (r && rp && 'IntersectionObserver' in window) {
-    var m2 = { v: false }, rv = false;
-    wire(r, rp, m2);
+  /* Video del equipo: corre en bucle mientras está a la vista */
+  var r = $('#eqv');
+  if (r && 'IntersectionObserver' in window) {
+    var rv = false;
     new IntersectionObserver(function (es) {
       rv = es[0].isIntersecting;
-      if (rv && !rm && !m2.v) play(r); else r.pause();
+      if (rv && !rm) play(r); else r.pause();
     }, { threshold: .4 }).observe(r);
-    d.addEventListener('visibilitychange', function () { if (d.hidden) r.pause(); else if (rv && !rm && !m2.v) play(r); });
+    d.addEventListener('visibilitychange', function () { if (d.hidden) r.pause(); else if (rv && !rm) play(r); });
   }
 })();
