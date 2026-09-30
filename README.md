@@ -1,8 +1,9 @@
 # Fernando Poerio Automotores · sitio demo
 
-Sitio estático (HTML/CSS/JS sin dependencias) de propuesta para Fernando Poerio Automotores, Concepción del Uruguay. **No es el sitio oficial ni está aprobado por el negocio.**
+Sitio estático (HTML/CSS/JS; el movimiento usa GSAP + ScrollTrigger incluidos en `vendor/`, sin CDN ni build) de propuesta para Fernando Poerio Automotores, Concepción del Uruguay. **No es el sitio oficial ni está aprobado por el negocio.**
 
 ## Archivos
+- `js/motion.js`: animaciones (hero, unidades, bloques, navegación). Se desactivan con `prefers-reduced-motion` y si GSAP no carga; `vendor/` trae GSAP 3.15.0 y ScrollTrigger.
 - `index.html`: sitio completo. Datos del negocio (`NEGOCIO`) y unidades (`STOCK`) en el bloque `<script>` al final.
 - `privacidad.html`: política de privacidad preliminar, aviso sobre la información de las unidades y aviso de demo.
 - `404.html`: página de error (usa `<base href>` absoluto porque GitHub Pages la sirve desde cualquier ruta).
