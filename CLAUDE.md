@@ -1,4 +1,4 @@
-# Guía de mantenimiento (adaptada del proyecto Toyota C. del Uruguay)
+# Guía de mantenimiento
 
 1. **Cero datos inventados.** Horarios, precios, marcas 0 km, servicios y fecha de fundación solo se cargan con confirmación escrita del dueño o fuente pública citada. Si falta: "Consultar" / "a confirmar".
 2. **Todo dato nuevo se registra** en `golive/AFIRMACIONES-A-CONFIRMAR.md` con fuente y fecha, y se refleja en `data/dealership.json`.
