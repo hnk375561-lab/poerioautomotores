@@ -430,14 +430,6 @@
         var im = e.target.closest && e.target.closest('.im'), over = !!im && !e.target.closest('.ar');
         if (over) {
           cqx(e.clientX); cqy(e.clientY);
-          var ct = $('.ct', im), n = ct ? ct.children.length : 0;
-          if (n > 1 && window.ScrollToPlugin) {
-            var r = im.getBoundingClientRect(), idx = Math.max(0, Math.min(n - 1, Math.floor((e.clientX - r.left) / r.width * n)));
-            if (idx !== im._pi) {
-              im._pi = idx; im.classList.add('pk'); scrubbed.set(im, 1);
-              g.to(ct, { scrollTo: { x: idx * ct.clientWidth }, duration: .75, ease: E, overwrite: true });
-            }
-          }
         }
         cshow(over, e);
       });
@@ -500,26 +492,6 @@
     reveal($$('.fin'), '.fin', { y: 12, st: 'top 95%' });
     reveal($$('footer .lg'), 'footer', { y: 16, st: 'top 92%' });
     reveal($$('footer .w > :not(.lg)'), 'footer', { y: 12, s: .07, d: .15, st: 'top 96%' });
-
-    /* Botones magnéticos (solo mouse): siguen al puntero unos px y vuelven con expo.out; el press los achica */
-    if (fine) $$('.hero .btn, header .btn.p, .loc .btn, .fin .btn, .fm form .btn, .bd a, .no .btn').forEach(function (b) {
-      var lift = b.classList.contains('p') ? -2 : 0, qx, qy;
-      b.classList.add('mg');
-      qx = g.quickTo(b, 'x', { duration: .6, ease: 'power3.out' }); qy = g.quickTo(b, 'y', { duration: .6, ease: 'power3.out' });
-      on(b, 'pointermove', function (e) { var r = b.getBoundingClientRect(); qx((e.clientX - (r.left + r.width / 2)) * .22); qy((e.clientY - (r.top + r.height / 2)) * .3 + lift); });
-      on(b, 'pointerleave', function () { qx(0); qy(0); g.to(b, { scale: 1, duration: .5, ease: E, overwrite: 'auto' }); });
-      on(b, 'pointerdown', function () { g.to(b, { scale: .97, duration: .15, ease: 'power2.out', overwrite: 'auto' }); });
-      on(b, 'pointerup', function () { g.to(b, { scale: 1, duration: .6, ease: E, overwrite: 'auto' }); });
-      cleanups.push(function () { b.classList.remove('mg'); g.set(b, { clearProps: 'transform' }); });
-    });
-
-    /* Tilt de las tarjetas de operaciones (solo mouse): giro corto hacia el puntero + elevación */
-    if (fine) $$('.oc').forEach(function (c) {
-      var o = { duration: .7, ease: 'power3.out' }, rx = g.quickTo(c, 'rotationX', o), ry = g.quickTo(c, 'rotationY', o), ly = g.quickTo(c, 'y', o);
-      on(c, 'pointerenter', function () { g.set(c, { transformPerspective: 900 }); ly(-6); });
-      on(c, 'pointermove', function (e) { var r = c.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - .5) * 7); rx(-((e.clientY - r.top) / r.height - .5) * 6); });
-      on(c, 'pointerleave', function () { rx(0); ry(0); ly(0); });
-    });
 
     /* Preguntas: el acordeón abre y cierra con altura animada (details nativo: el teclado y el lector de pantalla siguen igual) */
     $$('.faq details').forEach(function (d) {
