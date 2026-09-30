@@ -127,7 +127,7 @@
   onLoad(function () {
     rotator($('#fqs'), ['clio-3', 'up-3', 'punto-3', 'ecosport-3', 'ka-s-2'], { sizes: '(min-width:900px) 40vw,100vw', sc: 1.06, du: 1.2, ms: 3800 });
     rotator($('#bd'), ['clio-5', 'up-5', 'ecosport-5'], { sizes: '100vw', sc: 1.08, du: 1.6, ms: 4200, op: .75, before: 'a' });
-    rotator($('#nph'), ['punto-4', 'up-4', 'clio-4', 'kwid-2'], { sizes: '(min-width:900px) 40vw,100vw', sc: 1.06, du: 1.2, ms: 3800 });
+    rotator($('#nph'), ['nosotros-patio', 'nosotros-calle', 'nosotros-cartel', 'up-4', 'kwid-2'], { sizes: '(min-width:900px) 40vw,100vw', sc: 1.06, du: 1.2, ms: 3800 });
   });
 
   /* ---------- Anclas: viaje con expo.inOut; la rueda/toque lo interrumpe ---------- */

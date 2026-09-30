@@ -38,3 +38,6 @@
 - Fotos originales de todas las unidades y retiro de las vendidas.
 - Fuentes propias en vez de Google Fonts (evita la conexión a Google).
 - Página propia por unidad, si el stock crece.
+
+8. Autorizar por escrito las fotos y videos nuevos: frente del local, recorrido en video (se ven patentes y hay audio), video del ingreso y foto del equipo (dos personas). Si falta alguna autorización, retirar ese archivo de `images/` o `video/` y su bloque en `#local` o `#equipo`.
+9. Las dos fotos de la calle son capturas de Google Street View: confirmar que se pueden usar o reemplazarlas por fotos propias. Además muestran carteles con frases sin confirmar ("Venta de 0Km y usados, todas las marcas", "Gestoría propia", horarios y redes). Son lo que dice el cartel, no algo que el sitio afirme.
