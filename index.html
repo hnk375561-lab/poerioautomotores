@@ -117,12 +117,13 @@ dl.spec{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}dl.spec dt{
 @media(min-width:1000px){.dm{grid-template-columns:1.3fr 1fr}.pb{display:flex;flex:1;align-items:center;gap:18px;padding:14px 18px}.pb .lg{flex:none;background:var(--paper);border-radius:3px;padding:8px 12px}.pb .lg img{height:52px;width:auto}.pb p{margin:0;color:#aebbc3;font-size:14px;line-height:1.45}.pb strong{color:#fff;display:block;font-size:15px}.pb a{color:#fff;font-weight:600}}
 /* MOVIMIENTO: estados iniciales del hero (solo con JS y sin reduced-motion), microinteracciones y ficha */
 .hero figure{overflow:hidden}nav{position:relative}
-.m:not(.mi) .hero h1,.m:not(.mi) .hero .tx p,.m:not(.mi) .hero .row,.m:not(.mi) .hero .lk,.m:not(.mi) .hero .vcap,.m:not(.mi) .hero .bgv,.m:not(.mi) .bar{opacity:0}
-.m:not(.mi) .hero figure{clip-path:inset(0 0 100% 0)}
+.m:not(.mi) .hero h1,.m:not(.mi) .hero .tx p,.m:not(.mi) .hero .row,.m:not(.mi) .hero .lk,.m:not(.mi) .hero .vcap,.m:not(.mi) .hero .bgv{opacity:0}
+.m:not(.mi) .bar{opacity:0;visibility:hidden}
+.m:not(.mi) .hero figure{clip-path:inset(0% 0% 100% 0%)}@media(min-width:900px){.m:not(.mi) .hero figure{clip-path:inset(0% 100% 0% 0%)}}
 .btn{transition:background .2s,color .2s,border-color .2s,transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}.btn:active{transform:scale(.97)}
 .chip{transition:color .25s,border-color .25s}
 nav a::after{content:"";position:absolute;left:0;right:0;bottom:7px;height:2px;background:var(--cy);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.16,1,.3,1)}
-nav a{position:relative}nav a:hover::after,nav a[aria-current]::after{transform:scaleX(1)}nav a[aria-current]{color:var(--cyd)}
+nav a{position:relative}nav a:hover::after{transform:scaleX(1)}nav a[aria-current]{color:var(--cyd)}
 header{transition:box-shadow .35s}header.s{box-shadow:0 10px 30px -22px rgba(14,27,38,.55)}
 @media(hover:hover){.btn.p:hover{transform:translateY(-2px);box-shadow:0 10px 22px -12px rgba(14,27,38,.55)}.car .ct img{transition:transform 1s cubic-bezier(.16,1,.3,1)}.car:hover .ct img{transform:scale(1.045)}}
 @media(max-width:899px){.m header{position:sticky;top:0;z-index:20;transition:box-shadow .35s,transform .5s cubic-bezier(.16,1,.3,1)}.m header.h{transform:translateY(-100%)}}
@@ -141,7 +142,6 @@ dialog[open]{animation:dIn .45s cubic-bezier(.16,1,.3,1)}dialog[open]::backdrop{
 .loc .row{gap:10px}.loc .btn{padding:0 14px;font-size:15px}.loc .soc{gap:0 20px}.loc .soc a{font-size:14px}
 @media(min-width:900px){.loc .w{align-items:stretch}.mp{min-height:440px}}
 /* ==== v3: centrado, cabecera de contacto, operaciones, ubicación ==== */
-.m:not(.mi) .hero figure{opacity:0;clip-path:none}
 .head{flex-direction:column;align-items:center;text-align:center}.head .sub{margin-inline:auto}.tabs{justify-content:center}
 header .w{width:min(1320px,100% - 40px)}.mark,.ic{white-space:nowrap}.hc{display:flex;align-items:center}.ic{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:40px;min-height:44px;color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;transition:color .25s,transform .35s cubic-bezier(.16,1,.3,1)}.ic svg{width:20px;height:20px;fill:currentColor;flex:none}.ic svg.o{fill:none;stroke:currentColor;stroke-width:2}.ic:hover{color:var(--cyd);transform:translateY(-2px)}.ic.tel span{display:none}
 @media(min-width:900px){.hc{margin-right:4px}}@media(min-width:900px) and (max-width:999px){.hc{display:none}}@media(min-width:900px) and (max-width:1199px){.ic.pin,.ic.fb{display:none}.mark small{display:none}header .w{column-gap:16px}nav{gap:14px}nav a{font-size:14px}}@media(min-width:1400px){.ic.tel span{display:inline}.ic.tel{padding:0 10px}}
@@ -167,7 +167,21 @@ footer{text-align:center}footer .lg img{margin-inline:auto}footer p{margin-inlin
 @media(min-width:900px){.lc{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(14,27,38,.9)}}
 @media(max-width:899px){header .w{column-gap:0}.mark{font-size:16px}.mark img{width:28px;height:28px;margin-right:8px}.ic{min-width:36px}.ic svg{width:19px;height:19px}}@media(max-width:389px){.ic.pin{display:none}}
 @media(max-width:899px){header .w{column-gap:0}.ic{min-width:38px}.bar{right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px))}.bar .btn{flex:1}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}dialog[open],dialog[open]::backdrop{animation:none!important}}
+/* ==== Movimiento v4: indicadores, barra móvil, botones, ficha ==== */
+.ni,.ti{position:absolute;left:0;width:100px;height:2px;background:var(--cy);transform-origin:0 50%;opacity:0;pointer-events:none}
+.ni{bottom:7px}.tabs{position:relative}.ti{top:0}
+.mt .chip[aria-pressed=true]{border-color:transparent}
+@media(max-width:899px){nav.nr{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}nav.nl{-webkit-mask-image:linear-gradient(90deg,transparent,#000 28px);mask-image:linear-gradient(90deg,transparent,#000 28px)}nav.nl.nr{-webkit-mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent)}}
+.m .bar{transition:transform .55s cubic-bezier(.16,1,.3,1),opacity .35s,visibility 0s}.m .bar.bh{transform:translateY(24px);opacity:0;visibility:hidden;pointer-events:none;transition:transform .4s cubic-bezier(.16,1,.3,1),opacity .25s,visibility 0s .4s}
+.btn{position:relative;isolation:isolate}
+.btn:not(.p)::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:var(--fill,var(--ink));transform:scaleX(0);transform-origin:0 50%;transition:transform .55s cubic-bezier(.16,1,.3,1)}
+.hero .btn:not(.p),.loc .btn:not(.p){--fill:#fff}
+.btn:not(.p){transition:color .3s cubic-bezier(.16,1,.3,1) .06s,border-color .3s,transform .25s cubic-bezier(.16,1,.3,1)}
+@media(hover:hover){.btn:not(.p):hover::before{transform:scaleX(1)}.btn:not(.p):hover,.hero .btn:not(.p):hover,.loc .btn:not(.p):hover,.bar .btn:not(.p):hover{background:transparent}
+.car .ar,.car .cnt{opacity:0;transition:opacity .35s,background .2s,transform .5s cubic-bezier(.16,1,.3,1)}.car .ar.l{transform:translate(-10px,-50%)}.car .ar.r{transform:translate(10px,-50%)}
+.car:hover .ar,.car:focus-within .ar,.car:hover .cnt,.car:focus-within .cnt{opacity:1}.car:hover .ar.l,.car:focus-within .ar.l,.car:hover .ar.r,.car:focus-within .ar.r{transform:translate(0,-50%)}}
+.m dialog[open]{animation:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}dialog[open],dialog[open]::backdrop{animation:none!important}}
 </style>
 </head>
 <body>
