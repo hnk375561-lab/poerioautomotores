@@ -26,7 +26,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="images/icon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="images/icon-192.png">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-<script>(function(r){if(!matchMedia("(prefers-reduced-motion:reduce)").matches){r.classList.add("m");setTimeout(function(){r.classList.add("mi")},4500)}})(document.documentElement)</script>
+<script>(function(r){if(!matchMedia("(prefers-reduced-motion:reduce)").matches){r.classList.add("m")}})(document.documentElement)</script>
+<link rel="preload" as="image" href="images/kwid-1.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet">
 <style>
@@ -117,9 +118,7 @@ dl.spec{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}dl.spec dt{
 @media(min-width:1000px){.dm{grid-template-columns:1.3fr 1fr}.pb{display:flex;flex:1;align-items:center;gap:18px;padding:14px 18px}.pb .lg{flex:none;background:var(--paper);border-radius:3px;padding:8px 12px}.pb .lg img{height:52px;width:auto}.pb p{margin:0;color:#aebbc3;font-size:14px;line-height:1.45}.pb strong{color:#fff;display:block;font-size:15px}.pb a{color:#fff;font-weight:600}}
 /* MOVIMIENTO: estados iniciales del hero (solo con JS y sin reduced-motion), microinteracciones y ficha */
 .hero figure{overflow:hidden}nav{position:relative}
-.m:not(.mi) .hero h1,.m:not(.mi) .hero .tx p,.m:not(.mi) .hero .row,.m:not(.mi) .hero .lk,.m:not(.mi) .hero .hcap,.m:not(.mi) .hero .hr,.m:not(.mi) .hero .ha,.m:not(.mi) .hero .bgv{opacity:0}
-.m:not(.mi) .bar{opacity:0;visibility:hidden}
-.m:not(.mi) .hero figure{clip-path:inset(0% 0% 100% 0%)}@media(min-width:900px){.m:not(.mi) .hero figure{clip-path:inset(0% 100% 0% 0%)}}
+/* El hero y la barra de contacto se ven desde el primer pintado: sin estados ocultos hasta que termine el JS */
 .btn{transition:background .2s,color .2s,border-color .2s,transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}.btn:active{transform:scale(.97)}
 .chip{transition:color .25s,border-color .25s}
 nav a::after{content:"";position:absolute;left:0;right:0;bottom:7px;height:2px;background:var(--cy);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.16,1,.3,1)}
@@ -268,7 +267,7 @@ header .mark{color:#fff}header .mark small{color:#8fa9b6}
 .cl{list-style:none;margin:0;padding:0;border-top:1px solid var(--stone)}.cl li{border-bottom:1px solid var(--stone)}
 .cr{all:unset;box-sizing:border-box;display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:4px 16px;width:100%;padding:12px 4px;align-items:center;cursor:pointer;transition:background .3s}.cr:hover{background:#fff}.cr:focus-visible{outline:3px solid var(--cy);outline-offset:-3px}
 .ctm{width:72px;height:54px;object-fit:cover;border-radius:6px;background:var(--stone)}
-.cb{display:grid;min-width:0}.cb b{font:700 18px/1.2 var(--h);letter-spacing:-.01em}.rm{color:var(--mute);font-size:14px}
+.crb{display:grid;min-width:0}.crb b{font:700 18px/1.2 var(--h);letter-spacing:-.01em}.rm{color:var(--mute);font-size:14px}
 .kb{display:block;height:4px;margin-top:8px;border-radius:2px;background:var(--stone);overflow:hidden}.kb i{display:block;height:100%;border-radius:2px;background:var(--cy);transform-origin:0 50%;transition:background .3s}.cr:hover .kb i{background:var(--ink)}
 .rt{font-size:13px;font-weight:600;color:var(--cyd);text-align:right}.rv{display:none;font-weight:600;font-size:15px;color:var(--cyd)}@media(min-width:640px){.cr{grid-template-columns:72px minmax(0,1fr) 150px 96px}.rv{display:block;text-align:right}}
 .cn{margin-top:14px;font-size:14px}@media(max-width:520px){.sc{padding:0 8px;font-size:14px}}
@@ -326,7 +325,7 @@ section.cmp,section.ops,section.faq{padding-block:96px}
 .cr{padding:16px 10px;grid-template-columns:84px minmax(0,1fr) auto}
 .cr:hover{background:#fff}
 .ctm{width:84px;height:60px;border-radius:0}
-.cb b{font:400 23px/1.1 var(--serif);letter-spacing:0}
+.crb b{font:400 23px/1.1 var(--serif);letter-spacing:0}
 .rm{font-size:14px;letter-spacing:.02em}
 .kb{height:2px;border-radius:0;margin-top:10px;background:#d3dce1}.kb i{border-radius:0;background:var(--cyd)}.cr:hover .kb i{background:var(--deep)}
 .rt{letter-spacing:.06em;color:var(--cyd)}
@@ -381,7 +380,7 @@ details p{font-size:16px;line-height:1.65;padding-right:44px}
 .fin{margin-top:36px;padding:28px 30px;background:var(--deep);color:#fff;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;border-top:2px solid var(--lux)}
 .fin p{margin:0;font:400 26px/1.1 var(--serif)}
 .fin .btn.p{background:var(--lux);border-color:var(--lux);color:var(--deep)}.fin .btn.p:hover{background:#fff;border-color:#fff}
-@media(max-width:640px){section.cmp,section.ops,section.faq{padding-block:72px}.eq{padding:26px 22px}.fr>form{padding:22px}summary{font-size:21px}.cb b{font-size:21px}.fin .btn{width:100%}}
+@media(max-width:640px){section.cmp,section.ops,section.faq{padding-block:72px}.eq{padding:26px 22px}.fr>form{padding:22px}summary{font-size:21px}.crb b{font-size:21px}.fin .btn{width:100%}}
 @media(min-width:900px){.lc{max-width:660px}.loc .soc{gap:0 18px}}
 
 
@@ -411,16 +410,18 @@ details p{font-size:16px;line-height:1.65;padding-right:44px}
 .vs select{width:100%;min-height:52px;padding:0 14px;background:#14283a;color:#fff;border:1px solid rgba(255,255,255,.3);font:600 16px var(--b);border-radius:3px}
 .vs .tw{overflow-x:auto;border:1px solid rgba(255,255,255,.16)}.vs table{width:100%;min-width:640px;border-collapse:collapse}
 .vs th,.vs td{padding:14px 16px;text-align:left;border-bottom:1px solid rgba(255,255,255,.12);font-size:16px}.vs th[scope=row]{color:#aebbc3;font-weight:500;width:26%}
-.vs td img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}.vs td.b{color:#8fd3e4;font-weight:700}.vs td.y{color:#8fd3e4}.vs td.n{color:#5b6b76}
+.vs td img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}.vs td.b{color:#8fd3e4;font-weight:700}.vs td.y{color:#8fd3e4}.vs td.n{color:#93a9b5;font-style:italic}
+.vs .vl{margin:14px 0 0;color:#aebbc3;font-size:14px;max-width:70ch}
+@media(max-width:640px){.vs .vp label:nth-child(3){display:none}.vs table{min-width:0;table-layout:fixed}.vs th,.vs td{padding:10px 8px;font-size:14px;overflow-wrap:anywhere}.vs th[scope=row]{width:32%}}
 .no{padding:clamp(56px,9vw,104px) 0;background:var(--paper)}.no .w{display:grid;gap:40px}
 @media(min-width:860px){.no .w{grid-template-columns:1fr 1fr;gap:72px;align-items:center}}
 .no .ph{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--stone)}.no .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}.no .ph img:first-child{opacity:1}
 .no .ey{display:inline-block;border:1px solid var(--ink);border-radius:999px;padding:6px 16px;font:600 13px var(--b);letter-spacing:.14em;text-transform:uppercase}
 .no h2{font:700 clamp(30px,4.4vw,52px)/1.05 var(--h);letter-spacing:-.02em;margin:18px 0}.no p{color:var(--mute)}
 .no .pl{display:grid;gap:0;margin:26px 0;border-top:1.5px solid var(--ink)}.no .pl div{padding:16px 0;border-bottom:1px solid var(--stone)}.no .pl b{font:700 19px var(--h);display:block}
-.cb{position:relative;overflow:hidden;background:var(--ink);color:#fff;text-align:center;padding:clamp(64px,10vw,120px) 0}
-.cb>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.28}.cb .w{position:relative}
-.cb h2{font:700 clamp(30px,5vw,58px)/1.05 var(--h);letter-spacing:-.02em;margin:0 0 14px}.cb p{max-width:560px;margin:0 auto 26px;color:#dbe6ec}.cb .row{justify-content:center;display:flex;flex-wrap:wrap;gap:12px}.cb .btn:not(.p){border-color:#fff;color:#fff}
+.cta-band{position:relative;overflow:hidden;background:var(--ink);color:#fff;text-align:center;padding:clamp(64px,10vw,120px) 0}
+.cta-band>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.28}.cta-band .w{position:relative}
+.cta-band h2{font:700 clamp(30px,5vw,58px)/1.05 var(--h);letter-spacing:-.02em;margin:0 0 14px}.cta-band p{max-width:560px;margin:0 auto 26px;color:#dbe6ec}.cta-band .row{justify-content:center;display:flex;flex-wrap:wrap;gap:12px}.cta-band .btn:not(.p){border-color:#fff;color:#fff}
 
 .car[hidden]{display:none!important}
 @media(min-width:900px){header nav{flex:1 1 auto;min-width:0;justify-content:center;gap:0;overflow-x:auto;scrollbar-width:none}header nav::-webkit-scrollbar{display:none}header nav a{white-space:nowrap;flex:none;padding-inline:9px;font-size:15px}}
@@ -498,13 +499,13 @@ details p{font-size:16px;line-height:1.65;padding-right:44px}
 <div class="nm" id="nm"></div>
 </div></section>
 
-<section id="versus" class="vs"><div class="w"><div class="head"><div><h2>¿Estás entre varias opciones?</h2><p class="sub">Elegí hasta tres unidades y compará año, kilómetros y equipamiento lado a lado.</p></div></div><div class="vp" id="vp"></div><div class="tw" id="vt"></div></div></section>
+<section id="versus" class="vs"><div class="w"><div class="head"><div><h2>¿Estás entre varias opciones?</h2><p class="sub">Elegí hasta tres unidades y compará año, kilómetros y equipamiento lado a lado.</p></div></div><div class="vp" id="vp"></div><div class="tw" id="vt" role="region" aria-label="Tabla comparativa de unidades" tabindex="0"></div><p class="vl">Según el texto de cada publicación. «No informado» quiere decir que la publicación no lo menciona, no que la unidad no lo tenga. Consultanos para confirmarlo.</p></div></section>
 
 <section id="nosotros" class="no"><div class="w"><div class="ph" id="nph"><img src="images/ecosport-4.webp" alt="Ford EcoSport XLS 2011" width="1280" height="960"></div><div><span class="ey">Quiénes somos</span><h2>Usados, permutas y consignaciones en Concepción del Uruguay</h2><p>Fernando Poerio Automotores atiende en Alberdi 1337. Vas a encontrar autos usados con sus fotos y datos, y podés escribirnos para vender, permutar o dejar tu auto en consignación.</p><div class="pl"><div><b>Usados</b><span>Unidades con ficha completa: año, kilómetros y equipamiento.</span></div><div><b>Permutas</b><span>Contanos tu auto y lo evaluamos como parte de pago.</span></div><div><b>Consignaciones</b><span>Escribinos y te contamos cómo funciona.</span></div></div><a class="btn p" href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por las unidades disponibles.">Hablar con la agencia</a></div>
 <div class="ci"><div class="ih"><img src="images/logo-claro.webp" alt="Fernando Poerio Automotores" width="722" height="287" loading="lazy"></div><div class="ib"><div><small>Dirección</small><b id="icA"></b></div><div><small>Atención</small><b>Escribinos o llamanos antes de venir y coordinamos la visita.</b></div><div><small>WhatsApp directo</small><b><a id="icW" href="https://wa.me/5493442453550"></a></b></div><div><small>Teléfono</small><b><a id="icT" href="tel:+543442453550"></a></b></div></div></div>
 </div></section>
 
-<section class="cb"><img src="images/punto-4.webp" alt="" loading="lazy" width="1280" height="960"><div class="w"><h2>¿Querés vender o permutar tu auto?</h2><p>Contanos marca, modelo y año y te respondemos por WhatsApp.</p><div class="row"><a class="btn p" href="#operaciones">Completar el formulario</a><a class="btn" href="https://wa.me/5493442453550" data-wa="Hola! Quiero vender mi auto.">Escribir ahora</a></div></div></section>
+<section class="cta-band"><img src="images/punto-4.webp" alt="" loading="lazy" width="1280" height="960"><div class="w"><h2>¿Querés vender o permutar tu auto?</h2><p>Contanos marca, modelo y año y te respondemos por WhatsApp.</p><div class="row"><a class="btn p" href="#operaciones">Completar el formulario</a><a class="btn" href="https://wa.me/5493442453550" data-wa="Hola! Quiero vender mi auto.">Escribir ahora</a></div></div></section>
 
 <section id="contacto" class="loc"><div class="mp"><iframe title="Mapa: Fernando Poerio Automotores, Alberdi 1337, Concepción del Uruguay" src="https://maps.google.com/maps?q=-32.4882114,-58.2425324&amp;z=17&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" width="600" height="450"></iframe><span class="mph">Tocá el mapa para moverlo</span><a class="mpl" data-map href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" target="_blank" rel="noopener noreferrer">Abrir en Google Maps ↗</a></div><div class="w">
 <div class="lc"><h2 class="eb">Dónde estamos</h2><address id="addr"></address><p class="meta" id="hoursNote">Escribinos o llamanos antes de venir y coordinamos la visita.</p>
@@ -606,7 +607,10 @@ D.addEventListener("scroll",count,true);
 var HZ=$("hzs"),HN=$("hn"),HM=$("hm"),HW=$("hw"),hi=0,SL=[],hsl;
 (function(){var mx=Math.max.apply(null,STOCK.map(function(c){return ph(c).length}));for(var p=0;p<mx;p++)STOCK.forEach(function(c,ci){var f=ph(c)[p];if(f)SL.push({c:ci,src:f})})})();
 var hL=SL.length;
-HZ.innerHTML=SL.map(function(x,i){var c=STOCK[x.c];return '<div class="hz'+(i?'':' on')+'" role="group" aria-roledescription="slide" aria-label="'+(i+1)+' de '+hL+': '+esc(c.titulo)+'"><img src="'+esc(x.src)+'" alt="'+esc(c.titulo+" "+c.anio)+'" width="1440" height="1085"'+(i?' decoding="async"':' fetchpriority="high"')+'></div>'}).join("");
+function sh(x,i){var c=STOCK[x.c];return '<div class="hz'+(i?'':' on')+'" role="group" aria-roledescription="slide" aria-label="'+(i+1)+' de '+hL+': '+esc(c.titulo)+'"><img src="'+esc(x.src)+'" alt="'+esc(c.titulo+" "+c.anio)+'" width="1440" height="1085"'+(i?' decoding="async"':' fetchpriority="high"')+'></div>'}
+var f0=HZ.firstElementChild;
+/* la primera foto ya viene en el HTML: se conserva (no se vuelve a crear) y solo se agregan las demás */
+if(f0){f0.setAttribute("role","group");f0.setAttribute("aria-roledescription","slide");f0.setAttribute("aria-label","1 de "+hL+": "+STOCK[SL[0].c].titulo);HZ.insertAdjacentHTML("beforeend",SL.slice(1).map(function(x,j){return sh(x,j+1)}).join(""))}else HZ.innerHTML=SL.map(sh).join("");
 hsl=HZ.querySelectorAll(".hz");
 function heroGo(n,dir){n=(n+hL)%hL;if(n===hi)return;var f=hi,c=STOCK[SL[n].c],pc=STOCK[SL[f].c];hi=n;dir=dir||(n>f?1:-1);
 hsl[f].classList.remove("on");hsl[n].classList.add("on");
@@ -622,7 +626,7 @@ document.querySelectorAll("[data-ov]").forEach(function(e){e.textContent=OVT[e.g
 $("fqc").textContent=N.direccion+" · "+N.telefono;
 var CL=$("cl"),CS=$("cs");
 CL.innerHTML=STOCK.map(function(c,i){var t=[],n=c.nota||"";if(/única mano/i.test(n))t.push("Única mano");if(/permuta/i.test(n))t.push("Permuta");var f=ph(c);
-return '<li data-i="'+i+'"><button type="button" class="cr" data-i="'+i+'" data-src="'+esc(f[1]||f[0])+'" aria-label="Ver ficha de '+esc(c.titulo)+'"><img class="ctm" src="'+esc(f[0])+'" alt="" loading="lazy" width="72" height="54"><span class="cb"><b>'+esc(c.titulo)+'</b><span class="rm">'+esc(c.anio)+' · '+esc(c.km||"Km: consultar")+' · '+esc(c.combustible||"—")+'</span><span class="kb"><i style="width:'+Math.max(6,Math.round(kmv(c)/KM*100))+'%"></i></span></span><span class="rt">'+t.join(" · ")+'</span><span class="rv" aria-hidden="true">Ver ficha ›</span></button></li>'}).join("");
+return '<li data-i="'+i+'"><button type="button" class="cr" data-i="'+i+'" data-src="'+esc(f[1]||f[0])+'" aria-label="Ver ficha de '+esc(c.titulo)+'"><img class="ctm" src="'+esc(f[0])+'" alt="" loading="lazy" width="72" height="54"><span class="crb"><b>'+esc(c.titulo)+'</b><span class="rm">'+esc(c.anio)+' · '+esc(c.km||"Km: consultar")+' · '+esc(c.combustible||"—")+'</span><span class="kb"><i style="width:'+Math.max(6,Math.round(kmv(c)/KM*100))+'%"></i></span></span><span class="rt">'+t.join(" · ")+'</span><span class="rv" aria-hidden="true">Ver ficha ›</span></button></li>'}).join("");
 var SO={orig:["Como en el catálogo",function(a,b){return a-b}],anio:["Más nuevas primero",function(a,b){return STOCK[b].anio-STOCK[a].anio||kmv(STOCK[a])-kmv(STOCK[b])}],km:["Menos km primero",function(a,b){return kmv(STOCK[a])-kmv(STOCK[b])}]};
 CS.innerHTML=Object.keys(SO).map(function(k,i){return '<button type="button" class="sc" data-s="'+k+'" aria-pressed="'+(i===0)+'">'+SO[k][0]+'</button>'}).join("");
 CS.addEventListener("click",function(e){var b=e.target.closest(".sc");if(!b||b.getAttribute("aria-pressed")==="true")return;var s=b.getAttribute("data-s"),rows=[].slice.call(CL.children),ord=STOCK.map(function(_,i){return i}).sort(SO[s][1]);
@@ -686,7 +690,7 @@ function show(k,i){
  im.src=ph[0];im.alt=c.titulo+" "+c.anio;im.width=1280;im.height=960;
  if(g&&!RM&&old){im.style.opacity=0;fi.appendChild(im);g.to(im,{opacity:1,duration:.7,ease:"power2.out"});g.to(old,{opacity:0,duration:.7,onComplete:function(){old.remove()}})}else{fi.innerHTML="";fi.appendChild(im)}
  var others=order.filter(function(x,j){return j!==ci}).slice(0,2).map(function(x){return'<button type="button" data-j="'+order.indexOf(x)+'">'+esc(x.corto||x.titulo)+" "+x.anio+"</button>"}).join("");
- $("fb").innerHTML='<h3>'+esc(c.titulo)+'</h3><div class="sp"><span>'+c.anio+'</span><span>'+esc(c.km)+'</span><span>'+esc(c.combustible)+'</span></div><ul><li>'+esc(P[k].w(c))+'</li><li>'+esc((c.nota||"").split(".").slice(0,2).join(".").trim())+'.</li></ul><div class="row"><a class="btn p" href="'+wa(c)+'" target="_blank" rel="noopener noreferrer">Consultar esta unidad</a><button type="button" class="btn" data-f="1">Ver ficha</button></div><div class="al">También:'+others+'</div>';
+ $("fb").innerHTML='<h3>'+esc(c.titulo)+'</h3><div class="sp"><span>'+c.anio+'</span><span>'+esc(c.km)+'</span><span>'+esc(c.combustible)+'</span></div><ul>'+(ci===0?'<li>'+esc(P[k].w(c))+'</li>':'')+'<li>'+esc((c.nota||"").split(".").slice(0,2).join(".").trim())+'.</li></ul><div class="row"><a class="btn p" href="'+wa(c)+'" target="_blank" rel="noopener noreferrer">Consultar esta unidad</a><button type="button" class="btn" data-f="1">Ver ficha</button></div><div class="al">También:'+others+'</div>';
  $("fdSt").textContent=P[k].l+": "+c.titulo;if(g&&!RM&&window.__fd)g.fromTo("#fb > *",{y:14,opacity:0},{y:0,opacity:1,duration:.6,ease:"expo.out",stagger:.06,clearProps:"transform,opacity"});window.__fd=1;
  document.querySelectorAll("#fk button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.k===k)});
 }
@@ -745,14 +749,15 @@ ob.observe($("stockGrid"),{childList:true});ap();
 var EQ=[["aire","Aire acondicionado"],["cierre","Cierre centralizado"],["levantavidrios","Levantavidrios"],["espejos","Espejos eléctricos"],["direcci","Dirección"],["airbag","Airbag"],["abs","ABS"],["llantas","Llantas de aleación"],["antinieblas","Antinieblas"]];
 var vp=$("vp"),sl=[];
 vp.innerHTML=[0,1,2].map(function(i){return'<label><span class="sr">Unidad '+(i+1)+'</span><select data-s="'+i+'"><option value="-1">Elegir unidad</option>'+S.map(function(c,j){return'<option value="'+j+'"'+(i===j?" selected":"")+">"+esc(c.titulo+" "+c.anio)+"</option>"}).join("")+"</select></label>"}).join("");
-function vr(){var u=[].map.call(vp.querySelectorAll("select"),function(s){return S[+s.value]}),a=u.filter(Boolean);
+var MQ=matchMedia("(max-width:640px)");
+function vr(){var u=[].map.call(vp.querySelectorAll("select"),function(s){return S[+s.value]}).slice(0,MQ.matches?2:3),a=u.filter(Boolean);
  if(!a.length){$("vt").innerHTML='<p style="padding:24px;margin:0">Elegí al menos una unidad para compararla.</p>';return}
  var mk=Math.min.apply(null,a.map(km)),ma=Math.max.apply(null,a.map(function(c){return c.anio}));
  function row(l,f){return'<tr><th scope="row">'+l+"</th>"+u.map(function(c){return c?f(c):"<td></td>"}).join("")+"</tr>"}
- function yn(ok){return'<td class="'+(ok?"y":"n")+'">'+(ok?"✓ Incluye":"—")+"</td>"}
+ function yn(ok){return'<td class="'+(ok?"y":"n")+'">'+(ok?"✓ Incluye":"No informado")+"</td>"}
  $("vt").innerHTML="<table><thead><tr><td></td>"+u.map(function(c){return c?"<th scope=\"col\">"+esc(c.titulo)+"</th>":"<th></th>"}).join("")+"</tr></thead><tbody>"+row("Foto",function(c){return'<td><img src="'+esc((c.fotos||[c.foto])[0])+'" alt="'+esc(c.titulo)+'" loading="lazy"></td>'})+row("Año",function(c){return"<td"+(a.length>1&&c.anio===ma?' class="b"':"")+">"+c.anio+"</td>"})+row("Kilómetros",function(c){return"<td"+(a.length>1&&km(c)===mk?' class="b"':"")+">"+esc(c.km)+"</td>"})+row("Combustible",function(c){return"<td>"+esc(c.combustible)+"</td>"})+row("Única mano",function(c){return yn(/única mano/i.test(c.nota||""))})+EQ.map(function(e){return row(e[1],function(c){return yn((c.nota||"").toLowerCase().indexOf(e[0])>-1)})}).join("")+"</tbody></table>";
  if(g&&!RM)g.from("#vt tbody tr",{opacity:0,y:10,duration:.5,stagger:.03,ease:"expo.out",clearProps:"all"})}
-vp.addEventListener("change",vr);
+vp.addEventListener("change",vr);if(MQ.addEventListener)MQ.addEventListener("change",vr);
 /* Nosotros: fotos en fundido */
 $("icA").textContent=NEGOCIO.direccion+" ("+NEGOCIO.referencia+"), "+NEGOCIO.ciudad;$("icW").textContent="+54 9 "+NEGOCIO.telefono.replace("03442 ","3442 ");$("icT").textContent=NEGOCIO.telefono;
 function late(){g=window.gsap;vr();(function(){var b=$("bd"),ns=["clio-5","up-5","ecosport-5"];ns.forEach(function(n){var i=new Image();i.src="images/"+n+".webp";i.alt="";i.width=1280;i.height=960;i.loading="lazy";b.insertBefore(i,b.querySelector("a"))});var im=b.querySelectorAll("img"),k=0,tm=0,vis=false;function nx(){var a=im[k],c=im[(k+1)%im.length];k=(k+1)%im.length;g.set(c,{opacity:0,scale:1.08});g.to(c,{opacity:.75,scale:1,duration:1.6,ease:"power2.out"});g.to(a,{opacity:0,duration:1.6})}function go(){if(!tm&&vis&&!document.hidden&&!RM)tm=setInterval(nx,4200)}function st(){clearInterval(tm);tm=0}new IntersectionObserver(function(e){vis=e[0].isIntersecting;vis?go():st()}).observe(b);document.addEventListener("visibilitychange",function(){document.hidden?st():go()})})();if(!g||RM)return;
@@ -765,11 +770,11 @@ function late(){g=window.gsap;vr();(function(){var b=$("bd"),ns=["clio-5","up-5"
  if(window.ScrollTrigger){
   function wd(el){if(!el||el.dataset.w)return;var t=el.textContent.trim();el.dataset.w=1;el.setAttribute("aria-label",t);el.innerHTML=t.split(/\s+/).map(function(w){return'<span aria-hidden="true" style="display:inline-block;overflow:hidden;vertical-align:top;padding:.28em 0 .16em;margin:-.28em 0 -.16em"><span class="wi" style="display:inline-block">'+w+"</span></span>"}).join(" ");
    g.fromTo(el.querySelectorAll(".wi"),{yPercent:110},{yPercent:0,duration:1,ease:"expo.out",stagger:.06,scrollTrigger:{trigger:el,start:"top 88%",once:true}})}
-  ["#elegir h2","#versus h2","#nosotros h2",".cb h2"].forEach(function(s){wd(document.querySelector(s))});
-  [["#versus .sub,#vp","#versus"],["#nosotros .ey,#nosotros .w > div:last-child > p,#nosotros .pl > div,#nosotros .w > div:last-child > .btn","#nosotros"],[".cb p,.cb .row",".cb"],[".ci",".ci"],["#ff,#qc,.qb","#unidades .qb"],["#nm div","#nm"]].forEach(function(r){var e=document.querySelectorAll(r[0]);if(e.length)g.from(e,{y:24,opacity:0,duration:.9,ease:"expo.out",stagger:.08,clearProps:"transform,opacity",scrollTrigger:{trigger:r[1],start:"top 85%",once:true}})});
+  ["#elegir h2","#versus h2","#nosotros h2",".cta-band h2"].forEach(function(s){wd(document.querySelector(s))});
+  [["#versus .sub,#vp","#versus"],["#nosotros .ey,#nosotros .w > div:last-child > p,#nosotros .pl > div,#nosotros .w > div:last-child > .btn","#nosotros"],[".cta-band p,.cta-band .row",".cta-band"],[".ci",".ci"],["#ff,#qc,.qb","#unidades .qb"],["#nm div","#nm"]].forEach(function(r){var e=document.querySelectorAll(r[0]);if(e.length)g.from(e,{y:24,opacity:0,duration:.9,ease:"expo.out",stagger:.08,clearProps:"transform,opacity",scrollTrigger:{trigger:r[1],start:"top 85%",once:true}})});
   var pi=document.querySelector("#nph");if(pi)g.fromTo(pi,{clipPath:"inset(0% 0% 100% 0%)"},{clipPath:"inset(0% 0% 0% 0%)",duration:1.3,ease:"expo.inOut",clearProps:"clipPath",scrollTrigger:{trigger:pi,start:"top 85%",once:true}});
   var bd=document.querySelector(".bd a");if(bd)g.from(bd,{y:20,opacity:0,duration:.9,ease:"expo.out",clearProps:"transform,opacity",scrollTrigger:{trigger:".bd",start:"top 70%",once:true}});
-  if(matchMedia("(hover:hover)").matches)document.querySelectorAll(".bd a,.cb .btn,.ci a,.no .btn").forEach(function(b){var x=g.quickTo(b,"x",{duration:.6,ease:"power3.out"}),y=g.quickTo(b,"y",{duration:.6,ease:"power3.out"});b.addEventListener("pointermove",function(e){var r=b.getBoundingClientRect();x((e.clientX-r.left-r.width/2)*.2);y((e.clientY-r.top-r.height/2)*.28)});b.addEventListener("pointerleave",function(){x(0);y(0)})});
+  if(matchMedia("(hover:hover)").matches)document.querySelectorAll(".bd a,.cta-band .btn,.ci a,.no .btn").forEach(function(b){var x=g.quickTo(b,"x",{duration:.6,ease:"power3.out"}),y=g.quickTo(b,"y",{duration:.6,ease:"power3.out"});b.addEventListener("pointermove",function(e){var r=b.getBoundingClientRect();x((e.clientX-r.left-r.width/2)*.2);y((e.clientY-r.top-r.height/2)*.28)});b.addEventListener("pointerleave",function(){x(0);y(0)})});
   window.addEventListener("load",function(){setTimeout(function(){ScrollTrigger.refresh()},400)})}
 }
 vr();if(document.readyState==="complete")late();else window.addEventListener("load",late);

@@ -165,46 +165,26 @@
       $$(sel).forEach(function (b) { b.classList.add('pulse'); setTimeout(function () { b.classList.remove('pulse'); }, 1800); });
     }
 
-    /* ---------- HERO: una sola entrada coordinada ----------
-       0.0 foto (máscara desde la costura con el texto) · 0.25 título por palabra · 0.4 bajada · 0.5 CTAs (usables en <1 s) · 0.62 enlace · 0.9 epígrafe */
-    if (!root.classList.contains('mi')) {
-      var fg = $('.hero figure'), fi = $('#hzs'), bg = $('.hero .bgv') || document.createElement('i'), ui = $$('.hero .hcap, .hero .ha'),
-        txt = [$('.hero h1'), $('.hero .tx p'), $('.hero .row'), $('.hero .lk')];
-      var HW = split(txt[0]);
-      var tl = g.timeline({ defaults: { ease: E }, onComplete: function () {
-        root.classList.add('mi');
-        g.set(HW, { clearProps: 'transform' });
-        g.set([fg, fi, bg].concat(ui, txt), { clearProps: 'opacity,transform,clipPath' });
-        ctx.add(startSlider);
-        ctx.add(function () {
-          if (D) {
-            /* Salida del hero: profundidad muy moderada (texto 28px, foto 2%) */
-            g.to([txt[0], txt[1]], { y: -28, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .5 } });
-            g.to(fi, { yPercent: 2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .5 } });
-            g.delayedCall(.9, function () { pulse('header .btn.p'); });
-            /* Paralaje con el puntero: foto y fondo se mueven en sentidos opuestos (solo mouse) */
-            if (fine) {
-              var hero = $('.hero'), P = { ease: 'power3.out', duration: .9 };
-              g.to([fi, bg], { scale: 1.06, duration: 1.6, ease: 'power2.out' });
-              var fx = g.quickTo(fi, 'x', P), fy = g.quickTo(fi, 'y', P), bx = g.quickTo(bg, 'x', P), by = g.quickTo(bg, 'y', P);
-              on(hero, 'pointermove', function (e) {
-                var r = hero.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - .5, ny = (e.clientY - r.top) / r.height - .5;
-                fx(nx * -26); fy(ny * -18); bx(nx * 18); by(ny * 12);
-              });
-              on(hero, 'pointerleave', function () { fx(0); fy(0); bx(0); by(0); });
-            }
-          }
+    /* ---------- HERO: visible desde el primer pintado ----------
+       Sin animación de entrada que lo oculte (el título, los botones y la foto ya están en el HTML). Solo queda la salida con profundidad y el paralaje. */
+    var fg = $('.hero figure'), fi = $('#hzs'), bg = $('.hero .bgv') || document.createElement('i'),
+      txt = [$('.hero h1'), $('.hero .tx p')];
+    if (D) {
+      /* Salida del hero: profundidad muy moderada (texto 28px, foto 2%) */
+      g.to([txt[0], txt[1]], { y: -28, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .5 } });
+      g.to(fi, { yPercent: 2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .5 } });
+      g.delayedCall(.9, function () { pulse('header .btn.p'); });
+      /* Paralaje con el puntero: foto y fondo se mueven en sentidos opuestos (solo mouse) */
+      if (fine) {
+        var hero = $('.hero'), P = { ease: 'power3.out', duration: .9 };
+        g.to([fi, bg], { scale: 1.06, duration: 1.6, ease: 'power2.out' });
+        var fx = g.quickTo(fi, 'x', P), fy = g.quickTo(fi, 'y', P), bx = g.quickTo(bg, 'x', P), by = g.quickTo(bg, 'y', P);
+        on(hero, 'pointermove', function (e) {
+          var r = hero.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - .5, ny = (e.clientY - r.top) / r.height - .5;
+          fx(nx * -26); fy(ny * -18); bx(nx * 18); by(ny * 12);
         });
-      } });
-      tl.fromTo(fg, { clipPath: D ? 'inset(0% 100% 0% 0%)' : 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: 'expo.inOut' }, 0)
-        .fromTo(fi, { scale: 1.12 }, { scale: 1, duration: 1.9, ease: 'power3.out' }, 0)
-        .fromTo(bg, { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 1.8, ease: 'power2.out' }, .1)
-        .set(txt[0], { opacity: 1 }, 0).fromTo(HW, { yPercent: 115 }, { yPercent: 0, duration: 1.1 * k, stagger: .07 }, .25)
-        .fromTo(txt[1], { opacity: 0, y: dy }, { opacity: 1, y: 0, duration: .8 * k }, .4)
-        .fromTo(txt[2], { opacity: 0, y: dy }, { opacity: 1, y: 0, duration: .7 * k }, .5)
-        .fromTo(txt[3], { opacity: 0, y: dy / 2 }, { opacity: 1, y: 0, duration: .6 * k }, .62)
-        .fromTo(ui[0], { opacity: 0 }, { opacity: 1, duration: .8 }, .9)
-        .fromTo(ui.slice(1), { opacity: 0, y: dy / 2 }, { opacity: 1, y: 0, duration: .7 * k, stagger: .08 }, 1);
+        on(hero, 'pointerleave', function () { fx(0); fy(0); bx(0); by(0); });
+      }
     }
 
 
@@ -251,7 +231,7 @@
       on(hv, 'pointerdown', function (e) { x0 = e.clientX; y0 = e.clientY; });
       on(hv, 'pointerup', function (e) { var dx = e.clientX - x0, dy2 = e.clientY - y0; if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy2) * 1.4) { var s2 = dx < 0 ? 1 : -1; H.go(H.i + s2, s2); } });
     }
-    if (root.classList.contains('mi')) startSlider();   /* redimensionado después de la entrada: retoma la rotación */
+    startSlider();   /* arranca la rotación (y la retoma tras redimensionar) */
 
     /* ---------- STOCK: el corazón comercial ---------- */
     words($('.head h2'), '.head');
