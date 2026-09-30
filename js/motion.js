@@ -70,8 +70,8 @@
         g.set([fg, bg, cap, bar].concat(txt), { clearProps: 'opacity,transform,clipPath' });
         if (!D) g.set(fi, { clearProps: 'transform' });
       } });
-      tl.fromTo(fg, { clipPath: D ? 'inset(0 0 0 100%)' : 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0 0)', duration: 1.2 * k, ease: 'expo.inOut' }, 0)
-        .fromTo(fi, { scale: D ? 1.12 : 1.08, transformOrigin: '100% 50%' }, { scale: 1, duration: 1.8, ease: 'power3.out' }, 0)
+      tl.fromTo(fg, { opacity: 0 }, { opacity: 1, duration: 1.6, ease: 'power2.out' }, 0)
+        .fromTo(fi, { scale: 1.1, transformOrigin: '50% 50%' }, { scale: 1, duration: 1.6, ease: 'power2.out' }, 0)
         .fromTo(bg, { opacity: 0, scale: 1.1 }, { opacity: 1, scale: 1, duration: 1.6, ease: 'power2.out' }, 0)
         .set(txt[0], { opacity: 1 }, 0).fromTo(HW, { yPercent: 115 }, { yPercent: 0, duration: 1.1 * k, stagger: .07 }, .1)
         .fromTo(txt[1], { opacity: 0, y: dy }, { opacity: 1, y: 0, duration: .9 * k }, .25)
@@ -129,12 +129,12 @@
     mo2.observe(dlg, { childList: true });
 
     /* ---- Bloques: mismo gesto en todo el sitio ---- */
-    words($('.ops .w > div:first-child > h2'), '.ops');
-    reveal($$('.ops .w > div:first-child > .sub'), '.ops');
-    reveal($$('.op'), '.op', { s: .1, st: 'top 88%' });
-    reveal([$('#canjeForm')], '#canjeForm', { st: 'top 90%' });
-    reveal($$('.loc .lc > *'), '.loc', { st: 'top 70%', s: .07 });
-    mask($('.mp'), '.loc', 'top 70%');
+    words($('.ops h2'), '.ops');
+    reveal($$('.ops .oh .sub'), '.ops');
+    reveal($$('.oc'), '.og', { s: .1, st: 'top 88%' });
+    reveal($$('.fm > *'), '.fm', { s: .12, st: 'top 85%' });
+    reveal([$('.lc')], '.loc', { st: 'top 65%' });
+    mask($('.mp'), '.loc', 'top 85%');
     words($('.faq h2'), '.faq');
     reveal($$('.faq details'), '.faq details', { y: 16, s: .06, st: 'top 90%' });
     reveal($$('.fin'), '.fin', { y: 12, st: 'top 95%' });
