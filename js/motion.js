@@ -5,12 +5,21 @@
    · Curva     → expo.out en todo lo que entra; expo.inOut solo en máscaras
    · Conversión→ WhatsApp/Llamar siempre accesibles; el pulso ocurre una sola vez
    Máscaras: siempre inset() de 4 valores en % (GSAP no interpola 0 con 0% y la máscara saltaría al final).
-   Solo se animan transform, opacity y clip-path. Sin smooth-scroll ni scroll-jacking.
+   Solo se animan transform, opacity y clip-path (única excepción: la altura del acordeón de Preguntas). Sin smooth-scroll ni scroll-jacking.
+   CAPAS v5 (todas con el mismo lenguaje: expo.out, gestos cortos, nada decorativo):
+   · ScrollTo   → los enlaces internos viajan con expo.inOut; la rueda o el toque los interrumpen (no hay secuestro de scroll)
+   · Flip       → al filtrar unidades, las que quedan se reacomodan, las nuevas entran y las que salen se despiden
+   · Puntero    → paralaje del hero, botones magnéticos y tilt de las tarjetas de operaciones (solo mouse; nunca en táctil)
+   · Vista previa del mensaje → el mensaje de WhatsApp se escribe mientras se completa el formulario; año y km ruedan como un odómetro
+   · Mapa       → se descubre con máscara; el panel de dirección entra escalonado
+   · Preguntas  → el acordeón abre y cierra con altura animada (details nativo, teclado intacto)
    prefers-reduced-motion: no se registra ninguna animación (queda la navegación activa, sin movimiento). */
 (function () {
   var root = document.documentElement, g = window.gsap, ST = window.ScrollTrigger;
   if (!g || !ST) { root.classList.remove('m'); return; }
   g.registerPlugin(ST);
+  if (window.Flip) g.registerPlugin(window.Flip);
+  if (window.ScrollToPlugin) g.registerPlugin(window.ScrollToPlugin);
   ST.config({ ignoreMobileResize: true });
 
   var $ = function (s, c) { return (c || document).querySelector(s); };
@@ -58,15 +67,72 @@
 
   if (reduce) return;
 
+  /* ---------- Anclas: viaje con expo.inOut; la rueda/toque lo interrumpe ---------- */
+  if (window.ScrollToPlugin) document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a) return;
+    var id = a.getAttribute('href'); if (id.length < 2) return;
+    var t = $(id); if (!t) return;
+    e.preventDefault();
+    var off = innerWidth >= 900 && header ? header.offsetHeight : 0, dist = Math.abs(t.getBoundingClientRect().top - off);
+    g.to(window, { scrollTo: { y: t, offsetY: off, autoKill: true }, duration: Math.min(1.7, Math.max(.8, dist / 2400)), ease: 'expo.inOut', overwrite: true,
+      onComplete: function () { t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); } });
+    if (history.replaceState) history.replaceState(null, '', id);
+  });
+
+  /* ---------- Vista previa del mensaje: escritura + odómetro ----------
+     index.html arma el estado (texto, modelo, dígitos) y llama a window.poerioFx(estado). Sin GSAP, index.html lo dibuja estático. */
+  var pv = $('#pv'), pvIntro = false;
+  if (pv) {
+    var tx = $('#pvTx'), cr = $('#pvCr'), mod = $('#pvMod'), bar = $('#pvP'), bub = $('#pvBub'), tkp = $$('.tk path', pv);
+    var T = { n: 0 }, wasEmpty = true, ready = false;
+    var od = { y: { cols: $$('#odY .d'), strips: $$('#odY .s'), sps: [] }, k: { cols: $$('#odK .d'), strips: $$('#odK .s'), sps: $$('#odK .sp') } };
+    /* las posiciones iniciales pasan de transform CSS a yPercent de GSAP */
+    [od.y, od.k].forEach(function (o) { o.strips.forEach(function (st) { var d = +st.getAttribute('data-d') || 0; g.set(st, { clearProps: 'transform' }); g.set(st, { yPercent: -10 * d }); }); });
+    var roll = function (o, v) {
+      o.cols.forEach(function (c, i) { c.classList.toggle('off', !!v.a[i].off); });
+      o.sps.forEach(function (b, i) { b.classList.toggle('off', v.off > (i ? 3 : 0)); });
+      o.strips.forEach(function (st, i) { g.to(st, { yPercent: -10 * v.a[i].d, duration: 1.2, ease: E, delay: (v.a.length - 1 - i) * .045, overwrite: true }); });
+    };
+    window.poerioFx = function (s) {
+      var cur = tx.textContent, c = 0, L = s.text.length;
+      while (c < cur.length && c < L && cur.charAt(c) === s.text.charAt(c)) c++;
+      g.killTweensOf(T);
+      if (L <= c) tx.textContent = s.text;                       /* solo se borró: sin animación */
+      else {
+        tx.textContent = s.text.slice(0, c); T.n = c;
+        g.to(T, { n: L, duration: Math.min(.9, (L - c) * .022), ease: 'none', onUpdate: function () { tx.textContent = s.text.slice(0, Math.round(T.n)); }, onComplete: function () { tx.textContent = s.text; } });
+      }
+      g.fromTo(cr, { opacity: 1 }, { opacity: 0, duration: .5, delay: 1.2, overwrite: true });
+      var empty = !s.modelo;
+      mod.textContent = s.modelo || 'Marca y modelo'; mod.classList.toggle('e', empty);
+      if (empty !== wasEmpty) g.fromTo(mod, { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .6, ease: E, overwrite: true, clearProps: 'opacity,transform' });
+      wasEmpty = empty;
+      g.to(bar, { scaleX: s.prog, duration: .9, ease: E, overwrite: true });
+      if (s.prog === 1 && !ready) g.fromTo(bub, { scale: .97, transformOrigin: '100% 100%' }, { scale: 1, duration: .7, ease: E, clearProps: 'transform,transformOrigin', overwrite: 'auto' });
+      ready = s.prog === 1;
+      roll(od.y, s.y); roll(od.k, s.k);
+    };
+    /* Enviado: la burbuja se asienta y las tildes se dibujan */
+    document.addEventListener('poerio:sent', function () {
+      g.fromTo(bub, { y: 8, scale: .985, transformOrigin: '100% 100%' }, { y: 0, scale: 1, duration: .7, ease: E, clearProps: 'transform,transformOrigin', overwrite: 'auto' });
+      tkp.forEach(function (pth, i) {
+        var l = pth.getTotalLength();
+        g.fromTo(pth, { strokeDasharray: l, strokeDashoffset: l }, { strokeDashoffset: 0, duration: .55, delay: .15 + i * .2, ease: E, clearProps: 'strokeDasharray,strokeDashoffset', overwrite: true });
+      });
+    });
+  }
+
   g.matchMedia().add({ d: '(min-width:900px)', m: '(max-width:899px)' }, function (ctx) {
     var D = ctx.conditions.d, dy = D ? 32 : 18, k = D ? 1 : .8;
-    var cleanups = [];
+    var cleanups = [], fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+    function on(el, type, fn, cap) { el.addEventListener(type, fn, cap); cleanups.push(function () { el.removeEventListener(type, fn, cap); }); }
 
     /* ---------- Helpers del sistema ---------- */
     function reveal(t, trig, o) {
       if (!t.length) return; o = o || {};
       if (o.nt) g.set(t, { transition: 'none' });   /* si el elemento tiene transition CSS sobre transform, GSAP no debe pelear con ella */
-      g.from(t, { opacity: 0, y: o.y == null ? dy : o.y, duration: .9 * k, stagger: o.s || .08, ease: E, clearProps: 'opacity,transform' + (o.nt ? ',transition' : ''),
+      g.from(t, { opacity: 0, y: o.y == null ? dy : o.y, duration: .9 * k, stagger: o.s || .08, delay: o.d || 0, ease: E, clearProps: 'opacity,transform' + (o.nt ? ',transition' : ''),
         scrollTrigger: { trigger: trig, start: o.st || 'top 85%', once: true } });
     }
     function split(el) {
@@ -108,6 +174,17 @@
             g.to([txt[0], txt[1]], { y: -28, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .5 } });
             g.to(fi, { yPercent: 2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .5 } });
             g.delayedCall(.9, function () { pulse('header .btn.p'); });
+            /* Paralaje con el puntero: foto y fondo se mueven en sentidos opuestos (solo mouse) */
+            if (fine) {
+              var hero = $('.hero'), P = { ease: 'power3.out', duration: .9 };
+              g.to([fi, bg], { scale: 1.06, duration: 1.6, ease: 'power2.out' });
+              var fx = g.quickTo(fi, 'x', P), fy = g.quickTo(fi, 'y', P), bx = g.quickTo(bg, 'x', P), by = g.quickTo(bg, 'y', P);
+              on(hero, 'pointermove', function (e) {
+                var r = hero.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - .5, ny = (e.clientY - r.top) / r.height - .5;
+                fx(nx * -26); fy(ny * -18); bx(nx * 18); by(ny * 12);
+              });
+              on(hero, 'pointerleave', function () { fx(0); fy(0); bx(0); by(0); });
+            }
           }
         });
       } });
@@ -166,8 +243,39 @@
     }
     bind($$('.car', grid));
     first = false;
+    /* Filtros con Flip: las que quedan se reacomodan, las nuevas entran, las que salen se despiden.
+       Se captura el estado ANTES de que index.html vuelva a dibujar la grilla (listener en captura). */
+    var chipsEl = $('#chips'), pend = null, busy = false;
+    if (window.Flip && chipsEl) on(chipsEl, 'click', function (e) {
+      var b = e.target.closest('.chip'); if (!b || b.getAttribute('aria-pressed') === 'true') return;
+      var cs = $$('.car', grid).filter(function (c) { return !c._gh; }); if (!cs.length) { pend = null; return; }
+      var gr = grid.getBoundingClientRect();
+      cs.forEach(function (c) { c.setAttribute('data-flip-id', c.getAttribute('data-i')); });
+      var st0 = window.Flip.getState(cs); mo.takeRecords();   /* getState reubica nodos un instante: esos registros no cuentan */
+      pend = { state: st0, ghosts: cs.map(function (c) { var r = c.getBoundingClientRect(); return { el: c, id: c.getAttribute('data-i'), l: r.left - gr.left, t: r.top - gr.top, w: r.width, h: r.height }; }) };
+    }, true);
+    function flipIn(P, cards) {
+      busy = true;
+      cards.forEach(function (c) { c._m = 1; c.setAttribute('data-flip-id', c.getAttribute('data-i')); });
+      var ids = cards.map(function (c) { return c.getAttribute('data-i'); });
+      P.ghosts.forEach(function (o) {
+        if (ids.indexOf(o.id) > -1) return;
+        var el = o.el; el._gh = 1; grid.appendChild(el);
+        g.set(el, { position: 'absolute', left: o.l, top: o.t, width: o.w, height: o.h, margin: 0, zIndex: 0, pointerEvents: 'none', opacity: 1 });
+        g.to(el, { opacity: 0, scale: .95, y: 10, duration: .32, ease: 'power2.in', onComplete: function () { if (el.parentNode) el.parentNode.removeChild(el); } });
+      });
+      mo.takeRecords(); busy = false;
+      /* durante el vuelo las tarjetas van por encima de las que se despiden y con fondo opaco (se limpia al terminar) */
+      g.set(cards, { position: 'relative', zIndex: 1, backgroundColor: '#F3F5F6' });
+      window.Flip.from(P.state, { targets: cards, duration: .95 * k, ease: E, stagger: .04, nested: false, delay: .08,
+        onComplete: function () { g.set(cards, { clearProps: 'position,zIndex,backgroundColor' }); },
+        onEnter: function (els) { return g.fromTo(els, { opacity: 0, y: dy, scale: .96 }, { opacity: 1, y: 0, scale: 1, duration: .8 * k, stagger: .07, ease: E, clearProps: 'opacity,transform' }); } });
+    }
     var mo = new MutationObserver(function () {
-      ctx.add(function () { bind($$('.car', grid)); });
+      if (busy) return;
+      var cards = $$('.car', grid).filter(function (c) { return !c._gh; });
+      if (pend && cards.some(function (c) { return !pend.ghosts.some(function (o) { return o.el === c; }); })) { var P = pend; pend = null; flipIn(P, cards); }
+      else ctx.add(function () { bind(cards); });
       requestAnimationFrame(function () { ST.refresh(); });
     });
     mo.observe(grid, { childList: true });
@@ -200,7 +308,8 @@
     photos($$('.oi'), '.og', { s: .1, st: 'top 88%' });
 
     /* Collage "Contanos tu auto": máscara escalonada; en escritorio, cada foto con su propia velocidad (±3–5%) */
-    reveal($$('.fm > div:first-child > :not(.fp)'), '.fm', { s: .12, st: 'top 85%' });
+    reveal($$('.fm > div:first-child > :not(.fp):not(.stp)'), '.fm', { s: .12, st: 'top 85%' });
+    reveal($$('.stp li'), '.stp', { s: .14, y: 22, st: 'top 88%' });
     photos($$('.fp > div'), '.fp', { s: .14, st: 'top 88%', still: D, from: D ? 'inset(0% 100% 0% 0%)' : 'inset(0% 0% 100% 0%)' });
     if (D) {
       $$('.fp > div').forEach(function (box, i) {
@@ -209,17 +318,68 @@
       });
     }
     reveal($$('.fm form'), '.fm form', { st: 'top 88%' });
+
+    /* Vista previa: máscara + contenido escalonado; el mensaje se escribe solo la primera vez que entra */
+    var pvEl = $('#pv');
+    if (pvEl) {
+      if (pvEl.getBoundingClientRect().top > innerHeight * .85) $('#pvTx').textContent = '';
+      g.fromTo(pvEl, { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2 * k, ease: 'expo.inOut', clearProps: 'clipPath', scrollTrigger: { trigger: pvEl, start: 'top 88%', once: true } });
+      reveal($$('.pv > *:not(.pvp)'), pvEl, { y: 14, s: .1, d: .3, st: 'top 82%' });
+      ST.create({ trigger: pvEl, start: 'top 82%', once: true, onEnter: function () { g.delayedCall(.55, function () { if (window.poerioPv && !$('#pvTx').textContent) window.poerioPv(); }); } });
+    }
+
+    /* Mapa: se descubre con máscara y el mapa se asienta; el panel de dirección entra escalonado */
+    var mp = $('.mp'), mif = $('.mp iframe');
+    if (mp) {
+      var mst = { trigger: '.loc', start: 'top 78%', once: true };
+      g.fromTo(mp, { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4 * k, ease: 'expo.inOut', clearProps: 'clipPath', scrollTrigger: mst });
+      if (mif) g.fromTo(mif, { scale: 1.14 }, { scale: 1, duration: 2, ease: 'power3.out', clearProps: 'transform', scrollTrigger: mst });
+    }
     reveal([$('.lc')], '.loc', { st: 'top 65%' });
+    reveal($$('.lc > *'), '.loc', { st: 'top 65%', s: .09, y: 18, d: .25 });
     words($('.faq h2'), '.faq');
     reveal($$('.faq details'), '.faq details', { y: 16, s: .06, st: 'top 90%' });
     reveal($$('.fin'), '.fin', { y: 12, st: 'top 95%' });
     reveal($$('footer .lg'), 'footer', { y: 16, st: 'top 92%' });
+    reveal($$('footer .w > :not(.lg)'), 'footer', { y: 12, s: .07, d: .15, st: 'top 96%' });
 
-    /* Preguntas: la respuesta acompaña al gesto de abrir */
+    /* Botones magnéticos (solo mouse): siguen al puntero unos px y vuelven con expo.out; el press los achica */
+    if (fine) $$('.hero .btn, header .btn.p, .loc .btn, .fin .btn, .fm form .btn').forEach(function (b) {
+      var lift = b.classList.contains('p') ? -2 : 0, qx, qy;
+      b.classList.add('mg');
+      qx = g.quickTo(b, 'x', { duration: .6, ease: 'power3.out' }); qy = g.quickTo(b, 'y', { duration: .6, ease: 'power3.out' });
+      on(b, 'pointermove', function (e) { var r = b.getBoundingClientRect(); qx((e.clientX - (r.left + r.width / 2)) * .22); qy((e.clientY - (r.top + r.height / 2)) * .3 + lift); });
+      on(b, 'pointerleave', function () { qx(0); qy(0); g.to(b, { scale: 1, duration: .5, ease: E, overwrite: 'auto' }); });
+      on(b, 'pointerdown', function () { g.to(b, { scale: .97, duration: .15, ease: 'power2.out', overwrite: 'auto' }); });
+      on(b, 'pointerup', function () { g.to(b, { scale: 1, duration: .6, ease: E, overwrite: 'auto' }); });
+      cleanups.push(function () { b.classList.remove('mg'); g.set(b, { clearProps: 'transform' }); });
+    });
+
+    /* Tilt de las tarjetas de operaciones (solo mouse): giro corto hacia el puntero + elevación */
+    if (fine) $$('.oc').forEach(function (c) {
+      var o = { duration: .7, ease: 'power3.out' }, rx = g.quickTo(c, 'rotationX', o), ry = g.quickTo(c, 'rotationY', o), ly = g.quickTo(c, 'y', o);
+      on(c, 'pointerenter', function () { g.set(c, { transformPerspective: 900 }); ly(-6); });
+      on(c, 'pointermove', function (e) { var r = c.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - .5) * 7); rx(-((e.clientY - r.top) / r.height - .5) * 6); });
+      on(c, 'pointerleave', function () { rx(0); ry(0); ly(0); });
+    });
+
+    /* Preguntas: el acordeón abre y cierra con altura animada (details nativo: el teclado y el lector de pantalla siguen igual) */
     $$('.faq details').forEach(function (d) {
-      var f = function () { if (d.open) g.fromTo($('p', d), { opacity: 0, y: -8 }, { opacity: 1, y: 0, duration: .5, ease: E, clearProps: 'opacity,transform', overwrite: 'auto' }); };
-      d.addEventListener('toggle', f);
-      cleanups.push(function () { d.removeEventListener('toggle', f); });
+      var sm = $('summary', d), pp = $('p', d);
+      on(sm, 'click', function (e) {
+        e.preventDefault();
+        g.killTweensOf(d);
+        var opening = !d.open, h0 = d.offsetHeight, bw = d.offsetHeight - d.clientHeight, hc = sm.offsetHeight + bw;
+        if (opening) {
+          d.open = true;
+          var h1 = d.offsetHeight;
+          g.fromTo(d, { height: h0 }, { height: h1, duration: .75 * k, ease: E, clearProps: 'height', onComplete: function () { ST.refresh(); } });
+          g.fromTo(pp, { opacity: 0, y: -8 }, { opacity: 1, y: 0, duration: .6, delay: .08, ease: E, clearProps: 'opacity,transform', overwrite: 'auto' });
+        } else {
+          g.to(d, { height: hc, duration: .55 * k, ease: E, onComplete: function () { d.open = false; g.set(d, { clearProps: 'height' }); ST.refresh(); } });
+          g.to(pp, { opacity: 0, duration: .25, ease: 'power2.out', overwrite: 'auto' });
+        }
+      });
     });
     /* Formulario: el aviso de estado aparece con un gesto corto */
     var fs = $('#fStatus');
@@ -251,7 +411,7 @@
     }
 
     return function () {
-      mo.disconnect(); mo2.disconnect(); mo3.disconnect();
+      mo.disconnect(); mo2.disconnect(); mo3.disconnect(); mo.takeRecords();
       header.classList.remove('h');
       cleanups.forEach(function (f) { f(); });
     };

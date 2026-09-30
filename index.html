@@ -181,6 +181,31 @@ footer{text-align:center}footer .lg img{margin-inline:auto}footer p{margin-inlin
 .car .ar,.car .cnt{opacity:0;transition:opacity .35s,background .2s,transform .5s cubic-bezier(.16,1,.3,1)}.car .ar.l{transform:translate(-10px,-50%)}.car .ar.r{transform:translate(10px,-50%)}
 .car:hover .ar,.car:focus-within .ar,.car:hover .cnt,.car:focus-within .cnt{opacity:1}.car:hover .ar.l,.car:focus-within .ar.l,.car:hover .ar.r,.car:focus-within .ar.r{transform:translate(0,-50%)}}
 .m dialog[open]{animation:none}
+/* ==== v5: vista previa del mensaje (odómetro), Flip, tilt ==== */
+html.m{scroll-behavior:auto}
+#stockGrid{position:relative}
+.fm{align-items:stretch}.fr{display:flex;flex-direction:column;gap:20px;min-width:0}.fr>form{flex:none}
+.pv{position:relative;flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:20px;min-height:320px;padding:22px 20px 20px;border-radius:16px;background:var(--ink);color:#fff;overflow:hidden;isolation:isolate}
+.pvp{position:absolute;left:0;right:0;top:0;height:3px;background:var(--cy);transform:scaleX(0);transform-origin:0 50%}
+.pvh{display:flex;align-items:center;gap:12px}.pvh img{width:36px;height:36px;border-radius:9px}.pvh b{display:block;font:700 16px/1.1 var(--h);letter-spacing:-.01em}.pvh span{font-size:13px;color:#aebbc3}
+.pvb{display:flex;justify-content:flex-end}
+.bub{position:relative;max-width:min(94%,430px);margin:0;padding:12px 14px 6px;border-radius:16px 16px 4px 16px;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.4;overflow-wrap:anywhere}
+.bub .cr{display:inline-block;width:2px;height:1.05em;margin-left:2px;vertical-align:-.15em;background:var(--cy);opacity:0}
+.bub .tk{display:flex;justify-content:flex-end;margin-top:2px;color:#7d8c96;transition:color .4s}.pv.sent .bub .tk{color:var(--cy)}.bub .tk svg{width:20px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.pvi{display:grid;gap:14px}
+.pvm{font:700 clamp(20px,2.2vw,26px)/1.15 var(--h);letter-spacing:-.015em;min-height:1.15em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pvm.e{color:#6f818c}
+.pvg{display:flex;flex-wrap:wrap;gap:14px 28px}.pvg>div{display:grid;gap:6px}.pvg .lb{font-size:13px;color:#aebbc3}
+.od{display:flex;gap:3px;font:700 28px/1 var(--h)}
+.od .d{position:relative;width:.7em;height:1.25em;overflow:hidden;border-radius:6px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transition:opacity .4s}
+.od .d.off{opacity:.3}.od .d::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,27,38,.6),transparent 32%,transparent 68%,rgba(14,27,38,.6));pointer-events:none}
+.od .s{display:block}.od .s i{display:block;height:1.25em;line-height:1.25em;text-align:center;font-style:normal}
+.od .sp{align-self:flex-end;line-height:1.25;color:#aebbc3;opacity:.8;transition:opacity .4s}.od .sp.off{opacity:.3}
+.pvf{margin:0;font-size:13px;color:#aebbc3}
+@media(max-width:899px){.pv{min-height:0}}
+/* con movimiento activo, GSAP maneja el transform de botones y tarjetas: se quita la transición CSS de transform */
+.m .btn.mg{transition:background .2s,color .3s cubic-bezier(.16,1,.3,1) .06s,border-color .3s,box-shadow .25s}
+.m .oc{transition:box-shadow .5s}.m .oc:hover{transform:none}
+.m .faq details{overflow:hidden}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}dialog[open],dialog[open]::backdrop{animation:none!important}}
 </style>
 </head>
@@ -206,13 +231,17 @@ footer{text-align:center}footer .lg img{margin-inline:auto}footer p{margin-inlin
 <div class="oh"><h2>Comprá, vendé o permutá</h2><p class="sub">Elegí qué querés hacer y escribinos por WhatsApp. Cada consulta llega con el mensaje ya armado.</p></div>
 <div class="og"><article class="oc"><div class="oi"><img src="images/ecosport-1.webp" alt="" loading="lazy" width="1280" height="960"></div><div class="ob"><h3>Comprar</h3><p>Consultanos por cualquiera de las unidades.</p><a href="https://wa.me/5493442453550" data-wa="Hola! Quiero comprar un auto. ¿Qué unidades tienen disponibles?">Consultar →</a></div></article><article class="oc"><div class="oi"><img src="images/kwid-1.webp" alt="" loading="lazy" width="1280" height="960"></div><div class="ob"><h3>Vender</h3><p>Contanos qué auto tenés y consultá cómo venderlo.</p><a href="https://wa.me/5493442453550" data-wa="Hola! Quiero vender mi auto.">Consultar →</a></div></article><article class="oc"><div class="oi"><img src="images/punto-1.webp" alt="" loading="lazy" width="1280" height="960"></div><div class="ob"><h3>Permutar</h3><p>Consultanos si tu usado puede ir como parte de pago.</p><a href="https://wa.me/5493442453550" data-wa="Hola! Quiero permutar mi auto por otro.">Consultar →</a></div></article><article class="oc"><div class="oi"><img src="images/ka-s-1.webp" alt="" loading="lazy" width="1280" height="960"></div><div class="ob"><h3>Consignar</h3><p>Dejá tu auto en consignación: escribinos con sus datos y te contamos cómo funciona.</p><a href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por dejar mi auto en consignación.">Consultar →</a></div></article></div>
 <div class="fm"><div><h3>Contanos tu auto</h3><ol class="stp"><li><div><b>Completá los datos</b><span>Marca, modelo y año. El kilometraje es opcional.</span></div></li><li><div><b>Se abre WhatsApp</b><span>Con tu consulta ya escrita, según lo que quieras hacer.</span></div></li><li><div><b>La enviás vos</b><span>Te respondemos por el mismo chat. El sitio no guarda tus datos.</span></div></li></ol><div class="fp"><div><img src="images/clio-2.webp" alt="Renault Clio Mio 1.2 2014" loading="lazy" width="1280" height="960"></div><div><img src="images/punto-2.webp" alt="Fiat Punto Attractive 1.4 Fire 2011" loading="lazy" width="1280" height="960"></div><div><img src="images/ecosport-2.webp" alt="Ford EcoSport XLS 1.6 2011" loading="lazy" width="1280" height="960"></div></div></div>
-<form id="canjeForm"><h3>Tus datos</h3>
+<div class="fr"><form id="canjeForm"><h3>Tus datos</h3>
 <label>Marca y modelo<input name="modelo" required maxlength="60" autocomplete="off" placeholder="Ej.: Ford Fiesta"></label>
 <div class="f2"><label>Año<input name="anio" inputmode="numeric" maxlength="4" autocomplete="off" required placeholder="Ej.: 2015"></label><label><span>Kilometraje <i>(opcional)</i></span><input name="km" inputmode="numeric" maxlength="9" autocomplete="off" placeholder="Ej.: 85000"></label></div>
 <label>¿Qué te interesa?<select name="interes"><option value="vender">Vender mi vehículo</option><option value="permutar">Permutar por otro</option><option value="consignar">Dejarlo en consignación</option><option value="consulta">Todavía no lo sé</option></select></label>
 <button class="btn p" type="submit">Enviar por WhatsApp</button>
 <p class="fs" id="fStatus" role="status"></p>
-<p class="meta">Se abre WhatsApp con tu consulta ya escrita y la enviás vos. El sitio no guarda estos datos. <a href="privacidad.html#privacidad">Privacidad</a>. Este formulario no calcula precios ni tasaciones.</p></form></div>
+<p class="meta">Se abre WhatsApp con tu consulta ya escrita y la enviás vos. El sitio no guarda estos datos. <a href="privacidad.html#privacidad">Privacidad</a>. Este formulario no calcula precios ni tasaciones.</p></form><aside class="pv" id="pv" aria-hidden="true"><i class="pvp" id="pvP"></i>
+<div class="pvh"><img src="images/icon-32.png" alt="" width="36" height="36"><div><b>Fernando Poerio Automotores</b><span>Así llega tu mensaje</span></div></div>
+<div class="pvb"><p class="bub" id="pvBub"><span id="pvTx"></span><i class="cr" id="pvCr"></i><span class="tk"><svg viewBox="0 0 22 16"><path d="M1.5 8.5l4 4L13 3.5"/><path d="M9.5 11.5l1.5 1.5L20 3.5"/></svg></span></p></div>
+<div class="pvi"><div class="pvm e" id="pvMod">Marca y modelo</div><div class="pvg"><div><span class="lb">Año</span><div class="od" id="odY"></div></div><div><span class="lb">Kilómetros</span><div class="od" id="odK"></div></div></div></div>
+<p class="pvf">La enviás vos desde WhatsApp. El sitio no guarda nada.</p></aside></div></div>
 </div></section>
 
 <section id="contacto" class="loc"><div class="mp"><iframe title="Mapa: Fernando Poerio Automotores, Alberdi 1337, Concepción del Uruguay" src="https://maps.google.com/maps?q=-32.4882114,-58.2425324&amp;z=17&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" width="600" height="450"></iframe><span class="mph">Tocá el mapa para moverlo</span><a class="mpl" data-map href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" target="_blank" rel="noopener noreferrer">Abrir en Google Maps ↗</a></div><div class="w">
@@ -318,16 +347,28 @@ m.setCustomValidity(m.value.trim()?"":"Ingresá la marca y el modelo.");
 a.setCustomValidity(/^\d{4}$/.test(a.value)&&y>=1950&&y<=YR?"":"Ingresá un año de 4 dígitos entre 1950 y "+YR+".");
 k.setCustomValidity(!k.value||/^\d{1,7}$/.test(kmVal(k.value))?"":"Ingresá solo números, por ejemplo 85000.")}
 var INT={vender:"Hola! Quiero vender mi auto: ",permutar:"Hola! Quiero permutar mi auto por otro: ",consignar:"Hola! Quiero consultar por dejar mi auto en consignación: ",consulta:"Hola! Quiero consultar por mi auto: "};
-FM.addEventListener("input",function(){check();FS.textContent=""});check();
+var PV=$("pv");
+function odv(t,n){t=t.slice(-n);var off=n-t.length,a=[];for(var i=0;i<n;i++)a.push(i<off?{d:0,off:1}:{d:+t.charAt(i-off),off:0});return {a:a,off:off}}
+function buildOd(el,n){var h="";for(var i=0;i<n;i++){var c="";for(var d=0;d<10;d++)c+="<i>"+d+"</i>";h+='<span class="d off"><span class="s" data-d="0">'+c+'</span></span>';if(n===7&&(i===0||i===3))h+='<b class="sp off">.</b>'}el.innerHTML=h}
+function pvState(){var m=FM.modelo.value.trim(),a=FM.anio.value.trim(),k=kmVal(FM.km.value),ok=/^\d{1,7}$/.test(k),ys=a.replace(/\D/g,""),yv=/^\d{4}$/.test(a)&&+a>=1950&&+a<=YR,
+t=(INT[FM.interes.value]||INT.consulta)+(m||"…")+(a?", año "+a:"")+(ok&&k?", "+Number(k).toLocaleString("es-AR")+" km":"");
+return {text:t+((m||a||(ok&&k))?".":""),modelo:m,y:odv(ys.slice(0,4),4),k:odv(ok?String(Number(k)):"",7),prog:((m?1:0)+(yv?1:0))/2}}
+function odStatic(el,o){el.querySelectorAll(".d").forEach(function(c,i){c.classList.toggle("off",!!o.a[i].off);var s=c.firstChild;s.setAttribute("data-d",o.a[i].d);s.style.transform=o.a[i].d?"translateY(-"+o.a[i].d*10+"%)":""});el.querySelectorAll(".sp").forEach(function(b,i){b.classList.toggle("off",o.off>(i?3:0))})}
+function pvStatic(s){$("pvTx").textContent=s.text;var m=$("pvMod");m.textContent=s.modelo||"Marca y modelo";m.classList.toggle("e",!s.modelo);odStatic($("odY"),s.y);odStatic($("odK"),s.k);$("pvP").style.transform="scaleX("+s.prog+")"}
+function pvUpdate(){var s=pvState();(window.poerioFx||pvStatic)(s)}
+window.poerioPv=pvUpdate;buildOd($("odY"),4);buildOd($("odK"),7);pvStatic(pvState());
+FM.addEventListener("input",function(){check();FS.textContent="";PV.classList.remove("sent");pvUpdate()});FM.addEventListener("change",pvUpdate);check();
 FM.addEventListener("submit",function(e){e.preventDefault();check();if(!FM.reportValidity())return;
-var k=kmVal(FM.km.value),txt=(INT[FM.interes.value]||INT.consulta)+FM.modelo.value.trim()+", año "+FM.anio.value+(k?", "+Number(k).toLocaleString("es-AR")+" km":"")+".",u=wa(txt);
+var txt=pvState().text,u=wa(txt);
 FS.textContent="Abriendo WhatsApp con tu consulta. Si no se abrió, ";var l=document.createElement("a");l.href=u;l.target="_blank";l.rel="noopener noreferrer";l.textContent="tocá acá";FS.appendChild(l);FS.appendChild(document.createTextNode("."));
-window.open(u,"_blank","noopener")});
+window.open(u,"_blank","noopener");PV.classList.add("sent");document.dispatchEvent(new CustomEvent("poerio:sent"))});
 })();
 </script>
 <script>(function(){var m=document.querySelector(".mp");if(!m)return;m.addEventListener("click",function(){m.classList.add("on")});m.addEventListener("mouseleave",function(){m.classList.remove("on")});document.addEventListener("touchstart",function(e){if(!m.contains(e.target))m.classList.remove("on")},{passive:true})})();</script>
 <script src="vendor/gsap.min.js" defer onerror="document.documentElement.classList.remove('m')"></script>
 <script src="vendor/ScrollTrigger.min.js" defer onerror="document.documentElement.classList.remove('m')"></script>
+<script src="vendor/Flip.min.js" defer onerror="document.documentElement.classList.remove('m')"></script>
+<script src="vendor/ScrollToPlugin.min.js" defer onerror="document.documentElement.classList.remove('m')"></script>
 <script src="js/motion.js" defer onerror="document.documentElement.classList.remove('m')"></script>
 </body>
 </html>
