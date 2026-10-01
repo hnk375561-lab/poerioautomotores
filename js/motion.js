@@ -176,20 +176,12 @@
        Sin animación de entrada que lo oculte (el título, los botones y la foto ya están en el HTML). Solo queda la salida con profundidad y el paralaje. */
     var fg = $('.hero figure'), fi = $('#hzs'), bg = $('.hero .bgv') || document.createElement('i'),
       txt = [$('.hero h1'), $('.hero .tx p')];
-    if (D) {
-      /* Paralaje con el puntero: foto y fondo se mueven en sentidos opuestos (solo mouse) */
-      if (fine) {
-        var hero = $('.hero'), P = { ease: 'power3.out', duration: .9 };
-        g.to([fi, bg], { scale: 1.06, duration: 1.6, ease: 'power2.out' });
-        var fx = g.quickTo(fi, 'x', P), fy = g.quickTo(fi, 'y', P), bx = g.quickTo(bg, 'x', P), by = g.quickTo(bg, 'y', P);
-        /* Sin seguimiento del mouse: el hero ya no se mueve con el puntero. */
-      }
-    }
+    /* Sin paralaje con el mouse ni escala permanente sobre la foto: el hero queda quieto y liviano. */
 
     /* Salida del hero en capas: al bajar, cada bloque de texto se despide a distinta velocidad (solo transform, escritorio).
        El hero sigue visible desde el primer pintado: no hay animación de entrada que lo oculte. */
     if (D && $('.hero')) {
-      var hl = g.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6 } });
+      var hl = g.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
       [['.hero .hlogo', -10], ['.hero h1', -24], ['.hero .tx > p', -36], ['.hero .tx .row', -48], ['.hero .tx .lk', -56], ['.hero .hcap', -22]].forEach(function (a) {
         var el = $(a[0]); if (el) hl.to(el, { y: a[1] }, 0);
       });
@@ -217,8 +209,8 @@
       window.__poerioIntro = 1;
       var hW = heroTitle($('.hero h1')), hI = $('#hs .hz.on img'), hT = g.timeline({ defaults: { ease: E } });
       var cp = function (a) { return { clipPath: a }; };
-      if (fg) hT.fromTo(fg, cp('inset(0% 0% 0% 100%)'), { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.35 * k, ease: 'expo.inOut', clearProps: 'clipPath' }, 0);
-      if (hI) hT.fromTo(hI, { scale: 1.35, xPercent: 6 }, { scale: 1, xPercent: 0, duration: 2.1, ease: 'power3.out', clearProps: 'transform' }, 0);
+      if (fg) hT.fromTo(fg, { opacity: 0 }, { opacity: 1, duration: .8 * k, ease: 'power2.out', clearProps: 'opacity' }, 0);
+      if (hI) hT.fromTo(hI, { scale: 1.12 }, { scale: 1, duration: 1.4, ease: 'power3.out', clearProps: 'transform' }, 0);
       [['.hero .hlogo', 'inset(0% 100% 0% 0%)', .12], ['.hero .h1n', 'inset(0% 100% 0% 0%)', .3]].forEach(function (a) {
         var el = $(a[0]); if (el) hT.fromTo(el, cp(a[1]), { clipPath: 'inset(0% 0% 0% 0%)', duration: .9 * k, ease: 'expo.inOut', clearProps: 'clipPath' }, a[2]);
       });
@@ -230,8 +222,7 @@
       var hc = $('.hero .hcap'); if (hc) hT.fromTo(hc, cp('inset(100% 0% 0% 0%)'), { clipPath: 'inset(0% 0% 0% 0%)', duration: .9 * k, ease: 'expo.inOut', clearProps: 'clipPath' }, 1);
       var ha = $$('.hero .ha .btn'); if (ha.length) hT.fromTo(ha, cp('inset(100% 0% 0% 0%)'), { clipPath: 'inset(-6% -6% -6% -6%)', duration: .8 * k, stagger: .08, ease: 'expo.inOut', clearProps: 'clipPath' }, 1.2);
     }
-    /* Salida: la foto viaja más lento que el scroll (profundidad entre capas) */
-    if (!lite && fi && $('.hero')) g.to(fi, { yPercent: D ? 7 : 4, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    /* La foto del hero ya no hace paralaje con el scroll (repintaba una imagen grande en cada fotograma). */
 
     /* ---------- HERO · rotación de unidades ----------
        Todas las unidades entran igual: máscara lateral (dirección según el sentido) + foto que se asienta con contraparalaje,
@@ -252,12 +243,13 @@
       var onHero = function (e) {
         ctx.add(function () {
           var d = e.detail, A = sl[d.to], B = sl[d.from], iA = $('img', A), iB = $('img', B), dir = d.dir;
-          sl.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'clipPath,zIndex' }); } });
+          sl.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'transform,zIndex' }); } });
           g.killTweensOf([A, B, iA, iB]);
-          B.classList.add('lv'); g.set(B, { zIndex: 1, clipPath: 'inset(0% 0% 0% 0%)' }); g.set(A, { zIndex: 2 });
-          g.fromTo(A, { clipPath: dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1 * k, ease: 'power3.inOut', clearProps: 'clipPath,zIndex',
-            onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,clipPath' }); g.set(iB, { clearProps: 'transform' }); } });
-          g.fromTo(iA, { scale: 1.07 }, { scale: 1, duration: 1.8, ease: 'power2.out', clearProps: 'transform' });
+          /* Cambio solo con transform (compositor): la unidad nueva entra deslizando, su foto contra-desliza y la saliente se corre apenas. Sin clip-path ni escala. */
+          B.classList.add('lv'); g.set(B, { zIndex: 1, xPercent: 0 }); g.set(A, { zIndex: 2 });
+          g.fromTo(A, { xPercent: dir > 0 ? 100 : -100 }, { xPercent: 0, duration: .9 * k, ease: 'power3.inOut', clearProps: 'transform,zIndex',
+            onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,transform' }); g.set(iB, { clearProps: 'transform' }); } });
+          g.to(B, { xPercent: dir > 0 ? -16 : 16, duration: .9 * k, ease: 'power3.inOut' });
           var W = split(hn, true);
           g.fromTo(W, { yPercent: 118, skewY: 6, transformOrigin: '0% 100%' }, { yPercent: 0, skewY: 0, duration: .7 * k, stagger: .045, delay: .1, ease: E, clearProps: 'transform' });
           g.fromTo(hm, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .5, delay: .2, ease: E, clearProps: 'opacity,transform' });
@@ -297,12 +289,13 @@
       var onVr = function (e) {
         ctx.add(function () {
           var d = e.detail, A = vsl[d.to], B = vsl[d.from], iA = $('img', A), iB = $('img', B), dir = d.dir;
-          vsl.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'clipPath,zIndex' }); } });
+          vsl.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'transform,zIndex' }); } });
           g.killTweensOf([A, B, iA, iB]);
-          B.classList.add('lv'); g.set(B, { zIndex: 1, clipPath: 'inset(0% 0% 0% 0%)' }); g.set(A, { zIndex: 2 });
-          g.fromTo(A, { clipPath: dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1 * k, ease: 'power3.inOut', clearProps: 'clipPath,zIndex',
-            onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,clipPath' }); g.set(iB, { clearProps: 'transform' }); } });
-          g.fromTo(iA, { scale: 1.07 }, { scale: 1, duration: 1.8, ease: 'power2.out', clearProps: 'transform' });
+          /* Cambio solo con transform (compositor): la unidad nueva entra deslizando, su foto contra-desliza y la saliente se corre apenas. Sin clip-path ni escala. */
+          B.classList.add('lv'); g.set(B, { zIndex: 1, xPercent: 0 }); g.set(A, { zIndex: 2 });
+          g.fromTo(A, { xPercent: dir > 0 ? 100 : -100 }, { xPercent: 0, duration: .9 * k, ease: 'power3.inOut', clearProps: 'transform,zIndex',
+            onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,transform' }); g.set(iB, { clearProps: 'transform' }); } });
+          g.to(B, { xPercent: dir > 0 ? -16 : 16, duration: .9 * k, ease: 'power3.inOut' });
           var W = split(vn, true);
           g.fromTo(W, { yPercent: 118, skewY: 6, transformOrigin: '0% 100%' }, { yPercent: 0, skewY: 0, duration: .7 * k, stagger: .045, delay: .15, ease: E, clearProps: 'transform' });
           g.fromTo([vm, vi], { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .5, delay: .25, ease: E, clearProps: 'opacity,transform' });
@@ -573,12 +566,12 @@
       var onLoc = function (e) {
         ctx.add(function () {
           var d = e.detail, A = VL[d.to], B = VL[d.from], iA = $('.vin', A), iB = $('.vin', B), dir = d.dir, li = VI[d.to];
-          VL.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'clipPath,zIndex' }); } });
+          VL.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'transform,zIndex' }); } });
           g.killTweensOf([A, B, iA, iB]);
-          B.classList.add('lv'); g.set(B, { zIndex: 1, clipPath: 'inset(0% 0% 0% 0%)' }); g.set(A, { zIndex: 2 });
-          g.fromTo(A, { clipPath: dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1 * k, ease: 'power3.inOut', clearProps: 'clipPath,zIndex',
-            onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,clipPath' }); g.set(iB, { clearProps: 'transform' }); } });
-          g.fromTo(iA, { scale: 1.08 }, { scale: 1, duration: 1.8, ease: 'power2.out', clearProps: 'transform' });
+          B.classList.add('lv'); g.set(B, { zIndex: 1, xPercent: 0 }); g.set(A, { zIndex: 2 });
+          g.fromTo(A, { xPercent: dir > 0 ? 100 : -100 }, { xPercent: 0, duration: .9 * k, ease: 'power3.inOut', clearProps: 'transform,zIndex',
+            onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,transform' }); g.set(iB, { clearProps: 'transform' }); } });
+          g.to(B, { xPercent: dir > 0 ? -16 : 16, duration: .9 * k, ease: 'power3.inOut' });
           if (vW[d.to] && vW[d.to].length) g.fromTo(vW[d.to], { yPercent: 118, skewY: 6, transformOrigin: '0% 100%' }, { yPercent: 0, skewY: 0, duration: .8 * k, stagger: .05, delay: .25, ease: E, clearProps: 'transform', overwrite: 'auto' });
           g.fromTo([$('p', li), $('.ra', li)], { clipPath: 'inset(100% -4% -8% -4%)', y: 14 }, { clipPath: 'inset(0% -4% -8% -4%)', y: 0, duration: .9 * k, stagger: .1, delay: .4, ease: 'expo.inOut', clearProps: 'clipPath,transform', overwrite: 'auto' });
           if (vnum) g.fromTo(vnum, { yPercent: 105 }, { yPercent: 0, duration: .8 * k, ease: E, clearProps: 'transform', overwrite: 'auto' });
@@ -600,7 +593,7 @@
     /* Profundidad (solo escritorio): la foto de Nosotros va a distinta velocidad (solo transform). */
     if (D) {
       var nph = $('#nph');
-      if (nph) g.fromTo(nph, { y: 26 }, { y: -26, ease: 'none', scrollTrigger: { trigger: '#nosotros', start: 'top bottom', end: 'bottom top', scrub: .6 } });
+      if (nph) g.fromTo(nph, { y: 26 }, { y: -26, ease: 'none', scrollTrigger: { trigger: '#nosotros', start: 'top bottom', end: 'bottom top', scrub: true } });
     }
 
     /* Avisos de estado (copiar dirección, formularios): aparecen con el mismo gesto corto */
@@ -626,7 +619,7 @@
 
     /* ---------- Progreso de lectura: línea fina bajo el header (solo transform) ---------- */
     var pb = $('.pgb') || header.appendChild(Object.assign(document.createElement('i'), { className: 'pgb', ariaHidden: 'true' }));
-    g.to(pb, { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: .3 } });
+    g.to(pb, { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
 
     /* ---------- CAPÍTULOS: una línea fina se dibuja con el scroll al entrar en cada sección ---------- */
     if (!lite) ['#unidades', '#versus', '#operaciones', '#contacto', '#preguntas'].forEach(function (id) {
@@ -635,11 +628,11 @@
       ln.style.cssText = 'display:block;height:1px;width:min(1180px,calc(100% - 40px));margin:0 auto -1px;background:var(--lux,#5cb8d0);opacity:.6;transform-origin:0 50%;pointer-events:none';
       sc.insertBefore(ln, sc.firstChild);
       cleanups.push(function () { if (ln.parentNode) ln.parentNode.removeChild(ln); });
-      g.fromTo(ln, { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: sc, start: 'top 92%', end: 'top 40%', scrub: .4 } });
+      g.fromTo(ln, { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: sc, start: 'top 92%', end: 'top 40%', scrub: true } });
     });
 
     /* ---------- BANNER: el marco se abre con el scroll (la foto pasa de ventana a pantalla completa) ---------- */
-    if (D && !lite && $('.bdm')) g.fromTo($('.bdm'), { clipPath: 'inset(9% 7% 9% 7%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none', scrollTrigger: { trigger: '.bd', start: 'top 95%', end: 'top 20%', scrub: .5 } });
+    if (D && !lite && $('.bdm')) g.fromTo($('.bdm'), { scale: .94 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.bd', start: 'top 95%', end: 'top 20%', scrub: true } });
 
     /* ---------- TARJETAS: inclinación 3D con respuesta del puntero (solo mouse, escritorio) ---------- */
     if (false) { /* sin inclinación con el mouse */
@@ -687,14 +680,7 @@
     }, true);
     on(document, 'pointerup', rel, true); on(document, 'pointercancel', rel, true); on(document, 'dragend', rel, true);
 
-    /* ---------- Velocidad de scroll: las tarjetas del catálogo respiran apenas (escala ±) al desplazarse rápido ---------- */
-    if (D && !lite) {
-      var vq = g.quickTo(grid, 'scale', { duration: .6, ease: 'power3.out' }), vTO = 0;
-      ST.create({ trigger: grid, start: 'top bottom', end: 'bottom top', onUpdate: function (s) {
-        vq(1 - Math.min(.012, Math.abs(s.getVelocity()) / 90000)); clearTimeout(vTO); vTO = setTimeout(function () { vq(1); }, 120);
-      } });
-      cleanups.push(function () { clearTimeout(vTO); g.set(grid, { clearProps: 'scale' }); });
-    }
+    /* (Se quitó la escala del catálogo según la velocidad de scroll: reescalaba toda la grilla de fotos en cada fotograma.) */
 
     /* ---------- MÓVIL ---------- */
     if (!D) {
