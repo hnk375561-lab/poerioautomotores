@@ -410,9 +410,11 @@
     mo.observe(grid, { childList: true });
 
     /* ---------- FICHA: se abre desde la tarjeta tocada; la foto se revela con máscara y el contenido entra escalonado ---------- */
-    var dlg = $('#dlg'), was = false, ox = 0, oy = 0;
+    var dlg = $('#dlg'), was = false, ox = 0, oy = 0, cc = null;
+    dlg.classList.add('gx');   /* GSAP conduce la apertura: se apaga el keyframe CSS para que no haya dos animaciones sobre el mismo transform */
     grid.addEventListener('click', function (e) {
       var c = e.target.closest('.car'); if (!c) return;
+      cc = c;
       var r = $('.im', c).getBoundingClientRect();
       ox = r.left + r.width / 2 - innerWidth / 2; oy = r.top + r.height / 2 - innerHeight / 2;
     }, true);
@@ -432,6 +434,30 @@
       if (t.length) g.from(t, { opacity: 0, y: D ? 14 : 10, duration: .6, stagger: .05, delay: fresh ? .3 : .08, ease: E, clearProps: 'opacity,transform', overwrite: 'auto' });
     });
     mo2.observe(dlg, { childList: true });
+
+    /* ---------- FICHA · cierre animado ----------
+       Es la apertura al revés: la ficha vuelve hacia su tarjeta (escritorio) o baja (móvil) y el fondo se apaga.
+       Cubre ×, clic en el fondo, Escape y cualquier dlg.close(); el cierre nativo sigue siendo el que cierra de verdad
+       (historial, hash, foco y overflow los resuelve index.html en su evento "close"). Un segundo Escape o cualquier cierre directo corta la animación. */
+    var closing = null, nativeClose = HTMLDialogElement.prototype.close;
+    function resetDlg() { if (closing) { closing.kill(); closing = null; } dlg.classList.remove('out'); g.set(dlg, { clearProps: 'opacity,transform,transformOrigin,pointerEvents' }); }
+    function animClose(rv) {
+      if (!dlg.open || closing) return;
+      var to = { opacity: 0, duration: .4, ease: 'power2.in', onComplete: function () { closing = null; nativeClose.call(dlg, rv); resetDlg(); } };
+      if (D) {
+        if (cc && cc.isConnected) { var r = $('.im', cc).getBoundingClientRect(); if (r.bottom > 0 && r.top < innerHeight) { ox = r.left + r.width / 2 - innerWidth / 2; oy = r.top + r.height / 2 - innerHeight / 2; } else { ox = 0; oy = 0; } }
+        else { ox = 0; oy = 0; }
+        var w = dlg.offsetWidth, h = dlg.offsetHeight;
+        to.scale = .94; to.x = ox * .08; to.y = oy * .08 + 14; to.transformOrigin = (w / 2 + ox) + 'px ' + (h / 2 + oy) + 'px';
+      } else { to.y = 26; to.scale = .985; to.duration = .34; to.ease = 'power2.in'; }
+      dlg.classList.add('out');
+      g.set(dlg, { pointerEvents: 'none' });
+      closing = ctx.add(function () { return g.to(dlg, to); });
+    }
+    dlg.close = function (rv) { animClose(rv); };
+    on(dlg, 'cancel', function (e) { if (closing) return; e.preventDefault(); animClose(); });
+    on(dlg, 'close', resetDlg);
+    cleanups.push(function () { delete dlg.close; resetDlg(); dlg.classList.remove('gx'); });
 
 
     /* ---------- CURSOR del catálogo: "Ver ficha" sigue al mouse sobre la foto de cada tarjeta (solo mouse) ---------- */
@@ -609,7 +635,7 @@
     if (!lite) ['#unidades', '#versus', '#operaciones', '#contacto', '#preguntas'].forEach(function (id) {
       var sc = $(id); if (!sc) return;
       var ln = document.createElement('i'); ln.setAttribute('aria-hidden', 'true');
-      ln.style.cssText = 'display:block;height:1px;width:min(1180px,calc(100% - 40px));margin:0 auto;background:var(--lux,#5cb8d0);opacity:.6;transform-origin:0 50%;pointer-events:none';
+      ln.style.cssText = 'display:block;height:1px;width:min(1180px,calc(100% - 40px));margin:0 auto -1px;background:var(--lux,#5cb8d0);opacity:.6;transform-origin:0 50%;pointer-events:none';
       sc.insertBefore(ln, sc.firstChild);
       cleanups.push(function () { if (ln.parentNode) ln.parentNode.removeChild(ln); });
       g.fromTo(ln, { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: sc, start: 'top 92%', end: 'top 40%', scrub: .4 } });
@@ -633,23 +659,34 @@
       on(grid, 'pointerleave', function () { if (tl2) g.to(tl2, { rotationX: 0, rotationY: 0, duration: .8, ease: 'elastic.out(1,.6)', overwrite: 'auto', clearProps: 'transform,transformPerspective' }); tl2 = null; });
     }
 
-    /* ---------- BOTONES: atracción magnética (mouse) + presión táctil (todos) ---------- */
+    /* ---------- BOTONES: atracción magnética (mouse) + presión táctil (todos) ----------
+       La hoja final fuerza transform:none!important en .btn (y scale(1.03) en hover), así que un transform en línea de GSAP nunca se vería.
+       Por eso el movimiento va por las propiedades individuales translate/scale, alimentadas por variables --mx/--my/--ps
+       (index.html: `.m .btn{translate:var(--mx) var(--my)}`). Sin variable definida valen "none": en reposo no crean contexto de apilamiento ni cambian nada. */
+    function drive(el, vars, P, tweenVars, done) {
+      g.to(P, Object.assign({ overwrite: true, onUpdate: function () { for (var k in vars) el.style.setProperty(vars[k], P[k] + (vars[k] === '--ps' ? '' : 'px')); }, onComplete: function () { if (done) done(); } }, tweenVars));
+    }
     if (D && fine && !lite) {
       $$('.hero .btn, .bd .btn, .loc .btn, .ci .btn, .eqc .btn, .pdr .btn, .hwr .btn, .rvr .btn').forEach(function (b) {
-        var bx = g.quickTo(b, 'x', { duration: .6, ease: 'power3.out' }), by = g.quickTo(b, 'y', { duration: .6, ease: 'power3.out' });
+        var P = { x: 0, y: 0 }, V = { x: '--mx', y: '--my' }, rest = function () { b.style.removeProperty('--mx'); b.style.removeProperty('--my'); };
         on(b, 'pointermove', function (e) {
           if (e.pointerType && e.pointerType !== 'mouse') return;
           var r = b.getBoundingClientRect();
-          bx((e.clientX - (r.left + r.width / 2)) * .22); by((e.clientY - (r.top + r.height / 2)) * .3);
+          drive(b, V, P, { x: (e.clientX - (r.left + r.width / 2)) * .22, y: (e.clientY - (r.top + r.height / 2)) * .3, duration: .6, ease: 'power3.out' });
         });
-        on(b, 'pointerleave', function () { g.to(b, { x: 0, y: 0, duration: .9, ease: 'elastic.out(1,.5)', overwrite: 'auto', clearProps: 'transform' }); });
+        on(b, 'pointerleave', function () { drive(b, V, P, { x: 0, y: 0, duration: .9, ease: 'elastic.out(1,.5)' }, rest); });
+        cleanups.push(function () { g.killTweensOf(P); rest(); });
       });
     }
     var pressed = null;
-    function rel() { if (!pressed) return; var b = pressed; pressed = null; g.to(b, { scale: 1, duration: .6, ease: 'elastic.out(1,.55)', overwrite: 'auto', clearProps: 'scale' }); }
+    function press(b, to, du, ease, done) { var P = b._P || (b._P = { ps: 1 }); drive(b, { ps: '--ps' }, P, { ps: to, duration: du, ease: ease }, done); }
+    function rel() {
+      if (!pressed) return; var b = pressed; pressed = null;
+      press(b, 1, .6, 'elastic.out(1,.55)', function () { b.style.removeProperty('--ps'); });
+    }
     on(document, 'pointerdown', function (e) {
-      var b = e.target.closest && e.target.closest('.btn, .chip'); if (!b || b.disabled) return;
-      pressed = b; g.to(b, { scale: .955, duration: .18, ease: 'power2.out', overwrite: 'auto' });
+      var b = e.target.closest && e.target.closest('.btn, .chip, .g-a, .fcx, .g-t button'); if (!b || b.disabled) return;
+      pressed = b; press(b, .955, .18, 'power2.out');
     }, true);
     on(document, 'pointerup', rel, true); on(document, 'pointercancel', rel, true); on(document, 'dragend', rel, true);
 
