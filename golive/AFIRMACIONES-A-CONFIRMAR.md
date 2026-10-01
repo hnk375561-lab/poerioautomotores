@@ -123,3 +123,6 @@ Precios: todos "Consultar". El validador falla si aparece otro valor sin confirm
 - Quiénes somos: "39 años de confianza" (lema ya existente, sin año de fundación); "unidades en el salón" sale de `STOCK`; "3 servicios" = usados, permutas y consignaciones (los tres pilares del sitio).
 - Formulario "Contanos tu auto": vista previa del mensaje y consejos generales (fotos, cédula, service). Son sugerencias, no requisitos del negocio: a confirmar con el dueño.
 
+## Equipo: quiénes atienden (2026-09-30)
+- "Fernando Poerio · Dueño": rol indicado por quien arma la demo (el nombre ya es el de la agencia). **PENDIENTE: confirmar con el dueño que figure así.**
+- Segunda persona: "Nombre a confirmar · Empleado" es un marcador. **PENDIENTE: completar con el nombre real y su rol, o quitar la fila antes de salir a producción.** No se identificó a nadie en la foto del local.

@@ -537,6 +537,7 @@
     photos([$('.eqf .eqm')], '.eqf', { to: 'inset(-3% -3% -3% -3%)', st: 'top 82%' });
     photos([$('.eqv .eqm')], '.eqv', { to: 'inset(-3% -3% -3% -3%)', from: D ? 'inset(0% 0% 0% 100%)' : 'inset(100% 0% 0% 0%)', st: 'top 82%', d: D ? .18 : 0, still: true });
     reveal($$('.eqk li'), '.eqk', { s: .1, st: 'top 88%' });
+    reveal($$('.eqt li'), '.eqt', { s: .12, y: 16, st: 'top 92%' });
     /* ---------- CÓMO LLEGAR · el recorrido como un solo módulo ----------
        Entrada: el marco sube con máscara. Cada paso cambia con el mismo lenguaje que el hero: máscara lateral, escena que se asienta con
        contraparalaje, título por palabra, número que rueda y bajada/acciones con máscara corta. En escritorio la escena reacciona al cursor. */
