@@ -772,8 +772,20 @@ section.pp.pp.pp.pp .pdc{border:1px solid var(--stone);border-top:3px solid var(
 .btn{min-height:48px}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #f5b301;outline-offset:3px}
 @media(max-width:600px){.pdr .btn,.eqc .btn,.hwr .btn{width:100%;justify-content:center;text-align:center}.pd h2{font-size:clamp(30px,9vw,40px)}}
+/* Pulido móvil y presentación */
+.ftg{display:none}
+.rvr{gap:12px;flex-wrap:wrap}.rvw .rvh{margin-bottom:0}.rvw .rvr{margin-top:28px}
+@media(max-width:639px){
+.ftg{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:48px;margin:0 0 10px;padding:0 16px;background:#fff;border:1.5px solid var(--ink);border-radius:3px;font:600 15px var(--b);color:var(--ink);cursor:pointer}
+.ftg::after{content:"+";font-size:22px;line-height:1}.ftg[aria-expanded=true]::after{content:"\2212"}
+.ff{padding:14px}.ff:not(.open)>:not(.fs1){display:none}
+.vsb{left:6px;top:6px;gap:4px}.vsb i{font-size:10.5px;padding:3px 6px}
+.vsr{grid-template-columns:92px repeat(var(--n,2),minmax(0,1fr))}.vsl{font-size:12px;overflow-wrap:anywhere;hyphens:auto}
+.eqv .eqm{max-width:300px;margin-inline:auto}
+}
+@media(min-width:360px) and (max-width:899px){.rq .rqg{display:grid;grid-template-columns:1fr 1fr;gap:10px}.rq .rqb{padding:12px 12px}.rq .rqb span{font-size:12.5px}}
 </style>
-<noscript><style>#modelos,.ff,#qc,#hf,.vs,.car .g-a,.car .g-c,.car .g-s,.vr .g-a,.vr .vrr,.vr .vri,#visitaForm,#buscoForm{display:none}</style></noscript>
+<noscript><style>#modelos,.ff,.ftg,#qc,#hf,.vs,.car .g-a,.car .g-c,.car .g-s,.vr .g-a,.vr .vrr,.vr .vri,#visitaForm,#buscoForm{display:none}</style></noscript>
 </head>
 <body>
 <a class="skip" href="#unidades">Saltar al contenido</a>
@@ -789,6 +801,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 <section id="unidades"><div class="w">
 <div class="head"><div><h2>Unidades</h2><p class="sub">Tocá una unidad para ver todas las fotos. Precio y disponibilidad: consultanos por WhatsApp.</p></div></div>
+<button type="button" class="ftg" id="ftg" aria-expanded="false" aria-controls="ff">Más filtros y orden</button>
 <div class="ff" id="ff" role="search" aria-label="Filtrar unidades"><label class="fs1">Buscar<input id="q" type="search" placeholder="Marca o modelo" autocomplete="off"></label><label>Modelo<select id="fm"><option value="">Todos</option></select></label><label>Año desde<input id="fy1" inputmode="numeric" maxlength="4" placeholder="Ej.: 2011"></label><label>Año hasta<input id="fy2" inputmode="numeric" maxlength="4" placeholder="Ej.: 2019"></label><label>Km desde<input id="fk1" inputmode="numeric" maxlength="7" placeholder="Ej.: 50.000"></label><label>Km hasta<input id="fk2" inputmode="numeric" maxlength="7" placeholder="Ej.: 200.000"></label><label>Ordenar<select id="fo"><option value="">Recientes</option><option value="nuevo">Año: más nuevo</option><option value="viejo">Año: más antiguo</option><option value="km">Menos kilómetros</option></select></label><button type="button" id="fc">Limpiar</button></div><p id="qc" role="status"></p>
 <p id="qe">No hay unidades con esa búsqueda. Escribinos y te contamos qué ingresa.</p>
 <p class="sr" id="stockStatus" role="status"></p>
@@ -840,7 +853,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 <section id="financiacion" class="pd pp" aria-labelledby="finh"><div class="w"><div class="pdl"><p class="pdt">Precio y pago</p><h2 id="finh">Precios y formas de pago, directo con la agencia</h2><p>Cada unidad se consulta de forma personal: escribinos por WhatsApp y te respondemos con el precio actualizado, las formas de pago y las opciones para tu usado.</p></div><div class="pdg"><div class="pdc"><h3>Precios</h3><p>Te pasamos el precio vigente de la unidad que elijas.</p><span class="pds">Consultar</span></div><div class="pdc"><h3>Financiación</h3><p>Preguntanos qué planes y condiciones hay disponibles.</p><span class="pds">Consultar</span></div><div class="pdc"><h3>Formas de pago</h3><p>Medios de pago y cómo se toma tu usado como parte de pago.</p><span class="pds">Consultar</span></div></div><div class="pdr"><a class="btn p" href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por precios y formas de pago.">Consultar formas de pago</a></div></div></section>
 
-<section id="opiniones" class="pd alt rvw" aria-labelledby="oph"><div class="w"><div class="rvh"><span class="ey">Reseñas en Google</span><h2 id="oph">Opiniones de clientes</h2><p>Lo que dejan quienes nos visitaron, directo desde Google.</p></div><div class="rvc"><article class="rvk"><div class="rva" aria-hidden="true">L</div><b>Luna Figueroa</b><span class="rvs" role="img" aria-label="5 estrellas de 5">★★★★★</span><p>Calificó con 5 estrellas en Google.</p></article><article class="rvk"><div class="rva" aria-hidden="true">S</div><b>Santiago Solis</b><span class="rvs" role="img" aria-label="5 estrellas de 5">★★★★★</span><p>Calificó con 5 estrellas en Google.</p></article></div><div class="rvr"><a class="btn p" id="reviewsLink2" href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" target="_blank" rel="noopener noreferrer">Ver opiniones en Google</a></div></div></section>
+<section id="opiniones" class="pd alt rvw" aria-labelledby="oph"><div class="w"><div class="rvh"><span class="ey">Reseñas en Google</span><h2 id="oph">Lo que dicen quienes nos visitaron</h2><p>Las opiniones de los clientes están en nuestra ficha de Google Maps. Leelas ahí, tal como las publicó cada persona, antes de venir.</p></div><div class="rvr"><a class="btn p" id="reviewsLink2" href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" target="_blank" rel="noopener noreferrer">Ver opiniones en Google</a><a class="btn" href="#contacto">Cómo llegar</a></div></div></section>
 
 <section id="contacto" class="loc"><div class="mp"><iframe title="Mapa: Fernando Poerio Automotores, Alberdi 1337, Concepción del Uruguay" src="https://maps.google.com/maps?q=-32.4882114,-58.2425324&amp;z=17&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" width="600" height="450"></iframe><span class="mph">Tocá el mapa para moverlo</span><a class="mpl" data-map href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" target="_blank" rel="noopener noreferrer">Abrir en Google Maps ↗</a></div><div class="w">
 <div class="lc"><h2 class="eb">Dónde estamos</h2><address id="addr"><strong>Alberdi 1337</strong> <span class="k">(casi Bv. Montoneras)</span><br>Concepción del Uruguay, Entre Ríos</address><p class="meta" id="hoursNote">Escribinos o llamanos antes de venir y coordinamos la visita.</p>
@@ -1132,6 +1145,7 @@ f.addEventListener("pointerover",function(v){var b=v.target.closest(".mdb");if(!
 go(0);
 })();</script>
 <script>(function(){var b=document.getElementById("rqc"),o=document.getElementById("rqs");if(!b)return;b.addEventListener("click",function(){var t="Alberdi 1337, Concepción del Uruguay, Entre Ríos";function ok(){o.textContent="Dirección copiada."}function ko(){o.textContent="No se pudo copiar. La dirección es "+t+"."}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok,ko);else{try{var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();document.execCommand("copy");a.remove();ok()}catch(e){ko()}}})})();</script>
+<script>(function(){var b=document.getElementById("ftg"),f=document.getElementById("ff");if(!b||!f)return;b.addEventListener("click",function(){var o=f.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");b.textContent=o?"Ocultar filtros":"Más filtros y orden"})})();</script>
 <script src="js/recorrido.js" defer></script>
 </body>
 </html>
