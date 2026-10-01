@@ -25,6 +25,7 @@
         DUR = [7000, 6500, 12000, 7000], cur = 0, tm = 0, vis = false;
 
     N.forEach(function (b, k) { b.style.setProperty('--d', DUR[k] + 'ms'); });
+    C.forEach(function (c, k) { c.style.setProperty('--d', DUR[k] + 'ms'); });
 
     function stop() { clearTimeout(tm); tm = 0; if (v) v.pause(); }
     function go(i) {
@@ -47,10 +48,16 @@
     C.forEach(function (c, k) { c.addEventListener('click', function (e) { if (!e.target.closest('a,button') && k !== cur) go(k); }); });
 
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) {
-        vis = es[0].isIntersecting;
+      /* Corre mientras se vea la escena o el texto del recorrido (basta un 15% de cualquiera de los dos) */
+      var seen = [false, false], tg = [st, $('#local .rg')];
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { seen[tg.indexOf(e.target)] = e.isIntersecting; });
+        var n = seen[0] || seen[1];
+        if (n === vis) return;
+        vis = n;
         if (vis) go(cur); else stop();
-      }, { threshold: .35 }).observe(st);
+      }, { threshold: .15 });
+      tg.forEach(function (x) { if (x) io.observe(x); });
     }
     d.addEventListener('visibilitychange', function () { if (d.hidden) stop(); else if (vis) go(cur); });
     go(0);

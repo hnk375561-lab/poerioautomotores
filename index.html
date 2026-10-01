@@ -864,17 +864,7 @@ section#financiacion.pp.pp.pp.pp .pdc{background:rgba(10,26,38,.55);-webkit-back
 #visita form{color:var(--ink);background:rgba(255,255,255,.96);border:1px solid rgba(143,211,228,.4);border-top:3px solid var(--lux);box-shadow:0 40px 80px -40px rgba(0,0,0,.85)}
 #visita .pdr .btn:not(.p){color:#fff}
 /* ===== v2: Quiénes somos con fondo, tarjeta, equipo, recorrido y mapa liviano ===== */
-body section#nosotros.no{position:relative;isolation:isolate;overflow:hidden;color:#fff;background:var(--deep)}
-#nosotros.no::before{content:"";position:absolute;inset:0;z-index:-2;background:url(images/ecosport-5-800.webp) 50% 42%/cover no-repeat}
-@media(min-width:801px){#nosotros.no::before{background-image:url(images/ecosport-5.webp)}}
-#nosotros.no::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(70% 60% at 50% 45%,rgba(6,17,26,.45),rgba(6,17,26,.1) 100%),linear-gradient(180deg,rgba(6,17,26,.82),rgba(8,24,36,.5) 42%,rgba(6,17,26,.9))}
-#nosotros .ey{color:var(--luxl);border-color:rgba(143,211,228,.55)}
-#nosotros h2{color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.55)}
-#nosotros .w>div:not(.ph):not(.ci)>p{color:#d3e0e6;text-shadow:0 1px 14px rgba(0,0,0,.6)}
-#nosotros .pl{border-top-color:rgba(143,211,228,.6)}#nosotros .pl div{border-bottom-color:rgba(255,255,255,.18)}
-#nosotros .pl b{color:#fff}#nosotros .pl span{color:#b9cad3}
-#nosotros .w>div>.btn.p{background:var(--lux);border-color:var(--lux);color:var(--deep)}#nosotros .w>div>.btn.p:hover{background:#fff;border-color:#fff}
-#nosotros .ph{box-shadow:0 40px 80px -40px rgba(0,0,0,.9);outline:1px solid rgba(143,211,228,.35);outline-offset:10px}
+#nosotros .ph{box-shadow:0 40px 80px -40px rgba(14,27,38,.55);outline:1px solid rgba(20,111,136,.4);outline-offset:10px}
 /* Tarjeta de contacto */
 #nosotros .ci{background:#fff;border:0;border-top:3px solid var(--lux);border-radius:0;box-shadow:0 40px 80px -40px rgba(0,0,0,.85)}
 #nosotros .ci .ih{flex-direction:column;gap:16px;padding:30px 28px 26px;background:linear-gradient(135deg,#0a1a27,#123046)}
@@ -907,8 +897,6 @@ body section#nosotros.no{position:relative;isolation:isolate;overflow:hidden;col
 @media(min-width:900px){.eqk{grid-template-columns:repeat(4,minmax(0,1fr))}.eqk li{grid-template-columns:1fr;gap:6px;padding:26px 22px 8px;border-bottom:0;border-left:1px solid rgba(14,27,38,.16)}.eqk li:first-child{border-left:0;padding-left:4px}.eqk span{grid-row:auto;font-size:44px}}
 #equipo .eqc{flex-wrap:wrap;gap:12px}
 /* Cómo llegar */
-.rec{position:relative;isolation:isolate;overflow:hidden}
-.rec::before{content:"1337";position:absolute;right:-1vw;top:clamp(20px,3vw,60px);z-index:-1;font:400 clamp(150px,26vw,400px)/.8 var(--serif);color:transparent;-webkit-text-stroke:1px rgba(143,211,228,.13);pointer-events:none;user-select:none}
 .rtg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin:0 0 clamp(28px,4vw,48px);background:rgba(143,211,228,.24);border:1px solid rgba(143,211,228,.24)}
 .rtg div{display:flex;flex-direction:column;gap:4px;padding:16px 18px;background:#0a1824}
 .rtg small{font:600 11.5px var(--b);letter-spacing:.16em;text-transform:uppercase;color:var(--luxl)}.rtg b{font:400 clamp(20px,2vw,26px)/1.1 var(--serif);color:#fff}
@@ -916,16 +904,36 @@ body section#nosotros.no{position:relative;isolation:isolate;overflow:hidden;col
 .rs{outline:1px solid rgba(143,211,228,.3);outline-offset:10px}
 .rp{padding:10px 14px;left:0;right:auto;bottom:0;background:rgba(6,17,26,.72);border-top:1px solid rgba(143,211,228,.4);border-right:1px solid rgba(143,211,228,.4)}
 @media(min-width:900px){
+.rx{grid-template-columns:minmax(0,1fr) clamp(280px,25vw,380px);gap:clamp(28px,3.4vw,52px);width:min(1560px,calc(100vw - 64px));margin-left:calc(50% - min(780px,calc(50vw - 32px)))}
+.rcc::before{content:"";position:absolute;left:-2px;top:0;bottom:0;width:2px;background:var(--luxl);transform:scaleY(0);transform-origin:top}
+.rcc.on::before{animation:rbv var(--d,7s) linear forwards}
 .rc{display:flex;flex-direction:column;gap:0}
 .rcc{grid-area:auto;position:relative;opacity:.42;visibility:visible;transform:none;cursor:pointer;padding:16px 0 16px 26px;border-left:2px solid rgba(255,255,255,.16);transition:opacity .4s ease,border-color .4s ease}
-.rcc.on{opacity:1;border-left-color:var(--luxl);transition:opacity .4s ease,border-color .4s ease}.rcc:hover{opacity:.8}.rcc.on:hover{opacity:1}
+.rcc.on{opacity:1;transition:opacity .4s ease}.rcc:hover{opacity:.8}.rcc.on:hover{opacity:1}
 .rcc h3{font-size:clamp(24px,2.4vw,32px);margin:6px 0 8px}.rcc p{margin:0 0 12px;font-size:15.5px}
 .rcc .ra{visibility:hidden}.rcc.on .ra{visibility:visible}
 }
+@keyframes rbv{to{transform:scaleY(1)}}
+@media(prefers-reduced-motion:reduce){.rcc.on::before{animation:none;transform:none}}
 /* Mapa liviano: se carga recién cuando el scroll se detiene */
 .mp .mpf{position:absolute;inset:0;background:linear-gradient(90deg,transparent 0 47%,rgba(255,255,255,.07) 47% 53%,transparent 53%) 0 0/120px 100%,linear-gradient(0deg,transparent 0 47%,rgba(255,255,255,.07) 47% 53%,transparent 53%) 0 0/100% 90px,linear-gradient(135deg,#16283a,#0e1b26)}
 .mp .mpf::after{content:"";position:absolute;left:50%;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--luxl);box-shadow:0 0 0 9px rgba(143,211,228,.22)}
 .mp iframe{opacity:0;transition:opacity .5s ease;will-change:auto}.mp.rd iframe{opacity:1}.mp.rd .mpf{display:none}
+/* ===== Guía general con interior de vehículo de fondo ===== */
+#guia.pd{position:relative;isolation:isolate;overflow:hidden;color:#fff;background:var(--deep)}
+#guia.pd::before{content:"";position:absolute;inset:0;z-index:-2;background:url(images/ecosport-5-800.webp) 50% 42%/cover no-repeat;transform:scale(1.03)}
+@media(min-width:801px){#guia.pd::before{background-image:url(images/ecosport-5.webp)}}
+#guia.pd::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(70% 60% at 50% 45%,rgba(6,17,26,.5),rgba(6,17,26,.12) 100%),linear-gradient(180deg,rgba(6,17,26,.8),rgba(8,24,36,.5) 45%,rgba(6,17,26,.86))}
+#guia .pde{display:inline-block;padding:6px 16px;border:1px solid rgba(143,211,228,.5);border-radius:999px;color:var(--luxl)}
+#guia h2{color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.55)}
+#guia .pdl p:not(.pde){color:#c9d8df;text-shadow:0 1px 14px rgba(0,0,0,.6)}
+#guia .gd{padding:6px 28px;background:rgba(10,26,38,.72);border:1px solid rgba(143,211,228,.28);border-top:3px solid var(--lux);box-shadow:0 30px 60px -36px rgba(0,0,0,.9)}
+#guia .gd details{border-bottom-color:rgba(255,255,255,.16)}#guia .gd details:last-child{border-bottom:0}
+#guia .gd summary{color:#fff}#guia .gd summary:hover{color:var(--luxl)}
+#guia .gd summary::after{background:linear-gradient(var(--luxl),var(--luxl)) center/100% 1.5px no-repeat,linear-gradient(var(--luxl),var(--luxl)) center/1.5px 100% no-repeat}
+#guia .gd details ul,#guia .gd details p{color:#c9d8df}
+#guia .pdn{color:#b9cad3;text-shadow:0 1px 12px rgba(0,0,0,.6)}
+#guia .pdr .btn.p{background:var(--lux);border-color:var(--lux);color:var(--deep)}#guia .pdr .btn.p:hover{background:#fff;border-color:#fff}
 </style>
 <noscript><style>#modelos,.ff,.ftg,#qc,#hf,.vs,.car .g-a,.car .g-c,.car .g-s,.vr .g-a,.vr .vrr,.vr .vri,#visitaForm,#buscoForm{display:none}</style></noscript>
 </head>
