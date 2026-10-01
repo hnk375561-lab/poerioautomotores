@@ -10,7 +10,7 @@
    · ScrollTo   → los enlaces internos viajan con expo.inOut; la rueda o el toque los interrumpen (no hay secuestro de scroll)
    · Flip       → al filtrar unidades, las que quedan se reacomodan, las nuevas entran y las que salen se despiden
    · Puntero    → paralaje del hero (solo mouse; nunca en táctil)
-   · Profundidad (v6, solo escritorio) → el texto del hero se despide en capas, los fondos con interior de vehículo se desplazan apenas y las fotos del equipo van a distinta velocidad
+   · Profundidad (v6, solo escritorio) → el texto del hero se despide en capas, los fondos con interior de vehículo se desplazan apenas y la foto de Nosotros va a distinta velocidad
    · Vender o permutar → una unidad por vez, con la misma máscara lateral y el mismo nombre por palabra que el hero
    · Ficha → se abre desde la tarjeta; la foto se revela con máscara y el contenido entra escalonado
    · Banner → foto fija de fondo con paralaje suave
@@ -165,8 +165,8 @@
       var st = { trigger: trig, start: o.st || 'top 85%', once: true };
       if (imgs.length) g.set(imgs, { transition: 'none' });
       /* o.to: las fotos con marco (outline) terminan con inset negativo para que el marco no quede recortado ni aparezca de golpe */
-      g.fromTo(boxes, { clipPath: o.from || 'inset(100% 0% 0% 0%)' }, { clipPath: o.to || 'inset(0% 0% 0% 0%)', duration: 1.1 * k, stagger: s, ease: 'expo.inOut', clearProps: 'clipPath', scrollTrigger: st });
-      if (!o.still && imgs.length) g.fromTo(imgs, { scale: 1.1 }, { scale: 1, duration: 1.5, stagger: s, ease: 'power3.out', clearProps: 'transform,transition', scrollTrigger: st });
+      g.fromTo(boxes, { clipPath: o.from || 'inset(100% 0% 0% 0%)' }, { clipPath: o.to || 'inset(0% 0% 0% 0%)', duration: 1.1 * k, delay: o.d || 0, stagger: s, ease: 'expo.inOut', clearProps: 'clipPath', scrollTrigger: st });
+      if (!o.still && imgs.length) g.fromTo(imgs, { scale: 1.1 }, { scale: 1, duration: 1.5, delay: o.d || 0, stagger: s, ease: 'power3.out', clearProps: 'transform,transition', scrollTrigger: st });
     }
     function pulse(sel) {
       $$(sel).forEach(function (b) { b.classList.add('pulse'); setTimeout(function () { b.classList.remove('pulse'); }, 1800); });
@@ -533,9 +533,9 @@
     reveal($$('.pdr .btn, .eqc .btn, .hwr .btn, .rvr .btn'), '.pdr, .eqc, .hwr, .rvr', { s: .08, y: 14, st: 'top 92%', nt: 1 });
     /* Tarjeta de contacto: cada dato entra después de la tarjeta */
     reveal($$('.ci .cit, .ci .cia .btn, .ci .cis > *'), '.ci', { s: .05, y: 14, d: .2, st: 'top 80%', nt: 1 });
-    /* Equipo: fotos con máscara; el video del ingreso va a otra velocidad (escritorio) */
-    photos([$('.eqf .eqm')], '.eqg', { to: 'inset(-3% -3% -3% -3%)', st: 'top 82%' });
-    photos([$('.eqv .eqm')], '.eqg', { to: 'inset(-3% -3% -3% -3%)', from: D ? 'inset(0% 0% 0% 100%)' : 'inset(0% 0% 100% 0%)', st: 'top 82%', s: .18, still: true });
+    /* Equipo: foto y video lado a lado, cada uno se abre con su máscara al llegar a la vista (en móvil el video va debajo, por eso el disparador es cada figura) */
+    photos([$('.eqf .eqm')], '.eqf', { to: 'inset(-3% -3% -3% -3%)', st: 'top 82%' });
+    photos([$('.eqv .eqm')], '.eqv', { to: 'inset(-3% -3% -3% -3%)', from: D ? 'inset(0% 0% 0% 100%)' : 'inset(100% 0% 0% 0%)', st: 'top 82%', d: D ? .18 : 0, still: true });
     reveal($$('.eqk li'), '.eqk', { s: .1, st: 'top 88%' });
     /* ---------- CÓMO LLEGAR · el recorrido como un solo módulo ----------
        Entrada: el marco sube con máscara. Cada paso cambia con el mismo lenguaje que el hero: máscara lateral, escena que se asienta con
@@ -573,12 +573,10 @@
       }
     }
 
-    /* Profundidad (solo escritorio): las fotos del equipo van a distinta velocidad (solo transform). */
+    /* Profundidad (solo escritorio): la foto de Nosotros va a distinta velocidad (solo transform). */
     if (D) {
       var nph = $('#nph');
       if (nph) g.fromTo(nph, { y: 26 }, { y: -26, ease: 'none', scrollTrigger: { trigger: '#nosotros', start: 'top bottom', end: 'bottom top', scrub: .6 } });
-      var eqv = $('.eqv');
-      if (eqv) g.fromTo(eqv, { y: 40 }, { y: -40, ease: 'none', scrollTrigger: { trigger: '.eqg', start: 'top bottom', end: 'bottom top', scrub: .6 } });
     }
 
     /* Avisos de estado (copiar dirección, formularios): aparecen con el mismo gesto corto */

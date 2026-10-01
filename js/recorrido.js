@@ -59,14 +59,22 @@
     go(0);
   }
 
-  /* Video del equipo: corre en bucle mientras está a la vista */
-  var r = $('#eqv');
-  if (r && 'IntersectionObserver' in window) {
-    var rv = false;
-    new IntersectionObserver(function (es) {
-      rv = es[0].isIntersecting;
-      if (rv && !rm) play(r); else r.pause();
-    }, { threshold: .4 }).observe(r);
-    d.addEventListener('visibilitychange', function () { if (d.hidden) r.pause(); else if (rv && !rm) play(r); });
+  /* Video del equipo: corre en bucle mientras está a la vista; el botón lo pausa (y con movimiento reducido arranca pausado) */
+  var r = $('#eqv'), pb = $('.eqvb');
+  if (r) {
+    var rv = false, held = rm;
+    var ui = function () {
+      if (!pb) return;
+      pb.classList.toggle('is-paused', held);
+      pb.setAttribute('aria-pressed', held ? 'true' : 'false');
+      pb.setAttribute('aria-label', held ? 'Reproducir video' : 'Pausar video');
+    };
+    var apply = function () { if (rv && !held && !d.hidden) play(r); else r.pause(); };
+    ui();
+    if (pb) pb.addEventListener('click', function () { held = !held; ui(); apply(); });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { rv = es[0].isIntersecting; apply(); }, { threshold: .4 }).observe(r);
+    }
+    d.addEventListener('visibilitychange', apply);
   }
 })();
