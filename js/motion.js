@@ -182,11 +182,7 @@
         var hero = $('.hero'), P = { ease: 'power3.out', duration: .9 };
         g.to([fi, bg], { scale: 1.06, duration: 1.6, ease: 'power2.out' });
         var fx = g.quickTo(fi, 'x', P), fy = g.quickTo(fi, 'y', P), bx = g.quickTo(bg, 'x', P), by = g.quickTo(bg, 'y', P);
-        on(hero, 'pointermove', function (e) {
-          var r = hero.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - .5, ny = (e.clientY - r.top) / r.height - .5;
-          fx(nx * -26); fy(ny * -18); bx(nx * 18); by(ny * 12);
-        });
-        on(hero, 'pointerleave', function () { fx(0); fy(0); bx(0); by(0); });
+        /* Sin seguimiento del mouse: el hero ya no se mueve con el puntero. */
       }
     }
 
@@ -461,7 +457,8 @@
 
 
     /* ---------- CURSOR del catálogo: "Ver ficha" sigue al mouse sobre la foto de cada tarjeta (solo mouse) ---------- */
-    if (fine) {
+    /* Desactivado: nada sigue al mouse. */
+    if (false) {
       var cu = document.createElement('div'); cu.className = 'cur'; cu.setAttribute('aria-hidden', 'true'); cu.innerHTML = '<span>Ver ficha</span>'; document.body.appendChild(cu);
       var cqx = g.quickTo(cu, 'x', { duration: .45, ease: 'power3.out' }), cqy = g.quickTo(cu, 'y', { duration: .45, ease: 'power3.out' }), cOn = false;
       var cshow = function (v, e) {
@@ -592,7 +589,7 @@
       /* Escritorio: la escena reacciona al cursor */
       if (D && !lite && vsc) {
         g.set(vsc, { scale: 1.05 });
-        if (fine) {
+        if (false) { /* sin seguimiento del mouse */
           var vx = g.quickTo(vsc, 'x', { duration: .9, ease: 'power3.out' }), vy = g.quickTo(vsc, 'y', { duration: .9, ease: 'power3.out' });
           on($('.vv', vj), 'pointermove', function (e) { var r = this.getBoundingClientRect(); vx(((e.clientX - r.left) / r.width - .5) * -22); vy(((e.clientY - r.top) / r.height - .5) * -14); });
           on($('.vv', vj), 'pointerleave', function () { vx(0); vy(0); });
@@ -645,7 +642,7 @@
     if (D && !lite && $('.bdm')) g.fromTo($('.bdm'), { clipPath: 'inset(9% 7% 9% 7%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none', scrollTrigger: { trigger: '.bd', start: 'top 95%', end: 'top 20%', scrub: .5 } });
 
     /* ---------- TARJETAS: inclinación 3D con respuesta del puntero (solo mouse, escritorio) ---------- */
-    if (D && fine && !lite) {
+    if (false) { /* sin inclinación con el mouse */
       var tl2 = null, tq = null;
       on(grid, 'pointermove', function (e) {
         if (e.pointerType && e.pointerType !== 'mouse') return;
@@ -666,7 +663,7 @@
     function drive(el, vars, P, tweenVars, done) {
       g.to(P, Object.assign({ overwrite: true, onUpdate: function () { for (var k in vars) el.style.setProperty(vars[k], P[k] + (vars[k] === '--ps' ? '' : 'px')); }, onComplete: function () { if (done) done(); } }, tweenVars));
     }
-    if (D && fine && !lite) {
+    if (false) { /* sin atracción magnética: solo el clic anima el botón */
       $$('.hero .btn, .bd .btn, .loc .btn, .ci .btn, .eqc .btn, .pdr .btn, .hwr .btn, .rvr .btn').forEach(function (b) {
         var P = { x: 0, y: 0 }, V = { x: '--mx', y: '--my' }, rest = function () { b.style.removeProperty('--mx'); b.style.removeProperty('--my'); };
         on(b, 'pointermove', function (e) {
