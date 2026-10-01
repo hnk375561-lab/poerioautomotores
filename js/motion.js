@@ -245,7 +245,7 @@
     function sync() { if (!prog) return; (!auto.off && !held && inView && !document.hidden) ? prog.play() : prog.pause(); }
     function tick(i) {
       if (prog) prog.kill();
-      prog = g.delayedCall(2, function () { H.next(); });
+      prog = g.delayedCall(3.6, function () { H.next(); });
       sync();
     }
     function startSlider() { if (started || !H || !hs) return; started = true; tick(H.i); }
@@ -259,10 +259,9 @@
           sl.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'clipPath,zIndex' }); } });
           g.killTweensOf([A, B, iA, iB]);
           B.classList.add('lv'); g.set(B, { zIndex: 1, clipPath: 'inset(0% 0% 0% 0%)' }); g.set(A, { zIndex: 2 });
-          g.fromTo(A, { clipPath: dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .8 * k, ease: 'expo.inOut', clearProps: 'clipPath,zIndex',
+          g.fromTo(A, { clipPath: dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1 * k, ease: 'power3.inOut', clearProps: 'clipPath,zIndex',
             onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,clipPath' }); g.set(iB, { clearProps: 'transform' }); } });
-          g.fromTo(iA, { scale: 1.16, xPercent: 8 * dir }, { scale: 1, xPercent: 0, duration: 1.3, ease: 'power3.out', clearProps: 'transform' });
-          g.to(iB, { xPercent: -6 * dir, duration: .8 * k, ease: 'expo.inOut' });
+          g.fromTo(iA, { scale: 1.07 }, { scale: 1, duration: 1.8, ease: 'power2.out', clearProps: 'transform' });
           var W = split(hn, true);
           g.fromTo(W, { yPercent: 118, skewY: 6, transformOrigin: '0% 100%' }, { yPercent: 0, skewY: 0, duration: .7 * k, stagger: .045, delay: .1, ease: E, clearProps: 'transform' });
           g.fromTo(hm, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .5, delay: .2, ease: E, clearProps: 'opacity,transform' });
@@ -305,10 +304,9 @@
           vsl.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'clipPath,zIndex' }); } });
           g.killTweensOf([A, B, iA, iB]);
           B.classList.add('lv'); g.set(B, { zIndex: 1, clipPath: 'inset(0% 0% 0% 0%)' }); g.set(A, { zIndex: 2 });
-          g.fromTo(A, { clipPath: dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .9 * k, ease: 'expo.inOut', clearProps: 'clipPath,zIndex',
+          g.fromTo(A, { clipPath: dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1 * k, ease: 'power3.inOut', clearProps: 'clipPath,zIndex',
             onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,clipPath' }); g.set(iB, { clearProps: 'transform' }); } });
-          g.fromTo(iA, { scale: 1.16, xPercent: 8 * dir }, { scale: 1, xPercent: 0, duration: 1.4, ease: 'power3.out', clearProps: 'transform' });
-          g.to(iB, { xPercent: -6 * dir, duration: .9 * k, ease: 'expo.inOut' });
+          g.fromTo(iA, { scale: 1.07 }, { scale: 1, duration: 1.8, ease: 'power2.out', clearProps: 'transform' });
           var W = split(vn, true);
           g.fromTo(W, { yPercent: 118, skewY: 6, transformOrigin: '0% 100%' }, { yPercent: 0, skewY: 0, duration: .7 * k, stagger: .045, delay: .15, ease: E, clearProps: 'transform' });
           g.fromTo([vm, vi], { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .5, delay: .25, ease: E, clearProps: 'opacity,transform' });
@@ -547,18 +545,16 @@
     var vj = $('#vj'), VL = $$('.vl', vj || document), VI = $$('.vi', vj || document), vW = [], vnum = $('#rn'), vsc = $('.vsc', vj || document);
     if (vj && VL.length > 1) {
       VI.forEach(function (li) { vW.push(split($('h3', li), true)); });
-      g.fromTo(vj, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(-2% -2% -2% -2%)', duration: 1.3 * k, ease: 'expo.inOut', clearProps: 'clipPath', scrollTrigger: { trigger: vj, start: 'top 88%', once: true } });
-      g.fromTo($('.vin', VL[0]), { scale: 1.14 }, { scale: 1, duration: 1.8, ease: 'power3.out', clearProps: 'transform', scrollTrigger: { trigger: vj, start: 'top 88%', once: true } });
+      g.fromTo(vj, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: .9 * k, ease: E, clearProps: 'opacity,transform', scrollTrigger: { trigger: vj, start: 'top 90%', once: true } });
       var onLoc = function (e) {
         ctx.add(function () {
           var d = e.detail, A = VL[d.to], B = VL[d.from], iA = $('.vin', A), iB = $('.vin', B), dir = d.dir, li = VI[d.to];
           VL.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'clipPath,zIndex' }); } });
           g.killTweensOf([A, B, iA, iB]);
           B.classList.add('lv'); g.set(B, { zIndex: 1, clipPath: 'inset(0% 0% 0% 0%)' }); g.set(A, { zIndex: 2 });
-          g.fromTo(A, { clipPath: dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.1 * k, ease: 'expo.inOut', clearProps: 'clipPath,zIndex',
+          g.fromTo(A, { clipPath: dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1 * k, ease: 'power3.inOut', clearProps: 'clipPath,zIndex',
             onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,clipPath' }); g.set(iB, { clearProps: 'transform' }); } });
-          g.timeline().fromTo(iA, { scale: 1.2, xPercent: 7 * dir }, { scale: 1, xPercent: 0, duration: 1.5, ease: 'power3.out' }).to(iA, { scale: 1.05, duration: 9, ease: 'none' });
-          g.to(iB, { xPercent: -8 * dir, duration: 1.1 * k, ease: 'expo.inOut' });
+          g.fromTo(iA, { scale: 1.08 }, { scale: 1, duration: 1.8, ease: 'power2.out', clearProps: 'transform' });
           if (vW[d.to] && vW[d.to].length) g.fromTo(vW[d.to], { yPercent: 118, skewY: 6, transformOrigin: '0% 100%' }, { yPercent: 0, skewY: 0, duration: .8 * k, stagger: .05, delay: .25, ease: E, clearProps: 'transform', overwrite: 'auto' });
           g.fromTo([$('p', li), $('.ra', li)], { clipPath: 'inset(100% -4% -8% -4%)', y: 14 }, { clipPath: 'inset(0% -4% -8% -4%)', y: 0, duration: .9 * k, stagger: .1, delay: .4, ease: 'expo.inOut', clearProps: 'clipPath,transform', overwrite: 'auto' });
           if (vnum) g.fromTo(vnum, { yPercent: 105 }, { yPercent: 0, duration: .8 * k, ease: E, clearProps: 'transform', overwrite: 'auto' });
@@ -566,10 +562,9 @@
       };
       document.addEventListener('poerio:local', onLoc);
       cleanups.push(function () { document.removeEventListener('poerio:local', onLoc); });
-      /* Escritorio: la escena respira con el scroll y reacciona al cursor (capas separadas: yPercent del scroll, x/y del puntero) */
+      /* Escritorio: la escena reacciona al cursor */
       if (D && !lite && vsc) {
-        g.set(vsc, { scale: 1.07 });
-        g.fromTo(vsc, { yPercent: -3 }, { yPercent: 3, ease: 'none', scrollTrigger: { trigger: vj, start: 'top bottom', end: 'bottom top', scrub: true } });
+        g.set(vsc, { scale: 1.05 });
         if (fine) {
           var vx = g.quickTo(vsc, 'x', { duration: .9, ease: 'power3.out' }), vy = g.quickTo(vsc, 'y', { duration: .9, ease: 'power3.out' });
           on($('.vv', vj), 'pointermove', function (e) { var r = this.getBoundingClientRect(); vx(((e.clientX - r.left) / r.width - .5) * -22); vy(((e.clientY - r.top) / r.height - .5) * -14); });
@@ -578,15 +573,8 @@
       }
     }
 
-    /* Profundidad (solo escritorio): fondos con interior de vehículo y fotos a distinta velocidad.
-       Todo con transform; el fondo se mueve con una variable CSS no heredable (--bgy), que solo recalcula el propio fondo. */
+    /* Profundidad (solo escritorio): las fotos del equipo van a distinta velocidad (solo transform). */
     if (D) {
-      root.classList.add('bgp');
-      cleanups.push(function () { root.classList.remove('bgp'); });
-      ['#financiacion', '#visita', '#guia'].forEach(function (id) {
-        var sc = $(id); if (!sc) return;
-        g.fromTo(sc, { '--bgy': '-5%' }, { '--bgy': '5%', ease: 'none', scrollTrigger: { trigger: sc, start: 'top bottom', end: 'bottom top', scrub: true } });
-      });
       var nph = $('#nph');
       if (nph) g.fromTo(nph, { y: 26 }, { y: -26, ease: 'none', scrollTrigger: { trigger: '#nosotros', start: 'top bottom', end: 'bottom top', scrub: .6 } });
       var eqv = $('.eqv');
