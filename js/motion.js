@@ -409,8 +409,8 @@
     reveal($$('.ci'), '.ci', { s: .08 });
     var bdI = $('.bdm img');
     if (bdI) {
-      g.set(bdI, { scale: 1.2 });
-      g.fromTo(bdI, { yPercent: D ? -7 : -4 }, { yPercent: D ? 7 : 4, ease: 'none', scrollTrigger: { trigger: '.bd', start: 'top bottom', end: 'bottom top', scrub: true } });
+      g.set(bdI, { scale: 1.06 });
+      g.fromTo(bdI, { yPercent: D ? -2.5 : -1.5 }, { yPercent: D ? 2.5 : 1.5, ease: 'none', scrollTrigger: { trigger: '.bd', start: 'top bottom', end: 'bottom top', scrub: true } });
     }
     words($('.bd h2'), '.bd');
     reveal($$('.bd .bde, .bd .btn'), '.bd', { y: 18, st: 'top 75%', nt: 1 });
