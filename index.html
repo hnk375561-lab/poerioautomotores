@@ -57,7 +57,7 @@
 
 :root{--ink:#0E1B26;--paper:#F3F5F6;--stone:#DCE2E6;--mute:#5B6b76;--cy:#1B8CAB;--cyd:#146F88;--h:"Cinzel",Georgia,serif;--b:"Cinzel",Georgia,serif;--deep:#06111a;--lux:#5cb8d0;--luxl:#8fd3e4;--serif:"Cinzel",Georgia,serif}
 body{font-family:"Cinzel",Georgia,"Times New Roman",serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
+*{box-sizing:border-box}html{scroll-behavior:smooth}html.sx{scroll-behavior:auto}a,button,summary,select,label,.chip,.btn{touch-action:manipulation}#stockGrid{overflow-anchor:none}.m .pgb,.m .ni,.m .ti{will-change:transform}.hz img,.vrz img{backface-visibility:hidden}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 19.4px/1.55 var(--b);-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}a{color:inherit}
 :focus-visible{outline:3px solid var(--cy);outline-offset:3px}
@@ -1524,7 +1524,7 @@ a,button,summary,label,select,.chip{touch-action:manipulation}
 :where(a,button,summary,input,select,textarea,[tabindex]):focus-visible{outline:2px solid var(--luxl);outline-offset:3px;border-radius:2px}
 :where(a,button,summary):focus:not(:focus-visible){outline:none}
 /* Durante el scroll con mouse no se evalúa hover ni hit-testing en cada cuadro; se restablece 140 ms después de detenerse */
-@media(hover:hover) and (pointer:fine){html.sc main{pointer-events:none}}
+#shd{position:fixed;inset:0;z-index:15;display:none;background:transparent}#shd.on{display:block}
 /* Animaciones infinitas fuera de pantalla: en pausa (no consumen compositor) */
 .pin i::after,.vpn i::after{animation-play-state:var(--ps-pulse,running)}
 .off-screen .pin i::after,.off-screen .vpn i::after{animation-play-state:paused}
@@ -1918,11 +1918,13 @@ go(0);
 var R=document.documentElement;
 if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
 if(matchMedia("(hover:hover) and (pointer:fine)").matches){
-var t=0,on=false;
-addEventListener("scroll",function(){
-if(!on){on=true;R.classList.add("sc")}
-clearTimeout(t);t=setTimeout(function(){on=false;R.classList.remove("sc")},140);
-},{passive:true});
+/* v8 · escudo de hover: un único div fijo y transparente absorbe el puntero mientras se scrollea con mouse.
+   Antes se alternaba una clase en <html> (pointer-events heredado + colisión con la clase .sc de los botones): cada inicio y fin de scroll
+   invalidaba ~2000 elementos y reflowaba la página. Ahora alternar el escudo toca un solo nodo. */
+var sh=document.createElement("div"),on=false,t=0;sh.id="shd";sh.setAttribute("aria-hidden","true");
+function show(){if(!on){on=true;if(!sh.parentNode)document.body.appendChild(sh);sh.classList.add("on")}}
+function hide(){on=false;sh.classList.remove("on")}
+addEventListener("scroll",function(){show();clearTimeout(t);t=setTimeout(hide,140)},{passive:true});
 }
 if("IntersectionObserver" in window){
 var io=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle("off-screen",!e.isIntersecting)})},{rootMargin:"80px 0px"});
