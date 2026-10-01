@@ -421,7 +421,7 @@ details p{font-size:18.2px;line-height:1.65;padding-right:44px}
 @media(min-width:900px){header>.w{width:min(1640px,100% - 32px)}header nav a{padding-inline:8px;font-size:16.5px}}
 @media(min-width:900px) and (max-width:1250px){header .ic.ig,header .ic.pin{display:none}header .mark small{display:none}}
 @media(min-width:900px) and (max-width:1500px){header nav a{padding-inline:6px;font-size:16px}header .mark small{display:none}header>.w{gap:10px}header .hc{gap:6px}}
-.fs2 img,.no .ph img{will-change:opacity,transform;backface-visibility:hidden}.wi{will-change:transform}
+.fs2 img,.no .ph img{backface-visibility:hidden}
 /* ==== Ola 2: una sola barra de filtros, tarjetas, tipografía única, padding y áreas táctiles ==== */
 .ff label.fs1{grid-column:1/-1}
 @media(min-width:900px){.ff{grid-template-columns:1.6fr 1.1fr repeat(4,.8fr) 1.2fr auto}.ff label.fs1{grid-column:auto}}
@@ -1365,6 +1365,24 @@ footer,footer *,footer *::before,footer *::after{font-family:"Josefin Sans",Geor
 /* Botón «Abrir en Google Maps»: siempre legible (reposo y hover) */
 #contacto a.mpl{background:rgba(6,17,26,.94);color:#fff;border:1px solid rgba(143,211,228,.6);box-shadow:0 10px 28px -10px rgba(0,0,0,.85)}
 #contacto a.mpl:active,#contacto a.mpl:focus-visible{background:var(--luxl);color:var(--deep);border-color:var(--luxl)}
+
+/* ==== Rendimiento y botones (v8) ====
+   Sliders y fondos: solo transform/opacity (compositor). Botones: efecto mínimo con mouse; en táctil no cambia nada. */
+.hz,.vrz{contain:paint}
+.bdm{backface-visibility:hidden}
+.btn,.btn:not(.p){transition:background-color .2s,color .2s,border-color .2s,box-shadow .25s,filter .2s,transform .2s cubic-bezier(.2,.7,.2,1)}
+@media(hover:hover) and (pointer:fine){
+.btn:hover{transform:translateY(-1px)}
+.btn:hover:active{transform:none}
+.btn.p:hover{filter:brightness(1.08);box-shadow:0 8px 18px -10px rgba(6,17,26,.55)}
+.btn:not(.p):hover{background-color:rgba(14,27,38,.06);border-color:var(--cy);box-shadow:0 8px 18px -12px rgba(6,17,26,.4)}
+:is(.hero,.ha,.loc,.vs,.rec,.bd,footer,header,.eq,.fin) .btn:not(.p):hover{background-color:rgba(255,255,255,.12);border-color:#fff;box-shadow:0 8px 18px -12px rgba(0,0,0,.6)}
+.loc .btn.p:hover{filter:none;background:var(--stone)}
+.chip:hover{color:var(--ink)}
+nav a:not([aria-current]):hover::after{transform:scaleX(1)}
+a.pdc:hover{background:rgba(143,211,228,.08);border-color:var(--luxl)}
+a.pdc:hover .pds::after{transform:translateX(4px)}
+}
 </style>
 <noscript><style>#modelos,.ff,.ftg,#qc,#hf,.vs,.car .g-a,.car .g-c,.car .g-s,.vr .g-a,.vr .vrr,.vr .vri,#visitaForm,#buscoForm{display:none}</style></noscript>
 </head>
