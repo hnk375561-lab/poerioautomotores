@@ -1155,6 +1155,130 @@ a.pdc:hover .pds::after{transform:translateX(4px)}
 @supports (animation-timeline:view()){@media(prefers-reduced-motion:no-preference){
 .xt .xl,.xt .xk,.xb .xp,.xb .xs,.bdp,.loc .xt,.loc .xb{animation:xin both linear;animation-timeline:view();animation-range:entry 0% entry 70%}
 @keyframes xin{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}}}
+/* ===== Compactación vertical (menos scroll) =====
+   Solo espacios vacíos y tamaños de tipografía. Fotos, textos y contenido intactos. */
+:root{--cp-y:clamp(40px,4.2vw,60px)}
+
+/* Unidades */
+section#unidades{padding-top:clamp(44px,4.4vw,64px);padding-bottom:clamp(36px,3.4vw,52px)}
+#unidades .head{margin-bottom:18px;padding-bottom:14px}
+#unidades .head h2{font-size:clamp(40px,4.6vw,64px)}
+#unidades .head h2::before{margin-bottom:12px}
+#unidades .head .sub{margin-top:8px;font-size:16px;line-height:1.5}
+#unidades .ff{padding:12px 18px;margin-bottom:8px}
+#unidades .ff label{gap:4px;font-size:12px}
+#unidades .ff input,#unidades .ff select,#unidades #fc{min-height:42px}
+#qc{margin-bottom:8px}
+#unidades .grid{row-gap:20px}
+#unidades .car h3{font-size:clamp(22px,1.9vw,25px);margin-top:10px}
+#unidades .car h3 button{padding:6px 0}
+#unidades .car .est{margin-top:5px}
+#unidades .car .tg{margin-top:7px}
+#unidades .car .eqp{margin-top:8px;margin-bottom:8px;row-gap:2px}
+#unidades .car .pr{padding-top:6px}
+#unidades .car .vf{min-height:40px}
+#unidades .car .wab{margin-top:4px;margin-bottom:16px;min-height:44px}
+
+/* Nuestros modelos */
+section#modelos{padding-block:var(--cp-y)}
+#modelos .mdh{margin-bottom:clamp(16px,2vw,24px)}
+#modelos .mdh h2{font-size:clamp(30px,3.6vw,46px);margin-bottom:8px}
+#modelos .mdl a{padding-top:12px;padding-bottom:12px;row-gap:2px}
+@media(min-width:900px){#modelos .mdl a{padding-top:16.5px;padding-bottom:16.5px}}
+#modelos .mdl b{font-size:clamp(24px,2.7vw,34px)}
+#modelos .mdl small{font-size:14px;line-height:1.4}
+
+/* Comparador */
+section#versus{padding-block:var(--cp-y)}
+#versus .head{margin-bottom:8px}
+#versus .vde{margin-bottom:10px;padding:5px 14px}
+#versus h2{font-size:clamp(30px,3.4vw,46px)}
+#versus .sub{margin-top:8px}
+#versus .vp{margin-top:16px;padding:18px 26px}
+#versus .vdp{min-height:50px}
+#versus .vdn{margin-top:10px}
+#versus .tw{margin-top:16px}
+#versus .vdh{padding:2px 20px 0}
+#versus .vdh h3{font-size:clamp(22px,2vw,28px)}
+#versus .vdh p{margin-top:5px}
+#versus .vdm{padding:2px 20px 0}
+#versus .vdm>div{padding:9px 0}
+#versus .vdm dd{margin-top:4px}
+#versus .vdm dd b{font-size:clamp(26px,2.4vw,32px)}
+#versus .vbr{margin-top:7px;height:4px}
+#versus .vdq{padding:10px 20px 2px}
+#versus .vdt{margin-bottom:8px}
+#versus .vdq ul{gap:5px 8px}
+#versus .vda{padding:12px 20px 18px;gap:8px}
+#versus .vda .btn{min-height:44px}
+#versus .vl{margin-top:14px}
+
+/* Comprá, vendé o permutá */
+section#operaciones{padding-block:var(--cp-y)}
+#operaciones .oh{margin-bottom:18px;padding-bottom:14px}
+#operaciones .oh h2{font-size:clamp(38px,4.6vw,64px)}
+#operaciones .oh .sub{margin-top:8px}
+#operaciones .og{margin-top:20px}
+#operaciones .ob{padding:14px 18px 8px;gap:5px}
+#operaciones .oc h3{font-size:clamp(26px,2.2vw,30px)}
+#operaciones .ob a{padding-top:2px;min-height:42px}
+#operaciones .fm{margin-top:32px;row-gap:28px}
+#operaciones .fm h3{font-size:clamp(26px,2.6vw,34px)}
+#operaciones .stp{margin-top:10px;margin-bottom:12px}
+#operaciones .stp li{padding:10px 0}
+#operaciones .stp li::before{font-size:32px}
+#operaciones .vr{margin-top:20px}
+@media(min-width:900px){#operaciones .fm>div:first-child .vr{min-height:580px}}
+@media(min-width:1100px){#operaciones .fm>div:first-child .vr{min-height:565px}}
+@media(min-width:1440px){#operaciones .fm>div:first-child .vr{min-height:541px}}
+#operaciones .fr>form{padding:22px 24px;gap:12px}
+#operaciones .fm #canjeForm{gap:12px}
+#operaciones #canjeForm h3{font-size:clamp(26px,2.6vw,34px)}
+#operaciones #canjeForm input,#operaciones #canjeForm select{min-height:44px}
+#operaciones .fr .btn.p{min-height:48px}
+
+/* Cómo llegar y reconocernos */
+section#local{padding-top:clamp(44px,5vw,72px);padding-bottom:clamp(32px,3.4vw,48px)}
+@media(min-width:900px){#local .vj{min-height:552px}}
+@media(min-width:1100px){#local .vj{min-height:561px}}
+@media(min-width:1200px){#local .vj{min-height:620px}}
+@media(min-width:1440px){#local .vj{min-height:636px}}
+@media(min-width:1600px){#local .vj{min-height:610px}}
+#local .vh{margin-bottom:clamp(16px,2vw,22px)}
+#local .vh h2{margin-top:8px}
+@media(min-width:1260px){#local .vh h2{font-size:clamp(40px,4vw,58px)}}
+@media(max-width:1259px){#local .vh h2{font-size:clamp(34px,5vw,50px)}}
+#local .vlead{font-size:clamp(15px,1.1vw,16.5px);line-height:1.5}
+#local .vsn li{padding:8px 0}
+#local .vsn b{font-size:clamp(19px,1.7vw,23px)}
+#local .vp{gap:12px;padding:clamp(18px,2vw,26px)}
+#local .vi h3{font-size:clamp(25px,2.2vw,32px);margin-bottom:8px}
+#local .vi p{font-size:15.5px;line-height:1.5;margin-bottom:10px}
+#local #rn{font-size:clamp(38px,3.6vw,52px)}
+#local .vt button{min-height:42px}
+#local .vq{margin-top:12px;padding:14px clamp(16px,2vw,24px);gap:12px}
+#local .vq h3{font-size:clamp(23px,2vw,28px)}
+#local .vqb{min-height:56px;padding:9px 14px}
+
+/* Preguntas */
+section#preguntas{padding-block:var(--cp-y)}
+#preguntas .fl h2{font-size:clamp(38px,4.6vw,64px)}
+#preguntas .fl .sub{margin-top:8px;margin-bottom:16px}
+#preguntas .fl .fq+.fq{margin-top:14px}
+#preguntas .fa summary{padding-top:14px;padding-bottom:14px;min-height:54px;font-size:clamp(19px,1.6vw,21px)}
+#preguntas .fa details p{margin-bottom:12px}
+#preguntas .fin{margin-top:20px;padding:18px 24px;gap:12px}
+#preguntas .fin p{font-size:clamp(21px,1.8vw,24px)}
+
+/* Pie de página */
+footer{padding-top:22px;padding-bottom:18px}
+footer .lg img{margin-bottom:6px}
+footer .fx{margin:18px auto;padding:16px 0;gap:20px}
+footer .fx h3{margin-bottom:6px;font-size:14px}
+footer .fx a{padding-block:3px}
+@media(hover:hover) and (pointer:fine){footer .fx a{min-height:32px}}
+footer p{margin-bottom:6px;line-height:1.5}
+@media(max-width:640px){#unidades .head h2{font-size:clamp(36px,12vw,50px)}}
 </style>
 <noscript><style>#modelos,.ff,.ftg,#qc,#hf,.vs,.car .g-a,.car .g-c,.car .g-s,.vr .g-a,.vr .vrr,.vr .vri,#visitaForm,#buscoForm{display:none}</style></noscript>
 </head>
