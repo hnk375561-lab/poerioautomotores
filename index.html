@@ -1494,6 +1494,40 @@ header .mark:active{color:var(--luxl)}
 #local .vqb:active{background:#fff;border-color:#fff;color:var(--deep);transform:none}
 #local .vqb:active span{color:#42525d}
 #equipo .eqvb:active{background:rgba(20,111,136,.9);border-color:var(--luxl);transform:scale(.94)}
+/* ==== v11: ejecución cinematográfica y respuesta instantánea ====
+   Todo con transform/opacity/background-position. Con prefers-reduced-motion no se activa nada de lo animado. */
+/* Respuesta inmediata al toque: sin espera de doble toque ni zoom accidental sobre controles */
+a,button,summary,label,select,.chip{touch-action:manipulation}
+/* Botón primario: un barrido de luz al pasar el mouse (solo mouse, solo si se admite movimiento) */
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+.btn.p:not(#_){background-image:linear-gradient(105deg,rgba(255,255,255,0) 38%,rgba(255,255,255,.34) 50%,rgba(255,255,255,0) 62%);background-size:260% 100%;background-position:160% 0;background-repeat:no-repeat;transition:background-color .2s,color .2s,border-color .2s,box-shadow .25s,filter .2s,transform .2s cubic-bezier(.2,.7,.2,1),background-position 0s}
+.btn.p:not(#_):hover{background-position:-60% 0;transition:background-color .2s,color .2s,border-color .2s,box-shadow .25s,filter .2s,transform .2s cubic-bezier(.2,.7,.2,1),background-position .95s cubic-bezier(.16,1,.3,1)}
+/* Tarjetas de unidades: la foto respira apenas y el filete superior se anuncia antes del clic */
+#unidades .car:hover .ct img{transform:scale(1.035)}
+#unidades .car:hover::before{opacity:1}
+}
+/* Capas con scrub: el navegador solo promueve la capa mientras la sección está a la vista (lo gestiona el script v11) */
+#hzs,#bd .bdm,#bd .bdm img,#nph img{transform-origin:50% 50%}
+/* ==== v12: animaciones CSS sin layout ni repintado ====
+   Las barras de progreso del recorrido animaban width (layout por fotograma) y el pulso del pin animaba box-shadow (repintado infinito).
+   Ahora son transform/opacity: van por el compositor y el aspecto es el mismo. */
+.rnav button i,.vt button i{width:100%;transform:scaleX(0);transform-origin:0 50%}
+.rnav button.done i,.vt button.done i{transform:scaleX(1)}
+.rnav button.on i,.vt button.on i{animation:rbs var(--d,7s) linear forwards;will-change:transform}
+@keyframes rbs{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.pin i,.vpn i{position:relative;animation:none}
+.pin i::after,.vpn i::after{content:"";position:absolute;inset:0;border-radius:50%;background:rgba(143,211,228,.6);animation:rpt 2.4s infinite;will-change:transform,opacity;pointer-events:none}
+@keyframes rpt{0%{transform:scale(1);opacity:.65}70%,100%{transform:scale(3);opacity:0}}
+@media(prefers-reduced-motion:reduce){.rnav button.on i,.vt button.on i{animation:none;transform:scaleX(1);will-change:auto}.pin i::after,.vpn i::after{animation:none;opacity:0;will-change:auto}}
+/* ==== v13: pulido final ==== */
+::selection{background:var(--lux);color:var(--deep)}
+:where(a,button,summary,input,select,textarea,[tabindex]):focus-visible{outline:2px solid var(--luxl);outline-offset:3px;border-radius:2px}
+:where(a,button,summary):focus:not(:focus-visible){outline:none}
+/* Durante el scroll con mouse no se evalúa hover ni hit-testing en cada cuadro; se restablece 140 ms después de detenerse */
+@media(hover:hover) and (pointer:fine){html.sc main{pointer-events:none}}
+/* Animaciones infinitas fuera de pantalla: en pausa (no consumen compositor) */
+.pin i::after,.vpn i::after{animation-play-state:var(--ps-pulse,running)}
+.off-screen .pin i::after,.off-screen .vpn i::after{animation-play-state:paused}
 </style>
 <noscript><style>#modelos,.ff,.ftg,#qc,#hf,.vs,.car .g-a,.car .g-c,.car .g-s,.vr .g-a,.vr .vrr,.vr .vri,#visitaForm,#buscoForm{display:none}</style></noscript>
 </head>
@@ -1878,5 +1912,89 @@ go(0);
 <script>(function(){var b=document.getElementById("rqc"),o=document.getElementById("rqs");if(!b)return;b.addEventListener("click",function(){var t="Alberdi 1337, Concepción del Uruguay, Entre Ríos";function ok(){o.textContent="Dirección copiada."}function ko(){o.textContent="No se pudo copiar. La dirección es "+t+"."}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok,ko);else{try{var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();document.execCommand("copy");a.remove();ok()}catch(e){ko()}}})})();</script>
 <script>(function(){var b=document.getElementById("ftg"),f=document.getElementById("ff");if(!b||!f)return;b.addEventListener("click",function(){var o=f.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");b.textContent=o?"Ocultar filtros":"Más filtros y orden"})})();</script>
 <script src="js/recorrido.js" defer></script>
+<script>
+/* v13 · scroll sin trabajo de hover (solo mouse) y pulsos CSS en pausa cuando su bloque no está a la vista */
+(function(){
+var R=document.documentElement;
+if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+if(matchMedia("(hover:hover) and (pointer:fine)").matches){
+var t=0,on=false;
+addEventListener("scroll",function(){
+if(!on){on=true;R.classList.add("sc")}
+clearTimeout(t);t=setTimeout(function(){on=false;R.classList.remove("sc")},140);
+},{passive:true});
+}
+if("IntersectionObserver" in window){
+var io=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle("off-screen",!e.isIntersecting)})},{rootMargin:"80px 0px"});
+[].forEach.call(document.querySelectorAll("#vj,#local,.rj .rl,.mp"),function(el){io.observe(el)});
+}
+})();
+</script>
+<script>
+/* v12 · precalentado de decodificación: las fotos grandes (fondos de sección y fotos diferidas) se decodifican en tiempos ociosos
+   ANTES de llegar a pantalla, para que el scroll no pague el costo de decodificar en pleno movimiento. Sin dependencias; sin efecto visual. */
+(function(){
+if(!("IntersectionObserver" in window))return;
+var warmed={},idle=window.requestIdleCallback||function(f){return setTimeout(f,60)};
+function warm(src){
+if(!src||warmed[src])return;warmed[src]=1;
+idle(function(){var i=new Image();i.decoding="async";i.src=src;if(i.decode)i.decode().catch(function(){})},{timeout:1500});
+}
+var conn=navigator.connection||{},save=!!conn.saveData||/(^|-)2g$/.test(conn.effectiveType||"");
+if(save)return;
+var ev=document.getElementById("eqv");
+if(ev&&ev.preload==="none"){var io3=new IntersectionObserver(function(es){if(es[0].isIntersecting){ev.preload="metadata";io3.disconnect()}},{rootMargin:"200% 0px"});io3.observe(ev)}
+/* fondos CSS: cada uno se precalienta cuando su sección está a ~1.5 pantallas */
+var bgs=[["#visita","images/fondo-visita.webp"],["#financiacion","images/fondo-precios.webp"],["#guia","images/fondo-guia.webp"]];
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){warm(e.target.__w);io.unobserve(e.target)}})},{rootMargin:"150% 0px"});
+function init(){
+bgs.forEach(function(b){var el=document.querySelector(b[0]);if(el){el.__w=b[1];io.observe(el)}});
+/* fotos diferidas: se decodifican al acercarse (currentSrc ya elegido por el navegador) */
+var lz=document.querySelectorAll("img[loading=lazy]"),io2=new IntersectionObserver(function(es){es.forEach(function(e){
+if(!e.isIntersecting)return;var im=e.target;io2.unobserve(im);
+if(im.complete&&im.decode)idle(function(){im.decode().catch(function(){})},{timeout:1200});
+else im.addEventListener("load",function(){if(im.decode)im.decode().catch(function(){})},{once:true});
+})},{rootMargin:"120% 0px"});
+for(var k=0;k<lz.length;k++)io2.observe(lz[k]);
+}
+if(document.readyState==="complete")init();else addEventListener("load",init,{once:true});
+})();
+</script>
+<script>
+/* v11 · capa cinematográfica sobre motion.js: profundidad atada al scroll (solo transform/opacity, scrub directo sin retraso).
+   Hero: la foto se acerca y se atenúa al salir. Banner: el marco se abre al llegar y la foto contra-desliza. Quiénes somos: contraparalaje de la foto.
+   Un solo gsap.matchMedia: se limpia solo al cambiar de escritorio a móvil. Sin listeners propios de scroll/resize. */
+(function(){
+function run(){
+var R=document.documentElement,g=window.gsap,ST=window.ScrollTrigger;
+if(!g||!ST||!R.classList.contains("m")||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+var q=function(s){return document.querySelector(s)};
+var lite=(navigator.hardwareConcurrency||8)<=4||(navigator.deviceMemory||8)<=2||((navigator.deviceMemory||8)<=4&&matchMedia("(pointer:coarse)").matches)||!!(navigator.connection&&navigator.connection.saveData);
+g.matchMedia().add({d:"(min-width:900px)",m:"(max-width:899px)"},function(ctx){
+var D=ctx.conditions.d,hinted=[];
+function scrub(el,from,to,trig,start,end){
+if(!el||!trig)return;
+to.ease="none";
+to.scrollTrigger={trigger:trig,start:start||"top bottom",end:end||"bottom top",scrub:true,invalidateOnRefresh:true,onToggle:function(s){el.style.willChange=s.isActive?"transform":"auto"}};
+g.fromTo(el,from,to);
+hinted.push(el);
+}
+/* Hero: al bajar, la foto se acerca y se oscurece mientras el texto se despide en capas (ya lo hace motion.js) */
+scrub(q("#hzs"),{scale:1,yPercent:0,opacity:1},{scale:D?1.12:1.08,yPercent:D?5:4,opacity:.55},q(".hero"),"top top","bottom top");
+/* Banner: el marco se abre al llegar (compositor) y la foto contra-desliza dentro */
+var bd=q("#bd"),bm=q("#bd .bdm"),bi=q("#bd .bdm img");
+if(bd&&bm){
+scrub(bm,{scale:D?.9:.94},{scale:1},bd,"top bottom",D?"top 20%":"top 45%");
+if(bi&&!lite)scrub(bi,{scale:D?1.14:1.1,yPercent:D?-6:-4},{scale:D?1.14:1.1,yPercent:D?6:4},bd,"top bottom","bottom top");
+}
+/* Quiénes somos: contraparalaje de la foto del local */
+var ni=q("#nph img");
+if(ni&&!lite)scrub(ni,{scale:1.12,yPercent:-4},{scale:1.12,yPercent:4},q("#nph"),"top bottom","bottom top");
+return function(){hinted.forEach(function(el){el.style.willChange=""})};
+});
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",run);else run();
+})();
+</script>
 </body>
 </html>
