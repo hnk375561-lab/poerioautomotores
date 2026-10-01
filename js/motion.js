@@ -232,7 +232,7 @@
     function sync() { if (!prog) return; (!auto.off && !held && inView && !document.hidden) ? prog.play() : prog.pause(); }
     function tick(i) {
       if (prog) prog.kill();
-      prog = g.delayedCall(3.6, function () { H.next(); });
+      prog = g.delayedCall(5, function () { H.next(); });
       sync();
     }
     function startSlider() { if (started || !H || !hs) return; started = true; tick(H.i); }
@@ -479,11 +479,7 @@
     reveal($$('#nosotros .ey, #nosotros .w > div:nth-child(2) > p, #nosotros .pl > div, #nosotros .w > div:nth-child(2) > .btn'), '#nosotros', { s: .08, nt: 1 });
     photos([$('#nph')], '#nosotros', { still: true });
     reveal($$('.ci'), '.ci', { s: .08 });
-    var bdI = $('.bdm img');
-    if (bdI) {
-      g.set(bdI, { scale: 1.06 });
-      g.fromTo(bdI, { yPercent: D ? -2.5 : -1.5 }, { yPercent: D ? 2.5 : 1.5, ease: 'none', scrollTrigger: { trigger: '.bd', start: 'top bottom', end: 'bottom top', scrub: true } });
-    }
+    /* Banner: foto estática (sin paralaje ni escala con el scroll). */
     words($('.bd h2'), '.bd');
     reveal($$('.bd .bde, .bd .btn'), '.bd', { y: 18, st: 'top 75%', nt: 1 });
 
@@ -507,7 +503,7 @@
     /* El mapa no se anima: un iframe con opacidad animada al llegar causaba tirones; se carga en reposo desde index.html */
     reveal([$('.lc')], '.loc', { st: 'top 65%' });
     reveal($$('.lc > *'), '.loc', { st: 'top 65%', s: .09, y: 18, d: .25 });
-    words($('.faq h2'), '.faq');
+    words($('#preguntas .fl h2'), '#preguntas .fl');
     reveal($$('.faq details'), '.faq details', { y: 16, s: .06, st: 'top 90%' });
     reveal($$('.fin'), '.fin', { y: 12, st: 'top 95%' });
     reveal($$('footer .lg'), 'footer', { y: 16, st: 'top 92%' });
@@ -590,12 +586,6 @@
       }
     }
 
-    /* Profundidad (solo escritorio): la foto de Nosotros va a distinta velocidad (solo transform). */
-    if (D) {
-      var nph = $('#nph');
-      if (nph) g.fromTo(nph, { y: 26 }, { y: -26, ease: 'none', scrollTrigger: { trigger: '#nosotros', start: 'top bottom', end: 'bottom top', scrub: true } });
-    }
-
     /* Avisos de estado (copiar dirección, formularios): aparecen con el mismo gesto corto */
     $$('.fs, .rqs').forEach(function (el) {
       if (el.id === 'fStatus') return;
@@ -628,11 +618,8 @@
       ln.style.cssText = 'display:block;height:1px;width:min(1180px,calc(100% - 40px));margin:0 auto -1px;background:var(--lux,#5cb8d0);opacity:.6;transform-origin:0 50%;pointer-events:none';
       sc.insertBefore(ln, sc.firstChild);
       cleanups.push(function () { if (ln.parentNode) ln.parentNode.removeChild(ln); });
-      g.fromTo(ln, { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: sc, start: 'top 92%', end: 'top 40%', scrub: true } });
+      g.fromTo(ln, { scaleX: 0 }, { scaleX: 1, duration: 1, ease: E, scrollTrigger: { trigger: sc, start: 'top 92%', once: true } });
     });
-
-    /* ---------- BANNER: el marco se abre con el scroll (la foto pasa de ventana a pantalla completa) ---------- */
-    if (D && !lite && $('.bdm')) g.fromTo($('.bdm'), { scale: .94 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.bd', start: 'top 95%', end: 'top 20%', scrub: true } });
 
     /* ---------- TARJETAS: inclinación 3D con respuesta del puntero (solo mouse, escritorio) ---------- */
     if (false) { /* sin inclinación con el mouse */
