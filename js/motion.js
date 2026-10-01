@@ -24,7 +24,7 @@
   g.registerPlugin(ST);
   if (window.Flip) g.registerPlugin(window.Flip);
   if (window.ScrollToPlugin) g.registerPlugin(window.ScrollToPlugin);
-  ST.config({ ignoreMobileResize: true });
+  ST.config({ ignoreMobileResize: true, limitCallbacks: true });
 
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
@@ -525,7 +525,7 @@
     /* ---------- v6 · mismo lenguaje en todas las secciones ----------
        Título por palabra + bajada y etiqueta con subida corta; las listas entran escalonadas con la misma curva.
        Sin lógica nueva: se reutilizan reveal / words / photos. */
-    $$('.pdl, .hwh, .eqh, .rvh, .mdh, .rec .rh').forEach(function (h) {
+    $$('.pdl, .hwh, .eqh, .rvh, .mdh, .rec .vh').forEach(function (h) {
       var t = $('h2', h); if (t) words(t, h);
       reveal($$('.pde, .pdt, .ey, .mdt, .mdk, :scope > p', h).filter(function (x) { return !t || !t.contains(x); }), h, { s: .08, y: dy * .6, st: 'top 80%' });
     });
@@ -539,12 +539,44 @@
     photos([$('.eqf .eqm')], '.eqg', { to: 'inset(-3% -3% -3% -3%)', st: 'top 82%' });
     photos([$('.eqv .eqm')], '.eqg', { to: 'inset(-3% -3% -3% -3%)', from: D ? 'inset(0% 0% 0% 100%)' : 'inset(0% 0% 100% 0%)', st: 'top 82%', s: .18, still: true });
     reveal($$('.eqk li'), '.eqk', { s: .1, st: 'top 88%' });
-    /* Cómo llegar: datos, escena (máscara) y texto del recorrido */
-    reveal($$('.rtg > div'), '.rtg', { s: .07, y: 16, st: 'top 90%' });
-    reveal($$('.rq .rqb'), '.rq', { s: .06, y: 14, d: .15, st: 'top 85%', nt: 1 });
-    var rsc = $('.rs');
-    if (rsc) g.fromTo(rsc, { clipPath: D ? 'inset(0% 100% 0% 0%)' : 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(-3% -3% -3% -3%)', duration: 1.2 * k, ease: 'expo.inOut', clearProps: 'clipPath', scrollTrigger: { trigger: rsc, start: 'top 82%', once: true } });
-    reveal($$('.rec .rg'), '.rec .rx', { y: 20, d: .25, st: 'top 78%' });
+    /* ---------- CÓMO LLEGAR · el recorrido como un solo módulo ----------
+       Entrada: el marco sube con máscara. Cada paso cambia con el mismo lenguaje que el hero: máscara lateral, escena que se asienta con
+       contraparalaje, título por palabra, número que rueda y bajada/acciones con máscara corta. En escritorio la escena reacciona al cursor. */
+    reveal($$('.vsn li'), '.vsn', { s: .08, y: 16, st: 'top 90%' });
+    reveal($$('.vq h3, .vq .vqa, .vqb'), '.vq', { s: .06, y: 14, st: 'top 92%', nt: 1 });
+    var vj = $('#vj'), VL = $$('.vl', vj || document), VI = $$('.vi', vj || document), vW = [], vnum = $('#rn'), vsc = $('.vsc', vj || document);
+    if (vj && VL.length > 1) {
+      VI.forEach(function (li) { vW.push(split($('h3', li), true)); });
+      g.fromTo(vj, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(-2% -2% -2% -2%)', duration: 1.3 * k, ease: 'expo.inOut', clearProps: 'clipPath', scrollTrigger: { trigger: vj, start: 'top 88%', once: true } });
+      g.fromTo($('.vin', VL[0]), { scale: 1.14 }, { scale: 1, duration: 1.8, ease: 'power3.out', clearProps: 'transform', scrollTrigger: { trigger: vj, start: 'top 88%', once: true } });
+      var onLoc = function (e) {
+        ctx.add(function () {
+          var d = e.detail, A = VL[d.to], B = VL[d.from], iA = $('.vin', A), iB = $('.vin', B), dir = d.dir, li = VI[d.to];
+          VL.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'clipPath,zIndex' }); } });
+          g.killTweensOf([A, B, iA, iB]);
+          B.classList.add('lv'); g.set(B, { zIndex: 1, clipPath: 'inset(0% 0% 0% 0%)' }); g.set(A, { zIndex: 2 });
+          g.fromTo(A, { clipPath: dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.1 * k, ease: 'expo.inOut', clearProps: 'clipPath,zIndex',
+            onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,clipPath' }); g.set(iB, { clearProps: 'transform' }); } });
+          g.timeline().fromTo(iA, { scale: 1.2, xPercent: 7 * dir }, { scale: 1, xPercent: 0, duration: 1.5, ease: 'power3.out' }).to(iA, { scale: 1.05, duration: 9, ease: 'none' });
+          g.to(iB, { xPercent: -8 * dir, duration: 1.1 * k, ease: 'expo.inOut' });
+          if (vW[d.to] && vW[d.to].length) g.fromTo(vW[d.to], { yPercent: 118, skewY: 6, transformOrigin: '0% 100%' }, { yPercent: 0, skewY: 0, duration: .8 * k, stagger: .05, delay: .25, ease: E, clearProps: 'transform', overwrite: 'auto' });
+          g.fromTo([$('p', li), $('.ra', li)], { clipPath: 'inset(100% -4% -8% -4%)', y: 14 }, { clipPath: 'inset(0% -4% -8% -4%)', y: 0, duration: .9 * k, stagger: .1, delay: .4, ease: 'expo.inOut', clearProps: 'clipPath,transform', overwrite: 'auto' });
+          if (vnum) g.fromTo(vnum, { yPercent: 105 }, { yPercent: 0, duration: .8 * k, ease: E, clearProps: 'transform', overwrite: 'auto' });
+        });
+      };
+      document.addEventListener('poerio:local', onLoc);
+      cleanups.push(function () { document.removeEventListener('poerio:local', onLoc); });
+      /* Escritorio: la escena respira con el scroll y reacciona al cursor (capas separadas: yPercent del scroll, x/y del puntero) */
+      if (D && !lite && vsc) {
+        g.set(vsc, { scale: 1.07 });
+        g.fromTo(vsc, { yPercent: -3 }, { yPercent: 3, ease: 'none', scrollTrigger: { trigger: vj, start: 'top bottom', end: 'bottom top', scrub: true } });
+        if (fine) {
+          var vx = g.quickTo(vsc, 'x', { duration: .9, ease: 'power3.out' }), vy = g.quickTo(vsc, 'y', { duration: .9, ease: 'power3.out' });
+          on($('.vv', vj), 'pointermove', function (e) { var r = this.getBoundingClientRect(); vx(((e.clientX - r.left) / r.width - .5) * -22); vy(((e.clientY - r.top) / r.height - .5) * -14); });
+          on($('.vv', vj), 'pointerleave', function () { vx(0); vy(0); });
+        }
+      }
+    }
 
     /* Profundidad (solo escritorio): fondos con interior de vehículo y fotos a distinta velocidad.
        Todo con transform; el fondo se mueve con una variable CSS no heredable (--bgy), que solo recalcula el propio fondo. */

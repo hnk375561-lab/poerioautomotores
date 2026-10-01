@@ -17,19 +17,20 @@
     figs.forEach(function (f) { fo.observe(f); });
   }
 
-  /* Recorrido: los cuatro pasos se suceden solos, en bucle continuo (la escena y el texto cambian juntos) */
-  var st = $('#local .rs');
+  /* Recorrido: los cuatro pasos se suceden solos, en bucle continuo (la escena y el texto cambian juntos).
+     Cada cambio avisa con el evento poerio:local para que motion.js lo anime (máscara + texto por palabra). */
+  var st = $('#vj');
   if (st) {
-    var L = $$('#local .rl'), C = $$('#local .rcc'), N = $$('#local .rnav button'),
-        v = $('#rvid'), nn = $('#rn'), tt = $('#rt'),
+    var L = $$('.vl', st), C = $$('.vi', st), N = $$('.vt button', st),
+        v = $('#rvid'), nn = $('#rn'),
         DUR = [7000, 6500, 12000, 7000], cur = 0, tm = 0, vis = false;
 
     N.forEach(function (b, k) { b.style.setProperty('--d', DUR[k] + 'ms'); });
-    C.forEach(function (c, k) { c.style.setProperty('--d', DUR[k] + 'ms'); });
 
     function stop() { clearTimeout(tm); tm = 0; if (v) v.pause(); }
     function go(i) {
       clearTimeout(tm); tm = 0;
+      var prev = cur;
       cur = i;
       L.forEach(function (l, k) { l.classList.toggle('on', k === i); });
       C.forEach(function (c, k) { c.classList.toggle('on', k === i); });
@@ -38,26 +39,21 @@
         if (k === i) { void b.offsetWidth; b.classList.add('on'); }
       });
       st.setAttribute('data-c', i);
-      nn.textContent = '0' + (i + 1);
-      tt.textContent = C[i].getAttribute('data-t');
+      if (nn) nn.textContent = '0' + (i + 1);
       if (v) { if (i === 2 && vis && !rm) { try { v.currentTime = 0; } catch (e) {} play(v); } else v.pause(); }
+      if (prev !== i) d.dispatchEvent(new CustomEvent('poerio:local', { detail: { from: prev, to: i, dir: (prev === L.length - 1 && i === 0) || i > prev ? 1 : -1 } }));
       if (vis && !rm && !d.hidden) tm = setTimeout(function () { go((cur + 1) % L.length); }, DUR[i]);
     }
 
-    N.forEach(function (b, k) { b.addEventListener('click', function () { go(k); }); });
-    C.forEach(function (c, k) { c.addEventListener('click', function (e) { if (!e.target.closest('a,button') && k !== cur) go(k); }); });
+    N.forEach(function (b, k) { b.addEventListener('click', function () { if (k !== cur) go(k); }); });
 
     if ('IntersectionObserver' in window) {
-      /* Corre mientras se vea la escena o el texto del recorrido (basta un 15% de cualquiera de los dos) */
-      var seen = [false, false], tg = [st, $('#local .rg')];
-      var io = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { seen[tg.indexOf(e.target)] = e.isIntersecting; });
-        var n = seen[0] || seen[1];
+      new IntersectionObserver(function (es) {
+        var n = es[0].isIntersecting;
         if (n === vis) return;
         vis = n;
         if (vis) go(cur); else stop();
-      }, { threshold: .15 });
-      tg.forEach(function (x) { if (x) io.observe(x); });
+      }, { threshold: .15 }).observe(st);
     }
     d.addEventListener('visibilitychange', function () { if (d.hidden) stop(); else if (vis) go(cur); });
     go(0);
