@@ -65,6 +65,21 @@
   var header = $('header'), nav = $('nav'), links = $$('nav a'), E = 'expo.out';
   var lite = (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 2 || !!(navigator.connection && navigator.connection.saveData);
 
+  /* v9 · gobernador adaptativo: si durante el scroll el equipo sostiene menos de ~40 fps, las animaciones que se crean desde ahí
+     (tarjetas, cambios de unidad, ficha, rotadores) pasan al modo liviano. Solo mide fotogramas con scroll; en reposo no cuesta nada. */
+  (function () {
+    var last = 0, y0 = window.scrollY, ds = [];
+    function f() {
+      var n = performance.now(), d = n - last; last = n;
+      if (document.hidden || !d || d > 250 || window.scrollY === y0) { y0 = window.scrollY; return; }
+      y0 = window.scrollY; ds.push(d);
+      if (ds.length < 120) return;
+      g.ticker.remove(f); ds.sort(function (a, b) { return a - b; });
+      if (ds[60] > 25) lite = true;
+    }
+    window.addEventListener('load', function () { setTimeout(function () { last = performance.now(); g.ticker.add(f); }, 1500); });
+  })();
+
   /* ---------- Navegación: sombra, sección activa, indicador deslizante ---------- */
   ST.create({ start: 8, end: 'max', toggleClass: { targets: header, className: 's' } });
 
@@ -132,16 +147,18 @@
       i.alt = ''; i.width = 1280; i.height = 960; i.loading = 'lazy'; i.decoding = 'async';
       box.insertBefore(i, o.before ? $(o.before, box) : null);
     });
-    var im = $$('img', box), k = 0, tm = 0, vis = false, top = o.op == null ? 1 : o.op;
+    var im = $$('img', box), k = 0, vis = false, call = null, top = o.op == null ? 1 : o.op;
     function nx() {
-      var a = im[k], b = im[(k + 1) % im.length]; k = (k + 1) % im.length;
-      g.set(b, { opacity: 0, scale: lite ? 1 : o.sc }); g.to(b, { opacity: top, scale: 1, duration: lite ? o.du * .7 : o.du, ease: 'power2.out' }); g.to(a, { opacity: 0, duration: o.du, ease: 'power2.out' });
+      var a = im[k], b = im[(k + 1) % im.length], du = lite ? o.du * .7 : o.du, wa = a.style.willChange, wb = b.style.willChange; k = (k + 1) % im.length;
+      g.killTweensOf([a, b]);
+      a.style.willChange = b.style.willChange = 'transform, opacity';   /* capa de compositor solo durante el fundido */
+      g.set(b, { opacity: 0, scale: lite ? 1 : o.sc });
+      g.to(b, { opacity: top, scale: 1, duration: du, ease: 'power2.out', onComplete: function () { a.style.willChange = wa; b.style.willChange = wb; } });
+      g.to(a, { opacity: 0, duration: du, ease: 'power2.out' });
     }
-    var hold = 0;
-    function go() { if (!tm) tm = setInterval(nx, o.ms); }
-    function st() { clearInterval(tm); tm = 0; }
-    function sync() { (vis && !hold && !auto.off && !document.hidden) ? go() : st(); }
-    new IntersectionObserver(function (e) { vis = e[0].isIntersecting; sync(); }).observe(box);
+    function arm() { if (call) call.kill(); call = g.delayedCall(o.ms / 1000, function () { nx(); arm(); }); }
+    function sync() { if (vis && !auto.off && !document.hidden) { if (call) call.play(); else arm(); } else if (call) call.pause(); }
+    new IntersectionObserver(function (e) { vis = e[e.length - 1].isIntersecting; sync(); }).observe(box);
     document.addEventListener('visibilitychange', sync);
     auto.subs.push(sync);
   }
@@ -170,6 +187,19 @@
     function on(el, type, fn, cap) { el.addEventListener(type, fn, cap); cleanups.push(function () { el.removeEventListener(type, fn, cap); }); }
 
     /* ---------- Helpers del sistema ---------- */
+    /* Cambio de unidad/escena, un solo sistema: la entrante desliza, su foto contra-desliza (el hueco queda siempre del lado que aún está fuera de pantalla)
+       y la saliente se corre apenas. Solo transform (compositor). par=false cuando el contenedor no recorta (recorrido). */
+    function swap(list, A, B, iA, iB, dir, par) {
+      var s = dir > 0 ? 1 : -1, du = .9 * k;
+      list.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'transform,zIndex' }); } });
+      g.killTweensOf([A, B, iA, iB]);
+      if (par && iB) g.set(iB, { clearProps: 'transform' });
+      B.classList.add('lv'); g.set(B, { zIndex: 1, xPercent: 0 }); g.set(A, { zIndex: 2 });
+      g.fromTo(A, { xPercent: 100 * s }, { xPercent: 0, duration: du, ease: 'power3.inOut', clearProps: 'transform,zIndex',
+        onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,transform' }); if (iB) g.set(iB, { clearProps: 'transform' }); } });
+      g.to(B, { xPercent: -16 * s, duration: du, ease: 'power3.inOut' });
+      if (par && iA && !lite) g.fromTo(iA, { xPercent: -16 * s }, { xPercent: 0, duration: du, ease: 'power3.inOut', clearProps: 'transform' });
+    }
     function reveal(t, trig, o) {
       if (!t.length) return; o = o || {};
       if (o.nt) g.set(t, { transition: 'none' });   /* si el elemento tiene transition CSS sobre transform, GSAP no debe pelear con ella */
@@ -245,7 +275,7 @@
     }
     if (!window.__poerioIntro && $('.hero') && !(window.scrollY > innerHeight)) {
       window.__poerioIntro = 1;
-      var hW = heroTitle($('.hero h1')), hI = $('#hs .hz.on img'), hT = g.timeline({ defaults: { ease: E } });
+      var hW = heroTitle($('.hero h1')), hI = $('#hs .hz.on img'), hT = g.timeline({ defaults: { ease: E }, paused: true });
       var cp = function (a) { return { clipPath: a }; };
       if (fg) hT.fromTo(fg, { opacity: 0 }, { opacity: 1, duration: .8 * k, ease: 'power2.out', clearProps: 'opacity' }, 0);
       if (hI && !lite) hT.fromTo(hI, { scale: 1.12 }, { scale: 1, duration: 1.4, ease: 'power3.out', clearProps: 'transform' }, 0);
@@ -259,6 +289,9 @@
       var hk = $('.hero .lk'); if (hk) hT.fromTo(hk, cp('inset(0% 100% 0% 0%)'), { clipPath: 'inset(0% 0% 0% 0%)', duration: .8 * k, ease: 'expo.inOut', clearProps: 'clipPath' }, 1.15);
       var hc = $('.hero .hcap'); if (hc) hT.fromTo(hc, cp('inset(100% 0% 0% 0%)'), { clipPath: 'inset(0% 0% 0% 0%)', duration: .9 * k, ease: 'expo.inOut', clearProps: 'clipPath' }, 1);
       var ha = $$('.hero .ha .btn'); if (ha.length) hT.fromTo(ha, cp('inset(100% 0% 0% 0%)'), { clipPath: 'inset(-6% -6% -6% -6%)', duration: .8 * k, stagger: .08, ease: 'expo.inOut', clearProps: 'clipPath' }, 1.2);
+      var go0 = false, go = function () { if (go0) return; go0 = true; hT.play(0); };
+      setTimeout(go, 600);
+      Promise.all([hI && hI.decode ? hI.decode().catch(function () {}) : 0, document.fonts && document.fonts.ready ? document.fonts.ready.catch(function () {}) : 0]).then(function () { requestAnimationFrame(go); });
     }
     /* La foto del hero ya no hace paralaje con el scroll (repintaba una imagen grande en cada fotograma). */
 
@@ -281,13 +314,7 @@
       var onHero = function (e) {
         ctx.add(function () {
           var d = e.detail, A = sl[d.to], B = sl[d.from], iA = $('img', A), iB = $('img', B), dir = d.dir;
-          sl.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'transform,zIndex' }); } });
-          g.killTweensOf([A, B, iA, iB]);
-          /* Cambio solo con transform (compositor): la unidad nueva entra deslizando, su foto contra-desliza y la saliente se corre apenas. Sin clip-path ni escala. */
-          B.classList.add('lv'); g.set(B, { zIndex: 1, xPercent: 0 }); g.set(A, { zIndex: 2 });
-          g.fromTo(A, { xPercent: dir > 0 ? 100 : -100 }, { xPercent: 0, duration: .9 * k, ease: 'power3.inOut', clearProps: 'transform,zIndex',
-            onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,transform' }); g.set(iB, { clearProps: 'transform' }); } });
-          g.to(B, { xPercent: dir > 0 ? -16 : 16, duration: .9 * k, ease: 'power3.inOut' });
+          swap(sl, A, B, iA, iB, dir, true);
           var W = split(hn, true);
           g.fromTo(W, { yPercent: 118, skewY: 6, transformOrigin: '0% 100%' }, { yPercent: 0, skewY: 0, duration: .7 * k, stagger: .045, delay: .1, ease: E, clearProps: 'transform' });
           g.fromTo(hm, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .5, delay: .2, ease: E, clearProps: 'opacity,transform' });
@@ -327,13 +354,7 @@
       var onVr = function (e) {
         ctx.add(function () {
           var d = e.detail, A = vsl[d.to], B = vsl[d.from], iA = $('img', A), iB = $('img', B), dir = d.dir;
-          vsl.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'transform,zIndex' }); } });
-          g.killTweensOf([A, B, iA, iB]);
-          /* Cambio solo con transform (compositor): la unidad nueva entra deslizando, su foto contra-desliza y la saliente se corre apenas. Sin clip-path ni escala. */
-          B.classList.add('lv'); g.set(B, { zIndex: 1, xPercent: 0 }); g.set(A, { zIndex: 2 });
-          g.fromTo(A, { xPercent: dir > 0 ? 100 : -100 }, { xPercent: 0, duration: .9 * k, ease: 'power3.inOut', clearProps: 'transform,zIndex',
-            onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,transform' }); g.set(iB, { clearProps: 'transform' }); } });
-          g.to(B, { xPercent: dir > 0 ? -16 : 16, duration: .9 * k, ease: 'power3.inOut' });
+          swap(vsl, A, B, iA, iB, dir, true);
           var W = split(vn, true);
           g.fromTo(W, { yPercent: 118, skewY: 6, transformOrigin: '0% 100%' }, { yPercent: 0, skewY: 0, duration: .7 * k, stagger: .045, delay: .15, ease: E, clearProps: 'transform' });
           g.fromTo([vm, vi], { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .5, delay: .25, ease: E, clearProps: 'opacity,transform' });
@@ -371,7 +392,7 @@
         if (!tShown || snap) { g.set(ti, to); g.set(ti, { opacity: 1 }); tShown = true; }
         else g.to(ti, { x: to.x, y: to.y, scaleX: to.scaleX, duration: .6, ease: E });
       };
-      tabs.addEventListener('click', function () { if (tShown) placeT(); });
+      on(tabs, 'click', function () { if (tShown) placeT(); });
       var onRef = function () { placeT(true); };
       ST.addEventListener('refresh', onRef);
       requestAnimationFrame(function () { placeT(true); });
@@ -439,13 +460,13 @@
     /* ---------- FICHA: se abre desde la tarjeta tocada; la foto se revela con máscara y el contenido entra escalonado ---------- */
     var dlg = $('#dlg'), was = false, ox = 0, oy = 0, cc = null;
     dlg.classList.add('gx');   /* GSAP conduce la apertura: se apaga el keyframe CSS para que no haya dos animaciones sobre el mismo transform */
-    grid.addEventListener('click', function (e) {
+    on(grid, 'click', function (e) {
       var c = e.target.closest('.car'); if (!c) return;
       cc = c;
       var r = $('.im', c).getBoundingClientRect();
       ox = r.left + r.width / 2 - innerWidth / 2; oy = r.top + r.height / 2 - innerHeight / 2;
     }, true);
-    dlg.addEventListener('close', function () { was = false; });
+    on(dlg, 'close', function () { was = false; });
     var mo2 = new MutationObserver(function () {
       var fresh = dlg.open && !was; was = dlg.open;
       if (!dlg.open) return;
@@ -486,28 +507,6 @@
     on(dlg, 'close', resetDlg);
     cleanups.push(function () { delete dlg.close; resetDlg(); dlg.classList.remove('gx'); });
 
-
-    /* ---------- CURSOR del catálogo: "Ver ficha" sigue al mouse sobre la foto de cada tarjeta (solo mouse) ---------- */
-    /* Desactivado: nada sigue al mouse. */
-    if (false) {
-      var cu = document.createElement('div'); cu.className = 'cur'; cu.setAttribute('aria-hidden', 'true'); cu.innerHTML = '<span>Ver ficha</span>'; document.body.appendChild(cu);
-      var cqx = g.quickTo(cu, 'x', { duration: .45, ease: 'power3.out' }), cqy = g.quickTo(cu, 'y', { duration: .45, ease: 'power3.out' }), cOn = false;
-      var cshow = function (v, e) {
-        if (v === cOn) return; cOn = v; root.classList.toggle('cur-on', v);
-        if (v && e) g.set(cu, { x: e.clientX, y: e.clientY });
-        g.to(cu, { scale: v ? 1 : 0, opacity: v ? 1 : 0, duration: .45, ease: E, overwrite: 'auto' });
-      };
-      on(grid, 'pointermove', function (e) {
-        if (e.pointerType && e.pointerType !== 'mouse') return;
-        var im = e.target.closest && e.target.closest('.im'), over = !!im && !e.target.closest('.g-a');
-        if (over) { cqx(e.clientX); cqy(e.clientY); }
-        cshow(over, e);
-      });
-      on(grid, 'pointerleave', function () { cshow(false); });
-      on(window, 'scroll', function () { cshow(false); }, { passive: true });
-      on(dlg, 'click', function () { cshow(false); }, true);
-      cleanups.push(function () { root.classList.remove('cur-on'); if (cu.parentNode) cu.parentNode.removeChild(cu); });
-    }
 
     /* ---------- COMPARADOR (versus), Quiénes somos, banner y barra de filtros ---------- */
     reveal($$('#ff, #qc'), '#ff', { s: .08 });
@@ -568,7 +567,7 @@
     /* Formulario: el aviso de estado aparece con un gesto corto */
     var fs = $('#fStatus');
     var mo3 = new MutationObserver(function () { if (fs.textContent) g.fromTo(fs, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: .45, ease: E, clearProps: 'opacity,transform', overwrite: 'auto' }); });
-    mo3.observe(fs, { childList: true });
+    if (fs) mo3.observe(fs, { childList: true });
 
     /* ---------- v6 · mismo lenguaje en todas las secciones ----------
        Título por palabra + bajada y etiqueta con subida corta; las listas entran escalonadas con la misma curva.
@@ -600,12 +599,7 @@
       var onLoc = function (e) {
         ctx.add(function () {
           var d = e.detail, A = VL[d.to], B = VL[d.from], iA = $('.vin', A), iB = $('.vin', B), dir = d.dir, li = VI[d.to];
-          VL.forEach(function (x) { if (x !== A && x !== B) { x.classList.remove('lv'); g.set(x, { clearProps: 'transform,zIndex' }); } });
-          g.killTweensOf([A, B, iA, iB]);
-          B.classList.add('lv'); g.set(B, { zIndex: 1, xPercent: 0 }); g.set(A, { zIndex: 2 });
-          g.fromTo(A, { xPercent: dir > 0 ? 100 : -100 }, { xPercent: 0, duration: .9 * k, ease: 'power3.inOut', clearProps: 'transform,zIndex',
-            onComplete: function () { B.classList.remove('lv'); g.set(B, { clearProps: 'zIndex,transform' }); g.set(iB, { clearProps: 'transform' }); } });
-          g.to(B, { xPercent: dir > 0 ? -16 : 16, duration: .9 * k, ease: 'power3.inOut' });
+          swap(VL, A, B, iA, iB, dir, false);
           if (vW[d.to] && vW[d.to].length) g.fromTo(vW[d.to], { yPercent: 118, skewY: 6, transformOrigin: '0% 100%' }, { yPercent: 0, skewY: 0, duration: .8 * k, stagger: .05, delay: .25, ease: E, clearProps: 'transform', overwrite: 'auto' });
           g.fromTo([$('p', li), $('.ra', li)], { clipPath: 'inset(100% -4% -8% -4%)', y: 14 }, { clipPath: 'inset(0% -4% -8% -4%)', y: 0, duration: .9 * k, stagger: .1, delay: .4, ease: 'expo.inOut', clearProps: 'clipPath,transform', overwrite: 'auto' });
           if (vnum) g.fromTo(vnum, { yPercent: 105 }, { yPercent: 0, duration: .8 * k, ease: E, clearProps: 'transform', overwrite: 'auto' });
@@ -614,14 +608,7 @@
       document.addEventListener('poerio:local', onLoc);
       cleanups.push(function () { document.removeEventListener('poerio:local', onLoc); });
       /* Escritorio: la escena reacciona al cursor */
-      if (D && !lite && vsc) {
-        g.set(vsc, { scale: 1.05 });
-        if (false) { /* sin seguimiento del mouse */
-          var vx = g.quickTo(vsc, 'x', { duration: .9, ease: 'power3.out' }), vy = g.quickTo(vsc, 'y', { duration: .9, ease: 'power3.out' });
-          on($('.vv', vj), 'pointermove', function (e) { var r = this.getBoundingClientRect(); vx(((e.clientX - r.left) / r.width - .5) * -22); vy(((e.clientY - r.top) / r.height - .5) * -14); });
-          on($('.vv', vj), 'pointerleave', function () { vx(0); vy(0); });
-        }
-      }
+      if (D && !lite && vsc) g.set(vsc, { scale: 1.05 });
     }
 
     /* Avisos de estado (copiar dirección, formularios): aparecen con el mismo gesto corto */
@@ -659,39 +646,12 @@
       g.fromTo(ln, { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: sc, start: 'top 98%', end: 'top 52%', scrub: true } });
     });
 
-    /* ---------- TARJETAS: inclinación 3D con respuesta del puntero (solo mouse, escritorio) ---------- */
-    if (false) { /* sin inclinación con el mouse */
-      var tl2 = null, tq = null;
-      on(grid, 'pointermove', function (e) {
-        if (e.pointerType && e.pointerType !== 'mouse') return;
-        var c = e.target.closest && e.target.closest('.car'), im = c && $('.im', c);
-        if (tl2 && tl2 !== im) { g.to(tl2, { rotationX: 0, rotationY: 0, duration: .8, ease: 'elastic.out(1,.6)', overwrite: 'auto' }); tl2 = null; }
-        if (!im) return;
-        if (tl2 !== im) { tl2 = im; g.set(im, { transformPerspective: 900 }); tq = [g.quickTo(im, 'rotationX', { duration: .5, ease: 'power3.out' }), g.quickTo(im, 'rotationY', { duration: .5, ease: 'power3.out' })]; }
-        var r = im.getBoundingClientRect();
-        tq[0](((e.clientY - r.top) / r.height - .5) * -6); tq[1](((e.clientX - r.left) / r.width - .5) * 8);
-      });
-      on(grid, 'pointerleave', function () { if (tl2) g.to(tl2, { rotationX: 0, rotationY: 0, duration: .8, ease: 'elastic.out(1,.6)', overwrite: 'auto', clearProps: 'transform,transformPerspective' }); tl2 = null; });
-    }
-
     /* ---------- BOTONES: atracción magnética (mouse) + presión táctil (todos) ----------
        La hoja final fuerza transform:none!important en .btn (y scale(1.03) en hover), así que un transform en línea de GSAP nunca se vería.
        Por eso el movimiento va por las propiedades individuales translate/scale, alimentadas por variables --mx/--my/--ps
        (index.html: `.m .btn{translate:var(--mx) var(--my)}`). Sin variable definida valen "none": en reposo no crean contexto de apilamiento ni cambian nada. */
     function drive(el, vars, P, tweenVars, done) {
       g.to(P, Object.assign({ overwrite: true, onUpdate: function () { for (var k in vars) el.style.setProperty(vars[k], P[k] + (vars[k] === '--ps' ? '' : 'px')); }, onComplete: function () { if (done) done(); } }, tweenVars));
-    }
-    if (false) { /* sin atracción magnética: solo el clic anima el botón */
-      $$('.hero .btn, .bd .btn, .loc .btn, .ci .btn, .eqc .btn, .pdr .btn, .hwr .btn, .rvr .btn').forEach(function (b) {
-        var P = { x: 0, y: 0 }, V = { x: '--mx', y: '--my' }, rest = function () { b.style.removeProperty('--mx'); b.style.removeProperty('--my'); };
-        on(b, 'pointermove', function (e) {
-          if (e.pointerType && e.pointerType !== 'mouse') return;
-          var r = b.getBoundingClientRect();
-          drive(b, V, P, { x: (e.clientX - (r.left + r.width / 2)) * .22, y: (e.clientY - (r.top + r.height / 2)) * .3, duration: .6, ease: 'power3.out' });
-        });
-        on(b, 'pointerleave', function () { drive(b, V, P, { x: 0, y: 0, duration: .9, ease: 'elastic.out(1,.5)' }, rest); });
-        cleanups.push(function () { g.killTweensOf(P); rest(); });
-      });
     }
     var pressed = null;
     function press(b, to, du, ease, done) { var P = b._P || (b._P = { ps: 1 }); drive(b, { ps: '--ps' }, P, { ps: to, duration: du, ease: ease }, done); }
@@ -710,8 +670,9 @@
     /* ---------- MÓVIL ---------- */
     if (!D) {
       /* Header: se guarda al bajar, vuelve al subir */
-      ST.create({ start: 0, end: 'max', onUpdate: function (s) { header.classList.toggle('h', s.scroll() > 260 && s.direction === 1); } });
-      header.addEventListener('focusin', function () { header.classList.remove('h'); });
+      var hid = false;   /* solo se toca el DOM cuando el estado cambia (antes: una escritura por fotograma de scroll) */
+      ST.create({ start: 0, end: 'max', onUpdate: function (s) { var v = s.scroll() > 260 && s.direction === 1; if (v !== hid) { hid = v; header.classList.toggle('h', v); } } });
+      on(header, 'focusin', function () { hid = false; header.classList.remove('h'); });
 
       /* Barra WhatsApp/Llamar: mientras los CTAs del hero están a la vista no se muestra (antes los tapaba);
          al pasarlos, sube una vez con un pulso y queda siempre accesible */
