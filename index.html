@@ -1528,6 +1528,55 @@ a,button,summary,label,select,.chip{touch-action:manipulation}
 /* Animaciones infinitas fuera de pantalla: en pausa (no consumen compositor) */
 .pin i::after,.vpn i::after{animation-play-state:var(--ps-pulse,running)}
 .off-screen .pin i::after,.off-screen .vpn i::after{animation-play-state:paused}
+/* ==== v11: mapa siempre visible, Quiénes somos a la par, recorrido más ancho, Cómo comprar y Equipo alineados ==== */
+/* Mapa: se carga solo al acercarse a la sección y aparece con un fundido (sin clic previo) */
+.mp .mpf{transition:opacity .9s ease}.mp.rd .mpf{display:block;opacity:0;pointer-events:none}
+.mp iframe{transition:opacity .9s ease .1s}
+.mp:not(.rd) .mph{opacity:0}.mph{transition:opacity .5s ease .6s}
+@media(prefers-reduced-motion:reduce){.mp .mpf,.mp iframe,.mph{transition:none}}
+
+/* Quiénes somos: la foto toma exactamente la altura del bloque de texto */
+@media(min-width:860px){
+#nosotros .w{align-items:stretch}
+#nosotros .w>div:not(.ph):not(.ci){display:flex;flex-direction:column;align-items:flex-start;align-self:stretch;min-width:0}
+#nosotros .w>div:not(.ph):not(.ci)>.ey{margin-top:0}
+#nosotros .w>div:not(.ph):not(.ci)>.btn{margin-top:auto;align-self:flex-start}
+#nosotros .pl{margin-bottom:26px}
+#nosotros .ph{aspect-ratio:auto;height:auto;min-height:0;align-self:stretch}
+}
+
+/* Recorrido: el video conserva su borde derecho y crece solo hacia la izquierda */
+#vj .vin{container-type:size}
+#vj .vin video{--vx:1.36;position:absolute;top:0;bottom:0;left:auto;right:calc(50% - 100cqh*480/854/2);height:100%;width:min(calc(100cqh*480/854*var(--vx)),calc(50% + 100cqh*480/854/2));max-width:none;margin:0;object-fit:cover;object-position:50% 50%}
+
+/* Cómo comprar: encabezados, listas y botones en las mismas filas */
+@media(min-width:900px){
+#como-comprar>.w{grid-template-rows:auto auto auto auto auto;align-items:stretch}
+#como-comprar .ccA,#como-comprar .ccB{display:grid;grid-row:1/span 5;grid-template-rows:subgrid;grid-template-columns:minmax(0,1fr);row-gap:0;margin:0;padding:0}
+#como-comprar .ccA{grid-column:1}#como-comprar .ccB{grid-column:2}
+#como-comprar .pdl,#como-comprar .hwh{display:contents}
+#como-comprar .pdl>:nth-child(1),#como-comprar .hwh>:nth-child(1){grid-row:1;justify-self:center;align-self:center;margin:0 0 14px}
+#como-comprar .pdl>h2,#como-comprar .hwh>h2{grid-row:2;margin:0 0 12px;text-align:center}
+#como-comprar .pdl>:nth-child(3),#como-comprar .hwh>:nth-child(3){grid-row:3;margin:0 auto 14px;max-width:560px;text-align:center}
+#como-comprar .stp,#como-comprar .hwl{grid-row:4;margin:10px 0 14px;align-self:stretch;display:grid;max-width:none;width:100%}
+#como-comprar .stp{grid-template-rows:repeat(4,minmax(0,1fr))}
+#como-comprar .hwl{grid-template-rows:repeat(2,minmax(0,1fr));grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+#como-comprar .stp li,#como-comprar .hwl li{margin:0;box-sizing:border-box}
+#como-comprar .stp li{padding:12px 0}
+#como-comprar .hwl li{padding-top:22px}
+#como-comprar .pdr,#como-comprar .hwr{grid-row:5;margin:18px 0 0;align-self:start;justify-content:center}
+}
+
+/* Equipo: la lista de la derecha y la columna izquierda comparten filas y terminan a la misma altura */
+@media(min-width:900px){
+#equipo .eqx{grid-template-rows:auto auto auto auto;grid-template-areas:none;align-items:stretch}
+#equipo .eqh{grid-area:auto;grid-column:1;grid-row:1/span 2;margin:0}
+#equipo .eqc{grid-area:auto;grid-column:1;grid-row:3;align-self:start;margin:26px 0 34px}
+#equipo .eqt{grid-area:auto;grid-column:1;grid-row:4;margin:0;display:grid;grid-template-rows:repeat(2,minmax(0,1fr))}
+#equipo .eqt li{box-sizing:border-box}
+#equipo .eqk{grid-area:auto;grid-column:2;grid-row:1/span 4;display:grid;grid-template-rows:subgrid;margin:0}
+#equipo .eqk li{align-content:center;box-sizing:border-box}
+}
 </style>
 <noscript><style>#modelos,.ff,.ftg,#qc,#hf,.vs,.car .g-a,.car .g-c,.car .g-s,.vr .g-a,.vr .vrr,.vr .vri,#visitaForm,#buscoForm{display:none}</style></noscript>
 </head>
@@ -1559,7 +1608,7 @@ a,button,summary,label,select,.chip{touch-action:manipulation}
 <div class="ci"><div class="ih"><img decoding="async" src="images/logo-claro.webp" alt="Fernando Poerio Automotores" width="722" height="287" loading="lazy"><p class="it"><span>Usados</span><span>Permutas</span><span>Consignaciones</span></p></div><div class="ib"><div class="cit"><svg class="cii f" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1114.5 9 2.5 2.5 0 0112 11.5z"/></svg><small>Dirección</small><b id="icA">Alberdi 1337 (casi Bv. Montoneras), Concepción del Uruguay, Entre Ríos</b></div><div class="cit"><svg class="cii" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><small>Atención</small><b>Escribinos o llamanos antes de venir y coordinamos la visita.</b></div><div class="cit"><svg class="cii" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 00-7.8 13.5L3 21l4.6-1.2A9 9 0 1012 3z"/><path d="M9 8.8c.2 3 2.2 5 5.2 5.2l1-1.4-1.9-.9-.8.7a4.5 4.5 0 01-1.9-1.9l.7-.8-.9-1.9z"/></svg><small>WhatsApp directo</small><b><a id="icW" href="https://wa.me/5493442453550">+54 9 3442 45-3550</a></b></div><div class="cit"><svg class="cii f" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25c1.1.37 2.3.57 3.6.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.6a1 1 0 01-.25 1z"/></svg><small>Teléfono</small><b><a id="icT" href="tel:+543442453550">03442 45-3550</a></b></div></div><div class="cia"><a class="btn p" href="https://wa.me/5493442453550" data-wa="Hola! Quiero consultar por las unidades disponibles.">Escribinos por WhatsApp</a><a class="btn" href="tel:+543442453550" data-tel>Llamar ahora</a><a class="btn" href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" data-map target="_blank" rel="noopener noreferrer">Cómo llegar</a></div><div class="cis"><small>Seguinos</small><a href="https://www.instagram.com/poerioautomotores/" data-ig target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6"/></svg>Instagram</a><a href="https://www.facebook.com/profile.php?id=100011380620292" data-fb target="_blank" rel="noopener noreferrer"><svg class="f" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h2.5V5H14a3.5 3.5 0 00-3.5 3.5V11H8v3h2.5v7h3v-7H16l.5-3h-2.5V8.8c0-.5.3-.8.8-.8z"/></svg>Facebook</a><a href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" target="_blank" rel="noopener noreferrer"><svg class="f" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1114.5 9 2.5 2.5 0 0112 11.5z"/></svg>Opiniones en Google</a></div></div>
 </div></section>
 
-<section id="contacto" class="loc"><div class="mp"><span class="mpf" aria-hidden="true"></span><iframe title="Mapa: Fernando Poerio Automotores, Alberdi 1337, Concepción del Uruguay" data-src="https://maps.google.com/maps?q=-32.4882114,-58.2425324&amp;z=17&amp;output=embed" referrerpolicy="no-referrer-when-downgrade" width="600" height="450"></iframe><span class="mph">Tocá para cargar el mapa</span><a class="mpl" data-map href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" target="_blank" rel="noopener noreferrer">Abrir en Google Maps ↗</a></div><div class="w">
+<section id="contacto" class="loc"><div class="mp"><span class="mpf" aria-hidden="true"></span><iframe title="Mapa: Fernando Poerio Automotores, Alberdi 1337, Concepción del Uruguay" data-src="https://maps.google.com/maps?q=-32.4882114,-58.2425324&amp;z=17&amp;output=embed" referrerpolicy="no-referrer-when-downgrade" width="600" height="450"></iframe><span class="mph">Tocá para mover el mapa</span><a class="mpl" data-map href="https://www.google.com/maps/place/Fernando+poeiro/@-32.4882114,-58.2425324,17z" target="_blank" rel="noopener noreferrer">Abrir en Google Maps ↗</a></div><div class="w">
 <div class="xt"><p class="xk">Cómo llegar</p><p class="xp">Estamos sobre Alberdi, casi Bv. Montoneras. Buscá el portón negro y el salón vidriado: los autos quedan a la vista desde la calle.</p></div>
 <div class="lc"><h2 class="eb">Dónde estamos</h2><address id="addr"><strong>Alberdi 1337</strong> <span class="k">(casi Bv. Montoneras)</span><br>Concepción del Uruguay, Entre Ríos</address><p class="meta" id="hoursNote">Escribinos o llamanos antes de venir y coordinamos la visita.</p>
 <div class="hrs" id="hrs"><h3>Horarios de atención</h3><dl><div><dt>Lunes a viernes</dt><dd class="tbc">a confirmar</dd></div><div><dt>Sábados</dt><dd class="tbc">a confirmar</dd></div><div><dt>Domingos y feriados</dt><dd class="tbc">a confirmar</dd></div></dl></div>
@@ -1834,6 +1883,8 @@ waForm($("buscoForm"),function(f){var a=f.anio.value.trim(),p=f.presu.value.trim
 </script>
 <script>(function(){var m=document.querySelector(".mp");if(!m)return;var f=m.querySelector("iframe");
 function ld(){if(!f||!f.getAttribute("data-src"))return;f.addEventListener("load",function(){m.classList.add("rd")},{once:true});f.src=f.getAttribute("data-src");f.removeAttribute("data-src")}
+/* El mapa se carga solo, un poco antes de llegar a la sección (sin clic) y aparece con un fundido */
+if("IntersectionObserver" in window){var o=new IntersectionObserver(function(es){if(es[0].isIntersecting){o.disconnect();ld()}},{rootMargin:"1400px 0px"});o.observe(m)}else{addEventListener("load",function(){setTimeout(ld,800)})}
 m.addEventListener("click",function(){ld();m.classList.add("on")});m.addEventListener("mouseleave",function(){m.classList.remove("on")});document.addEventListener("touchstart",function(e){if(!m.contains(e.target))m.classList.remove("on")},{passive:true})})();</script>
 <script src="vendor/gsap.min.js" defer onerror="document.documentElement.classList.remove('m')"></script>
 <script src="vendor/ScrollTrigger.min.js" defer onerror="document.documentElement.classList.remove('m')"></script>
