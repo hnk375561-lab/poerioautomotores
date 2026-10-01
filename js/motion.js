@@ -569,6 +569,19 @@
       cleanups.push(function () { mx.disconnect(); });
     });
 
+    /* ---------- v7 · Quiénes somos, reseñas y vista previa del mensaje ---------- */
+    reveal($$('#nosotros .ns > div'), '#nosotros .ns', { s: .1, y: 24, st: 'top 90%', nt: 1 });
+    $$('#nosotros .ns b').forEach(function (b) {
+      var t = parseInt(b.textContent, 10); if (!t) return;
+      g.fromTo(b, { textContent: 0 }, { textContent: t, duration: 1.6, ease: 'power3.out', snap: { textContent: 1 }, scrollTrigger: { trigger: b, start: 'top 92%', once: true } });
+    });
+    reveal($$('.rvc'), '.rvg', { s: .14, y: 34, st: 'top 88%', nt: 1 });
+    if ($('.rvg')) g.from($$('.rvs svg'), { scale: 0, rotation: -50, transformOrigin: '50% 50%', duration: .8, stagger: .06, delay: .35, ease: 'back.out(2.4)', clearProps: 'transform',
+      scrollTrigger: { trigger: '.rvg', start: 'top 82%', once: true } });
+    var cf = $('#canjeForm'), wpT = $('#wpT');
+    if (cf && wpT) on(cf, 'input', function () { g.fromTo(wpT, { opacity: .5, y: 3 }, { opacity: 1, y: 0, duration: .35, ease: E, clearProps: 'opacity,transform', overwrite: 'auto' }); });
+    reveal($$('#canjeForm .wp > *, #canjeForm .wk li'), '#canjeForm .wp', { s: .08, y: 16, st: 'top 92%' });
+
     /* ---------- Progreso de lectura: línea fina bajo el header (solo transform) ---------- */
     var pb = $('.pgb') || header.appendChild(Object.assign(document.createElement('i'), { className: 'pgb', ariaHidden: 'true' }));
     g.to(pb, { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: .3 } });

@@ -116,3 +116,10 @@ Precios: todos "Consultar". El validador falla si aparece otro valor sin confirm
 
 ## Pulido final de movimiento (2026-09-30)
 - El panel del buscador "¿Qué estás buscando?" anima el cambio de contenido al elegir otra prioridad. Los títulos animados por palabra ya no cortan las tildes. Se verificó sin desborde horizontal en móvil (390 px) y con movimiento reducido. Sin datos nuevos.
+
+## Hero, reseñas, Quiénes somos y Cómo llegar (2026-09-30)
+- Hero: solo el frente de cada unidad (6 fotos, una por vehículo). Sin datos nuevos.
+- Reseñas: tarjetas "luna Figueroa" (1 opinión, 5 estrellas; captura de la ficha de Maps) y "Santiago Solis" (5 estrellas). **PENDIENTE: confirmar que la calificación de Santiago Solis esté publicada en la ficha de Google Maps; si no lo está, quitar la tarjeta antes de salir a producción.** Sin fechas relativas, sin promedio ni cantidad total (no hay respaldo).
+- Quiénes somos: "39 años de confianza" (lema ya existente, sin año de fundación); "unidades en el salón" sale de `STOCK`; "4 formas de operar" = comprar, vender, permutar, consignar (tarjetas del sitio).
+- Formulario "Contanos tu auto": vista previa del mensaje y consejos generales (fotos, cédula, service). Son sugerencias, no requisitos del negocio: a confirmar con el dueño.
+
