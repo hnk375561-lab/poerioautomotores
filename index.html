@@ -784,6 +784,85 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .eqv .eqm{max-width:300px;margin-inline:auto}
 }
 @media(min-width:360px) and (max-width:899px){.rq .rqg{display:grid;grid-template-columns:1fr 1fr;gap:10px}.rq .rqb{padding:12px 12px}.rq .rqb span{font-size:12.5px}}
+
+/* ===== Hero 75/25: vehículo protagonista ===== */
+@media(min-width:900px){
+.hero{grid-template-columns:clamp(340px,25%,440px) minmax(0,1fr)}
+.hero .tx{padding:36px 28px 36px clamp(24px,2.4vw,40px);justify-content:center}
+.hero .hlogo{width:clamp(150px,12vw,190px);margin-bottom:clamp(16px,3vh,28px)}
+.hero .tx h1{font-size:clamp(34px,3.1vw,48px);max-width:11ch}
+.hero .tx h1 .h1n{font-size:11.5px;margin-bottom:12px}
+.hero .tx>p{margin:20px 0 24px;padding-top:18px;font-size:16px;max-width:30ch}
+.hero .row{display:flex;flex-direction:column;align-items:stretch;gap:10px;width:100%;max-width:300px}
+.hero .row .btn{width:100%;justify-content:center;text-align:center;white-space:normal}
+.hero .lk{font-size:14.5px}
+.hv::before{width:9%}
+.hero .hn{font-size:clamp(34px,3.8vw,60px)}
+.hcap{left:clamp(24px,3vw,48px);bottom:26px}
+.ha{padding:18px clamp(24px,3vw,48px) 24px}.ha .btn{max-width:340px}.ha .hw{max-width:420px}
+}
+
+/* ===== Comparador ===== */
+.vs{position:relative;overflow:hidden;background:radial-gradient(60% 45% at 50% 0%,#13384e 0%,rgba(19,56,78,0) 72%),radial-gradient(40% 30% at 100% 100%,rgba(92,184,208,.12),transparent 70%),linear-gradient(180deg,#07131c,#0b1a27)}
+.vs .head{justify-content:center;text-align:center}.vs .head>div{max-width:720px;margin-inline:auto}
+.vde{display:inline-block;margin-bottom:16px;padding:6px 16px;border:1px solid rgba(143,211,228,.5);border-radius:999px;font:600 12px var(--b);letter-spacing:.16em;text-transform:uppercase;color:var(--luxl)}
+.vs .vp{display:block;max-width:none;margin:34px 0 0}
+.vdk{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.vdp{position:relative;display:flex;align-items:center;gap:12px;min-height:58px;padding:6px 18px 6px 6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.2);color:#fff;font:inherit;text-align:left;cursor:pointer;transition:background .25s,border-color .25s,transform .25s}
+.vdp img{display:block;width:56px;height:44px;object-fit:cover;filter:grayscale(.55) brightness(.8);transition:filter .25s}
+.vdp b{display:block;font:600 15px/1.1 var(--b)}.vdp small{display:block;margin-top:3px;font-size:13px;color:#9db3bf}
+.vdp[aria-pressed=true]{background:rgba(92,184,208,.16);border-color:var(--lux)}
+.vdp[aria-pressed=true] img{filter:none}
+.vdp[aria-pressed=true]::after{content:"✓";display:grid;place-items:center;width:20px;height:20px;margin-left:4px;border-radius:50%;background:var(--lux);color:var(--deep);font:700 12px var(--b)}
+@media(hover:hover){.vdp:hover{border-color:var(--luxl);transform:translateY(-2px)}}
+.vdn{margin:16px 0 0;text-align:center;font-size:14px;color:#9db3bf}
+.vs .tw{border:0;overflow:visible;margin-top:30px}
+.vdg{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:clamp(14px,2vw,28px);align-items:stretch}
+.vdg[style*="--n:1"]{max-width:460px;margin-inline:auto}.vdg[style*="--n:2"]{max-width:860px;margin-inline:auto}
+.vdc{display:flex;flex-direction:column;background:linear-gradient(180deg,#14283a,#0a1823);border:1px solid rgba(143,211,228,.22);box-shadow:0 40px 70px -48px rgba(0,0,0,.9)}
+.vdi{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--deep)}.vdi img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+.vdi::after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(0deg,#14283a,rgba(20,40,58,0));pointer-events:none}
+@media(hover:hover){.vdc:hover .vdi img{transform:scale(1.05)}}
+.vdb{position:absolute;left:12px;top:12px;z-index:2;display:flex;flex-wrap:wrap;gap:6px}.vdb i{font:600 12px var(--b);font-style:normal;padding:5px 10px;background:var(--lux);color:var(--deep)}
+.vdh{padding:6px 24px 4px}.vdh h3{margin:0;font:400 clamp(26px,2.4vw,34px)/1.05 var(--serif);color:#fff}.vdh p{margin:8px 0 0;color:#9db3bf;font-size:14.5px;letter-spacing:.03em}
+.vdm{margin:0;padding:10px 24px 4px}.vdm>div{padding:16px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.vdm dt{font:600 11.5px var(--b);letter-spacing:.14em;text-transform:uppercase;color:#8aa3b1}.vdm dt small{font:400 11.5px var(--b);letter-spacing:.02em;text-transform:none;margin-left:6px;color:#6f8797}
+.vdm dd{margin:8px 0 0}.vdm dd b{display:block;font:400 clamp(30px,3vw,42px)/1 var(--serif);color:#fff}
+.vbr{display:block;height:5px;margin-top:12px;background:rgba(255,255,255,.1)}.vbr u{display:block;height:100%;background:#5d7686}
+.vdm .win dd b{color:var(--luxl)}.vdm .win .vbr u{background:var(--lux)}
+.vdq{padding:18px 24px 6px}.vdt{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 12px;font:600 11.5px var(--b);letter-spacing:.14em;text-transform:uppercase;color:#8aa3b1}.vdt b{font:400 24px var(--serif);letter-spacing:0;text-transform:none;color:var(--luxl)}
+.vdq ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vdq li{display:flex;align-items:center;gap:8px;font-size:13.5px;line-height:1.25;color:#e3ecf0}.vdq li span{flex:none;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--lux);color:var(--deep);font:700 11px var(--b)}
+.vdq li.n{color:#6f8797}.vdq li.n span{background:rgba(255,255,255,.07);color:#6f8797}
+.vda{margin-top:auto;display:grid;gap:10px;padding:22px 24px 24px}.vs .vda .btn{width:100%;justify-content:center;border-radius:0;border-color:rgba(255,255,255,.5);color:#fff}.vs .vda .btn.p{background:var(--lux);border-color:var(--lux);color:var(--deep)}
+.vs .vl{margin:22px auto 0;text-align:center}
+.hero .hz img{object-position:50% 68%}
+.vdy{display:none;margin:12px 0 0;text-align:center;font-size:13px;color:#9db3bf}
+@media(max-width:820px){
+.vdg,.vdg[style]{display:flex;max-width:none;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding-bottom:10px;-webkit-overflow-scrolling:touch}
+.vdc{flex:0 0 84%;scroll-snap-align:center}.vdg[style*="--n:1"] .vdc{flex-basis:100%}
+.vdy{display:block}.vdp{flex:1 1 calc(50% - 5px);min-width:0}.vdh,.vdm,.vdq,.vda{padding-left:20px;padding-right:20px}
+}
+@media(max-width:640px){.vdp img{width:48px;height:38px}.vdp b{font-size:14px}}
+
+/* ===== Fondos con interior de vehículo ===== */
+#financiacion.pp,#visita.pd{position:relative;isolation:isolate;overflow:hidden;color:#fff;background:var(--deep)}
+#financiacion.pp::before,#visita.pd::before{content:"";position:absolute;inset:0;z-index:-2;background-size:cover;background-repeat:no-repeat;transform:scale(1.03)}
+#financiacion.pp::before{background-image:url(images/punto-6-800.webp);background-position:50% 58%}
+#visita.pd::before{background-image:url(images/clio-6-800.webp);background-position:50% 55%}
+@media(min-width:801px){#financiacion.pp::before{background-image:url(images/punto-6.webp)}#visita.pd::before{background-image:url(images/clio-6.webp)}}
+#financiacion.pp::after,#visita.pd::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(70% 60% at 50% 45%,rgba(6,17,26,.5),rgba(6,17,26,.12) 100%),linear-gradient(180deg,rgba(6,17,26,.72),rgba(8,24,36,.4) 45%,rgba(6,17,26,.78))}
+#financiacion .pdt,#visita .pde{color:var(--luxl)}
+#financiacion .pdt{border-color:rgba(143,211,228,.6)}
+#financiacion h2,#visita h2{color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.55)}#financiacion .pdl p:not(.pdt),#visita .pdl p:not(.pde){text-shadow:0 1px 14px rgba(0,0,0,.6)}
+#financiacion .pdl p:not(.pdt),#visita .pdl p:not(.pde){color:#c9d8df}
+#visita .pde{display:inline-block;padding:6px 16px;border:1px solid rgba(143,211,228,.5);border-radius:999px}
+section#financiacion.pp.pp.pp.pp .pdc{background:rgba(10,26,38,.55);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);border:1px solid rgba(143,211,228,.28);border-top:3px solid var(--lux);box-shadow:0 30px 60px -36px rgba(0,0,0,.9);color:#fff}
+#financiacion .pdc h3{color:#fff}#financiacion .pdc p{color:#c9d8df}#financiacion .pds{color:var(--luxl)}
+#financiacion .pdr .btn.p,#visita form .btn.p{background:var(--lux);border-color:var(--lux);color:var(--deep)}
+#financiacion .pdr .btn.p:hover,#visita form .btn.p:hover{background:#fff;border-color:#fff}
+#visita form{color:var(--ink);background:rgba(255,255,255,.96);border:1px solid rgba(143,211,228,.4);border-top:3px solid var(--lux);box-shadow:0 40px 80px -40px rgba(0,0,0,.85)}
+#visita .pdr .btn:not(.p){color:#fff}
 </style>
 <noscript><style>#modelos,.ff,.ftg,#qc,#hf,.vs,.car .g-a,.car .g-c,.car .g-s,.vr .g-a,.vr .vrr,.vr .vri,#visitaForm,#buscoForm{display:none}</style></noscript>
 </head>
@@ -811,7 +890,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 <section id="modelos" aria-labelledby="mdh"><div class="w"><div class="mdh"><h2 id="mdh">Nuestros modelos</h2><p class="mdt">Pasá el mouse sobre un modelo para ver su foto en grande y hacé clic para abrir la ficha completa.</p><p class="mdk">Tocá un modelo para abrir su ficha completa con todas las fotos.</p></div><div class="mdg"><ol class="mdl" id="mdl"></ol><aside class="mdf" id="mdf" aria-hidden="true"></aside></div></div></section>
 
-<section id="versus" class="vs"><div class="w"><div class="head"><div><h2>¿Estás entre varias opciones?</h2><p class="sub">Elegí hasta tres unidades y compará año, kilómetros y equipamiento lado a lado.</p></div></div><div class="vp" id="vp"></div><div class="tw" id="vt" role="region" aria-label="Tabla comparativa de unidades" tabindex="0"></div><p class="vl">Según el texto de cada publicación. «No informado» quiere decir que la publicación no lo menciona, no que la unidad no lo tenga. Consultanos para confirmarlo.</p></div></section>
+<section id="versus" class="vs"><div class="w"><div class="head"><div><span class="vde">Comparador</span><h2>¿Estás entre varias opciones?</h2><p class="sub">Elegí hasta tres unidades y compará año, kilómetros y equipamiento lado a lado.</p></div></div><div class="vp" id="vp"></div><div class="tw" id="vt" role="region" aria-label="Tabla comparativa de unidades" tabindex="0"></div><p class="vl">Según el texto de cada publicación. «No informado» quiere decir que la publicación no lo menciona, no que la unidad no lo tenga. Consultanos para confirmarlo.</p></div></section>
 
 <section id="como-comprar" class="pd" aria-labelledby="cch"><div class="w"><div class="pdl"><p class="pde">Comprar un usado</p><h2 id="cch">Cómo comprar, paso a paso</h2><p>Del primer vistazo a la visita, sin vueltas.</p></div><ol class="stp"><li><div><b>Elegí una o más unidades</b><span>Mirá las fotos y los datos de cada una. En «Comparar» podés poner hasta tres lado a lado.</span></div></li><li><div><b>Consultanos por WhatsApp</b><span>Cada unidad tiene su botón con el mensaje ya armado. Te confirmamos si sigue disponible.</span></div></li><li><div><b>Coordiná la visita</b><span>Escribinos o llamanos antes de venir y coordinamos el día.</span></div></li><li><div><b>Precio y forma de pago</b><span>Por ahora se consultan por WhatsApp o por teléfono.</span></div></li></ol><div class="pdr"><a class="btn p" href="#unidades">Ver unidades</a><a class="btn" href="#visita">Coordinar una visita</a></div></div></section>
 
@@ -1104,26 +1183,30 @@ q.addEventListener("input",function(){ap()});
 ob.observe($("stockGrid"),{childList:true});ap();
 /* Comparador de hasta 3 */
 var EQ=[["aire","Aire acondicionado"],["cierre","Cierre centralizado"],["levantavidrios","Levantavidrios"],["espejos","Espejos eléctricos"],["direcci","Dirección"],["airbag","Airbag"],["abs","ABS"],["llantas","Llantas de aleación"],["antinieblas","Antinieblas"]];
-var vp=$("vp"),sl=[];
-vp.innerHTML=[0,1,2].map(function(i){return'<label><span class="sr">Unidad '+(i+1)+'</span><select data-s="'+i+'"><option value="-1">Elegir unidad</option>'+S.map(function(c,j){return'<option value="'+j+'"'+(i===j?" selected":"")+">"+esc(c.titulo+" "+c.anio)+"</option>"}).join("")+"</select></label>"}).join("");
-var MQ=matchMedia("(max-width:640px)");
+var vp=$("vp"),sel=[0,1,2].filter(function(i){return S[i]});
 function wl(c){return"https://wa.me/"+NEGOCIO.whatsapp+"?text="+encodeURIComponent("Hola! Vi el "+c.titulo+" "+c.anio+" en la página y quisiera consultar si sigue disponible.")}
 function sg(c){return String((c.corto||c.titulo)+"-"+c.anio).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")}
-function vr(){var u=[].map.call(vp.querySelectorAll("select"),function(s){return S[+s.value]}).slice(0,MQ.matches?2:3).filter(Boolean);
+function vpk(){vp.innerHTML='<div class="vdk" role="group" aria-label="Elegir unidades para comparar">'+S.map(function(c,j){var on=sel.indexOf(j)>-1;return'<button type="button" class="vdp" data-j="'+j+'" aria-pressed="'+(on?"true":"false")+'"><img src="'+esc((c.fotos||[c.foto])[0].replace(/\.webp$/,"-480.webp"))+'" alt="" width="56" height="44" loading="lazy"><span><b>'+esc(c.corto||c.titulo)+'</b><small>'+c.anio+'</small></span></button>'}).join("")+'</div><p class="vdn" role="status">Comparando '+sel.length+' de 3. Tocá otra unidad para sumarla; con tres elegidas, reemplaza la más antigua.</p>'}
+function vr(){var u=sel.map(function(i){return S[i]}),m=u.length>1;vpk();
  if(!u.length){$("vt").innerHTML='<p class="vsx">Elegí al menos una unidad para compararla.</p>';return}
- var mx=Math.max.apply(null,S.map(function(c){return km(c)})),ys=S.map(function(c){return c.anio}),y0=Math.min.apply(null,ys),y1=Math.max.apply(null,ys),mk=Math.min.apply(null,u.map(function(c){return km(c)})),ma=Math.max.apply(null,u.map(function(c){return c.anio})),m=u.length>1;
- function row(l,f,x){return'<div class="vsr"><div class="vsl">'+l+(x?"<small>"+x+"</small>":"")+"</div>"+u.map(f).join("")+"</div>"}
- var h='<div class="vsm" style="--n:'+u.length+'"><div class="vsr vsq"><div class="vsl">Unidad</div>'+u.map(function(c){return'<div class="vsu"><div class="vsi"><img src="'+esc((c.fotos||[c.foto])[0].replace(/\.webp$/,"-800.webp"))+'" alt="'+esc(c.titulo)+'" loading="lazy"><div class="vsb">'+(m&&c.anio===ma?"<i>Más nuevo</i>":"")+(m&&km(c)===mk?"<i>Menos km</i>":"")+'</div></div><b>'+esc(c.titulo)+'</b></div>'}).join("")+"</div>";
- h+=row("Año",function(c){return'<div class="vsv'+(m&&c.anio===ma?" w":"")+'"><b>'+c.anio+'</b><span class="vbar"><u style="width:'+(28+72*(c.anio-y0)/(y1-y0||1))+'%"></u></span></div>'});
- h+=row("Kilómetros",function(c){return'<div class="vsv'+(m&&km(c)===mk?" w":"")+'"><b>'+esc(c.km)+'</b><span class="vbar"><u style="width:'+Math.max(8,100*km(c)/mx)+'%"></u></span></div>'},"menos es mejor");
- h+=row("Combustible",function(c){return'<div class="vsv"><b>'+esc(c.combustible)+'</b></div>'});
- h+=row("Única mano",function(c){return'<div class="vsv"><b>'+(/única mano/i.test(c.nota||"")?"Sí":"No informado")+'</b></div>'});
- h+='<div class="vss">Equipamiento según la publicación</div>';
- h+=EQ.map(function(q){return row(q[1],function(c){var ok=(c.nota||"").toLowerCase().indexOf(q[0])>-1;return'<div class="vsv vsk '+(ok?"y":"n")+'"><span class="vck" role="img" aria-label="'+(ok?"Incluye":"No informado")+'">'+(ok?"✓":"–")+"</span></div>"})}).join("");
- h+='<div class="vsr"><div class="vsl">Consultar</div>'+u.map(function(c){return'<div class="vsa2"><a class="btn p" href="'+wl(c)+'" target="_blank" rel="noopener noreferrer">Consultar esta unidad</a><a class="btn" href="#unidad-'+sg(c)+'">Ver ficha</a></div>'}).join("")+"</div></div>";
+ var K=function(c){return km(c)},mx=Math.max.apply(null,S.map(K)),ys=S.map(function(c){return c.anio}),y0=Math.min.apply(null,ys),y1=Math.max.apply(null,ys);
+ var ua=u.map(function(c){return c.anio}),uk=u.map(K),ue=u.map(function(c){return EQ.filter(function(q){return(c.nota||"").toLowerCase().indexOf(q[0])>-1}).length});
+ var ma=Math.max.apply(null,ua),mk=Math.min.apply(null,uk),me=Math.max.apply(null,ue);
+ var da=m&&ma!==Math.min.apply(null,ua),dk=m&&mk!==Math.max.apply(null,uk),de=m&&me!==Math.min.apply(null,ue)&&me>0;
+ var h='<div class="vdg" style="--n:'+u.length+'">'+u.map(function(c,i){
+  var wa=da&&c.anio===ma,wk=dk&&K(c)===mk,we=de&&ue[i]===me,un=/única mano/i.test(c.nota||"");
+  var bd=(wa?"<i>Más nuevo</i>":"")+(wk?"<i>Menos km</i>":"")+(we?"<i>Más equipado</i>":"");
+  return'<article class="vdc"><div class="vdi"><img src="'+esc((c.fotos||[c.foto])[0].replace(/\.webp$/,"-800.webp"))+'" alt="'+esc(c.titulo)+'" loading="lazy">'+(bd?'<div class="vdb">'+bd+"</div>":"")+'</div>'
+  +'<div class="vdh"><h3>'+esc(c.titulo)+'</h3><p>'+c.anio+" · "+esc(c.combustible)+(un?" · Única mano":"")+'</p></div>'
+  +'<dl class="vdm"><div class="'+(wa?"win":"")+'"><dt>Año</dt><dd><b>'+c.anio+'</b><span class="vbr"><u style="width:'+(28+72*(c.anio-y0)/(y1-y0||1))+'%"></u></span></dd></div>'
+  +'<div class="'+(wk?"win":"")+'"><dt>Kilómetros <small>menos es mejor</small></dt><dd><b>'+esc(c.km)+'</b><span class="vbr"><u style="width:'+Math.max(8,100*K(c)/mx)+'%"></u></span></dd></div></dl>'
+  +'<div class="vdq"><p class="vdt"><span>Equipamiento informado</span><b>'+ue[i]+" de "+EQ.length+'</b></p><ul>'+EQ.map(function(q){var ok=(c.nota||"").toLowerCase().indexOf(q[0])>-1;return'<li class="'+(ok?"y":"n")+'"><span aria-hidden="true">'+(ok?"✓":"–")+'</span>'+q[1]+'<i class="sr">'+(ok?": incluye":": no informado")+"</i></li>"}).join("")+'</ul></div>'
+  +'<div class="vda"><a class="btn p" href="'+wl(c)+'" target="_blank" rel="noopener noreferrer">Consultar esta unidad</a><a class="btn" href="#unidad-'+sg(c)+'">Ver ficha</a></div></article>'}).join("")+"</div>"+(m?'<p class="vdy" aria-hidden="true">Deslizá para ver las demás unidades →</p>':"");
  $("vt").innerHTML=h;
- if(g&&!RM)g.from("#vt .vsr",{opacity:0,y:10,duration:.5,stagger:.03,ease:"expo.out",clearProps:"all"})}
-vp.addEventListener("change",vr);if(MQ.addEventListener)MQ.addEventListener("change",vr);
+ if(g&&!RM)g.from("#vt .vdc",{opacity:0,y:18,duration:.6,stagger:.08,ease:"expo.out",clearProps:"all"})}
+vp.addEventListener("click",function(e){var b=e.target.closest(".vdp");if(!b)return;var j=+b.getAttribute("data-j"),k=sel.indexOf(j);
+ if(k>-1){if(sel.length>1)sel.splice(k,1)}else{sel.push(j);if(sel.length>3)sel.shift()}
+ vr();var f=vp.querySelector('[data-j="'+j+'"]');if(f)f.focus()});
 /* Datos de contacto de la ficha */
 $("icA").textContent=NEGOCIO.direccion+" ("+NEGOCIO.referencia+"), "+NEGOCIO.ciudad;$("icW").textContent="+54 9 "+NEGOCIO.telefono.replace("03442 ","3442 ");$("icT").textContent=NEGOCIO.telefono;
 function late(){g=window.gsap;vr()}
