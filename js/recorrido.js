@@ -44,6 +44,7 @@
     }
 
     N.forEach(function (b, k) { b.addEventListener('click', function () { go(k); }); });
+    C.forEach(function (c, k) { c.addEventListener('click', function (e) { if (!e.target.closest('a,button') && k !== cur) go(k); }); });
 
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (es) {

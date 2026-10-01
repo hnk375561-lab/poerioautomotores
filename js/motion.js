@@ -432,11 +432,7 @@
     reveal($$('.fm form'), '.fm form', { st: 'top 88%' });
 
     /* Mapa: se descubre con máscara y el mapa se asienta; el panel de dirección entra escalonado */
-    var mp = $('.mp'), mif = $('.mp iframe');
-    if (mp) {
-      var mst = { trigger: '.loc', start: 'top 78%', once: true };
-      g.fromTo(mp, { opacity: 0 }, { opacity: 1, duration: 1 * k, ease: 'power2.out', clearProps: 'opacity', scrollTrigger: mst });
-    }
+    /* El mapa no se anima: un iframe con opacidad animada al llegar causaba tirones; se carga en reposo desde index.html */
     reveal([$('.lc')], '.loc', { st: 'top 65%' });
     reveal($$('.lc > *'), '.loc', { st: 'top 65%', s: .09, y: 18, d: .25 });
     words($('.faq h2'), '.faq');
