@@ -120,7 +120,8 @@ nav a{position:relative}nav a:hover::after{transform:scaleX(1)}nav a[aria-curren
 header{transition:box-shadow .35s}header.s{box-shadow:0 10px 30px -22px rgba(14,27,38,.55)}
 @media(hover:hover){.btn.p:hover{transform:translateY(-2px);box-shadow:0 10px 22px -12px rgba(14,27,38,.55)}.car .ct img{transition:transform 1s cubic-bezier(.16,1,.3,1)}.car:hover .ct img{transform:scale(1.045)}}
 @media(max-width:899px){.m header{position:sticky;top:0;z-index:20;transition:box-shadow .35s,transform .5s cubic-bezier(.16,1,.3,1)}.m header.h{transform:translateY(-100%)}}
-dialog[open]{animation:dIn .45s cubic-bezier(.16,1,.3,1)}dialog[open]::backdrop{animation:dB .35s ease-out}
+.m dialog[open]:not(.gx){animation:dIn .45s cubic-bezier(.16,1,.3,1)}.m dialog[open]::backdrop{animation:dB .35s ease-out}.m dialog.out::backdrop{opacity:0;transition:opacity .4s cubic-bezier(.7,0,.84,0)}
+.m .btn{translate:var(--mx) var(--my)}.m :is(.btn,.chip,.g-a,.fcx,.g-t button){scale:var(--ps)}
 @keyframes dIn{from{opacity:0;transform:translate(calc(var(--fx,0px)*.06),calc(var(--fy,0px)*.06 + 14px)) scale(.97)}}@keyframes dB{from{opacity:0}}
 .ph{overflow:hidden}.pr{transition:border-color .4s}.car:hover .pr{border-color:var(--cy)}.car .vf{transition:transform .35s cubic-bezier(.16,1,.3,1)}.car:hover .vf{transform:translateX(3px)}
 .wl{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.14em;margin-bottom:-.14em}.wl>span{display:inline-block}
