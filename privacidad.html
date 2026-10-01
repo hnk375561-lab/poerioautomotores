@@ -18,7 +18,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--b
 a{color:var(--cyd)}:focus-visible{outline:3px solid #1B8CAB;outline-offset:3px}
 .w{width:min(760px,100% - 40px);margin-inline:auto}
 header{background:var(--ink)}header .w{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px}
-header a{color:#fff;font-weight:600;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+header a{color:#fff;font-weight:600;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;transition:color .25s,text-decoration-color .25s,text-underline-offset .25s}header a:hover,header a:active{color:#8fd3e4;text-decoration:underline;text-underline-offset:.34em}
 h1,h2{font-family:var(--h);letter-spacing:-.02em;line-height:1.1;margin:0}
 h1{font-size:clamp(32px,6vw,48px);margin:40px 0 12px}h2{font-size:clamp(24px,4vw,30px);margin:0 0 12px}
 section{padding:28px 0;border-top:1px solid var(--stone)}
