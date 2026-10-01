@@ -9,7 +9,8 @@
    CAPAS v5 (todas con el mismo lenguaje: expo.out, gestos cortos, nada decorativo):
    · ScrollTo   → los enlaces internos viajan con expo.inOut; la rueda o el toque los interrumpen (no hay secuestro de scroll)
    · Flip       → al filtrar unidades, las que quedan se reacomodan, las nuevas entran y las que salen se despiden
-   · Puntero    → paralaje del hero, botones magnéticos y tilt de las tarjetas de operaciones (solo mouse; nunca en táctil)
+   · Puntero    → paralaje del hero (solo mouse; nunca en táctil)
+   · Profundidad (v6, solo escritorio) → el texto del hero se despide en capas, los fondos con interior de vehículo se desplazan apenas y las fotos del equipo van a distinta velocidad
    · Vender o permutar → una unidad por vez, con la misma máscara lateral y el mismo nombre por palabra que el hero
    · Ficha → se abre desde la tarjeta; la foto se revela con máscara y el contenido entra escalonado
    · Banner → foto fija de fondo con paralaje suave
@@ -139,22 +140,31 @@
     }
     function split(el, force) {
       if (!el || (el._s && !force)) return []; el._s = 1;
-      var w = el.textContent.trim().split(/\s+/); el.setAttribute('aria-label', w.join(' '));
-      el.innerHTML = w.map(function (x) { return '<span class="wl" aria-hidden="true"><span>' + x + '</span></span>'; }).join(' ');
+      var out = [];
+      Array.prototype.slice.call(el.childNodes).forEach(function (n) {
+        var tag = n.nodeType === 1 && /^(EM|I|STRONG|B)$/.test(n.nodeName) ? n.nodeName.toLowerCase() : '', t = n.textContent.trim();
+        if (!t) return;
+        t.split(/\s+/).forEach(function (x) { out.push(tag ? '<' + tag + '>' + x + '</' + tag + '>' : x); });
+      });
+      if (!out.length) return [];
+      el.setAttribute('aria-label', el.textContent.trim().split(/\s+/).join(' '));
+      el.innerHTML = out.map(function (x) { return '<span class="wl" aria-hidden="true"><span>' + x + '</span></span>'; }).join(' ');
       return $$('.wl > span', el);
     }
     function words(el, trig) {
       var W = split(el); if (!W.length) return;
-      g.from(W, { yPercent: 115, duration: 1.05 * k, stagger: .06, ease: E, clearProps: 'transform', scrollTrigger: { trigger: trig, start: 'top 85%', once: true } });
+      g.from(W, { yPercent: 115, duration: 1.05 * k, stagger: .06, ease: E, clearProps: 'transform', scrollTrigger: { trigger: trig, start: 'top 85%', once: true },
+        onComplete: function () { W.forEach(function (w) { w.parentNode.style.overflow = 'visible'; }); } });
     }
     /* Foto editorial: máscara + escala asentándose. Nunca deforma: la escala es uniforme y siempre baja a 1 */
     function photos(boxes, trig, o) {
       boxes = boxes.filter(Boolean); if (!boxes.length) return; o = o || {};
       var imgs = boxes.map(function (b) { return $('img', b); }).filter(Boolean), s = o.s || .1;
       var st = { trigger: trig, start: o.st || 'top 85%', once: true };
-      g.set(imgs, { transition: 'none' });
-      g.fromTo(boxes, { clipPath: o.from || 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.1 * k, stagger: s, ease: 'expo.inOut', clearProps: 'clipPath', scrollTrigger: st });
-      if (!o.still) g.fromTo(imgs, { scale: 1.1 }, { scale: 1, duration: 1.5, stagger: s, ease: 'power3.out', clearProps: 'transform,transition', scrollTrigger: st });
+      if (imgs.length) g.set(imgs, { transition: 'none' });
+      /* o.to: las fotos con marco (outline) terminan con inset negativo para que el marco no quede recortado ni aparezca de golpe */
+      g.fromTo(boxes, { clipPath: o.from || 'inset(0% 0% 100% 0%)' }, { clipPath: o.to || 'inset(0% 0% 0% 0%)', duration: 1.1 * k, stagger: s, ease: 'expo.inOut', clearProps: 'clipPath', scrollTrigger: st });
+      if (!o.still && imgs.length) g.fromTo(imgs, { scale: 1.1 }, { scale: 1, duration: 1.5, stagger: s, ease: 'power3.out', clearProps: 'transform,transition', scrollTrigger: st });
     }
     function pulse(sel) {
       $$(sel).forEach(function (b) { b.classList.add('pulse'); setTimeout(function () { b.classList.remove('pulse'); }, 1800); });
@@ -178,6 +188,14 @@
       }
     }
 
+    /* Salida del hero en capas: al bajar, cada bloque de texto se despide a distinta velocidad (solo transform, escritorio).
+       El hero sigue visible desde el primer pintado: no hay animación de entrada que lo oculte. */
+    if (D && $('.hero')) {
+      var hl = g.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6 } });
+      [['.hero .hlogo', -10], ['.hero h1', -24], ['.hero .tx > p', -36], ['.hero .tx .row', -48], ['.hero .tx .lk', -56], ['.hero .hcap', -22]].forEach(function (a) {
+        var el = $(a[0]); if (el) hl.to(el, { y: a[1] }, 0);
+      });
+    }
 
     /* ---------- HERO · rotación de unidades ----------
        Todas las unidades entran igual: máscara lateral (dirección según el sentido) + foto que se asienta con contraparalaje,
@@ -463,6 +481,53 @@
     var fs = $('#fStatus');
     var mo3 = new MutationObserver(function () { if (fs.textContent) g.fromTo(fs, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: .45, ease: E, clearProps: 'opacity,transform', overwrite: 'auto' }); });
     mo3.observe(fs, { childList: true });
+
+    /* ---------- v6 · mismo lenguaje en todas las secciones ----------
+       Título por palabra + bajada y etiqueta con subida corta; las listas entran escalonadas con la misma curva.
+       Sin lógica nueva: se reutilizan reveal / words / photos. */
+    $$('.pdl, .hwh, .eqh, .rvh, .mdh, .rec .rh').forEach(function (h) {
+      var t = $('h2', h); if (t) words(t, h);
+      reveal($$('.pde, .pdt, .ey, .mdt, .mdk, :scope > p', h).filter(function (x) { return !t || !t.contains(x); }), h, { s: .08, y: dy * .6, st: 'top 80%' });
+    });
+    reveal($$('.hwl li'), '.hwl', { s: .1, st: 'top 85%' });
+    reveal($$('.pdg .pdc'), '.pdg', { s: .09, y: dy * .6, st: 'top 88%', nt: 1 });
+    reveal($$('.gd details'), '.gd', { s: .08, y: dy * .6, st: 'top 88%' });
+    reveal($$('.pdr .btn, .eqc .btn, .hwr .btn, .rvr .btn'), '.pdr, .eqc, .hwr, .rvr', { s: .08, y: 14, st: 'top 92%', nt: 1 });
+    /* Tarjeta de contacto: cada dato entra después de la tarjeta */
+    reveal($$('.ci .cit, .ci .cia .btn, .ci .cis > *'), '.ci', { s: .05, y: 14, d: .2, st: 'top 80%', nt: 1 });
+    /* Equipo: fotos con máscara; el video del ingreso va a otra velocidad (escritorio) */
+    photos([$('.eqf .eqm')], '.eqg', { to: 'inset(-3% -3% -3% -3%)', st: 'top 82%' });
+    photos([$('.eqv .eqm')], '.eqg', { to: 'inset(-3% -3% -3% -3%)', from: D ? 'inset(0% 0% 0% 100%)' : 'inset(0% 0% 100% 0%)', st: 'top 82%', s: .18, still: true });
+    reveal($$('.eqk li'), '.eqk', { s: .1, st: 'top 88%' });
+    /* Cómo llegar: datos, escena (máscara) y texto del recorrido */
+    reveal($$('.rtg > div'), '.rtg', { s: .07, y: 16, st: 'top 90%' });
+    reveal($$('.rq .rqb'), '.rq', { s: .06, y: 14, d: .15, st: 'top 85%', nt: 1 });
+    var rsc = $('.rs');
+    if (rsc) g.fromTo(rsc, { clipPath: D ? 'inset(0% 100% 0% 0%)' : 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(-3% -3% -3% -3%)', duration: 1.2 * k, ease: 'expo.inOut', clearProps: 'clipPath', scrollTrigger: { trigger: rsc, start: 'top 82%', once: true } });
+    reveal($$('.rec .rg'), '.rec .rx', { y: 20, d: .25, st: 'top 78%' });
+
+    /* Profundidad (solo escritorio): fondos con interior de vehículo y fotos a distinta velocidad.
+       Todo con transform; el fondo se mueve con una variable CSS no heredable (--bgy), que solo recalcula el propio fondo. */
+    if (D) {
+      root.classList.add('bgp');
+      cleanups.push(function () { root.classList.remove('bgp'); });
+      ['#financiacion', '#visita', '#guia'].forEach(function (id) {
+        var sc = $(id); if (!sc) return;
+        g.fromTo(sc, { '--bgy': '-5%' }, { '--bgy': '5%', ease: 'none', scrollTrigger: { trigger: sc, start: 'top bottom', end: 'bottom top', scrub: true } });
+      });
+      var nph = $('#nph');
+      if (nph) g.fromTo(nph, { y: 26 }, { y: -26, ease: 'none', scrollTrigger: { trigger: '#nosotros', start: 'top bottom', end: 'bottom top', scrub: .6 } });
+      var eqv = $('.eqv');
+      if (eqv) g.fromTo(eqv, { y: 40 }, { y: -40, ease: 'none', scrollTrigger: { trigger: '.eqg', start: 'top bottom', end: 'bottom top', scrub: .6 } });
+    }
+
+    /* Avisos de estado (copiar dirección, formularios): aparecen con el mismo gesto corto */
+    $$('.fs, .rqs').forEach(function (el) {
+      if (el.id === 'fStatus') return;
+      var mx = new MutationObserver(function () { if (el.textContent.trim()) g.fromTo(el, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: .45, ease: E, clearProps: 'opacity,transform', overwrite: 'auto' }); });
+      mx.observe(el, { childList: true, characterData: true, subtree: true });
+      cleanups.push(function () { mx.disconnect(); });
+    });
 
     /* ---------- Progreso de lectura: línea fina bajo el header (solo transform) ---------- */
     var pb = $('.pgb') || header.appendChild(Object.assign(document.createElement('i'), { className: 'pgb', ariaHidden: 'true' }));

@@ -934,6 +934,10 @@ section#financiacion.pp.pp.pp.pp .pdc{background:rgba(10,26,38,.55);-webkit-back
 #guia .gd details ul,#guia .gd details p{color:#c9d8df}
 #guia .pdn{color:#b9cad3;text-shadow:0 1px 12px rgba(0,0,0,.6)}
 #guia .pdr .btn.p{background:var(--lux);border-color:var(--lux);color:var(--deep)}#guia .pdr .btn.p:hover{background:#fff;border-color:#fff}
+
+/* ===== v6: profundidad (solo con GSAP activo en escritorio) ===== */
+@property --bgy{syntax:"<percentage>";inherits:false;initial-value:0%}
+.bgp #financiacion.pp::before,.bgp #visita.pd::before,.bgp #guia.pd::before{inset:-7% 0;transform:translate3d(0,var(--bgy),0) scale(1.03);will-change:transform}
 </style>
 <noscript><style>#modelos,.ff,.ftg,#qc,#hf,.vs,.car .g-a,.car .g-c,.car .g-s,.vr .g-a,.vr .vrr,.vr .vri,#visitaForm,#buscoForm{display:none}</style></noscript>
 </head>
