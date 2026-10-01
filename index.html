@@ -1419,6 +1419,81 @@ a.pdc:hover .pds::after{transform:translateX(4px)}
 #preguntas.bq .bqp .fq{aspect-ratio:auto;height:clamp(170px,15vw,230px)}
 }
 .ctk{will-change:auto}
+
+/* ==== v10: micro-interacciones. Todos los botones y enlaces responden al pasar el mouse y al presionar (solo estilo) ==== */
+/* Transiciones base, cortas y suaves */
+header .mark{transition:color .25s}header .mark img{transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.lk,.soc a,.rvn a,.oc a,.demo a,.fx a,.ci a{transition:color .25s,text-decoration-color .25s,text-underline-offset .25s}
+summary{transition:color .25s}
+.fcbr a,.fcu button{transition:color .25s,text-decoration-color .25s,text-underline-offset .25s}
+#local .vqb{transition:background-color .25s,border-color .25s,color .25s,transform .3s cubic-bezier(.16,1,.3,1)}
+#local .vqb span{transition:color .25s}
+.vt button em::before{transition:background .3s,border-color .3s,transform .3s}
+#financiacion a.pdc{transition:background-color .25s,border-color .25s,transform .3s cubic-bezier(.16,1,.3,1)}
+#contacto a.mpl{transition:background-color .25s,color .25s,border-color .25s,transform .3s cubic-bezier(.16,1,.3,1)}
+.car h3 button{transition:color .2s,text-decoration-color .2s}
+button.st.vf{transition:transform .35s cubic-bezier(.16,1,.3,1),color .2s}
+.vrr button::before{transition:background .3s}
+#unidades #fc,.ftg{transition:background-color .2s,color .2s,border-color .2s}
+:is(input,select):not([type=checkbox],[type=radio]){transition:border-color .2s,background-color .2s}
+
+/* Al pasar el mouse (solo dispositivos con puntero): color, fondo, borde y subrayado */
+@media(hover:hover) and (pointer:fine){
+header .ic:hover,header .mark:hover{color:var(--luxl)}
+.lk:hover,.soc a:hover,.rvn a:hover,.vi .lk:hover{color:#fff;text-decoration:underline;text-decoration-color:#fff;text-underline-offset:.34em}
+.oc a:hover,.ci a:hover{color:var(--ink);text-decoration-color:var(--ink);text-underline-offset:.34em}
+.demo a:hover{color:var(--luxl);text-underline-offset:.3em}
+.fx a:hover{color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.55);text-underline-offset:.3em}
+#local .vqb:hover{background-color:rgba(143,211,228,.14);border-color:var(--luxl)}
+#local .vqb:hover span{color:#d4ebf2}
+.vt button:not(.on):hover{color:#fff}
+.vt button:not(.on):hover em::before{border-color:var(--luxl)}
+#financiacion a.pdc:hover{background-color:rgba(143,211,228,.14);border-color:var(--luxl)}
+#contacto a.mpl:hover{background:var(--luxl);color:var(--deep);border-color:var(--luxl)}
+summary:hover{color:var(--cyd)}
+#guia .gd summary:hover{color:var(--luxl)}
+.vdp:hover{border-color:var(--luxl);background-color:rgba(143,211,228,.14)}
+.car h3 button:hover{color:var(--cyd);text-decoration:underline;text-underline-offset:.2em}
+button.st.vf:hover{color:var(--ink);text-decoration:underline;text-underline-offset:.25em}
+.g-a:not(:disabled):hover{background:var(--lux);border-color:var(--lux);color:var(--deep)}
+.mdb:hover{opacity:1;border-color:var(--luxl)}
+.vrr button:hover::before{background:rgba(255,255,255,.55)}
+.vrl:hover{background:var(--luxl)}
+#equipo .eqvb:hover{background:rgba(20,111,136,.9);border-color:var(--luxl)}
+#unidades #fc:hover{background:#fff;color:var(--ink)}
+.fcx:hover{background:var(--lux);border-color:var(--lux);color:var(--deep)}
+.g-t button:not(.on):hover{opacity:.9}
+.fcbr a:hover{color:var(--luxl);text-decoration:underline;text-underline-offset:.3em}
+.fcu button:hover{color:var(--deep);text-decoration:underline;text-underline-offset:4px}
+.ftg:hover{background:var(--paper);border-color:var(--cy)}
+:is(input,select):not([type=checkbox],[type=radio]):hover{border-color:var(--cy)}
+#unidades .ff :is(input,select):hover{border-color:var(--luxl);background-color:rgba(255,255,255,.1)}
+}
+/* Movimiento sutil (se omite si la persona pidió menos movimiento) */
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+header .ic:hover{transform:translateY(-2px)}
+header .mark:hover img{transform:scale(1.08)}
+#local .vqb:hover,#contacto a.mpl:hover,.vdp:hover{transform:translateY(-2px)}
+#financiacion a.pdc:hover{transform:translateY(-2px)}
+.vt button:not(.on):hover em::before{transform:rotate(45deg) scale(1.3)}
+button.st.vf:hover{transform:translateX(4px)}
+#equipo .eqvb:hover{transform:scale(1.07)}
+details:not([open]) summary:hover::after{transform:scale(1.25)}
+}
+/* Al presionar (también en celular): mismo lenguaje, para lo que no tenía respuesta */
+.lk:active,.soc a:active,.rvn a:active,.fx a:active{color:#fff;text-decoration:underline;text-decoration-color:#fff}
+.oc a:active,.ci a:active{color:var(--ink);text-underline-offset:.34em}
+.demo a:active{color:var(--luxl)}
+header .mark:active{color:var(--luxl)}
+.car h3 button:active{color:var(--cyd);text-decoration:underline}
+.mdb:active{opacity:1;border-color:var(--luxl)}
+.fcbr a:active{color:var(--luxl);text-decoration:underline}
+.g-a:not(:disabled):active{background:var(--lux);border-color:var(--lux);color:var(--deep)}
+.mdl a:active{background:rgba(255,255,255,.9)}
+.mdf .btn:active{transform:translateY(1px)}
+#local .vqb:active{background:#fff;border-color:#fff;color:var(--deep);transform:none}
+#local .vqb:active span{color:#42525d}
+#equipo .eqvb:active{background:rgba(20,111,136,.9);border-color:var(--luxl);transform:scale(.94)}
 </style>
 <noscript><style>#modelos,.ff,.ftg,#qc,#hf,.vs,.car .g-a,.car .g-c,.car .g-s,.vr .g-a,.vr .vrr,.vr .vri,#visitaForm,#buscoForm{display:none}</style></noscript>
 </head>
